@@ -1,0 +1,295 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zjgt.p2p.dao.BonusMapper">
+	<resultMap id="BaseResultMap" type="com.zjgt.p2p.model.Bonus">
+		<!-- common class - @ET model 属性定义, do not modify. -->
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="bonusno" property="bonusno" jdbcType="VARCHAR" />
+		<result column="bonustype" property="bonustype" jdbcType="INTEGER" />
+		<result column="source" property="source" jdbcType="INTEGER" />
+		<result column="account" property="account" jdbcType="DECIMAL" />
+		<result column="blance" property="blance" jdbcType="DECIMAL" />
+		<result column="begindate" property="begindate" jdbcType="DATE" />
+		<result column="enddate" property="enddate" jdbcType="DATE" />
+		<result column="status" property="status" jdbcType="INTEGER" />
+		<result column="bonusrange" property="bonusrange" jdbcType="INTEGER" />
+		<result column="subject" property="subject" jdbcType="VARCHAR" />
+		<result column="bonusdetailtype" property="bonusdetailtype" jdbcType="VARCHAR" />
+		<result column="relativeno" property="relativeno" jdbcType="VARCHAR" />
+		<result column="memberid" property="memberid" jdbcType="BIGINT" />
+	</resultMap>
+	<sql id="Example_Where_Clause">
+		<!-- common class - @ET model 属性定义, do not modify. -->
+		<where>
+			<foreach collection="oredCriteria" item="criteria" separator="or">
+				<if test="criteria.valid">
+					<trim prefix="(" suffix=")" prefixOverrides="and">
+						<foreach collection="criteria.criteria" item="criterion">
+							<choose>
+								<when test="criterion.noValue">
+									and ${criterion.condition}
+								</when>
+								<when test="criterion.singleValue">
+									and ${criterion.condition} #{criterion.value}
+								</when>
+								<when test="criterion.betweenValue">
+									and ${criterion.condition} #{criterion.value} and
+									#{criterion.secondValue}
+								</when>
+								<when test="criterion.listValue">
+									and ${criterion.condition}
+									<foreach collection="criterion.value" item="listItem"
+										open="(" close=")" separator=",">
+										#{listItem}
+									</foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+	<sql id="Base_Column_List">
+		<!-- common class - @ET model 属性定义, do not modify. -->
+    id, bonusno, bonustype, source, account, blance, begindate, enddate, status, bonusrange, 
+    subject, bonusdetailtype, relativeno, memberid
+	</sql>
+	<select id="selectByExample" resultMap="BaseResultMap"
+		parameterType="com.zjgt.p2p.model.BonusExample">
+		<!-- common class - @ET model 属性定义, do not modify. -->
+		select
+		<if test="distinct">
+			distinct
+		</if>
+		'true' as QUERYID,
+		<include refid="Base_Column_List" />
+		from bonus
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+		<if test="orderByClause != null">
+			order by ${orderByClause}
+		</if>
+	</select>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Integer">
+		<!-- common class - @ET model 属性定义, do not modify. -->
+		select
+		<include refid="Base_Column_List" />
+		from bonus
+		where id = #{id,jdbcType=INTEGER}
+	</select>
+	<select id="selectByMap" resultMap="BaseResultMap"
+		parameterType="java.util.Map">
+		<!-- common class - @ET model 属性定义, do not modify. -->
+		select
+		<include refid="Base_Column_List" />
+		from bonus
+		<where>
+			<if test="bonustype!=null and bonustype!='' ">
+				bonustype = #{bonustype}
+			</if>
+			<if test="memberid!= null and memberid!= '' ">
+				AND memberid = #{memberid}
+			</if>
+		</where>
+	</select>
+	<!-- 前台:红包使用记录 -->
+	<select id="selectUseList" resultType="java.util.Map"
+		parameterType="java.util.Map">
+		SELECT t.transtime AS transTime, c.Transno AS transNo, t.amount AS amount ,t.payeesubamount AS payeeSubAmount , t.Paysubamount AS paySubAmount,
+		t.transcode AS transCode,CASE WHEN t.transcode = '1034' THEN t.payeesubamount ELSE t.Paysubamount END AS memberAvailAmount , (SELECT
+		b.bidclassname FROM bid b WHERE b.bidcode = (SELECT bidCode FROM
+		investorder i WHERE i.investordercode = c.Transno)) AS bidClassName
+		FROM translog t INNER JOIN capitaltrans c ON t.transno = c.id WHERE
+		t.transcode IN ('1031','1032','1033','1034') AND (t.paymemberid = #{memberId} OR
+		t.payeememberid = #{memberId}) order by t.id desc
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		<!-- common class - @ET model 属性定义, do not modify. -->
+		delete from bonus
+		where id = #{id,jdbcType=INTEGER}
+	</delete>
+  <insert id="insert" parameterType="com.zjgt.p2p.model.Bonus" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    insert into bonus (id, bonusno, bonustype, 
+      source, account, blance, 
+      begindate, enddate, status, 
+      bonusrange, subject, bonusdetailtype, 
+      relativeno, memberid)
+    values (#{id,jdbcType=INTEGER}, #{bonusno,jdbcType=VARCHAR}, #{bonustype,jdbcType=INTEGER}, 
+      #{source,jdbcType=INTEGER}, #{account,jdbcType=DECIMAL}, #{blance,jdbcType=DECIMAL}, 
+      #{begindate,jdbcType=DATE}, #{enddate,jdbcType=DATE}, #{status,jdbcType=INTEGER}, 
+      #{bonusrange,jdbcType=INTEGER}, #{subject,jdbcType=VARCHAR}, #{bonusdetailtype,jdbcType=VARCHAR}, 
+      #{relativeno,jdbcType=VARCHAR}, #{memberid,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zjgt.p2p.model.Bonus" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    insert into bonus
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="bonusno != null" >
+        bonusno,
+      </if>
+      <if test="bonustype != null" >
+        bonustype,
+      </if>
+      <if test="source != null" >
+        source,
+      </if>
+      <if test="account != null" >
+        account,
+      </if>
+      <if test="blance != null" >
+        blance,
+      </if>
+      <if test="begindate != null" >
+        begindate,
+      </if>
+      <if test="enddate != null" >
+        enddate,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="bonusrange != null" >
+        bonusrange,
+      </if>
+      <if test="subject != null" >
+        subject,
+      </if>
+      <if test="bonusdetailtype != null" >
+        bonusdetailtype,
+      </if>
+      <if test="relativeno != null" >
+        relativeno,
+      </if>
+      <if test="memberid != null" >
+        memberid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="bonusno != null" >
+        #{bonusno,jdbcType=VARCHAR},
+      </if>
+      <if test="bonustype != null" >
+        #{bonustype,jdbcType=INTEGER},
+      </if>
+      <if test="source != null" >
+        #{source,jdbcType=INTEGER},
+      </if>
+      <if test="account != null" >
+        #{account,jdbcType=DECIMAL},
+      </if>
+      <if test="blance != null" >
+        #{blance,jdbcType=DECIMAL},
+      </if>
+      <if test="begindate != null" >
+        #{begindate,jdbcType=DATE},
+      </if>
+      <if test="enddate != null" >
+        #{enddate,jdbcType=DATE},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="bonusrange != null" >
+        #{bonusrange,jdbcType=INTEGER},
+      </if>
+      <if test="subject != null" >
+        #{subject,jdbcType=VARCHAR},
+      </if>
+      <if test="bonusdetailtype != null" >
+        #{bonusdetailtype,jdbcType=VARCHAR},
+      </if>
+      <if test="relativeno != null" >
+        #{relativeno,jdbcType=VARCHAR},
+      </if>
+      <if test="memberid != null" >
+        #{memberid,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zjgt.p2p.model.Bonus" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    update bonus
+    <set >
+      <if test="bonusno != null" >
+        bonusno = #{bonusno,jdbcType=VARCHAR},
+      </if>
+      <if test="bonustype != null" >
+        bonustype = #{bonustype,jdbcType=INTEGER},
+      </if>
+      <if test="source != null" >
+        source = #{source,jdbcType=INTEGER},
+      </if>
+      <if test="account != null" >
+        account = #{account,jdbcType=DECIMAL},
+      </if>
+      <if test="blance != null" >
+        blance = #{blance,jdbcType=DECIMAL},
+      </if>
+      <if test="begindate != null" >
+        begindate = #{begindate,jdbcType=DATE},
+      </if>
+      <if test="enddate != null" >
+        enddate = #{enddate,jdbcType=DATE},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="bonusrange != null" >
+        bonusrange = #{bonusrange,jdbcType=INTEGER},
+      </if>
+      <if test="subject != null" >
+        subject = #{subject,jdbcType=VARCHAR},
+      </if>
+      <if test="bonusdetailtype != null" >
+        bonusdetailtype = #{bonusdetailtype,jdbcType=VARCHAR},
+      </if>
+      <if test="relativeno != null" >
+        relativeno = #{relativeno,jdbcType=VARCHAR},
+      </if>
+      <if test="memberid != null" >
+        memberid = #{memberid,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zjgt.p2p.model.Bonus" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    update bonus
+    set bonusno = #{bonusno,jdbcType=VARCHAR},
+      bonustype = #{bonustype,jdbcType=INTEGER},
+      source = #{source,jdbcType=INTEGER},
+      account = #{account,jdbcType=DECIMAL},
+      blance = #{blance,jdbcType=DECIMAL},
+      begindate = #{begindate,jdbcType=DATE},
+      enddate = #{enddate,jdbcType=DATE},
+      status = #{status,jdbcType=INTEGER},
+      bonusrange = #{bonusrange,jdbcType=INTEGER},
+      subject = #{subject,jdbcType=VARCHAR},
+      bonusdetailtype = #{bonusdetailtype,jdbcType=VARCHAR},
+      relativeno = #{relativeno,jdbcType=VARCHAR},
+      memberid = #{memberid,jdbcType=BIGINT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

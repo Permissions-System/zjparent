@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zjgt.p2p.dao.CpsrecMapper" >
+  <resultMap id="BaseResultMap" type="com.zjgt.p2p.model.Cpsrec" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="pagename" property="pagename" jdbcType="VARCHAR" />
+    <result column="url" property="url" jdbcType="VARCHAR" />
+    <result column="channel" property="channel" jdbcType="VARCHAR" />
+    <result column="channel2" property="channel2" jdbcType="VARCHAR" />
+    <result column="sessionid" property="sessionid" jdbcType="VARCHAR" />
+    <result column="memberid" property="memberid" jdbcType="BIGINT" />
+    <result column="userdistrict" property="userdistrict" jdbcType="VARCHAR" />
+    <result column="operation" property="operation" jdbcType="VARCHAR" />
+    <result column="opdate" property="opdate" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    id, pagename, url, channel, channel2, sessionid, memberid, userdistrict, operation, 
+    opdate
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.zjgt.p2p.model.CpsrecExample" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from cpsrec
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    select 
+    <include refid="Base_Column_List" />
+    from cpsrec
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    delete from cpsrec
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.zjgt.p2p.model.Cpsrec" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    insert into cpsrec (id, pagename, url, 
+      channel, channel2, sessionid, 
+      memberid, userdistrict, operation, 
+      opdate)
+    values (#{id,jdbcType=BIGINT}, #{pagename,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR}, 
+      #{channel,jdbcType=VARCHAR}, #{channel2,jdbcType=VARCHAR}, #{sessionid,jdbcType=VARCHAR}, 
+      #{memberid,jdbcType=BIGINT}, #{userdistrict,jdbcType=VARCHAR}, #{operation,jdbcType=VARCHAR}, 
+      #{opdate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zjgt.p2p.model.Cpsrec" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    insert into cpsrec
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="pagename != null" >
+        pagename,
+      </if>
+      <if test="url != null" >
+        url,
+      </if>
+      <if test="channel != null" >
+        channel,
+      </if>
+      <if test="channel2 != null" >
+        channel2,
+      </if>
+      <if test="sessionid != null" >
+        sessionid,
+      </if>
+      <if test="memberid != null" >
+        memberid,
+      </if>
+      <if test="userdistrict != null" >
+        userdistrict,
+      </if>
+      <if test="operation != null" >
+        operation,
+      </if>
+      <if test="opdate != null" >
+        opdate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="pagename != null" >
+        #{pagename,jdbcType=VARCHAR},
+      </if>
+      <if test="url != null" >
+        #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="channel != null" >
+        #{channel,jdbcType=VARCHAR},
+      </if>
+      <if test="channel2 != null" >
+        #{channel2,jdbcType=VARCHAR},
+      </if>
+      <if test="sessionid != null" >
+        #{sessionid,jdbcType=VARCHAR},
+      </if>
+      <if test="memberid != null" >
+        #{memberid,jdbcType=BIGINT},
+      </if>
+      <if test="userdistrict != null" >
+        #{userdistrict,jdbcType=VARCHAR},
+      </if>
+      <if test="operation != null" >
+        #{operation,jdbcType=VARCHAR},
+      </if>
+      <if test="opdate != null" >
+        #{opdate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zjgt.p2p.model.Cpsrec" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    update cpsrec
+    <set >
+      <if test="pagename != null" >
+        pagename = #{pagename,jdbcType=VARCHAR},
+      </if>
+      <if test="url != null" >
+        url = #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="channel != null" >
+        channel = #{channel,jdbcType=VARCHAR},
+      </if>
+      <if test="channel2 != null" >
+        channel2 = #{channel2,jdbcType=VARCHAR},
+      </if>
+      <if test="sessionid != null" >
+        sessionid = #{sessionid,jdbcType=VARCHAR},
+      </if>
+      <if test="memberid != null" >
+        memberid = #{memberid,jdbcType=BIGINT},
+      </if>
+      <if test="userdistrict != null" >
+        userdistrict = #{userdistrict,jdbcType=VARCHAR},
+      </if>
+      <if test="operation != null" >
+        operation = #{operation,jdbcType=VARCHAR},
+      </if>
+      <if test="opdate != null" >
+        opdate = #{opdate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zjgt.p2p.model.Cpsrec" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    update cpsrec
+    set pagename = #{pagename,jdbcType=VARCHAR},
+      url = #{url,jdbcType=VARCHAR},
+      channel = #{channel,jdbcType=VARCHAR},
+      channel2 = #{channel2,jdbcType=VARCHAR},
+      sessionid = #{sessionid,jdbcType=VARCHAR},
+      memberid = #{memberid,jdbcType=BIGINT},
+      userdistrict = #{userdistrict,jdbcType=VARCHAR},
+      operation = #{operation,jdbcType=VARCHAR},
+      opdate = #{opdate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

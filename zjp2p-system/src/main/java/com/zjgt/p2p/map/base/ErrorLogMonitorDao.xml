@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zjgt.p2p.base.dao.ErrorLogMonitorDao" >
+    <!-- 定义查询结果集Map 查询ErrorLogMonitor转换Map数据集-->
+	<resultMap id="baseResultMap" type="com.zjgt.p2p.base.domain.ErrorLogMonitor" >
+		<id column="ERROR_CODE" property="errorCode" jdbcType="VARCHAR" />
+		<result column="CYCLE_THRESHOLD" property="cycleThreshold" jdbcType="DECIMAL" />
+		<result column="DAY_THRESHOLD" property="dayThreshold" jdbcType="DECIMAL" />
+		<result column="CYCLE_NUM" property="cycleNum" jdbcType="DECIMAL" />
+		<result column="DAY_NUM" property="dayNum" jdbcType="DECIMAL" />
+		<result column="TOTAL_TIMES" property="totalTimes" jdbcType="DECIMAL" />
+		<result column="AUTO_ADJUSTMENT" property="autoAdjustment" jdbcType="CHAR" />
+		<result column="LOG_TIMESTAMP" property="logTimestamp" jdbcType="VARCHAR" />
+		<result column="TOTAL_DAYS" property="totalDays" jdbcType="DECIMAL" />
+		<result column="THRESHOLD_RATE" property="thresholdRate" jdbcType="DECIMAL" />
+		<result column="LAST_DAY_NUM" property="lastDayNum" jdbcType="DECIMAL" />
+		<result column="LAST_CYCLE_NUM" property="lastCycleNum" jdbcType="DECIMAL" />
+	</resultMap>
+	
+	<!-- 新增错误信息监控配置 -->
+	<insert id="insert" parameterType="com.zjgt.p2p.base.domain.ErrorLogMonitor" >
+		INSERT INTO cp_errorlog_monitor (
+		    error_code, 
+		    cycle_threshold, 
+		    day_threshold, 
+		    cycle_num, 
+		    day_num, 
+		    total_times, 
+		    auto_adjustment, 
+		    log_timestamp,
+		    total_days,
+		    threshold_rate,
+		    last_day_num,
+		    last_cycle_num
+		)
+		VALUES (
+		  #{errorCode,jdbcType=VARCHAR}, 
+		  #{cycleThreshold,jdbcType=DECIMAL}, 
+		  #{dayThreshold,jdbcType=DECIMAL}, 
+		  #{cycleNum,jdbcType=DECIMAL}, 
+		  #{dayNum,jdbcType=DECIMAL}, 
+		  #{totalTimes,jdbcType=DECIMAL}, 
+		  #{autoAdjustment,jdbcType=CHAR}, 
+		  #{logTimestamp,jdbcType=VARCHAR},
+		  #{totalDays,jdbcType=DECIMAL},
+		  #{thresholdRate,jdbcType=DECIMAL},
+		  #{lastDayNum,jdbcType=DECIMAL},
+		  #{lastCycleNum,jdbcType=DECIMAL}
+		  )
+	</insert>
+	
+	<!-- 根据主键修改错误信息监控配置 -->
+	<update id="update" parameterType="com.zjgt.p2p.base.domain.ErrorLogMonitor" >
+		UPDATE 
+		cp_errorlog_monitor
+		<set>
+			<if test="cycleThreshold!=null">
+				cycle_threshold = #{cycleThreshold,jdbcType=DECIMAL},
+			</if>
+			<if test="dayThreshold!=null">
+				day_threshold = #{dayThreshold,jdbcType=DECIMAL},
+			</if>
+			<if test="cycleNum!=null">
+				cycle_num = #{cycleNum,jdbcType=DECIMAL},
+			</if>
+		    <if test="dayNum!=null">
+				day_num = #{dayNum,jdbcType=DECIMAL},
+			</if>
+		    <if test="totalTimes!=null">
+				total_times = #{totalTimes,jdbcType=DECIMAL},
+	        </if>
+	        <if test="autoAdjustment!=null">
+				auto_adjustment = #{autoAdjustment,jdbcType=CHAR},
+			</if>
+			<if test="logTimestamp!=null">
+				log_timestamp = #{logTimestamp,jdbcType=VARCHAR},
+			</if>
+			<if test="totalDays!=null">
+	            total_days = #{totalDays,jdbcType=DECIMAL},
+	        </if>
+	        <if test="lastDayNum!=null">
+				last_day_num = #{lastDayNum,jdbcType=VARCHAR},
+			</if>
+			<if test="lastCycleNum!=null">
+				last_cycle_num = #{lastCycleNum,jdbcType=VARCHAR},
+			</if>
+	            threshold_rate = #{thresholdRate,jdbcType=DECIMAL}
+        </set>
+		WHERE 
+		    error_code = #{errorCode,jdbcType=VARCHAR}
+	</update>
+	
+	<!-- 根据主键 错误码 删除 错误信息监控配置 -->
+	<delete id="delete" parameterType="java.lang.String" >
+		DELETE FROM 
+		    cp_errorlog_monitor
+		WHERE 
+		    error_code = #{errorCode,jdbcType=VARCHAR}
+    </delete>
+	
+	<!-- 根据主键 错误码 查询  错误信息监控配置-->
+	<select id="selectByPrimaryKey" resultMap="baseResultMap" parameterType="java.lang.String" >
+		SELECT 
+			error_code, cycle_threshold, day_threshold, cycle_num, day_num, total_times, 
+			auto_adjustment, log_timestamp,total_days,threshold_rate,last_day_num,last_cycle_num
+		FROM 
+		    cp_errorlog_monitor
+		WHERE 
+		    error_code = #{errorCode,jdbcType=VARCHAR}
+	</select>
+	
+	<!-- 查询所有 错误信息监控配置-->
+	<select id="selectAll" resultMap="baseResultMap" >
+		SELECT 
+			error_code, cycle_threshold, day_threshold, cycle_num, day_num, total_times, 
+			auto_adjustment, log_timestamp,total_days,threshold_rate,last_day_num,last_cycle_num
+		FROM 
+			cp_errorlog_monitor
+	</select>
+	
+	<!-- 新增数据的 重复性校验使用 返回符合条件的记录数 -->
+	<select id="getCountLogMonitorInfo" parameterType="java.lang.String" resultType="java.lang.Integer">
+        SELECT 
+            COUNT(1) 
+        FROM 
+            cp_errorlog_monitor 
+        WHERE
+            error_code = #{errorCode,jdbcType=VARCHAR}
+    </select>
+    
+    <!-- 分页查询  -->
+    <select id="getErrorLogMonitorListByPage" parameterType="java.util.Map"  resultMap="baseResultMap" >
+        SELECT 
+            error_code, cycle_threshold, day_threshold, cycle_num, day_num, total_times, 
+            auto_adjustment, log_timestamp,total_days,threshold_rate,last_day_num,last_cycle_num
+        FROM 
+            cp_errorlog_monitor
+        WHERE 1 = 1
+        <if test=" productCode!=null">
+            AND error_code like CONCAT('%',#{productCode},'%')
+        </if>
+        <if test=" errorCode!=null">
+            AND error_code like CONCAT('%',#{errorCode},'%')
+        </if>
+        <if test="autoAdjustment!=null">
+            AND auto_adjustment = #{autoAdjustment,jdbcType=CHAR}
+        </if>
+    </select>
+</mapper>

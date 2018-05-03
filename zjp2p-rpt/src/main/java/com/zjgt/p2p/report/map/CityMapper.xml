@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zjgt.p2p.report.dao.CityMapper" >
+  <resultMap id="BaseResultMap" type="com.zjgt.p2p.report.model.City" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    <id column="cityId" property="cityid" jdbcType="VARCHAR" />
+    <result column="cityName" property="cityname" jdbcType="VARCHAR" />
+    <result column="proId" property="proid" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    cityId, cityName, proId
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.zjgt.p2p.report.model.CityExample" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from city
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    select 
+    <include refid="Base_Column_List" />
+    from city
+    where cityId = #{cityid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    delete from city
+    where cityId = #{cityid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.zjgt.p2p.report.model.City" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    insert into city (cityId, cityName, proId
+      )
+    values (#{cityid,jdbcType=VARCHAR}, #{cityname,jdbcType=VARCHAR}, #{proid,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.zjgt.p2p.report.model.City" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    insert into city
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="cityid != null" >
+        cityId,
+      </if>
+      <if test="cityname != null" >
+        cityName,
+      </if>
+      <if test="proid != null" >
+        proId,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="cityid != null" >
+        #{cityid,jdbcType=VARCHAR},
+      </if>
+      <if test="cityname != null" >
+        #{cityname,jdbcType=VARCHAR},
+      </if>
+      <if test="proid != null" >
+        #{proid,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zjgt.p2p.report.model.City" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    update city
+    <set >
+      <if test="cityname != null" >
+        cityName = #{cityname,jdbcType=VARCHAR},
+      </if>
+      <if test="proid != null" >
+        proId = #{proid,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where cityId = #{cityid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zjgt.p2p.report.model.City" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    update city
+    set cityName = #{cityname,jdbcType=VARCHAR},
+      proId = #{proid,jdbcType=VARCHAR}
+    where cityId = #{cityid,jdbcType=VARCHAR}
+  </update>
+</mapper>

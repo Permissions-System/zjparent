@@ -1,0 +1,305 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zjgt.p2p.dao.CpssettlelogMapper" >
+  <resultMap id="BaseResultMap" type="com.zjgt.p2p.model.Cpssettlelog" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="termnum" property="termnum" jdbcType="INTEGER" />
+    <result column="channel" property="channel" jdbcType="VARCHAR" />
+    <result column="channel2" property="channel2" jdbcType="VARCHAR" />
+    <result column="memberid" property="memberid" jdbcType="BIGINT" />
+    <result column="bidcode" property="bidcode" jdbcType="VARCHAR" />
+    <result column="amount" property="amount" jdbcType="DECIMAL" />
+    <result column="settleamount" property="settleamount" jdbcType="DECIMAL" />
+    <result column="settledate" property="settledate" jdbcType="TIMESTAMP" />
+    <result column="commission" property="commission" jdbcType="DECIMAL" />
+    <result column="investOrderCode" property="investordercode" jdbcType="VARCHAR" />
+    <result column="settlestatus" property="settlestatus" jdbcType="INTEGER" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="opdate" property="opdate" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    id, termnum, channel, channel2, memberid, bidcode, amount, settleamount, settledate, 
+    commission, investOrderCode, settlestatus, remark, opdate
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.zjgt.p2p.model.CpssettlelogExample" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from cps_settlelog
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    select 
+    <include refid="Base_Column_List" />
+    from cps_settlelog
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    delete from cps_settlelog
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.zjgt.p2p.model.Cpssettlelog" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    insert into cps_settlelog (id, termnum, channel, 
+      channel2, memberid, bidcode, 
+      amount, settleamount, settledate, 
+      commission, investOrderCode, settlestatus, 
+      remark, opdate)
+    values (#{id,jdbcType=BIGINT}, #{termnum,jdbcType=INTEGER}, #{channel,jdbcType=VARCHAR}, 
+      #{channel2,jdbcType=VARCHAR}, #{memberid,jdbcType=BIGINT}, #{bidcode,jdbcType=VARCHAR}, 
+      #{amount,jdbcType=DECIMAL}, #{settleamount,jdbcType=DECIMAL}, #{settledate,jdbcType=TIMESTAMP}, 
+      #{commission,jdbcType=DECIMAL}, #{investordercode,jdbcType=VARCHAR}, #{settlestatus,jdbcType=INTEGER}, 
+      #{remark,jdbcType=VARCHAR}, #{opdate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zjgt.p2p.model.Cpssettlelog" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    insert into cps_settlelog
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="termnum != null" >
+        termnum,
+      </if>
+      <if test="channel != null" >
+        channel,
+      </if>
+      <if test="channel2 != null" >
+        channel2,
+      </if>
+      <if test="memberid != null" >
+        memberid,
+      </if>
+      <if test="bidcode != null" >
+        bidcode,
+      </if>
+      <if test="amount != null" >
+        amount,
+      </if>
+      <if test="settleamount != null" >
+        settleamount,
+      </if>
+      <if test="settledate != null" >
+        settledate,
+      </if>
+      <if test="commission != null" >
+        commission,
+      </if>
+      <if test="investordercode != null" >
+        investOrderCode,
+      </if>
+      <if test="settlestatus != null" >
+        settlestatus,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+      <if test="opdate != null" >
+        opdate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="termnum != null" >
+        #{termnum,jdbcType=INTEGER},
+      </if>
+      <if test="channel != null" >
+        #{channel,jdbcType=VARCHAR},
+      </if>
+      <if test="channel2 != null" >
+        #{channel2,jdbcType=VARCHAR},
+      </if>
+      <if test="memberid != null" >
+        #{memberid,jdbcType=BIGINT},
+      </if>
+      <if test="bidcode != null" >
+        #{bidcode,jdbcType=VARCHAR},
+      </if>
+      <if test="amount != null" >
+        #{amount,jdbcType=DECIMAL},
+      </if>
+      <if test="settleamount != null" >
+        #{settleamount,jdbcType=DECIMAL},
+      </if>
+      <if test="settledate != null" >
+        #{settledate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="commission != null" >
+        #{commission,jdbcType=DECIMAL},
+      </if>
+      <if test="investordercode != null" >
+        #{investordercode,jdbcType=VARCHAR},
+      </if>
+      <if test="settlestatus != null" >
+        #{settlestatus,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="opdate != null" >
+        #{opdate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zjgt.p2p.model.Cpssettlelog" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    update cps_settlelog
+    <set >
+      <if test="termnum != null" >
+        termnum = #{termnum,jdbcType=INTEGER},
+      </if>
+      <if test="channel != null" >
+        channel = #{channel,jdbcType=VARCHAR},
+      </if>
+      <if test="channel2 != null" >
+        channel2 = #{channel2,jdbcType=VARCHAR},
+      </if>
+      <if test="memberid != null" >
+        memberid = #{memberid,jdbcType=BIGINT},
+      </if>
+      <if test="bidcode != null" >
+        bidcode = #{bidcode,jdbcType=VARCHAR},
+      </if>
+      <if test="amount != null" >
+        amount = #{amount,jdbcType=DECIMAL},
+      </if>
+      <if test="settleamount != null" >
+        settleamount = #{settleamount,jdbcType=DECIMAL},
+      </if>
+      <if test="settledate != null" >
+        settledate = #{settledate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="commission != null" >
+        commission = #{commission,jdbcType=DECIMAL},
+      </if>
+      <if test="investordercode != null" >
+        investOrderCode = #{investordercode,jdbcType=VARCHAR},
+      </if>
+      <if test="settlestatus != null" >
+        settlestatus = #{settlestatus,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="opdate != null" >
+        opdate = #{opdate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zjgt.p2p.model.Cpssettlelog" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    update cps_settlelog
+    set termnum = #{termnum,jdbcType=INTEGER},
+      channel = #{channel,jdbcType=VARCHAR},
+      channel2 = #{channel2,jdbcType=VARCHAR},
+      memberid = #{memberid,jdbcType=BIGINT},
+      bidcode = #{bidcode,jdbcType=VARCHAR},
+      amount = #{amount,jdbcType=DECIMAL},
+      settleamount = #{settleamount,jdbcType=DECIMAL},
+      settledate = #{settledate,jdbcType=TIMESTAMP},
+      commission = #{commission,jdbcType=DECIMAL},
+      investOrderCode = #{investordercode,jdbcType=VARCHAR},
+      settlestatus = #{settlestatus,jdbcType=INTEGER},
+      remark = #{remark,jdbcType=VARCHAR},
+      opdate = #{opdate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  
+  <select id="selectLastTTFlog"  resultMap="BaseResultMap" parameterType="Integer">
+  SELECT c.id AS id,
+  c.termnum AS termnum,
+  c.channel AS channel,
+  c.channel2 AS channel2,
+  c.memberid AS memberid,
+  c.bidcode AS bidcode,
+  c.amount AS amount,
+  c.settleamount AS settleamount,
+  c.settledate AS settledate,
+  c.commission AS commission,
+  c.investOrderCode AS investOrderCode,
+  c.settlestatus AS settlestatus,
+  c.opdate AS opdate
+  from cps_settlelog c
+  where NOT EXISTS(SELECT 1 from cps_settlelog s 
+  where c.memberid = s.memberid and s.opdate>c.opdate)
+  and NOT EXISTS(SELECT 1 from cps_settlelog t 
+  where c.memberid = t.memberid and t.termnum>c.termnum)
+  and c.bidcode in (SELECT BidCode from bid where bidtypeid = 4);
+  </select>
+</mapper>

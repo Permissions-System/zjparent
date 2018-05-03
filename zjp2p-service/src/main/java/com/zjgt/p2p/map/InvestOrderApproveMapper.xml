@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zjgt.p2p.dao.InvestOrderApproveMapper" >
+
+  <sql id="Base_Column_List" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    a.serviceno number,a.*,b.id b_id,b.bidclassname,b.amount,b.bidtypeid,b.bidstatus,b.bidcode,b.ifredeem,b.redeemfeetype,b.raisemoney,b.raiseenddate,
+    i.amount amount1,i.id i_id,i.orderstatusdesc,i.orderdate,
+    m.id m_id,m.username,m.name,m.create_date
+  </sql>
+	<resultMap  id="BaseResultMap" type="com.zjgt.p2p.viewbean.InvestOrderApprove">
+			<result column="number" property="number" jdbcType="VARCHAR" />
+			<result column="investNo" property="investNo" jdbcType="INTEGER" />
+			<result column="bidamount" property="bidamount" jdbcType="INTEGER" />
+		<association property="approve" javaType="com.zjgt.p2p.model.Approve">
+			<id column="Id" property="id" jdbcType="BIGINT" />
+		    <result column="modulecode" property="modulecode" jdbcType="VARCHAR" />
+		    <result column="serviceno" property="serviceno" jdbcType="VARCHAR" />
+		    <result column="transname" property="transname" jdbcType="VARCHAR" />
+		    <result column="flowstep" property="flowstep" jdbcType="INTEGER" />
+		    <result column="subject" property="subject" jdbcType="VARCHAR" />
+		    <result column="appreason" property="appreason" jdbcType="VARCHAR" />
+		    <result column="appstatus" property="appstatus" jdbcType="BIT" />
+		    <result column="staff_no" property="staffNo" jdbcType="VARCHAR" />
+		    <result column="staff_name" property="staffName" jdbcType="VARCHAR" />
+		    <result column="opdate" property="opdate" jdbcType="TIMESTAMP" />
+		    <result column="remark" property="remark" jdbcType="VARCHAR" />
+		</association>
+		<association property="bid" column="id" javaType="com.zjgt.p2p.model.Bid" >
+			<id column="id1" property="id" jdbcType="INTEGER" />
+		    <result column="bidno" property="bidno" jdbcType="VARCHAR" />
+		    <result column="bidclassno" property="bidclassno" jdbcType="VARCHAR" />
+		    <result column="bidtypeid" property="bidtypeid" jdbcType="INTEGER" />
+		    <result column="bidtype" property="bidtype" jdbcType="VARCHAR" />
+		    <result column="bidclassname" property="bidclassname" jdbcType="VARCHAR" />
+		    <result column="bidclasssubject" property="bidclasssubject" jdbcType="VARCHAR" />
+		    <result column="bidimg" property="bidimg" jdbcType="VARCHAR" />
+		    <result column="amount" property="amount" jdbcType="DECIMAL" />
+		    <result column="investperiodtypeid" property="investperiodtypeid" jdbcType="INTEGER" />
+		    <result column="investperiod" property="investperiod" jdbcType="INTEGER" />
+		    <result column="raiseperiod" property="raiseperiod" jdbcType="VARCHAR" />
+		    <result column="raisebegindate" property="raisebegindate" jdbcType="DATE" />
+		    <result column="raiseenddate" property="raiseenddate" jdbcType="DATE" />
+		    <result column="exptinterestdate" property="exptinterestdate" jdbcType="DATE" />
+		    <result column="exptexpiredate" property="exptexpiredate" jdbcType="DATE" />
+		    <result column="annualizedrate" property="annualizedrate" jdbcType="DECIMAL" />
+		    <result column="intestcalctypeid" property="intestcalctypeid" jdbcType="INTEGER" />
+		    <result column="intestcalctype" property="intestcalctype" jdbcType="VARCHAR" />
+		    <result column="exptlastacctdate" property="exptlastacctdate" jdbcType="DATE" />
+		    <result column="mininvestamount" property="mininvestamount" jdbcType="DECIMAL" />
+		    <result column="maxinvestamount" property="maxinvestamount" jdbcType="DECIMAL" />
+		    <result column="ifredeem" property="ifredeem" jdbcType="INTEGER" />
+		    <result column="redeemfeetype" property="redeemfeetype" jdbcType="INTEGER" />
+		    <result column="redeemfee" property="redeemfee" jdbcType="DECIMAL" />
+		    <result column="iftransfer" property="iftransfer" jdbcType="INTEGER" />
+		    <result column="transfertype" property="transfertype" jdbcType="INTEGER" />
+		    <result column="transfee" property="transfee" jdbcType="DECIMAL" />
+		    <result column="assureinstid" property="assureinstid" jdbcType="INTEGER" />
+		    <result column="assureinstname" property="assureinstname" jdbcType="VARCHAR" />
+		    <result column="ensuretype" property="ensuretype" jdbcType="INTEGER" />
+		    <result column="agreement1" property="agreement1" jdbcType="INTEGER" />
+		    <result column="agreement2" property="agreement2" jdbcType="INTEGER" />
+		    <result column="agreement3" property="agreement3" jdbcType="INTEGER" />
+		    <result column="raisemoney" property="raisemoney" jdbcType="DECIMAL" />
+		    <result column="raisestate" property="raisestate" jdbcType="INTEGER" />
+		    <result column="bidstatus" property="bidstatus" jdbcType="INTEGER" />
+		    <result column="BidCode" property="bidcode" jdbcType="VARCHAR" />
+		    <result column="repaymentway" property="repaymentway" jdbcType="VARCHAR" />
+		    <result column="bindinnerno" property="bindinnerno" jdbcType="VARCHAR" />
+		    <result column="bidclassintro" property="bidclassintro" jdbcType="VARCHAR" />
+		    <result column="investscope" property="investscope" jdbcType="VARCHAR" />
+		    <result column="incomedesc" property="incomedesc" jdbcType="VARCHAR" />
+		    <result column="incomeway" property="incomeway" jdbcType="INTEGER" />
+		    <result column="raisecond" property="raisecond" jdbcType="VARCHAR" />
+		    <result column="redeemway" property="redeemway" jdbcType="VARCHAR" />
+		    <result column="raiserate" property="raiserate" jdbcType="DECIMAL" />
+		    <result column="redemrate" property="redemrate" jdbcType="DECIMAL" />
+		    <result column="transrate" property="transrate" jdbcType="DECIMAL" />
+		    <result column="prepayrate" property="prepayrate" jdbcType="DECIMAL" />
+		    <result column="receiptdesc" property="receiptdesc" jdbcType="VARCHAR" />
+		    <result column="bidnum" property="bidnum" jdbcType="INTEGER" />
+		    <result column="pubdate" property="pubdate" jdbcType="TIMESTAMP" />
+		    <result column="memberid" property="memberid" jdbcType="INTEGER" />
+		    <result column="staff_no1" property="staffNo" jdbcType="VARCHAR" />
+		    <result column="membername" property="membername" jdbcType="VARCHAR" />
+		    <result column="riskmgrfee" property="riskmgrfee" jdbcType="DECIMAL" />
+		    <result column="transname1" property="transname" jdbcType="VARCHAR" />
+		    <result column="ApproStatus" property="approstatus" jdbcType="INTEGER" />
+		    <result column="projectCode" property="projectcode" jdbcType="VARCHAR" />
+		    <result column="yearservicefee" property="yearservicefee" jdbcType="DECIMAL" />
+		    <result column="remark1" property="remark" jdbcType="VARCHAR" />
+		</association>
+		<association property="investOrder" column="id" javaType="com.zjgt.p2p.model.InvestOrder" >
+		    <id column="ID2" property="id" jdbcType="INTEGER" />
+		    <result column="InvestOrderCode" property="investordercode" jdbcType="VARCHAR" />
+		    <result column="BidCode" property="bidcode" jdbcType="VARCHAR" />
+		    <result column="CreditMatchRuleId" property="creditmatchruleid" jdbcType="INTEGER" />
+		    <result column="CustomerID" property="customerid" jdbcType="BIGINT" />
+		    <result column="CustomerNickName" property="customernickname" jdbcType="VARCHAR" />
+		    <result column="CustomerName" property="customername" jdbcType="VARCHAR" />
+		    <result column="SalerID" property="salerid" jdbcType="BIGINT" />
+		    <result column="BusinessType" property="businesstype" jdbcType="VARCHAR" />
+		    <result column="Amount" property="amount" jdbcType="DECIMAL" />
+		    <result column="Fee" property="fee" jdbcType="DECIMAL" />
+		    <result column="InvestTerm" property="investterm" jdbcType="INTEGER" />
+		    <result column="TermType" property="termtype" jdbcType="VARCHAR" />
+		    <result column="ChannelCode" property="channelcode" jdbcType="VARCHAR" />
+		    <result column="transname2" property="transname" jdbcType="VARCHAR" />
+		    <result column="ApproStatus1" property="approstatus" jdbcType="INTEGER" />
+		    <result column="OrderStatus" property="orderstatus" jdbcType="INTEGER" />
+		    <result column="OrderStatusDesc" property="orderstatusdesc" jdbcType="VARCHAR" />
+		    <result column="OrderDate" property="orderdate" jdbcType="TIMESTAMP" />
+		    <result column="Remark2" property="remark" jdbcType="VARCHAR" />
+		</association>
+		<association property="member" column="id" javaType="com.zjgt.p2p.model.Member" >
+		    <id column="id3" property="id" jdbcType="BIGINT" />
+		    <result column="username" property="username" jdbcType="VARCHAR" />
+		    <result column="email" property="email" jdbcType="VARCHAR" />
+		    <result column="password" property="password" jdbcType="VARCHAR" />
+		    <result column="nickname" property="nickname" jdbcType="VARCHAR" />
+		    <result column="realname" property="realname" jdbcType="VARCHAR" />
+		    <result column="name" property="name" jdbcType="VARCHAR" />
+		    <result column="verifyemail" property="verifyemail" jdbcType="VARCHAR" />
+		    <result column="idcard" property="idcard" jdbcType="VARCHAR" />
+		    <result column="bankcardno" property="bankcardno" jdbcType="VARCHAR" />
+		    <result column="bankcardnum" property="bankcardnum" jdbcType="INTEGER" />
+		    <result column="transpasswd" property="transpasswd" jdbcType="VARCHAR" />
+		    <result column="transpasswdifset" property="transpasswdifset" jdbcType="INTEGER" />
+		    <result column="address" property="address" jdbcType="VARCHAR" />
+		    <result column="mobile" property="mobile" jdbcType="VARCHAR" />
+		    <result column="amount2" property="amount" jdbcType="DECIMAL" />
+		    <result column="birth" property="birth" jdbcType="TIMESTAMP" />
+		    <result column="gender" property="gender" jdbcType="INTEGER" />
+		    <result column="is_enabled" property="isEnabled" jdbcType="BIT" />
+		    <result column="is_locked" property="isLocked" jdbcType="BIT" />
+		    <result column="locked_date" property="lockedDate" jdbcType="TIMESTAMP" />
+		    <result column="login_date" property="loginDate" jdbcType="TIMESTAMP" />
+		    <result column="login_failure_count" property="loginFailureCount" jdbcType="INTEGER" />
+		    <result column="login_ip" property="loginIp" jdbcType="VARCHAR" />
+		    <result column="phone" property="phone" jdbcType="VARCHAR" />
+		    <result column="point" property="point" jdbcType="BIGINT" />
+		    <result column="openid" property="openid" jdbcType="VARCHAR" />
+		    <result column="usertype" property="usertype" jdbcType="INTEGER" />
+		    <result column="register_ip" property="registerIp" jdbcType="VARCHAR" />
+		    <result column="safe_key_expire" property="safeKeyExpire" jdbcType="TIMESTAMP" />
+		    <result column="safe_key_value" property="safeKeyValue" jdbcType="VARCHAR" />
+		    <result column="zip_code" property="zipCode" jdbcType="VARCHAR" />
+		    <result column="area" property="area" jdbcType="BIGINT" />
+		    <result column="member_rank" property="memberRank" jdbcType="BIGINT" />
+		    <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+		    <result column="modify_date" property="modifyDate" jdbcType="TIMESTAMP" />
+		    <result column="userstatus" property="userstatus" jdbcType="SMALLINT" />
+		</association>
+	</resultMap>
+	
+	
+  <select id="getInvestOrderApproveByInvestOrder" resultMap="BaseResultMap" parameterType="com.zjgt.p2p.viewbean.InvestOrderApproveExample" >
+ 	 SELECT  a.serviceno number,i.id investNo ,a.* ,i.* ,b.*,b.amount bidamount, m.* FROM approve a,bid b,investorder i,member m
+	WHERE i.InvestOrderCode=a.serviceno and b.BidCode=i.BidCode AND i.CustomerID=m.id
+	AND a.modulecode=2  
+	and a.serviceno = #{id} and a.flowstep = #{flowstep}
+  </select>
+	
+<select id="getInvestOrderApprove"  resultMap="BaseResultMap" parameterType="com.zjgt.p2p.viewbean.InvestOrderApproveExample">
+	SELECT a.serviceno number,a.* ,i.* ,i.id investNo ,b.*,b.amount bidamount, m.* FROM approve a,bid b,investorder i,member m
+	WHERE i.InvestOrderCode=a.serviceno and b.BidCode=i.BidCode AND i.CustomerID=m.id
+	AND a.modulecode=2 AND a.flowstep=1 AND i.transname=2
+    	<if test="username !=  null">
+			and m.email like #{username}  
+		</if>
+		<if test="name != null">
+			and m.realname like  #{name}  
+		</if>
+		<if test="orderstatusdesc != null">
+			and i.OrderStatusDesc = #{orderstatusdesc}  
+		</if>
+		order by a.opdate DESC
+		<if test="startPos != null" >
+      		limit ${startPos} ,${pageSize}
+    	</if>
+    	
+</select>
+
+<!-- 取得记录的总数 -->  
+<select id="getInvestOrderApproveCount" resultType="long" parameterType="com.zjgt.p2p.viewbean.InvestOrderApproveExample">  
+	SELECT count(a.id) FROM approve a,bid b,investorder i,member m
+	WHERE i.InvestOrderCode=a.serviceno and b.BidCode=i.BidCode AND i.CustomerID=m.id
+	AND a.modulecode=2 AND a.flowstep=1 AND i.transname=2
+    	<if test="username !=  null">
+			and m.email like #{username}  
+		</if>
+		<if test="name != null">
+			and m.realname like  #{name} 
+		</if>
+		<if test="orderstatusdesc != null">
+			and i.OrderStatusDesc = #{orderstatusdesc}  
+		</if>
+</select> 
+</mapper>

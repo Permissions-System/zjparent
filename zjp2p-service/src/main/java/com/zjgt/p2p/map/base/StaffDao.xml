@@ -1,0 +1,440 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zjgt.p2p.base.dao.StaffDao" >
+  <resultMap id="BaseResultMap" type="com.zjgt.p2p.base.domain.Staff" >
+    <id column="STAFF_NO" property="staffNo" jdbcType="VARCHAR" />
+    <result column="ORG_CODE" property="orgCode" jdbcType="VARCHAR" />
+    <result column="ORG_NAME" property="orgName" jdbcType="VARCHAR" />
+    <result column="NAME" property="name" jdbcType="VARCHAR" />
+    <result column="IDENT_NO" property="identNo" jdbcType="VARCHAR" />
+    <result column="PWD" property="pwd" jdbcType="VARCHAR" />
+    <result column="SALT" property="salt" jdbcType="VARCHAR" />
+    <result column="TEL" property="tel" jdbcType="VARCHAR" />
+    <result column="EMAIL" property="email" jdbcType="VARCHAR" />
+    <result column="STAFF_TYPE" property="staffType" jdbcType="CHAR" />
+    <result column="C3_ORG_NO" property="c3OrgNo" jdbcType="VARCHAR" />
+    <result column="C3_ORG_NAME" property="c3OrgName" jdbcType="VARCHAR" />
+    <result column="STAFF_STATUS" property="staffStatus" jdbcType="CHAR" />
+    <result column="ROLE_CODE" property="roleCode" jdbcType="VARCHAR" />
+    <result column="CREATE_DATE" property="createDate" jdbcType="VARCHAR" />
+    <result column="TRANSPWD" property="transpwd" jdbcType="VARCHAR" />
+  </resultMap>
+  
+  <resultMap id="RoleRelResultMap" type="com.zjgt.p2p.base.domain.StaffRoleRel" >
+    <id column="REC_NO" property="recNo" jdbcType="VARCHAR" />
+    <result column="ROLE_CODE" property="roleCode" jdbcType="VARCHAR" />
+    <result column="Staff_No" property="staffNo" jdbcType="VARCHAR" />
+  </resultMap>
+  
+  <resultMap id="RoleResultMap" type="com.zjgt.p2p.base.domain.Role" >
+    <id column="ROLE_CODE" property="roleCode" jdbcType="VARCHAR" />
+    <result column="ROLE_NAME" property="roleName" jdbcType="VARCHAR" />
+    <result column="ORG_CODE" property="orgCode" jdbcType="VARCHAR" />
+    <result column="ROLE_TYPE" property="roleType" jdbcType="VARCHAR" />
+    <result column="CHECKED" property="checked" jdbcType="VARCHAR" />
+    <result column="DISABLED" property="disabled" jdbcType="BOOLEAN" />
+  </resultMap>
+  
+  <resultMap id="OrgResultMap" type="com.zjgt.p2p.base.domain.Organization" >
+    <id column="ORG_CODE" property="orgCode" jdbcType="VARCHAR" />
+    <result column="ORG_NAME" property="orgName" jdbcType="VARCHAR" />
+    <result column="ORDER_NO" property="orderNo" jdbcType="DECIMAL" />
+    <result column="TREEPATH" property="treepath" jdbcType="VARCHAR" />
+    <result column="PARENT_ORG_CODE" property="parentOrgCode" jdbcType="VARCHAR" />
+  </resultMap>
+  
+    <resultMap id="SimpleResultMap" type="com.zjgt.p2p.base.domain.Staff" >
+    <id column="STAFF_NO" property="staffNo" jdbcType="VARCHAR" />
+    <result column="ORG_CODE" property="orgCode" jdbcType="VARCHAR" />
+    <result column="NAME" property="name" jdbcType="VARCHAR" />
+    <result column="IDENT_NO" property="identNo" jdbcType="VARCHAR" />
+    <result column="TEL" property="tel" jdbcType="VARCHAR" />
+    <result column="EMAIL" property="email" jdbcType="VARCHAR" />
+    <result column="STAFF_TYPE" property="staffType" jdbcType="CHAR" />
+    <result column="C3_ORG_NO" property="c3OrgNo" jdbcType="VARCHAR" />
+    <result column="C3_ORG_NAME" property="c3OrgName" jdbcType="VARCHAR" />
+    <result column="STAFF_STATUS" property="staffStatus" jdbcType="CHAR" />
+    <result column="CREATE_DATE" property="createDate" jdbcType="VARCHAR" />
+  </resultMap>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from CP_STAFF
+    where STAFF_NO = #{staffNo,jdbcType=VARCHAR}
+  </delete>
+  
+  <insert id="insert" parameterType="com.zjgt.p2p.base.domain.Staff" >
+    insert into CP_STAFF (STAFF_NO, ORG_CODE, NAME, 
+      IDENT_NO, PWD, SALT, 
+      TEL, EMAIL, STAFF_TYPE, 
+      C3_ORG_NO, C3_ORG_NAME, STAFF_STATUS,CREATE_DATE)
+    values (#{staffNo,jdbcType=VARCHAR}, #{orgCode,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{identNo,jdbcType=VARCHAR}, #{pwd,jdbcType=VARCHAR}, #{salt,jdbcType=VARCHAR}, 
+      #{tel,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{staffType,jdbcType=CHAR}, 
+      #{c3OrgNo,jdbcType=VARCHAR}, #{c3OrgName,jdbcType=VARCHAR}, #{staffStatus,jdbcType=CHAR}, #{createDate,jdbcType=CHAR})
+  </insert>
+  
+  <update id="updateByPrimaryKey" parameterType="com.zjgt.p2p.base.domain.Staff" >
+    update CP_STAFF
+    set ORG_CODE = #{orgCode,jdbcType=VARCHAR},
+      NAME = #{name,jdbcType=VARCHAR},
+      IDENT_NO = #{identNo,jdbcType=VARCHAR},
+      TEL = #{tel,jdbcType=VARCHAR},
+      EMAIL = #{email,jdbcType=VARCHAR},
+      STAFF_TYPE = #{staffType,jdbcType=CHAR},
+      C3_ORG_NO = #{c3OrgNo,jdbcType=VARCHAR},
+      C3_ORG_NAME = #{c3OrgName,jdbcType=VARCHAR},
+      STAFF_STATUS = #{staffStatus,jdbcType=CHAR},
+      CREATE_DATE = #{createDate,jdbcType=CHAR}
+    where STAFF_NO = #{staffNo,jdbcType=VARCHAR}
+  </update>
+  
+  <update id="updateStaffBaseInfo" parameterType="com.zjgt.p2p.base.domain.Staff" >
+    update CP_STAFF
+    set ORG_CODE = #{orgCode,jdbcType=VARCHAR},
+      NAME = #{name,jdbcType=VARCHAR},
+      TEL = #{tel,jdbcType=VARCHAR},
+      EMAIL = #{email,jdbcType=VARCHAR},
+      STAFF_STATUS = #{staffStatus,jdbcType=CHAR}
+    where STAFF_NO = #{staffNo,jdbcType=VARCHAR}
+  </update>
+  
+  <update id="updateTranspwdByStaffNo" parameterType="com.zjgt.p2p.base.domain.Staff" >
+    update CP_STAFF
+    set TRANSPWD = #{transpwd,jdbcType=VARCHAR} 
+    where STAFF_NO = #{staffNo,jdbcType=VARCHAR}
+  </update>
+  
+  <sql id="selectBasic">
+    STAFF_NO, ORG_CODE, NAME, IDENT_NO, PWD, SALT, TEL, EMAIL, STAFF_TYPE, C3_ORG_NO, C3_ORG_NAME,
+    STAFF_STATUS, CREATE_DATE, TRANSPWD
+  </sql>
+ 
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select <include refid="selectBasic"/>
+    from CP_STAFF
+    where STAFF_NO = #{staffNo,jdbcType=VARCHAR}
+  </select>
+  
+  <select id="selectByIdentNo" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select <include refid="selectBasic"/>
+    from CP_STAFF
+    where IDENT_NO = #{identNo,jdbcType=VARCHAR}
+  </select>
+  
+  <select id="selectRolesByStaffNo" resultType="String" parameterType="String" >
+  	select ROLE_CODE from CP_STAFF_ROLE_REL csrr where csrr.STAFF_NO = #{staffNo}
+  </select>
+  
+  <select id="selectPermissionsBy"  resultType="String" parameterType="String" >
+	select distinct t.TRANS_CODE
+	  from CP_ROLE_TRANS_REL cptr, CP_STAFF_ROLE_REL csrr, cp_trans t
+	 where cptr.ROLE_CODE = csrr.ROLE_CODE
+	   and t.trans_code = cptr.trans_code
+	   and t.trans_status = '1'
+	   and csrr.STAFF_NO = #{staffNo}  
+  </select>
+  
+  <select id="selectPermissionsForAdmin"  resultType="String">
+	select distinct trans_code from cp_trans
+  </select>
+  
+  <select id="selectByOrg" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select STAFF_NO, ORG_CODE, NAME, IDENT_NO, TEL, EMAIL, STAFF_TYPE, C3_ORG_NO, C3_ORG_NAME,
+    STAFF_STATUS, CREATE_DATE
+    from CP_STAFF 
+    where ORG_CODE = #{orgCode,jdbcType=VARCHAR}
+  </select>
+  
+  <select id="selectByOrgList" resultMap="BaseResultMap" parameterType="java.util.Map" >
+    select STAFF_NO, ORG_CODE, NAME, IDENT_NO, TEL, EMAIL, STAFF_TYPE, C3_ORG_NO, C3_ORG_NAME,
+    STAFF_STATUS, CREATE_DATE
+    from CP_STAFF 
+    where 1 = 1
+     AND ORG_CODE in
+        <foreach item="item" index="index" collection="orgCode" open="(" separator="," close=")">
+		      #{item}
+		</foreach>
+	order by ORG_CODE, STAFF_NO
+  </select>
+  
+  <select id="selectStaffsByRoleId" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select distinct CS.STAFF_NO, CS.ORG_CODE, CS.NAME,ORG.ORG_NAME, CS.IDENT_NO, CS.TEL, CS.EMAIL, CS.STAFF_TYPE, CS.C3_ORG_NO, CS.C3_ORG_NAME,
+    CS.STAFF_STATUS, CS.CREATE_DATE
+    from CP_STAFF CS, CP_STAFF_ROLE_REL CSRR ,CP_ORG ORG
+  	where CSRR.ROLE_CODE= #{roleCode} and CS.STAFF_NO = CSRR.STAFF_NO 
+  	and ORG.ORG_CODE = CS.ORG_CODE
+  </select>
+  
+  <insert id="insertStaffRoleRel" parameterType="com.zjgt.p2p.base.domain.StaffRoleRel" >
+    insert into CP_STAFF_ROLE_REL (REC_NO, ROLE_CODE, STAFF_NO
+      )
+    values (#{recNo,jdbcType=VARCHAR}, #{roleCode,jdbcType=VARCHAR}, #{staffNo,jdbcType=VARCHAR}
+      )
+  </insert>
+  
+  <delete id="deleteStaffRoleByStaffNo" parameterType="java.lang.String" >
+    delete from CP_STAFF_ROLE_REL
+    where STAFF_NO = #{staffNo,jdbcType=VARCHAR}
+  </delete>
+  
+  <select id="selectStaffRoleByStaffNo" resultMap="RoleRelResultMap" parameterType="java.lang.String" >
+    select REC_NO, ROLE_CODE, STAFF_NO
+    from CP_STAFF_ROLE_REL
+    where STAFF_NO = #{staffNo,jdbcType=VARCHAR}
+  </select>
+  
+  <select id="selectStaffRole" resultMap="RoleRelResultMap" parameterType="java.util.Map" >
+    select REC_NO, ROLE_CODE, STAFF_NO
+    from CP_STAFF_ROLE_REL
+    where STAFF_NO = #{staffNo,jdbcType=VARCHAR}
+    and ROLE_CODE = #{roleCode,jdbcType=VARCHAR}
+  </select>
+  
+  <select id="findStaffRoleRelForCheck" resultMap="RoleResultMap" parameterType="java.lang.String">
+	select r.role_code as role_code,
+	       r.role_name as role_name,
+	       r.org_code as org_code,
+	       r.role_type as role_type,
+	       case
+	         when srr.staff_no is not null then
+	          'true'
+	         when srr.staff_no is null then
+	          'false'
+	       end as checked
+	  from cp_staff s
+	  join cp_role r
+	    on r.org_code = s.org_code
+	  left join cp_staff_role_rel srr
+	    on srr.staff_no = s.staff_no
+	   and srr.role_code = r.role_code
+	 where s.staff_no = #{staffNo,jdbcType=VARCHAR}
+	order by r.role_code
+  </select>
+  
+  <select id="findRoleByOrgCodeForStaff" resultMap="RoleResultMap" parameterType="java.util.Map">
+	select distinct r.role_code as role_code,
+			       r.role_name as role_name,
+			       r.org_code as org_code,
+			       r.role_type as role_type,
+			       case
+			         when srr.staff_no is null then
+			          'false'
+			         when srr.staff_no is not null then
+			          'true'
+			       end as checked
+	  from cp_role r
+	  left join cp_staff_role_rel srr
+	    on srr.role_code = r.role_code
+	   and srr.staff_no = #{staffNo,jdbcType=VARCHAR}
+	 where r.org_code = #{orgCode,jdbcType=VARCHAR}
+	 order by r.role_code
+  </select>
+  
+  <select id="findRoleByOrgCodeForAdminStaff" resultMap="RoleResultMap" parameterType="java.util.Map">
+	select distinct r.role_code as role_code,
+	                r.role_name as role_name,
+	                r.org_code as org_code,
+	                r.role_type as role_type,
+	                'false' as checked,
+	                'false' as disabled,
+	                o.treepath
+	  from cp_staff s, cp_role r, cp_org o
+	 where s.staff_no = #{adminNo,jdbcType=VARCHAR}
+	   and r.org_code = #{orgCode,jdbcType=VARCHAR}
+	   and o.org_code = r.org_code
+	   and instr(CONCAT('/' ,o.treepath ,'/'), CONCAT('/' , s.org_code ,'/')) > 0
+	 order by r.role_code
+  </select>
+  
+  <select id="findAvailableRoleByOrgCodeForStaff" resultMap="RoleResultMap" parameterType="java.util.Map">
+	select distinct r.role_code as role_code,
+			       r.role_name as role_name,
+			       r.org_code as org_code,
+			       r.role_type as role_type,
+			       'true' as checked,
+			       'false' as disabled
+	  from cp_role r, cp_staff_role_rel srr, cp_staff s
+	 where s.staff_no = #{staffNo,jdbcType=VARCHAR}
+	   and srr.staff_no = s.staff_no
+	   and r.role_code = srr.role_code
+	   and r.org_code =  #{orgCode,jdbcType=VARCHAR}
+	   order by r.role_code
+  </select>
+  
+  <select id="findRoleOrgByRoleCode" resultMap="OrgResultMap" parameterType="java.lang.String" >
+	select distinct o.org_code        as org_code,
+			       o.org_name        as org_name,
+			       o.order_no        as order_no,
+			       o.treepath        as treepath,
+			       o.parent_org_code as parent_org_code
+	  from cp_staff s, cp_staff_role_rel srr, cp_role r, cp_org o
+	 where s.staff_no = #{staffNo,jdbcType=VARCHAR}
+	   and srr.staff_no = s.staff_no
+	   and r.role_code = srr.role_code
+	   and o.org_code = r.org_code
+	 order by o.treepath, o.order_no
+  </select>
+  
+  <update id="resetPassword" parameterType="com.zjgt.p2p.base.domain.Staff" >
+   	update CP_STAFF
+    set PWD = #{pwd,jdbcType=VARCHAR},
+      SALT = #{salt,jdbcType=VARCHAR}
+    where STAFF_NO = #{staffNo,jdbcType=VARCHAR}
+  </update>
+  
+  <select id="findCustManager" resultMap="BaseResultMap" parameterType="java.util.Map" >
+	select distinct s.STAFF_NO,
+	       s.ORG_CODE,
+	       s.NAME,
+	       s.IDENT_NO,
+	       s.TEL,
+	       s.EMAIL,
+	       s.STAFF_TYPE,
+	       s.C3_ORG_NO,
+	       s.STAFF_STATUS,
+	       s.C3_ORG_NAME
+	  from CP_STAFF s
+	  <if test="roleCode!=null">
+	  join CP_STAFF_ROLE_REL srr
+	    on srr.STAFF_NO = s.STAFF_NO
+	   and srr.ROLE_CODE = #{roleCode}
+	  </if>
+	 where s.STAFF_TYPE = #{staffType}
+	   and s.STAFF_STATUS != '3'
+	   <if test="identNo!=null">
+	   	and s.IDENT_NO like CONCAT('%',#{identNo},'%')
+       </if>
+	   <if test="name!=null">
+	   	and s.NAME like CONCAT('%',#{name},'%')
+       </if>
+	order by s.staff_no
+  </select>
+  
+  <delete id="deleteStaffRole" parameterType="java.util.Map" >
+    delete from CP_STAFF_ROLE_REL
+    where STAFF_NO = #{staffNo,jdbcType=VARCHAR}
+    and ROLE_CODE = #{roleCode,jdbcType=VARCHAR}
+  </delete>
+  
+  <select id="findStaffByRoleCode" resultMap="RoleResultMap" parameterType="java.util.Map">
+	select s.STAFF_NO, s.ORG_CODE, s.NAME, s.IDENT_NO, s.PWD, s.SALT, s.TEL, s.EMAIL, 
+		s.STAFF_TYPE, s.C3_ORG_NO, s.STAFF_STATUS, s.CREATE_DATE
+	  from CP_STAFF s, CP_STAFF_ROLE_REL srr
+	 where s.STAFF_NO = srr.STAFF_NO
+	   and srr.ROLE_CODE in
+		<foreach item="item" index="index" collection="roleCodes" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+		order by s.STAFF_NO
+  </select>
+  
+  <select id="selectStaffOrg" parameterType="java.lang.String" resultType="java.lang.String">
+  	select ORG_CODE
+  	from CP_STAFF
+  	where STAFF_NO = #{staffNo}
+  </select>
+  
+  <update id="updatePersonalStaffInfo" parameterType="com.zjgt.p2p.base.domain.Staff">
+  	update CP_STAFF
+    set NAME = #{name,jdbcType=VARCHAR},
+      TEL = #{tel,jdbcType=VARCHAR},
+      EMAIL = #{email,jdbcType=VARCHAR}
+    where IDENT_NO = #{identNo,jdbcType=VARCHAR}
+  </update>
+  
+  <select id="selectByNameSearch" resultMap="BaseResultMap" parameterType="java.util.Map">
+  	select STAFF_NO, ORG_CODE, NAME, IDENT_NO, TEL, EMAIL, STAFF_TYPE, STAFF_STATUS
+  	from CP_STAFF
+  	where NAME like CONCAT('%',#{condition},'%')
+  		and ORG_CODE in (
+  			select ORG_CODE
+  			from CP_ORG
+  			where TREEPATH = (
+	  			select TREEPATH
+	  			from CP_ORG
+	  			where ORG_CODE = (
+		  			select ORG_CODE
+		  			from CP_STAFF
+		  			where IDENT_NO = #{currentUID}
+	  			)
+	  		) or TREEPATH like CONCAT((
+	  			select TREEPATH
+	  			from CP_ORG
+	  			where ORG_CODE = (
+		  			select ORG_CODE
+		  			from CP_STAFF
+		  			where IDENT_NO = #{currentUID}
+	  			)
+	  		) ,'/','%')
+  		)
+  	order by STAFF_NO
+  </select>
+  
+  <select id="selectStaffs" resultMap="SimpleResultMap" parameterType="java.util.Map" >
+    select STAFF_NO, ORG_CODE, NAME, IDENT_NO, TEL, EMAIL, STAFF_TYPE, C3_ORG_NO, C3_ORG_NAME,
+	    STAFF_STATUS, CREATE_DATE
+	from CP_STAFF
+    where 1=1
+    <if test=" staffNos!=null">
+	     AND STAFF_NO in 
+	     <foreach item="item" index="index" collection="staffNos" open="(" separator="," close=")">
+	           #{item}
+	     </foreach>
+    </if>
+    <if test=" name!=null">
+        AND NAME LIKE CONCAT('%',#{name,jdbcType=VARCHAR},'%')
+    </if>
+    <if test=" identNo!=null">
+        AND IDENT_NO LIKE CONCAT('%',#{identNo,jdbcType=VARCHAR},'%')
+    </if>
+  </select>
+  
+  <!-- 查询Shiro权限  start-->
+  <resultMap id="SimpleTransResultMap" type="com.zjgt.p2p.base.domain.Transaction" >
+	  <id column="TRANS_CODE" property="transCode" jdbcType="VARCHAR" />
+	  <result column="URL" property="url" jdbcType="VARCHAR" />
+  </resultMap>
+  
+  
+  <select id="selectTranPermissionsForAdmin" resultMap="SimpleTransResultMap" parameterType="String" >
+  	select distinct URL, TRANS_CODE from cp_trans
+  </select>
+  
+  <select id="selectTranPermissionsForStaff"  resultMap="SimpleTransResultMap" parameterType="String" >
+	select distinct t.URL, t.TRANS_CODE
+	  from CP_ROLE_TRANS_REL cptr, CP_STAFF_ROLE_REL csrr, cp_trans t
+	 where cptr.ROLE_CODE = csrr.ROLE_CODE
+	   and t.trans_code = cptr.trans_code
+	   and t.trans_status = '1'
+	   and csrr.STAFF_NO = #{staffNo}
+  </select>
+  <!-- 查询Shiro权限  end-->
+  
+  <resultMap id="TransResultMap" type="com.zjgt.p2p.base.domain.Transaction" >
+	  <id column="TRANS_CODE" property="transCode" jdbcType="VARCHAR" />
+	  <result column="URL" property="url" jdbcType="VARCHAR" />
+	  <result column="TRANS_NAME" property="transName" jdbcType="VARCHAR" />
+	  <result column="MODULE_CODE" property="moduleCode" jdbcType="VARCHAR" />
+  </resultMap>
+  
+  <select id="selectTranPermissions"  resultMap="TransResultMap" parameterType="String" >
+	select distinct t.URL, t.TRANS_CODE, t.TRANS_NAME, t.MODULE_CODE
+	  from CP_ROLE_TRANS_REL cptr, CP_STAFF_ROLE_REL csrr, cp_trans t
+	 where cptr.ROLE_CODE = csrr.ROLE_CODE
+	   and t.trans_code = cptr.trans_code
+	   and t.trans_status = '1'
+	   and csrr.STAFF_NO = #{staffNo}
+	   order by t.MODULE_CODE
+  </select>
+  
+  <!-- 分页查询角色下的员工列表 -->
+  <select id="selectStaffsByRoleIdPage" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select distinct CS.STAFF_NO, CS.ORG_CODE, CS.NAME,ORG.ORG_NAME, CS.IDENT_NO, CS.TEL, CS.EMAIL, CS.STAFF_TYPE, CS.C3_ORG_NO, CS.C3_ORG_NAME,
+    CS.STAFF_STATUS, CS.CREATE_DATE
+    from CP_STAFF CS, CP_STAFF_ROLE_REL CSRR ,CP_ORG ORG
+  	where CSRR.ROLE_CODE= #{roleCode} and CS.STAFF_NO = CSRR.STAFF_NO 
+  	and ORG.ORG_CODE = CS.ORG_CODE
+  </select>
+  
+  
+</mapper>

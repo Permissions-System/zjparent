@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zjgt.p2p.base.dao.ModuleDao" >
+	<resultMap id="moduleMap" type="com.zjgt.p2p.base.domain.Module" >
+		<id column="MODULE_CODE" property="moduleCode" jdbcType="VARCHAR" />
+		<result column="MODULE_NAME" property="moduleName" jdbcType="VARCHAR" />
+		<result column="TREEPATH" property="treepath" jdbcType="VARCHAR" />
+		<result column="MODULE_STATUS" property="moduleStatus" jdbcType="VARCHAR" />
+		<result column="PARENT_MODULE_CODE" property="parentModuleCode" jdbcType="VARCHAR" />
+	</resultMap>
+	
+	<resultMap id="TransactionResultMap" type="com.zjgt.p2p.base.domain.Transaction" >
+		<id column="TRANS_CODE" property="transCode" jdbcType="VARCHAR" />
+		<result column="TRANS_NAME" property="transName" jdbcType="VARCHAR" />
+		<result column="URL" property="url" jdbcType="VARCHAR" />
+		<result column="TRANS_STATUS" property="transStatus" jdbcType="VARCHAR" />
+		<result column="VALIDATE_FLAG" property="validateFlag" jdbcType="VARCHAR" />
+		<result column="MODULE_CODE" property="moduleCode" jdbcType="VARCHAR" />
+	</resultMap>
+	
+	<!-- 根据主键删除模块记录 -->
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+		DELETE FROM cp_module
+		WHERE module_code = #{moduleCode,jdbcType=VARCHAR}
+	</delete>
+	
+	<!-- 新增数据 -->
+	<insert id="insert" parameterType="com.zjgt.p2p.base.domain.Module" >
+	INSERT INTO 
+		cp_module (module_code, module_name, treepath, module_status, parent_module_code)
+	VALUES 
+		(#{moduleCode,jdbcType=VARCHAR}, #{moduleName,jdbcType=VARCHAR}, #{treepath,jdbcType=VARCHAR}, 
+	  	#{moduleStatus,jdbcType=VARCHAR}, #{parentModuleCode,jdbcType=VARCHAR})
+	</insert>
+	
+	<!-- 修改模块数据 -->
+	<update id="updateByPrimaryKey" parameterType="com.zjgt.p2p.base.domain.Module" >
+		UPDATE cp_module
+		SET 
+			module_name = #{moduleName,jdbcType=VARCHAR},
+		    treepath = #{treepath,jdbcType=VARCHAR},
+		    module_status = #{moduleStatus,jdbcType=VARCHAR},
+		    parent_module_code = #{parentModuleCode,jdbcType=VARCHAR}
+		WHERE module_code = #{moduleCode,jdbcType=VARCHAR}
+	</update>
+	
+	<!-- 根据模块编号获取模块名称 -->
+	<select id="selectByPrimaryKey" resultMap="moduleMap" parameterType="java.lang.String" >
+		SELECT 
+			 module_code, module_name, treepath, module_status,parent_module_code
+		FROM cp_module
+		WHERE 
+			module_code = #{moduleCode,jdbcType=VARCHAR}
+	</select>
+	
+	<!-- 新增数据的 重复性校验使用 返回符合条件的记录数 -->
+    <select id="getCountModuleInfo" parameterType="java.lang.String" resultType="java.lang.Integer" >
+        SELECT 
+            COUNT(1) 
+        FROM 
+            cp_module 
+        WHERE module_code = #{moduleCode,jdbcType=VARCHAR}
+    </select>
+	
+	<!-- 获取跟结点集合 -->
+	<select id="getRootModuleList" resultMap="moduleMap" >
+		SELECT 
+			module_code, module_name, treepath, module_status, parent_module_code
+		FROM cp_module 
+		WHERE parent_module_code = 'ROOT'
+	</select>
+	
+	<!-- 获取跟结点集合 -->
+	<select id="getRootModule" resultMap="moduleMap" >
+		SELECT 
+			module_code, module_name, treepath, module_status, parent_module_code
+		FROM cp_module 
+		WHERE 
+			parent_module_code = 'ROOT'
+	</select>
+	
+	<!-- 获取模块下子模块集合 -->
+	<select id="getSubModules" resultMap="moduleMap" parameterType="java.lang.String">
+		SELECT 
+			module_code, module_name, treepath, module_status, parent_module_code
+		FROM cp_module 
+		WHERE parent_module_code = #{moduleCode}  
+		ORDER BY module_code
+	</select>
+	
+	<!-- 获取模块下的交易信息 --> 
+	<select id="getTransByModuleCode" resultMap="TransactionResultMap" parameterType="java.lang.String">
+		SELECT 
+			trans_code, trans_name, url, trans_status, validate_flag, module_code
+		FROM cp_trans 
+		WHERE 
+			module_code = #{moduleCode}  
+		ORDER BY trans_code
+	</select>
+	
+	<!-- 根据模块编码 查询 交易信息中配置的交易记录数  -->
+	<select id="getCountTransByModuleCode" parameterType="java.lang.String" resultType="java.lang.Integer" >
+	     SELECT 
+	         COUNT(1) 
+	     FROM 
+	         cp_trans 
+	     WHERE module_code = #{moduleCode,jdbcType=VARCHAR} 
+	</select> 
+</mapper>

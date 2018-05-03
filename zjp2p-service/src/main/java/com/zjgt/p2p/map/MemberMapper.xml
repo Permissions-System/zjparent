@@ -1,0 +1,687 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zjgt.p2p.dao.MemberMapper" >
+  <resultMap id="BaseResultMap" type="com.zjgt.p2p.model.Member" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="username" property="username" jdbcType="VARCHAR" />
+    <result column="email" property="email" jdbcType="VARCHAR" />
+    <result column="password" property="password" jdbcType="VARCHAR" />
+    <result column="nickname" property="nickname" jdbcType="VARCHAR" />
+    <result column="headImg" property="headimg" jdbcType="VARCHAR" />
+    <result column="realname" property="realname" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="verifyemail" property="verifyemail" jdbcType="VARCHAR" />
+    <result column="idcard" property="idcard" jdbcType="VARCHAR" />
+    <result column="bankcardno" property="bankcardno" jdbcType="VARCHAR" />
+    <result column="bankcardnum" property="bankcardnum" jdbcType="INTEGER" />
+    <result column="transpasswd" property="transpasswd" jdbcType="VARCHAR" />
+    <result column="transpasswdifset" property="transpasswdifset" jdbcType="INTEGER" />
+    <result column="address" property="address" jdbcType="VARCHAR" />
+    <result column="mobile" property="mobile" jdbcType="VARCHAR" />
+    <result column="amount" property="amount" jdbcType="DECIMAL" />
+    <result column="birth" property="birth" jdbcType="TIMESTAMP" />
+    <result column="gender" property="gender" jdbcType="INTEGER" />
+    <result column="ifSelfMember" property="ifselfmember" jdbcType="BIT" />
+    <result column="ifjoinExpence" property="ifjoinexpence" jdbcType="BIT" />
+    <result column="is_enabled" property="isEnabled" jdbcType="BIT" />
+    <result column="is_locked" property="isLocked" jdbcType="BIT" />
+    <result column="locked_date" property="lockedDate" jdbcType="TIMESTAMP" />
+    <result column="login_date" property="loginDate" jdbcType="TIMESTAMP" />
+    <result column="login_failure_count" property="loginFailureCount" jdbcType="INTEGER" />
+    <result column="login_ip" property="loginIp" jdbcType="VARCHAR" />
+    <result column="phone" property="phone" jdbcType="VARCHAR" />
+    <result column="point" property="point" jdbcType="BIGINT" />
+    <result column="openid" property="openid" jdbcType="VARCHAR" />
+    <result column="weixinopenid" property="weixinopenid" jdbcType="VARCHAR" />
+    <result column="usertype" property="usertype" jdbcType="INTEGER" />
+    <result column="userrole" property="userrole" jdbcType="INTEGER" />
+    <result column="register_ip" property="registerIp" jdbcType="VARCHAR" />
+    <result column="safe_key_expire" property="safeKeyExpire" jdbcType="TIMESTAMP" />
+    <result column="safe_key_value" property="safeKeyValue" jdbcType="VARCHAR" />
+    <result column="zip_code" property="zipCode" jdbcType="VARCHAR" />
+    <result column="area" property="area" jdbcType="BIGINT" />
+    <result column="member_rank" property="memberRank" jdbcType="BIGINT" />
+    <result column="agentid" property="agentid" jdbcType="BIGINT" />
+    <result column="regSource" property="regsource" jdbcType="SMALLINT" />
+    <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="modify_date" property="modifyDate" jdbcType="TIMESTAMP" />
+    <result column="userstatus" property="userstatus" jdbcType="SMALLINT" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    id, username, email, password, nickname, headImg, realname, name, verifyemail, idcard, 
+    bankcardno, bankcardnum, transpasswd, transpasswdifset, address, mobile, amount, 
+    birth, gender, ifSelfMember, ifjoinExpence, is_enabled, is_locked, locked_date, login_date, 
+    login_failure_count, login_ip, phone, point, openid, weixinopenid, usertype, userrole, 
+    register_ip, safe_key_expire, safe_key_value, zip_code, area, member_rank, agentid, 
+    regSource, create_date, modify_date, userstatus
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.zjgt.p2p.model.MemberExample" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from member
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    select 
+    <include refid="Base_Column_List" />
+    from member
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    delete from member
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.zjgt.p2p.model.Member" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    insert into member (id, username, email, 
+      password, nickname, headImg, 
+      realname, name, verifyemail, 
+      idcard, bankcardno, bankcardnum, 
+      transpasswd, transpasswdifset, address, 
+      mobile, amount, birth, 
+      gender, ifSelfMember, ifjoinExpence, 
+      is_enabled, is_locked, locked_date, 
+      login_date, login_failure_count, login_ip, 
+      phone, point, openid, 
+      weixinopenid, usertype, userrole, 
+      register_ip, safe_key_expire, safe_key_value, 
+      zip_code, area, member_rank, 
+      agentid, regSource, create_date, 
+      modify_date, userstatus)
+    values (#{id,jdbcType=BIGINT}, #{username,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 
+      #{password,jdbcType=VARCHAR}, #{nickname,jdbcType=VARCHAR}, #{headimg,jdbcType=VARCHAR}, 
+      #{realname,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{verifyemail,jdbcType=VARCHAR}, 
+      #{idcard,jdbcType=VARCHAR}, #{bankcardno,jdbcType=VARCHAR}, #{bankcardnum,jdbcType=INTEGER}, 
+      #{transpasswd,jdbcType=VARCHAR}, #{transpasswdifset,jdbcType=INTEGER}, #{address,jdbcType=VARCHAR}, 
+      #{mobile,jdbcType=VARCHAR}, #{amount,jdbcType=DECIMAL}, #{birth,jdbcType=TIMESTAMP}, 
+      #{gender,jdbcType=INTEGER}, #{ifselfmember,jdbcType=BIT}, #{ifjoinexpence,jdbcType=BIT}, 
+      #{isEnabled,jdbcType=BIT}, #{isLocked,jdbcType=BIT}, #{lockedDate,jdbcType=TIMESTAMP}, 
+      #{loginDate,jdbcType=TIMESTAMP}, #{loginFailureCount,jdbcType=INTEGER}, #{loginIp,jdbcType=VARCHAR}, 
+      #{phone,jdbcType=VARCHAR}, #{point,jdbcType=BIGINT}, #{openid,jdbcType=VARCHAR}, 
+      #{weixinopenid,jdbcType=VARCHAR}, #{usertype,jdbcType=INTEGER}, #{userrole,jdbcType=INTEGER}, 
+      #{registerIp,jdbcType=VARCHAR}, #{safeKeyExpire,jdbcType=TIMESTAMP}, #{safeKeyValue,jdbcType=VARCHAR}, 
+      #{zipCode,jdbcType=VARCHAR}, #{area,jdbcType=BIGINT}, #{memberRank,jdbcType=BIGINT}, 
+      #{agentid,jdbcType=BIGINT}, #{regsource,jdbcType=SMALLINT}, #{createDate,jdbcType=TIMESTAMP}, 
+      #{modifyDate,jdbcType=TIMESTAMP}, #{userstatus,jdbcType=SMALLINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zjgt.p2p.model.Member" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    insert into member
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="username != null" >
+        username,
+      </if>
+      <if test="email != null" >
+        email,
+      </if>
+      <if test="password != null" >
+        password,
+      </if>
+      <if test="nickname != null" >
+        nickname,
+      </if>
+      <if test="headimg != null" >
+        headImg,
+      </if>
+      <if test="realname != null" >
+        realname,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="verifyemail != null" >
+        verifyemail,
+      </if>
+      <if test="idcard != null" >
+        idcard,
+      </if>
+      <if test="bankcardno != null" >
+        bankcardno,
+      </if>
+      <if test="bankcardnum != null" >
+        bankcardnum,
+      </if>
+      <if test="transpasswd != null" >
+        transpasswd,
+      </if>
+      <if test="transpasswdifset != null" >
+        transpasswdifset,
+      </if>
+      <if test="address != null" >
+        address,
+      </if>
+      <if test="mobile != null" >
+        mobile,
+      </if>
+      <if test="amount != null" >
+        amount,
+      </if>
+      <if test="birth != null" >
+        birth,
+      </if>
+      <if test="gender != null" >
+        gender,
+      </if>
+      <if test="ifselfmember != null" >
+        ifSelfMember,
+      </if>
+      <if test="ifjoinexpence != null" >
+        ifjoinExpence,
+      </if>
+      <if test="isEnabled != null" >
+        is_enabled,
+      </if>
+      <if test="isLocked != null" >
+        is_locked,
+      </if>
+      <if test="lockedDate != null" >
+        locked_date,
+      </if>
+      <if test="loginDate != null" >
+        login_date,
+      </if>
+      <if test="loginFailureCount != null" >
+        login_failure_count,
+      </if>
+      <if test="loginIp != null" >
+        login_ip,
+      </if>
+      <if test="phone != null" >
+        phone,
+      </if>
+      <if test="point != null" >
+        point,
+      </if>
+      <if test="openid != null" >
+        openid,
+      </if>
+      <if test="weixinopenid != null" >
+        weixinopenid,
+      </if>
+      <if test="usertype != null" >
+        usertype,
+      </if>
+      <if test="userrole != null" >
+        userrole,
+      </if>
+      <if test="registerIp != null" >
+        register_ip,
+      </if>
+      <if test="safeKeyExpire != null" >
+        safe_key_expire,
+      </if>
+      <if test="safeKeyValue != null" >
+        safe_key_value,
+      </if>
+      <if test="zipCode != null" >
+        zip_code,
+      </if>
+      <if test="area != null" >
+        area,
+      </if>
+      <if test="memberRank != null" >
+        member_rank,
+      </if>
+      <if test="agentid != null" >
+        agentid,
+      </if>
+      <if test="regsource != null" >
+        regSource,
+      </if>
+      <if test="createDate != null" >
+        create_date,
+      </if>
+      <if test="modifyDate != null" >
+        modify_date,
+      </if>
+      <if test="userstatus != null" >
+        userstatus,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="username != null" >
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="nickname != null" >
+        #{nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="headimg != null" >
+        #{headimg,jdbcType=VARCHAR},
+      </if>
+      <if test="realname != null" >
+        #{realname,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="verifyemail != null" >
+        #{verifyemail,jdbcType=VARCHAR},
+      </if>
+      <if test="idcard != null" >
+        #{idcard,jdbcType=VARCHAR},
+      </if>
+      <if test="bankcardno != null" >
+        #{bankcardno,jdbcType=VARCHAR},
+      </if>
+      <if test="bankcardnum != null" >
+        #{bankcardnum,jdbcType=INTEGER},
+      </if>
+      <if test="transpasswd != null" >
+        #{transpasswd,jdbcType=VARCHAR},
+      </if>
+      <if test="transpasswdifset != null" >
+        #{transpasswdifset,jdbcType=INTEGER},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null" >
+        #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="amount != null" >
+        #{amount,jdbcType=DECIMAL},
+      </if>
+      <if test="birth != null" >
+        #{birth,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gender != null" >
+        #{gender,jdbcType=INTEGER},
+      </if>
+      <if test="ifselfmember != null" >
+        #{ifselfmember,jdbcType=BIT},
+      </if>
+      <if test="ifjoinexpence != null" >
+        #{ifjoinexpence,jdbcType=BIT},
+      </if>
+      <if test="isEnabled != null" >
+        #{isEnabled,jdbcType=BIT},
+      </if>
+      <if test="isLocked != null" >
+        #{isLocked,jdbcType=BIT},
+      </if>
+      <if test="lockedDate != null" >
+        #{lockedDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="loginDate != null" >
+        #{loginDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="loginFailureCount != null" >
+        #{loginFailureCount,jdbcType=INTEGER},
+      </if>
+      <if test="loginIp != null" >
+        #{loginIp,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="point != null" >
+        #{point,jdbcType=BIGINT},
+      </if>
+      <if test="openid != null" >
+        #{openid,jdbcType=VARCHAR},
+      </if>
+      <if test="weixinopenid != null" >
+        #{weixinopenid,jdbcType=VARCHAR},
+      </if>
+      <if test="usertype != null" >
+        #{usertype,jdbcType=INTEGER},
+      </if>
+      <if test="userrole != null" >
+        #{userrole,jdbcType=INTEGER},
+      </if>
+      <if test="registerIp != null" >
+        #{registerIp,jdbcType=VARCHAR},
+      </if>
+      <if test="safeKeyExpire != null" >
+        #{safeKeyExpire,jdbcType=TIMESTAMP},
+      </if>
+      <if test="safeKeyValue != null" >
+        #{safeKeyValue,jdbcType=VARCHAR},
+      </if>
+      <if test="zipCode != null" >
+        #{zipCode,jdbcType=VARCHAR},
+      </if>
+      <if test="area != null" >
+        #{area,jdbcType=BIGINT},
+      </if>
+      <if test="memberRank != null" >
+        #{memberRank,jdbcType=BIGINT},
+      </if>
+      <if test="agentid != null" >
+        #{agentid,jdbcType=BIGINT},
+      </if>
+      <if test="regsource != null" >
+        #{regsource,jdbcType=SMALLINT},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyDate != null" >
+        #{modifyDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userstatus != null" >
+        #{userstatus,jdbcType=SMALLINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zjgt.p2p.model.Member" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    update member
+    <set >
+      <if test="username != null" >
+        username = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="nickname != null" >
+        nickname = #{nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="headimg != null" >
+        headImg = #{headimg,jdbcType=VARCHAR},
+      </if>
+      <if test="realname != null" >
+        realname = #{realname,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="verifyemail != null" >
+        verifyemail = #{verifyemail,jdbcType=VARCHAR},
+      </if>
+      <if test="idcard != null" >
+        idcard = #{idcard,jdbcType=VARCHAR},
+      </if>
+      <if test="bankcardno != null" >
+        bankcardno = #{bankcardno,jdbcType=VARCHAR},
+      </if>
+      <if test="bankcardnum != null" >
+        bankcardnum = #{bankcardnum,jdbcType=INTEGER},
+      </if>
+      <if test="transpasswd != null" >
+        transpasswd = #{transpasswd,jdbcType=VARCHAR},
+      </if>
+      <if test="transpasswdifset != null" >
+        transpasswdifset = #{transpasswdifset,jdbcType=INTEGER},
+      </if>
+      <if test="address != null" >
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null" >
+        mobile = #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="amount != null" >
+        amount = #{amount,jdbcType=DECIMAL},
+      </if>
+      <if test="birth != null" >
+        birth = #{birth,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gender != null" >
+        gender = #{gender,jdbcType=INTEGER},
+      </if>
+      <if test="ifselfmember != null" >
+        ifSelfMember = #{ifselfmember,jdbcType=BIT},
+      </if>
+      <if test="ifjoinexpence != null" >
+        ifjoinExpence = #{ifjoinexpence,jdbcType=BIT},
+      </if>
+      <if test="isEnabled != null" >
+        is_enabled = #{isEnabled,jdbcType=BIT},
+      </if>
+      <if test="isLocked != null" >
+        is_locked = #{isLocked,jdbcType=BIT},
+      </if>
+      <if test="lockedDate != null" >
+        locked_date = #{lockedDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="loginDate != null" >
+        login_date = #{loginDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="loginFailureCount != null" >
+        login_failure_count = #{loginFailureCount,jdbcType=INTEGER},
+      </if>
+      <if test="loginIp != null" >
+        login_ip = #{loginIp,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="point != null" >
+        point = #{point,jdbcType=BIGINT},
+      </if>
+      <if test="openid != null" >
+        openid = #{openid,jdbcType=VARCHAR},
+      </if>
+      <if test="weixinopenid != null" >
+        weixinopenid = #{weixinopenid,jdbcType=VARCHAR},
+      </if>
+      <if test="usertype != null" >
+        usertype = #{usertype,jdbcType=INTEGER},
+      </if>
+      <if test="userrole != null" >
+        userrole = #{userrole,jdbcType=INTEGER},
+      </if>
+      <if test="registerIp != null" >
+        register_ip = #{registerIp,jdbcType=VARCHAR},
+      </if>
+      <if test="safeKeyExpire != null" >
+        safe_key_expire = #{safeKeyExpire,jdbcType=TIMESTAMP},
+      </if>
+      <if test="safeKeyValue != null" >
+        safe_key_value = #{safeKeyValue,jdbcType=VARCHAR},
+      </if>
+      <if test="zipCode != null" >
+        zip_code = #{zipCode,jdbcType=VARCHAR},
+      </if>
+      <if test="area != null" >
+        area = #{area,jdbcType=BIGINT},
+      </if>
+      <if test="memberRank != null" >
+        member_rank = #{memberRank,jdbcType=BIGINT},
+      </if>
+      <if test="agentid != null" >
+        agentid = #{agentid,jdbcType=BIGINT},
+      </if>
+      <if test="regsource != null" >
+        regSource = #{regsource,jdbcType=SMALLINT},
+      </if>
+      <if test="createDate != null" >
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyDate != null" >
+        modify_date = #{modifyDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userstatus != null" >
+        userstatus = #{userstatus,jdbcType=SMALLINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zjgt.p2p.model.Member" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    update member
+    set username = #{username,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      nickname = #{nickname,jdbcType=VARCHAR},
+      headImg = #{headimg,jdbcType=VARCHAR},
+      realname = #{realname,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      verifyemail = #{verifyemail,jdbcType=VARCHAR},
+      idcard = #{idcard,jdbcType=VARCHAR},
+      bankcardno = #{bankcardno,jdbcType=VARCHAR},
+      bankcardnum = #{bankcardnum,jdbcType=INTEGER},
+      transpasswd = #{transpasswd,jdbcType=VARCHAR},
+      transpasswdifset = #{transpasswdifset,jdbcType=INTEGER},
+      address = #{address,jdbcType=VARCHAR},
+      mobile = #{mobile,jdbcType=VARCHAR},
+      amount = #{amount,jdbcType=DECIMAL},
+      birth = #{birth,jdbcType=TIMESTAMP},
+      gender = #{gender,jdbcType=INTEGER},
+      ifSelfMember = #{ifselfmember,jdbcType=BIT},
+      ifjoinExpence = #{ifjoinexpence,jdbcType=BIT},
+      is_enabled = #{isEnabled,jdbcType=BIT},
+      is_locked = #{isLocked,jdbcType=BIT},
+      locked_date = #{lockedDate,jdbcType=TIMESTAMP},
+      login_date = #{loginDate,jdbcType=TIMESTAMP},
+      login_failure_count = #{loginFailureCount,jdbcType=INTEGER},
+      login_ip = #{loginIp,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      point = #{point,jdbcType=BIGINT},
+      openid = #{openid,jdbcType=VARCHAR},
+      weixinopenid = #{weixinopenid,jdbcType=VARCHAR},
+      usertype = #{usertype,jdbcType=INTEGER},
+      userrole = #{userrole,jdbcType=INTEGER},
+      register_ip = #{registerIp,jdbcType=VARCHAR},
+      safe_key_expire = #{safeKeyExpire,jdbcType=TIMESTAMP},
+      safe_key_value = #{safeKeyValue,jdbcType=VARCHAR},
+      zip_code = #{zipCode,jdbcType=VARCHAR},
+      area = #{area,jdbcType=BIGINT},
+      member_rank = #{memberRank,jdbcType=BIGINT},
+      agentid = #{agentid,jdbcType=BIGINT},
+      regSource = #{regsource,jdbcType=SMALLINT},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      modify_date = #{modifyDate,jdbcType=TIMESTAMP},
+      userstatus = #{userstatus,jdbcType=SMALLINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+    <select id="getReferralByPage" resultType="java.util.Map" parameterType="java.util.Map" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+SELECT m.create_date as createDate,m.realname,m.email,m.userstatus,m.id ,COUNT(i.Amount)  as num,SUM(i.Amount) AS sum,ac.account FROM member m LEFT JOIN investorder i ON m.id=i.CustomerID 
+LEFT JOIN member_acct ac ON m.id=ac.memberid  
+	where m.agentid=#{memberid}
+    AND ac.acct_type=20 GROUP BY m.id
+
+      order by m.create_date
+
+  </select>
+  
+  <select id="getSumAccount" resultType="java.util.Map" parameterType="java.lang.Long">
+  	SELECT SUM(ma.usedaccount) sumAccount ,SUM(ma.recvincome) sumRecvincome ,COUNT( ma.id) memberNum FROM memberaccount ma WHERE ma.memberid IN ( SELECT m.id FROM member m where m.agentid=#{memberid} )
+  </select>
+  
+    <select id="getActiveNum" resultType="java.lang.Long" parameterType="java.lang.Long">
+  	SELECT COUNT( distinct  i.CustomerID) activeNum FROM investorder i WHERE i.OrderStatus=1 AND i.CustomerID IN ( SELECT m.id FROM member m where m.agentid=#{memberid} )
+  </select>
+  
+  <select id="findMembersForExcle" resultType="java.util.Map" parameterType="com.zjgt.p2p.model.MemberExcleExample">
+  	 select
+    <if test="distinct" >
+      distinct
+    </if>
+    m.id AS memberid,
+    m.email AS email,
+    m.realname AS realname,
+    m.mobile AS mobile,
+    m.userstatus AS userstatus,
+    m.create_date AS createDate,
+    m.login_date AS loginDate,
+    m.regSource AS regSource,
+	acc.account AS totalAccount,
+	acc.income  AS collectionPrincipal,
+	acc.recvincome AS collectionInterest,
+	acc.totalincome  AS earningsTotal,
+	(SELECT SUM(t.amount) FROM translog t WHERE t.transcode = 1002 AND (t.payeememberid = acc.memberid OR t.paymemberid = acc.memberid) AND t.Transstatus = 1) AS withdrawTotal
+    FROM member m,memberaccount acc
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    and m.id = acc.memberid
+    GROUP BY m.id
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+</mapper>

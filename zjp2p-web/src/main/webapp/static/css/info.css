@@ -1,0 +1,268 @@
+﻿@charset "utf-8";
+.nav2 {
+	width: 100%;
+	min-width:1200px;
+	height: 70px;
+	background-color:#fff;
+}
+
+.nav2 .logo {
+	width: 211px;
+	height: 46px;
+	margin-top: 20px;
+	float: left;
+}
+
+.nav2 .nav_wrap {
+	width: 1000px;
+	height: 70px;
+	margin-left: auto;
+	margin-right: auto;
+}
+.nav2 .nav_wrap2 {
+	width: 1000px;
+	height: 70px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.navi2 {
+	float: right;
+	margin-top: 35px;
+	width: 465px;
+}
+
+.nav2 .navi2 ul  {
+	margin-top: 0px;
+	padding-left: 0px;
+	
+}
+
+.nav2 .navi2 ul li {
+	list-style-type: none;
+	float: left;
+	font-size: 16px;
+	font-family: "微软雅黑";
+	color: #565A5C;
+	margin-right: 0px;
+	text-align: right;
+	margin-left: 50px;
+}
+
+.nav2 .navi2 ul li a {
+	font-size: 16px;
+	font-family: "微软雅黑";
+	color: #565A5C;
+	text-decoration: none;
+}
+
+.nav2 .navi2 ul li a:hover {
+	font-size: 16px;
+	font-family: "微软雅黑";
+	color: #1E9ED5;
+	text-decoration: none;
+}
+
+.content {
+	width: 1000px;
+	height:1180px;
+    margin-left: auto;
+	margin-right: auto;
+	font-family:"微软雅黑";
+}
+
+.content2 {
+	width: 1000px;
+	height:1000px;
+    margin-left: auto;
+	margin-right: auto;
+	font-family:"微软雅黑";
+}
+
+
+.content_left {
+	width: 260px;
+	height: 340px;
+	float: left;
+}
+
+.content_left .content_title {
+	width: 260px;
+	height: 85px;
+	font-family:"微软雅黑";
+	color: #565A5C;
+	font-size: 17px;
+	text-indent:18px;
+	padding-top: 50px;
+}
+
+.content_left  .content_menu {
+	width: 260px;
+	height: 255px;
+}
+
+.content_left  .content_menu li {
+	font-family:"微软雅黑";
+	font-size:15px;
+	color:#8F9496;
+	line-height: 35px;
+	text-indent:18px;
+}
+
+.content_left .content_menu li a {
+	color:#8F9496;
+	text-decoration:none;
+}
+
+.content_left .content_menu li a:hover {
+	color:#565A5C;
+}
+
+.content_left .content_menu .current {
+	color:#565A5C;
+}
+
+.content .content_right{
+	width: 740px;
+	height: 1130px;
+	float: right;
+}
+
+.content2 .content2_right {
+	width: 740px;
+	height: 1000px;
+	float: right;
+}
+
+.content .content_right .content_h {
+	width: 740px;
+	height: 85px;
+	font-family:"微软雅黑";
+	font-size:25px;
+	color:#565A5C;
+	padding-top: 42px;
+	border-bottom-color:#565A5C;
+	border-bottom-style:solid;
+	border-bottom-width:1px;
+}
+
+.content2 .content2_right .content2_h {
+	width: 740px;
+	height: 85px;
+	font-family:"微软雅黑";
+	font-size:25px;
+	color:#565A5C;
+	padding-top: 40px;
+	border-bottom-color:#565A5C;
+	border-bottom-style:solid;
+	border-bottom-width:1px;
+	margin-bottom:55px;
+}
+
+.content2 .content2_right .content2_team {
+	width: 740px;
+	height: 250px;
+	margin-bottom:55px;
+}
+
+.content2 .content2_right .content2_team .photo {
+	width:220px;
+	height:250px;
+	padding-left:20px;
+	float:left;
+}
+
+.content2 .content2_right .content2_team .teamtxt{
+	width:480px;
+	height:250px;
+	padding-left:20px;
+	float:left;
+	color:#8F9496;
+	font-size:13px;
+}
+
+.content .content_right .content_intro {
+	font-family:"微软雅黑";
+	font-size:15px;
+	color:#8F9496;
+	line-height: 25px;
+	margin-top:10px;
+}
+
+.content .content_right .content_box {
+	width:740px;
+	height:240px;
+	margin-top:50px;
+}
+
+.content .content_right .content_box .content_box1 {
+	width:353px;
+	padding-left:140px;
+	height:108px;
+	padding-top:20px;
+	line-height:30px;
+	margin-bottom:20px;
+	float:left;	
+	color:#565A5C;
+	background-color:#FFF;
+	border-color: #999;
+	border-style:solid;
+	border-width:1px;
+	background-image:url(../images/intro_1.jpg);
+}
+
+.content .content_right .content_box .content_box2 {
+	width:353px;
+	padding-left:140px;
+	height:108px;
+	padding-top:20px;
+	line-height:30px;
+	margin-bottom:20px;
+	margin-left:30px;
+	float:left;
+	color:#565A5C;
+	background-color:#FFF;	
+	border-color:#999;
+	border-style:solid;
+	border-width:1px;
+	background-image:url(../images/intro_2.jpg);
+}
+
+.content .content_right .content_box .content_box3 {
+	width:353px;
+	padding-left:140px;
+	height:108px;
+	padding-top:20px;
+	line-height:30px;
+	float:left;
+	color:#565A5C;
+	background-color:#FFF;
+	border-color: #999;
+	border-style:solid;
+	border-width:1px;
+	background-image:url(../images/intro_3.jpg);
+}
+
+.content .content_right .content_box .content_box4 {
+	width:353px;
+	padding-left:140px;
+	height:108px;
+	padding-top:20px;
+	line-height:30px;
+	margin-left:30px;
+	float:left;
+	color:#565A5C;
+	background-color:#FFF;	
+	border-color:#999;
+	border-style:solid;
+	border-width:1px;
+	background-image:url(../images/intro_4.jpg);
+}
+
+.content .content_right .content_h2 {
+	text-align:center;
+	font-size:16px;
+	margin-top:50px;
+	margin-bottom:28px;
+	color:#565A5C;
+} 

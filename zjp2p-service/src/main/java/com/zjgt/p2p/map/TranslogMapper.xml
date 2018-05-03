@@ -1,0 +1,523 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zjgt.p2p.dao.TranslogMapper" >
+  <resultMap id="BaseResultMap" type="com.zjgt.p2p.model.Translog" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    <id column="Id" property="id" jdbcType="BIGINT" />
+    <result column="TransNo" property="transno" jdbcType="VARCHAR" />
+    <result column="TransTime" property="transtime" jdbcType="TIMESTAMP" />
+    <result column="TransCode" property="transcode" jdbcType="CHAR" />
+    <result column="TransDesc" property="transdesc" jdbcType="VARCHAR" />
+    <result column="Amount" property="amount" jdbcType="DECIMAL" />
+    <result column="availAmount" property="availamount" jdbcType="DECIMAL" />
+    <result column="platAvailAmount" property="platavailamount" jdbcType="DECIMAL" />
+    <result column="paySubAmount" property="paysubamount" jdbcType="DECIMAL" />
+    <result column="payeeSubAmount" property="payeesubamount" jdbcType="DECIMAL" />
+    <result column="Currency" property="currency" jdbcType="CHAR" />
+    <result column="paymemberid" property="paymemberid" jdbcType="INTEGER" />
+    <result column="PayAccountId" property="payaccountid" jdbcType="BIGINT" />
+    <result column="PayAccountNo" property="payaccountno" jdbcType="VARCHAR" />
+    <result column="PayerName" property="payername" jdbcType="VARCHAR" />
+    <result column="PayCardNum" property="paycardnum" jdbcType="VARCHAR" />
+    <result column="PayAccountType" property="payaccounttype" jdbcType="INTEGER" />
+    <result column="payeememberid" property="payeememberid" jdbcType="INTEGER" />
+    <result column="PayeeAccountId" property="payeeaccountid" jdbcType="BIGINT" />
+    <result column="PayeeAccountNo" property="payeeaccountno" jdbcType="VARCHAR" />
+    <result column="PayeeName" property="payeename" jdbcType="VARCHAR" />
+    <result column="PayeeCardNum" property="payeecardnum" jdbcType="VARCHAR" />
+    <result column="PayeeAccountType" property="payeeaccounttype" jdbcType="INTEGER" />
+    <result column="TransStatus" property="transstatus" jdbcType="INTEGER" />
+    <result column="memberid" property="memberid" jdbcType="INTEGER" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="transCodeName" property="transCodeName" jdbcType="VARCHAR" />
+    <result column="capitalDirection" property="capitalDirection" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    Id, TransNo, TransTime, TransCode, TransDesc, Amount, availAmount, platAvailAmount, 
+    paySubAmount, payeeSubAmount, Currency, paymemberid, PayAccountId, PayAccountNo, 
+    PayerName, PayCardNum, PayAccountType, payeememberid, PayeeAccountId, PayeeAccountNo, 
+    PayeeName, PayeeCardNum, PayeeAccountType, TransStatus, memberid, remark
+  </sql>
+  <select id="getCapitalTransByPage" resultMap="BaseResultMap" parameterType="com.zjgt.p2p.model.TranslogExample" >
+     select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    ,def.trandesc AS transCodeName , CASE WHEN def.direction = 'I' THEN '增加' WHEN def.direction = 'O' THEN '减少' WHEN def.direction = 'D' THEN '转账' ELSE '' END AS capitalDirection  
+    from translog INNER JOIN transdef def ON translog.transcode = def.trancode
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.zjgt.p2p.model.TranslogExample" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from translog
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    select 
+    <include refid="Base_Column_List" />
+    from translog
+    where Id = #{id,jdbcType=BIGINT}
+  </select>
+    
+  <select id="selectByTransNo" resultMap="BaseResultMap" parameterType="java.util.Map" >
+    select 
+    a.Id, a.TransNo, a.TransTime, a.TransCode, a.TransDesc, a.Amount, a.availAmount, a.platAvailAmount, 
+    a.paySubAmount, a.payeeSubAmount, a.Currency, a.paymemberid, a.PayAccountId, a.PayAccountNo, 
+    a.PayerName, a.PayCardNum, a.PayAccountType, a.payeememberid, a.PayeeAccountId, a.PayeeAccountNo, 
+    a.PayeeName, a.PayeeCardNum, a.PayeeAccountType, a.TransStatus, a.memberid, a.remark
+    from translog a,capitaltrans b where a.transno = b.id 
+    and b.transno = #{transno} and a.transcode = #{transcode}
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    delete from translog
+    where Id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.zjgt.p2p.model.Translog" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    insert into translog (Id, TransNo, TransTime, 
+      TransCode, TransDesc, Amount, 
+      availAmount, platAvailAmount, paySubAmount, 
+      payeeSubAmount, Currency, paymemberid, 
+      PayAccountId, PayAccountNo, PayerName, 
+      PayCardNum, PayAccountType, payeememberid, 
+      PayeeAccountId, PayeeAccountNo, PayeeName, 
+      PayeeCardNum, PayeeAccountType, TransStatus, 
+      memberid, remark)
+    values (#{id,jdbcType=BIGINT}, #{transno,jdbcType=VARCHAR}, #{transtime,jdbcType=TIMESTAMP}, 
+      #{transcode,jdbcType=CHAR}, #{transdesc,jdbcType=VARCHAR}, #{amount,jdbcType=DECIMAL}, 
+      #{availamount,jdbcType=DECIMAL}, #{platavailamount,jdbcType=DECIMAL}, #{paysubamount,jdbcType=DECIMAL}, 
+      #{payeesubamount,jdbcType=DECIMAL}, #{currency,jdbcType=CHAR}, #{paymemberid,jdbcType=INTEGER}, 
+      #{payaccountid,jdbcType=BIGINT}, #{payaccountno,jdbcType=VARCHAR}, #{payername,jdbcType=VARCHAR}, 
+      #{paycardnum,jdbcType=VARCHAR}, #{payaccounttype,jdbcType=INTEGER}, #{payeememberid,jdbcType=INTEGER}, 
+      #{payeeaccountid,jdbcType=BIGINT}, #{payeeaccountno,jdbcType=VARCHAR}, #{payeename,jdbcType=VARCHAR}, 
+      #{payeecardnum,jdbcType=VARCHAR}, #{payeeaccounttype,jdbcType=INTEGER}, #{transstatus,jdbcType=INTEGER}, 
+      #{memberid,jdbcType=INTEGER}, #{remark,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zjgt.p2p.model.Translog" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    insert into translog
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        Id,
+      </if>
+      <if test="transno != null" >
+        TransNo,
+      </if>
+      <if test="transtime != null" >
+        TransTime,
+      </if>
+      <if test="transcode != null" >
+        TransCode,
+      </if>
+      <if test="transdesc != null" >
+        TransDesc,
+      </if>
+      <if test="amount != null" >
+        Amount,
+      </if>
+      <if test="availamount != null" >
+        availAmount,
+      </if>
+      <if test="platavailamount != null" >
+        platAvailAmount,
+      </if>
+      <if test="paysubamount != null" >
+        paySubAmount,
+      </if>
+      <if test="payeesubamount != null" >
+        payeeSubAmount,
+      </if>
+      <if test="currency != null" >
+        Currency,
+      </if>
+      <if test="paymemberid != null" >
+        paymemberid,
+      </if>
+      <if test="payaccountid != null" >
+        PayAccountId,
+      </if>
+      <if test="payaccountno != null" >
+        PayAccountNo,
+      </if>
+      <if test="payername != null" >
+        PayerName,
+      </if>
+      <if test="paycardnum != null" >
+        PayCardNum,
+      </if>
+      <if test="payaccounttype != null" >
+        PayAccountType,
+      </if>
+      <if test="payeememberid != null" >
+        payeememberid,
+      </if>
+      <if test="payeeaccountid != null" >
+        PayeeAccountId,
+      </if>
+      <if test="payeeaccountno != null" >
+        PayeeAccountNo,
+      </if>
+      <if test="payeename != null" >
+        PayeeName,
+      </if>
+      <if test="payeecardnum != null" >
+        PayeeCardNum,
+      </if>
+      <if test="payeeaccounttype != null" >
+        PayeeAccountType,
+      </if>
+      <if test="transstatus != null" >
+        TransStatus,
+      </if>
+      <if test="memberid != null" >
+        memberid,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="transno != null" >
+        #{transno,jdbcType=VARCHAR},
+      </if>
+      <if test="transtime != null" >
+        #{transtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="transcode != null" >
+        #{transcode,jdbcType=CHAR},
+      </if>
+      <if test="transdesc != null" >
+        #{transdesc,jdbcType=VARCHAR},
+      </if>
+      <if test="amount != null" >
+        #{amount,jdbcType=DECIMAL},
+      </if>
+      <if test="availamount != null" >
+        #{availamount,jdbcType=DECIMAL},
+      </if>
+      <if test="platavailamount != null" >
+        #{platavailamount,jdbcType=DECIMAL},
+      </if>
+      <if test="paysubamount != null" >
+        #{paysubamount,jdbcType=DECIMAL},
+      </if>
+      <if test="payeesubamount != null" >
+        #{payeesubamount,jdbcType=DECIMAL},
+      </if>
+      <if test="currency != null" >
+        #{currency,jdbcType=CHAR},
+      </if>
+      <if test="paymemberid != null" >
+        #{paymemberid,jdbcType=INTEGER},
+      </if>
+      <if test="payaccountid != null" >
+        #{payaccountid,jdbcType=BIGINT},
+      </if>
+      <if test="payaccountno != null" >
+        #{payaccountno,jdbcType=VARCHAR},
+      </if>
+      <if test="payername != null" >
+        #{payername,jdbcType=VARCHAR},
+      </if>
+      <if test="paycardnum != null" >
+        #{paycardnum,jdbcType=VARCHAR},
+      </if>
+      <if test="payaccounttype != null" >
+        #{payaccounttype,jdbcType=INTEGER},
+      </if>
+      <if test="payeememberid != null" >
+        #{payeememberid,jdbcType=INTEGER},
+      </if>
+      <if test="payeeaccountid != null" >
+        #{payeeaccountid,jdbcType=BIGINT},
+      </if>
+      <if test="payeeaccountno != null" >
+        #{payeeaccountno,jdbcType=VARCHAR},
+      </if>
+      <if test="payeename != null" >
+        #{payeename,jdbcType=VARCHAR},
+      </if>
+      <if test="payeecardnum != null" >
+        #{payeecardnum,jdbcType=VARCHAR},
+      </if>
+      <if test="payeeaccounttype != null" >
+        #{payeeaccounttype,jdbcType=INTEGER},
+      </if>
+      <if test="transstatus != null" >
+        #{transstatus,jdbcType=INTEGER},
+      </if>
+      <if test="memberid != null" >
+        #{memberid,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  
+  <update id="updateStatusByTransNo" parameterType="java.util.Map">
+	    update translog set TransStatus = #{transStatus} where TransNo = #{transNo}
+  </update>
+  
+  <update id="updateWithdrawFailDesc" parameterType="java.util.Map">
+	    update translog set remark = #{failDesc} where TransNo = (select id from capitaltrans where TransNo = #{dealFlowNum}) and transCode = '1002'
+  </update>
+  
+  
+  <update id="updateByPrimaryKeySelective" parameterType="com.zjgt.p2p.model.Translog" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    update translog
+    <set >
+      <if test="transno != null" >
+        TransNo = #{transno,jdbcType=VARCHAR},
+      </if>
+      <if test="transtime != null" >
+        TransTime = #{transtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="transcode != null" >
+        TransCode = #{transcode,jdbcType=CHAR},
+      </if>
+      <if test="transdesc != null" >
+        TransDesc = #{transdesc,jdbcType=VARCHAR},
+      </if>
+      <if test="amount != null" >
+        Amount = #{amount,jdbcType=DECIMAL},
+      </if>
+      <if test="availamount != null" >
+        availAmount = #{availamount,jdbcType=DECIMAL},
+      </if>
+      <if test="platavailamount != null" >
+        platAvailAmount = #{platavailamount,jdbcType=DECIMAL},
+      </if>
+      <if test="paysubamount != null" >
+        paySubAmount = #{paysubamount,jdbcType=DECIMAL},
+      </if>
+      <if test="payeesubamount != null" >
+        payeeSubAmount = #{payeesubamount,jdbcType=DECIMAL},
+      </if>
+      <if test="currency != null" >
+        Currency = #{currency,jdbcType=CHAR},
+      </if>
+      <if test="paymemberid != null" >
+        paymemberid = #{paymemberid,jdbcType=INTEGER},
+      </if>
+      <if test="payaccountid != null" >
+        PayAccountId = #{payaccountid,jdbcType=BIGINT},
+      </if>
+      <if test="payaccountno != null" >
+        PayAccountNo = #{payaccountno,jdbcType=VARCHAR},
+      </if>
+      <if test="payername != null" >
+        PayerName = #{payername,jdbcType=VARCHAR},
+      </if>
+      <if test="paycardnum != null" >
+        PayCardNum = #{paycardnum,jdbcType=VARCHAR},
+      </if>
+      <if test="payaccounttype != null" >
+        PayAccountType = #{payaccounttype,jdbcType=INTEGER},
+      </if>
+      <if test="payeememberid != null" >
+        payeememberid = #{payeememberid,jdbcType=INTEGER},
+      </if>
+      <if test="payeeaccountid != null" >
+        PayeeAccountId = #{payeeaccountid,jdbcType=BIGINT},
+      </if>
+      <if test="payeeaccountno != null" >
+        PayeeAccountNo = #{payeeaccountno,jdbcType=VARCHAR},
+      </if>
+      <if test="payeename != null" >
+        PayeeName = #{payeename,jdbcType=VARCHAR},
+      </if>
+      <if test="payeecardnum != null" >
+        PayeeCardNum = #{payeecardnum,jdbcType=VARCHAR},
+      </if>
+      <if test="payeeaccounttype != null" >
+        PayeeAccountType = #{payeeaccounttype,jdbcType=INTEGER},
+      </if>
+      <if test="transstatus != null" >
+        TransStatus = #{transstatus,jdbcType=INTEGER},
+      </if>
+      <if test="memberid != null" >
+        memberid = #{memberid,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where Id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zjgt.p2p.model.Translog" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    update translog
+    set TransNo = #{transno,jdbcType=VARCHAR},
+      TransTime = #{transtime,jdbcType=TIMESTAMP},
+      TransCode = #{transcode,jdbcType=CHAR},
+      TransDesc = #{transdesc,jdbcType=VARCHAR},
+      Amount = #{amount,jdbcType=DECIMAL},
+      availAmount = #{availamount,jdbcType=DECIMAL},
+      platAvailAmount = #{platavailamount,jdbcType=DECIMAL},
+      paySubAmount = #{paysubamount,jdbcType=DECIMAL},
+      payeeSubAmount = #{payeesubamount,jdbcType=DECIMAL},
+      Currency = #{currency,jdbcType=CHAR},
+      paymemberid = #{paymemberid,jdbcType=INTEGER},
+      PayAccountId = #{payaccountid,jdbcType=BIGINT},
+      PayAccountNo = #{payaccountno,jdbcType=VARCHAR},
+      PayerName = #{payername,jdbcType=VARCHAR},
+      PayCardNum = #{paycardnum,jdbcType=VARCHAR},
+      PayAccountType = #{payaccounttype,jdbcType=INTEGER},
+      payeememberid = #{payeememberid,jdbcType=INTEGER},
+      PayeeAccountId = #{payeeaccountid,jdbcType=BIGINT},
+      PayeeAccountNo = #{payeeaccountno,jdbcType=VARCHAR},
+      PayeeName = #{payeename,jdbcType=VARCHAR},
+      PayeeCardNum = #{payeecardnum,jdbcType=VARCHAR},
+      PayeeAccountType = #{payeeaccounttype,jdbcType=INTEGER},
+      TransStatus = #{transstatus,jdbcType=INTEGER},
+      memberid = #{memberid,jdbcType=INTEGER},
+      remark = #{remark,jdbcType=VARCHAR}
+    where Id = #{id,jdbcType=BIGINT}
+  </update>
+  
+        <!-- 分页 -->
+  <select id="selectByExampleLimit" resultMap="BaseResultMap" parameterType="com.zjgt.p2p.model.TranslogExample" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+      This element : Tue Dec 09 13:48:21 CST 2014.
+    -->
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    translog.Id,
+translog.TransNo,
+translog.TransTime,
+translog.TransCode,
+translog.TransDesc,
+translog.Amount,
+translog.availAmount,
+translog.platAvailAmount,
+translog.Currency,
+translog.PayAccountId,
+translog.PayAccountNo,
+translog.paySubAmount,
+translog.PayerName,
+translog.PayCardNum,
+translog.PayAccountType,
+translog.PayeeAccountId,
+translog.PayeeAccountNo,
+translog.payeeSubAmount,
+translog.PayeeName,
+translog.PayeeCardNum,
+translog.PayeeAccountType,
+translog.TransStatus,
+translog.memberid,
+translog.remark,
+paymem_acct.acct_type AS paymemberid,
+payee_acct.acct_type as payeememberid
+ from Translog
+Left Join member_acct AS paymem_acct ON translog.PayAccountId = paymem_acct.member_acctid
+left Join member_acct as payee_acct ON payee_acct.member_acctid = translog.PayeeAccountId
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="startPos != null" >
+      limit ${startPos} ,${pageSize}
+    </if>
+  </select>
+ 
+  <!-- 取得记录的总数 -->  
+<select id="getTranslogCount" resultType="int" parameterType="com.zjgt.p2p.model.TranslogExample">  
+  SELECT COUNT(*) FROM Translog   
+      <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+</select>
+</mapper>

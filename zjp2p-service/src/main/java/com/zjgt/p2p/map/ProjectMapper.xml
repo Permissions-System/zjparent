@@ -1,0 +1,384 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zjgt.p2p.dao.ProjectMapper" >
+  <resultMap id="BaseResultMap" type="com.zjgt.p2p.model.Project" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="ProjectCode" property="projectcode" jdbcType="CHAR" />
+    <result column="ProjectName" property="projectname" jdbcType="VARCHAR" />
+    <result column="Account" property="account" jdbcType="DECIMAL" />
+    <result column="instCode" property="instcode" jdbcType="VARCHAR" />
+    <result column="instName" property="instname" jdbcType="VARCHAR" />
+    <result column="Subject" property="subject" jdbcType="VARCHAR" />
+    <result column="bidnum" property="bidnum" jdbcType="INTEGER" />
+    <result column="bidamount" property="bidamount" jdbcType="DECIMAL" />
+    <result column="opDate" property="opdate" jdbcType="TIMESTAMP" />
+    <result column="memberid" property="memberid" jdbcType="INTEGER" />
+    <result column="loanrate" property="loanrate" jdbcType="DECIMAL" />
+    <result column="mgrrate" property="mgrrate" jdbcType="DECIMAL" />
+    <result column="pubrate" property="pubrate" jdbcType="DECIMAL" />
+    <result column="exprate" property="exprate" jdbcType="DECIMAL" />
+    <result column="debtrate" property="debtrate" jdbcType="DECIMAL" />
+    <result column="inforate" property="inforate" jdbcType="DECIMAL" />
+    <result column="payway" property="payway" jdbcType="INTEGER" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    id, ProjectCode, ProjectName, Account, instCode, instName, Subject, bidnum, bidamount, 
+    opDate, memberid, loanrate, mgrrate, pubrate, exprate, debtrate, inforate, payway, 
+    remark, status
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.zjgt.p2p.model.ProjectExample" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from project
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    select 
+    <include refid="Base_Column_List" />
+    from project
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    delete from project
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.zjgt.p2p.model.Project" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    insert into project (id, ProjectCode, ProjectName, 
+      Account, instCode, instName, 
+      Subject, bidnum, bidamount, 
+      opDate, memberid, loanrate, 
+      mgrrate, pubrate, exprate, 
+      debtrate, inforate, payway, 
+      remark, status)
+    values (#{id,jdbcType=BIGINT}, #{projectcode,jdbcType=CHAR}, #{projectname,jdbcType=VARCHAR}, 
+      #{account,jdbcType=DECIMAL}, #{instcode,jdbcType=VARCHAR}, #{instname,jdbcType=VARCHAR}, 
+      #{subject,jdbcType=VARCHAR}, #{bidnum,jdbcType=INTEGER}, #{bidamount,jdbcType=DECIMAL}, 
+      #{opdate,jdbcType=TIMESTAMP}, #{memberid,jdbcType=INTEGER}, #{loanrate,jdbcType=DECIMAL}, 
+      #{mgrrate,jdbcType=DECIMAL}, #{pubrate,jdbcType=DECIMAL}, #{exprate,jdbcType=DECIMAL}, 
+      #{debtrate,jdbcType=DECIMAL}, #{inforate,jdbcType=DECIMAL}, #{payway,jdbcType=INTEGER}, 
+      #{remark,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zjgt.p2p.model.Project" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    insert into project
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="projectcode != null" >
+        ProjectCode,
+      </if>
+      <if test="projectname != null" >
+        ProjectName,
+      </if>
+      <if test="account != null" >
+        Account,
+      </if>
+      <if test="instcode != null" >
+        instCode,
+      </if>
+      <if test="instname != null" >
+        instName,
+      </if>
+      <if test="subject != null" >
+        Subject,
+      </if>
+      <if test="bidnum != null" >
+        bidnum,
+      </if>
+      <if test="bidamount != null" >
+        bidamount,
+      </if>
+      <if test="opdate != null" >
+        opDate,
+      </if>
+      <if test="memberid != null" >
+        memberid,
+      </if>
+      <if test="loanrate != null" >
+        loanrate,
+      </if>
+      <if test="mgrrate != null" >
+        mgrrate,
+      </if>
+      <if test="pubrate != null" >
+        pubrate,
+      </if>
+      <if test="exprate != null" >
+        exprate,
+      </if>
+      <if test="debtrate != null" >
+        debtrate,
+      </if>
+      <if test="inforate != null" >
+        inforate,
+      </if>
+      <if test="payway != null" >
+        payway,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="projectcode != null" >
+        #{projectcode,jdbcType=CHAR},
+      </if>
+      <if test="projectname != null" >
+        #{projectname,jdbcType=VARCHAR},
+      </if>
+      <if test="account != null" >
+        #{account,jdbcType=DECIMAL},
+      </if>
+      <if test="instcode != null" >
+        #{instcode,jdbcType=VARCHAR},
+      </if>
+      <if test="instname != null" >
+        #{instname,jdbcType=VARCHAR},
+      </if>
+      <if test="subject != null" >
+        #{subject,jdbcType=VARCHAR},
+      </if>
+      <if test="bidnum != null" >
+        #{bidnum,jdbcType=INTEGER},
+      </if>
+      <if test="bidamount != null" >
+        #{bidamount,jdbcType=DECIMAL},
+      </if>
+      <if test="opdate != null" >
+        #{opdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="memberid != null" >
+        #{memberid,jdbcType=INTEGER},
+      </if>
+      <if test="loanrate != null" >
+        #{loanrate,jdbcType=DECIMAL},
+      </if>
+      <if test="mgrrate != null" >
+        #{mgrrate,jdbcType=DECIMAL},
+      </if>
+      <if test="pubrate != null" >
+        #{pubrate,jdbcType=DECIMAL},
+      </if>
+      <if test="exprate != null" >
+        #{exprate,jdbcType=DECIMAL},
+      </if>
+      <if test="debtrate != null" >
+        #{debtrate,jdbcType=DECIMAL},
+      </if>
+      <if test="inforate != null" >
+        #{inforate,jdbcType=DECIMAL},
+      </if>
+      <if test="payway != null" >
+        #{payway,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zjgt.p2p.model.Project" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    update project
+    <set >
+      <if test="projectcode != null" >
+        ProjectCode = #{projectcode,jdbcType=CHAR},
+      </if>
+      <if test="projectname != null" >
+        ProjectName = #{projectname,jdbcType=VARCHAR},
+      </if>
+      <if test="account != null" >
+        Account = #{account,jdbcType=DECIMAL},
+      </if>
+      <if test="instcode != null" >
+        instCode = #{instcode,jdbcType=VARCHAR},
+      </if>
+      <if test="instname != null" >
+        instName = #{instname,jdbcType=VARCHAR},
+      </if>
+      <if test="subject != null" >
+        Subject = #{subject,jdbcType=VARCHAR},
+      </if>
+      <if test="bidnum != null" >
+        bidnum = #{bidnum,jdbcType=INTEGER},
+      </if>
+      <if test="bidamount != null" >
+        bidamount = #{bidamount,jdbcType=DECIMAL},
+      </if>
+      <if test="opdate != null" >
+        opDate = #{opdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="memberid != null" >
+        memberid = #{memberid,jdbcType=INTEGER},
+      </if>
+      <if test="loanrate != null" >
+        loanrate = #{loanrate,jdbcType=DECIMAL},
+      </if>
+      <if test="mgrrate != null" >
+        mgrrate = #{mgrrate,jdbcType=DECIMAL},
+      </if>
+      <if test="pubrate != null" >
+        pubrate = #{pubrate,jdbcType=DECIMAL},
+      </if>
+      <if test="exprate != null" >
+        exprate = #{exprate,jdbcType=DECIMAL},
+      </if>
+      <if test="debtrate != null" >
+        debtrate = #{debtrate,jdbcType=DECIMAL},
+      </if>
+      <if test="inforate != null" >
+        inforate = #{inforate,jdbcType=DECIMAL},
+      </if>
+      <if test="payway != null" >
+        payway = #{payway,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zjgt.p2p.model.Project" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    update project
+    set ProjectCode = #{projectcode,jdbcType=CHAR},
+      ProjectName = #{projectname,jdbcType=VARCHAR},
+      Account = #{account,jdbcType=DECIMAL},
+      instCode = #{instcode,jdbcType=VARCHAR},
+      instName = #{instname,jdbcType=VARCHAR},
+      Subject = #{subject,jdbcType=VARCHAR},
+      bidnum = #{bidnum,jdbcType=INTEGER},
+      bidamount = #{bidamount,jdbcType=DECIMAL},
+      opDate = #{opdate,jdbcType=TIMESTAMP},
+      memberid = #{memberid,jdbcType=INTEGER},
+      loanrate = #{loanrate,jdbcType=DECIMAL},
+      mgrrate = #{mgrrate,jdbcType=DECIMAL},
+      pubrate = #{pubrate,jdbcType=DECIMAL},
+      exprate = #{exprate,jdbcType=DECIMAL},
+      debtrate = #{debtrate,jdbcType=DECIMAL},
+      inforate = #{inforate,jdbcType=DECIMAL},
+      payway = #{payway,jdbcType=INTEGER},
+      remark = #{remark,jdbcType=VARCHAR},
+      status = #{status,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  
+    <select id="selectByExampleLimit" resultMap="BaseResultMap" parameterType="com.zjgt.p2p.model.ProjectExample" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+      This element : Tue Dec 09 13:48:21 CST 2014.
+    -->
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from project
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="startPos != null" >
+      limit ${startPos} ,${pageSize}
+    </if>
+  </select>
+  <!-- 取得记录的总数 -->  
+<select id="getProjectCount" resultType="int" parameterType="com.zjgt.p2p.model.ProjectExample">  
+  SELECT COUNT(*) FROM Project   
+      <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+</select>
+</mapper>

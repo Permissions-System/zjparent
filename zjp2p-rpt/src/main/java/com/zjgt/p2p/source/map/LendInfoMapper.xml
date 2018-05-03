@@ -1,0 +1,1887 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zjgt.p2p.source.dao.LendInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.zjgt.p2p.source.model.LendInfo" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    <id column="Id" property="id" jdbcType="INTEGER" />
+    <result column="borrowId" property="borrowid" jdbcType="VARCHAR" />
+    <result column="lendMoney" property="lendmoney" jdbcType="DECIMAL" />
+    <result column="minRate" property="minrate" jdbcType="DECIMAL" />
+    <result column="lendReason" property="lendreason" jdbcType="VARCHAR" />
+    <result column="lendDate" property="lenddate" jdbcType="TIMESTAMP" />
+    <result column="curYearRate" property="curyearrate" jdbcType="DECIMAL" />
+    <result column="curMonthRate" property="curmonthrate" jdbcType="DECIMAL" />
+    <result column="factMoney" property="factmoney" jdbcType="DECIMAL" />
+    <result column="lendStatus" property="lendstatus" jdbcType="VARCHAR" />
+    <result column="userName" property="username" jdbcType="VARCHAR" />
+    <result column="bUserName" property="busername" jdbcType="VARCHAR" />
+    <result column="statusDate" property="statusdate" jdbcType="TIMESTAMP" />
+    <result column="lendDescribe" property="lenddescribe" jdbcType="VARCHAR" />
+    <result column="relation" property="relation" jdbcType="VARCHAR" />
+    <result column="Iszhuanrang" property="iszhuanrang" jdbcType="VARCHAR" />
+    <result column="zhuanrangDate" property="zhuanrangdate" jdbcType="TIMESTAMP" />
+    <result column="BidStatus" property="bidstatus" jdbcType="CHAR" />
+    <result column="succeedTime" property="succeedtime" jdbcType="TIMESTAMP" />
+    <result column="IncomeTime" property="incometime" jdbcType="TIMESTAMP" />
+    <result column="IncomeStatus" property="incomestatus" jdbcType="CHAR" />
+    <result column="IncomeMoney" property="incomemoney" jdbcType="DECIMAL" />
+    <result column="waitMoney" property="waitmoney" jdbcType="DECIMAL" />
+    <result column="InceomeInterest" property="inceomeinterest" jdbcType="DECIMAL" />
+    <result column="waitInterest" property="waitinterest" jdbcType="DECIMAL" />
+    <result column="IncomeCount" property="incomecount" jdbcType="INTEGER" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="payAmount" property="payamount" jdbcType="DECIMAL" />
+    <result column="status" property="status" jdbcType="VARCHAR" />
+    <result column="userSend" property="usersend" jdbcType="VARCHAR" />
+    <result column="userAgree" property="useragree" jdbcType="VARCHAR" />
+    <result column="websiteSend" property="websitesend" jdbcType="VARCHAR" />
+    <result column="websiteAgree" property="websiteagree" jdbcType="VARCHAR" />
+    <result column="temp1" property="temp1" jdbcType="VARCHAR" />
+    <result column="temp2" property="temp2" jdbcType="VARCHAR" />
+    <result column="temp3" property="temp3" jdbcType="VARCHAR" />
+    <result column="temp4" property="temp4" jdbcType="VARCHAR" />
+    <result column="RecordStatus" property="recordstatus" jdbcType="INTEGER" />
+    <result column="CodeNum" property="codenum" jdbcType="NVARCHAR" />
+    <result column="DeductMoney" property="deductmoney" jdbcType="DECIMAL" />
+    <result column="ExpectMoney" property="expectmoney" jdbcType="DECIMAL" />
+    <result column="IsRepay" property="isrepay" jdbcType="INTEGER" />
+    <result column="RepayDate" property="repaydate" jdbcType="TIMESTAMP" />
+    <result column="RepayOperator" property="repayoperator" jdbcType="NVARCHAR" />
+    <result column="LendState" property="lendstate" jdbcType="NVARCHAR" />
+    <result column="PreRepayDate" property="prerepaydate" jdbcType="TIMESTAMP" />
+    <result column="FactRepayDate" property="factrepaydate" jdbcType="TIMESTAMP" />
+    <result column="FactRepayNote" property="factrepaynote" jdbcType="NVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    Id, borrowId, lendMoney, minRate, lendReason, lendDate, curYearRate, curMonthRate, 
+    factMoney, lendStatus, userName, bUserName, statusDate, lendDescribe, relation, Iszhuanrang, 
+    zhuanrangDate, BidStatus, succeedTime, IncomeTime, IncomeStatus, IncomeMoney, waitMoney, 
+    InceomeInterest, waitInterest, IncomeCount, remark, payAmount, status, userSend, 
+    userAgree, websiteSend, websiteAgree, temp1, temp2, temp3, temp4, RecordStatus, CodeNum, 
+    DeductMoney, ExpectMoney, IsRepay, RepayDate, RepayOperator, LendState, PreRepayDate, 
+    FactRepayDate, FactRepayNote
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.zjgt.p2p.source.model.LendInfoExample" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from dbo.tb_lendInfo
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    select 
+    <include refid="Base_Column_List" />
+    from dbo.tb_lendInfo
+    where Id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    delete from dbo.tb_lendInfo
+    where Id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zjgt.p2p.source.model.LendInfo" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    insert into dbo.tb_lendInfo (Id, borrowId, lendMoney, 
+      minRate, lendReason, lendDate, 
+      curYearRate, curMonthRate, factMoney, 
+      lendStatus, userName, bUserName, 
+      statusDate, lendDescribe, relation, 
+      Iszhuanrang, zhuanrangDate, BidStatus, 
+      succeedTime, IncomeTime, IncomeStatus, 
+      IncomeMoney, waitMoney, InceomeInterest, 
+      waitInterest, IncomeCount, remark, 
+      payAmount, status, userSend, 
+      userAgree, websiteSend, websiteAgree, 
+      temp1, temp2, temp3, 
+      temp4, RecordStatus, CodeNum, 
+      DeductMoney, ExpectMoney, IsRepay, 
+      RepayDate, RepayOperator, LendState, 
+      PreRepayDate, FactRepayDate, FactRepayNote
+      )
+    values (#{id,jdbcType=INTEGER}, #{borrowid,jdbcType=VARCHAR}, #{lendmoney,jdbcType=DECIMAL}, 
+      #{minrate,jdbcType=DECIMAL}, #{lendreason,jdbcType=VARCHAR}, #{lenddate,jdbcType=TIMESTAMP}, 
+      #{curyearrate,jdbcType=DECIMAL}, #{curmonthrate,jdbcType=DECIMAL}, #{factmoney,jdbcType=DECIMAL}, 
+      #{lendstatus,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, #{busername,jdbcType=VARCHAR}, 
+      #{statusdate,jdbcType=TIMESTAMP}, #{lenddescribe,jdbcType=VARCHAR}, #{relation,jdbcType=VARCHAR}, 
+      #{iszhuanrang,jdbcType=VARCHAR}, #{zhuanrangdate,jdbcType=TIMESTAMP}, #{bidstatus,jdbcType=CHAR}, 
+      #{succeedtime,jdbcType=TIMESTAMP}, #{incometime,jdbcType=TIMESTAMP}, #{incomestatus,jdbcType=CHAR}, 
+      #{incomemoney,jdbcType=DECIMAL}, #{waitmoney,jdbcType=DECIMAL}, #{inceomeinterest,jdbcType=DECIMAL}, 
+      #{waitinterest,jdbcType=DECIMAL}, #{incomecount,jdbcType=INTEGER}, #{remark,jdbcType=VARCHAR}, 
+      #{payamount,jdbcType=DECIMAL}, #{status,jdbcType=VARCHAR}, #{usersend,jdbcType=VARCHAR}, 
+      #{useragree,jdbcType=VARCHAR}, #{websitesend,jdbcType=VARCHAR}, #{websiteagree,jdbcType=VARCHAR}, 
+      #{temp1,jdbcType=VARCHAR}, #{temp2,jdbcType=VARCHAR}, #{temp3,jdbcType=VARCHAR}, 
+      #{temp4,jdbcType=VARCHAR}, #{recordstatus,jdbcType=INTEGER}, #{codenum,jdbcType=NVARCHAR}, 
+      #{deductmoney,jdbcType=DECIMAL}, #{expectmoney,jdbcType=DECIMAL}, #{isrepay,jdbcType=INTEGER}, 
+      #{repaydate,jdbcType=TIMESTAMP}, #{repayoperator,jdbcType=NVARCHAR}, #{lendstate,jdbcType=NVARCHAR}, 
+      #{prerepaydate,jdbcType=TIMESTAMP}, #{factrepaydate,jdbcType=TIMESTAMP}, #{factrepaynote,jdbcType=NVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.zjgt.p2p.source.model.LendInfo" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    insert into dbo.tb_lendInfo
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        Id,
+      </if>
+      <if test="borrowid != null" >
+        borrowId,
+      </if>
+      <if test="lendmoney != null" >
+        lendMoney,
+      </if>
+      <if test="minrate != null" >
+        minRate,
+      </if>
+      <if test="lendreason != null" >
+        lendReason,
+      </if>
+      <if test="lenddate != null" >
+        lendDate,
+      </if>
+      <if test="curyearrate != null" >
+        curYearRate,
+      </if>
+      <if test="curmonthrate != null" >
+        curMonthRate,
+      </if>
+      <if test="factmoney != null" >
+        factMoney,
+      </if>
+      <if test="lendstatus != null" >
+        lendStatus,
+      </if>
+      <if test="username != null" >
+        userName,
+      </if>
+      <if test="busername != null" >
+        bUserName,
+      </if>
+      <if test="statusdate != null" >
+        statusDate,
+      </if>
+      <if test="lenddescribe != null" >
+        lendDescribe,
+      </if>
+      <if test="relation != null" >
+        relation,
+      </if>
+      <if test="iszhuanrang != null" >
+        Iszhuanrang,
+      </if>
+      <if test="zhuanrangdate != null" >
+        zhuanrangDate,
+      </if>
+      <if test="bidstatus != null" >
+        BidStatus,
+      </if>
+      <if test="succeedtime != null" >
+        succeedTime,
+      </if>
+      <if test="incometime != null" >
+        IncomeTime,
+      </if>
+      <if test="incomestatus != null" >
+        IncomeStatus,
+      </if>
+      <if test="incomemoney != null" >
+        IncomeMoney,
+      </if>
+      <if test="waitmoney != null" >
+        waitMoney,
+      </if>
+      <if test="inceomeinterest != null" >
+        InceomeInterest,
+      </if>
+      <if test="waitinterest != null" >
+        waitInterest,
+      </if>
+      <if test="incomecount != null" >
+        IncomeCount,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+      <if test="payamount != null" >
+        payAmount,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="usersend != null" >
+        userSend,
+      </if>
+      <if test="useragree != null" >
+        userAgree,
+      </if>
+      <if test="websitesend != null" >
+        websiteSend,
+      </if>
+      <if test="websiteagree != null" >
+        websiteAgree,
+      </if>
+      <if test="temp1 != null" >
+        temp1,
+      </if>
+      <if test="temp2 != null" >
+        temp2,
+      </if>
+      <if test="temp3 != null" >
+        temp3,
+      </if>
+      <if test="temp4 != null" >
+        temp4,
+      </if>
+      <if test="recordstatus != null" >
+        RecordStatus,
+      </if>
+      <if test="codenum != null" >
+        CodeNum,
+      </if>
+      <if test="deductmoney != null" >
+        DeductMoney,
+      </if>
+      <if test="expectmoney != null" >
+        ExpectMoney,
+      </if>
+      <if test="isrepay != null" >
+        IsRepay,
+      </if>
+      <if test="repaydate != null" >
+        RepayDate,
+      </if>
+      <if test="repayoperator != null" >
+        RepayOperator,
+      </if>
+      <if test="lendstate != null" >
+        LendState,
+      </if>
+      <if test="prerepaydate != null" >
+        PreRepayDate,
+      </if>
+      <if test="factrepaydate != null" >
+        FactRepayDate,
+      </if>
+      <if test="factrepaynote != null" >
+        FactRepayNote,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="borrowid != null" >
+        #{borrowid,jdbcType=VARCHAR},
+      </if>
+      <if test="lendmoney != null" >
+        #{lendmoney,jdbcType=DECIMAL},
+      </if>
+      <if test="minrate != null" >
+        #{minrate,jdbcType=DECIMAL},
+      </if>
+      <if test="lendreason != null" >
+        #{lendreason,jdbcType=VARCHAR},
+      </if>
+      <if test="lenddate != null" >
+        #{lenddate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="curyearrate != null" >
+        #{curyearrate,jdbcType=DECIMAL},
+      </if>
+      <if test="curmonthrate != null" >
+        #{curmonthrate,jdbcType=DECIMAL},
+      </if>
+      <if test="factmoney != null" >
+        #{factmoney,jdbcType=DECIMAL},
+      </if>
+      <if test="lendstatus != null" >
+        #{lendstatus,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null" >
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="busername != null" >
+        #{busername,jdbcType=VARCHAR},
+      </if>
+      <if test="statusdate != null" >
+        #{statusdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lenddescribe != null" >
+        #{lenddescribe,jdbcType=VARCHAR},
+      </if>
+      <if test="relation != null" >
+        #{relation,jdbcType=VARCHAR},
+      </if>
+      <if test="iszhuanrang != null" >
+        #{iszhuanrang,jdbcType=VARCHAR},
+      </if>
+      <if test="zhuanrangdate != null" >
+        #{zhuanrangdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="bidstatus != null" >
+        #{bidstatus,jdbcType=CHAR},
+      </if>
+      <if test="succeedtime != null" >
+        #{succeedtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="incometime != null" >
+        #{incometime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="incomestatus != null" >
+        #{incomestatus,jdbcType=CHAR},
+      </if>
+      <if test="incomemoney != null" >
+        #{incomemoney,jdbcType=DECIMAL},
+      </if>
+      <if test="waitmoney != null" >
+        #{waitmoney,jdbcType=DECIMAL},
+      </if>
+      <if test="inceomeinterest != null" >
+        #{inceomeinterest,jdbcType=DECIMAL},
+      </if>
+      <if test="waitinterest != null" >
+        #{waitinterest,jdbcType=DECIMAL},
+      </if>
+      <if test="incomecount != null" >
+        #{incomecount,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="payamount != null" >
+        #{payamount,jdbcType=DECIMAL},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="usersend != null" >
+        #{usersend,jdbcType=VARCHAR},
+      </if>
+      <if test="useragree != null" >
+        #{useragree,jdbcType=VARCHAR},
+      </if>
+      <if test="websitesend != null" >
+        #{websitesend,jdbcType=VARCHAR},
+      </if>
+      <if test="websiteagree != null" >
+        #{websiteagree,jdbcType=VARCHAR},
+      </if>
+      <if test="temp1 != null" >
+        #{temp1,jdbcType=VARCHAR},
+      </if>
+      <if test="temp2 != null" >
+        #{temp2,jdbcType=VARCHAR},
+      </if>
+      <if test="temp3 != null" >
+        #{temp3,jdbcType=VARCHAR},
+      </if>
+      <if test="temp4 != null" >
+        #{temp4,jdbcType=VARCHAR},
+      </if>
+      <if test="recordstatus != null" >
+        #{recordstatus,jdbcType=INTEGER},
+      </if>
+      <if test="codenum != null" >
+        #{codenum,jdbcType=NVARCHAR},
+      </if>
+      <if test="deductmoney != null" >
+        #{deductmoney,jdbcType=DECIMAL},
+      </if>
+      <if test="expectmoney != null" >
+        #{expectmoney,jdbcType=DECIMAL},
+      </if>
+      <if test="isrepay != null" >
+        #{isrepay,jdbcType=INTEGER},
+      </if>
+      <if test="repaydate != null" >
+        #{repaydate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="repayoperator != null" >
+        #{repayoperator,jdbcType=NVARCHAR},
+      </if>
+      <if test="lendstate != null" >
+        #{lendstate,jdbcType=NVARCHAR},
+      </if>
+      <if test="prerepaydate != null" >
+        #{prerepaydate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="factrepaydate != null" >
+        #{factrepaydate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="factrepaynote != null" >
+        #{factrepaynote,jdbcType=NVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.zjgt.p2p.source.model.LendInfoExample" resultType="java.lang.Integer" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    select count(*) from dbo.tb_lendInfo
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zjgt.p2p.source.model.LendInfo" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    update dbo.tb_lendInfo
+    <set >
+      <if test="borrowid != null" >
+        borrowId = #{borrowid,jdbcType=VARCHAR},
+      </if>
+      <if test="lendmoney != null" >
+        lendMoney = #{lendmoney,jdbcType=DECIMAL},
+      </if>
+      <if test="minrate != null" >
+        minRate = #{minrate,jdbcType=DECIMAL},
+      </if>
+      <if test="lendreason != null" >
+        lendReason = #{lendreason,jdbcType=VARCHAR},
+      </if>
+      <if test="lenddate != null" >
+        lendDate = #{lenddate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="curyearrate != null" >
+        curYearRate = #{curyearrate,jdbcType=DECIMAL},
+      </if>
+      <if test="curmonthrate != null" >
+        curMonthRate = #{curmonthrate,jdbcType=DECIMAL},
+      </if>
+      <if test="factmoney != null" >
+        factMoney = #{factmoney,jdbcType=DECIMAL},
+      </if>
+      <if test="lendstatus != null" >
+        lendStatus = #{lendstatus,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null" >
+        userName = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="busername != null" >
+        bUserName = #{busername,jdbcType=VARCHAR},
+      </if>
+      <if test="statusdate != null" >
+        statusDate = #{statusdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lenddescribe != null" >
+        lendDescribe = #{lenddescribe,jdbcType=VARCHAR},
+      </if>
+      <if test="relation != null" >
+        relation = #{relation,jdbcType=VARCHAR},
+      </if>
+      <if test="iszhuanrang != null" >
+        Iszhuanrang = #{iszhuanrang,jdbcType=VARCHAR},
+      </if>
+      <if test="zhuanrangdate != null" >
+        zhuanrangDate = #{zhuanrangdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="bidstatus != null" >
+        BidStatus = #{bidstatus,jdbcType=CHAR},
+      </if>
+      <if test="succeedtime != null" >
+        succeedTime = #{succeedtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="incometime != null" >
+        IncomeTime = #{incometime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="incomestatus != null" >
+        IncomeStatus = #{incomestatus,jdbcType=CHAR},
+      </if>
+      <if test="incomemoney != null" >
+        IncomeMoney = #{incomemoney,jdbcType=DECIMAL},
+      </if>
+      <if test="waitmoney != null" >
+        waitMoney = #{waitmoney,jdbcType=DECIMAL},
+      </if>
+      <if test="inceomeinterest != null" >
+        InceomeInterest = #{inceomeinterest,jdbcType=DECIMAL},
+      </if>
+      <if test="waitinterest != null" >
+        waitInterest = #{waitinterest,jdbcType=DECIMAL},
+      </if>
+      <if test="incomecount != null" >
+        IncomeCount = #{incomecount,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="payamount != null" >
+        payAmount = #{payamount,jdbcType=DECIMAL},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="usersend != null" >
+        userSend = #{usersend,jdbcType=VARCHAR},
+      </if>
+      <if test="useragree != null" >
+        userAgree = #{useragree,jdbcType=VARCHAR},
+      </if>
+      <if test="websitesend != null" >
+        websiteSend = #{websitesend,jdbcType=VARCHAR},
+      </if>
+      <if test="websiteagree != null" >
+        websiteAgree = #{websiteagree,jdbcType=VARCHAR},
+      </if>
+      <if test="temp1 != null" >
+        temp1 = #{temp1,jdbcType=VARCHAR},
+      </if>
+      <if test="temp2 != null" >
+        temp2 = #{temp2,jdbcType=VARCHAR},
+      </if>
+      <if test="temp3 != null" >
+        temp3 = #{temp3,jdbcType=VARCHAR},
+      </if>
+      <if test="temp4 != null" >
+        temp4 = #{temp4,jdbcType=VARCHAR},
+      </if>
+      <if test="recordstatus != null" >
+        RecordStatus = #{recordstatus,jdbcType=INTEGER},
+      </if>
+      <if test="codenum != null" >
+        CodeNum = #{codenum,jdbcType=NVARCHAR},
+      </if>
+      <if test="deductmoney != null" >
+        DeductMoney = #{deductmoney,jdbcType=DECIMAL},
+      </if>
+      <if test="expectmoney != null" >
+        ExpectMoney = #{expectmoney,jdbcType=DECIMAL},
+      </if>
+      <if test="isrepay != null" >
+        IsRepay = #{isrepay,jdbcType=INTEGER},
+      </if>
+      <if test="repaydate != null" >
+        RepayDate = #{repaydate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="repayoperator != null" >
+        RepayOperator = #{repayoperator,jdbcType=NVARCHAR},
+      </if>
+      <if test="lendstate != null" >
+        LendState = #{lendstate,jdbcType=NVARCHAR},
+      </if>
+      <if test="prerepaydate != null" >
+        PreRepayDate = #{prerepaydate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="factrepaydate != null" >
+        FactRepayDate = #{factrepaydate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="factrepaynote != null" >
+        FactRepayNote = #{factrepaynote,jdbcType=NVARCHAR},
+      </if>
+    </set>
+    where Id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zjgt.p2p.source.model.LendInfo" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    update dbo.tb_lendInfo
+    set borrowId = #{borrowid,jdbcType=VARCHAR},
+      lendMoney = #{lendmoney,jdbcType=DECIMAL},
+      minRate = #{minrate,jdbcType=DECIMAL},
+      lendReason = #{lendreason,jdbcType=VARCHAR},
+      lendDate = #{lenddate,jdbcType=TIMESTAMP},
+      curYearRate = #{curyearrate,jdbcType=DECIMAL},
+      curMonthRate = #{curmonthrate,jdbcType=DECIMAL},
+      factMoney = #{factmoney,jdbcType=DECIMAL},
+      lendStatus = #{lendstatus,jdbcType=VARCHAR},
+      userName = #{username,jdbcType=VARCHAR},
+      bUserName = #{busername,jdbcType=VARCHAR},
+      statusDate = #{statusdate,jdbcType=TIMESTAMP},
+      lendDescribe = #{lenddescribe,jdbcType=VARCHAR},
+      relation = #{relation,jdbcType=VARCHAR},
+      Iszhuanrang = #{iszhuanrang,jdbcType=VARCHAR},
+      zhuanrangDate = #{zhuanrangdate,jdbcType=TIMESTAMP},
+      BidStatus = #{bidstatus,jdbcType=CHAR},
+      succeedTime = #{succeedtime,jdbcType=TIMESTAMP},
+      IncomeTime = #{incometime,jdbcType=TIMESTAMP},
+      IncomeStatus = #{incomestatus,jdbcType=CHAR},
+      IncomeMoney = #{incomemoney,jdbcType=DECIMAL},
+      waitMoney = #{waitmoney,jdbcType=DECIMAL},
+      InceomeInterest = #{inceomeinterest,jdbcType=DECIMAL},
+      waitInterest = #{waitinterest,jdbcType=DECIMAL},
+      IncomeCount = #{incomecount,jdbcType=INTEGER},
+      remark = #{remark,jdbcType=VARCHAR},
+      payAmount = #{payamount,jdbcType=DECIMAL},
+      status = #{status,jdbcType=VARCHAR},
+      userSend = #{usersend,jdbcType=VARCHAR},
+      userAgree = #{useragree,jdbcType=VARCHAR},
+      websiteSend = #{websitesend,jdbcType=VARCHAR},
+      websiteAgree = #{websiteagree,jdbcType=VARCHAR},
+      temp1 = #{temp1,jdbcType=VARCHAR},
+      temp2 = #{temp2,jdbcType=VARCHAR},
+      temp3 = #{temp3,jdbcType=VARCHAR},
+      temp4 = #{temp4,jdbcType=VARCHAR},
+      RecordStatus = #{recordstatus,jdbcType=INTEGER},
+      CodeNum = #{codenum,jdbcType=NVARCHAR},
+      DeductMoney = #{deductmoney,jdbcType=DECIMAL},
+      ExpectMoney = #{expectmoney,jdbcType=DECIMAL},
+      IsRepay = #{isrepay,jdbcType=INTEGER},
+      RepayDate = #{repaydate,jdbcType=TIMESTAMP},
+      RepayOperator = #{repayoperator,jdbcType=NVARCHAR},
+      LendState = #{lendstate,jdbcType=NVARCHAR},
+      PreRepayDate = #{prerepaydate,jdbcType=TIMESTAMP},
+      FactRepayDate = #{factrepaydate,jdbcType=TIMESTAMP},
+      FactRepayNote = #{factrepaynote,jdbcType=NVARCHAR}
+    where Id = #{id,jdbcType=INTEGER}
+  </update>
+
+
+	<select id="getlendTotalByPromoCode" resultType="long">
+	select count(1) from(
+			select 
+			tui.Id ,	
+			tui.mobile,
+			tui.registerDate,
+			tui.HasFuiou as hasfuiou,
+			sum(tli.lendMoney) as a,
+			max(tli.lendDate) as b	
+			from tb_lendInfo tli 
+			inner JOIN tb_userInfo tui on tli.userName=tui.userName
+			where  1=1
+			<if test="lendInfo.promoCode != null and lendInfo.promoCode != '' ">
+				and tui.PromoCode like CONCAT(#{lendInfo.promoCode},'%')
+			</if>
+			<if test="lendInfo.hasfuiou != null and lendInfo.hasfuiou != '' ">
+				and tui.HasFuiou = #{lendInfo.hasfuiou}
+			</if> 
+			<if test="lendInfo.beginTime != null and lendInfo.beginTime != '' ">
+				<![CDATA[  and tui.registerDate >= #{lendInfo.beginTime}     ]]>
+			</if>
+			<if test="lendInfo.endTime != null and lendInfo.endTime != '' ">
+				<![CDATA[  and tui.registerDate <= #{lendInfo.endTime}   ]]>
+			</if>
+			group by tui.Id,tui.registerDate,tui.mobile,tui.HasFuiou
+			 )aa
+	</select>
+	
+    <select id="getDatagridYYOneTotal" resultType="long">
+			select 
+				count(1)
+			from tb_lendInfo tli 
+			inner JOIN tb_userInfo tui on tli.userName=tui.userName
+			inner JOIN tb_borrowInfo borrow on borrow.borrowId=tli.borrowId	 
+			where  1=1	
+			<if test="lendInfo.promoCode != null and lendInfo.promoCode != '' ">
+				and tui.PromoCode = #{lendInfo.promoCode}
+			</if>
+			<if test="lendInfo.hasfuiou != null and lendInfo.hasfuiou != '' ">
+				and tui.HasFuiou = #{lendInfo.hasfuiou}
+			</if>
+			<if test="lendInfo.beginTime != null and lendInfo.beginTime != '' ">
+				<![CDATA[  and tli.lendDate >= #{lendInfo.beginTime}     ]]>
+			</if>
+			<if test="lendInfo.endTime != null and lendInfo.endTime != '' ">
+				<![CDATA[  and tli.lendDate <= #{lendInfo.endTime}   ]]>
+			</if>
+	</select>
+	<select id="datagridYYOneLend" resultType="com.zjgt.p2p.source.model.LendInfo">
+		select * from 
+		(
+		select 
+		row_number() OVER (ORDER BY tli.lendDate DESC) n,
+		tui.Id as temp2,tui.AccountDate as temp3,tui.PromoCode,tui.registerDate as temp1, 
+		tli.userName,tli.lendMoney,tli.lendDate,borrow.borrowReason as temp4,borrow.dateline as dateline,tui.mobile as mobile
+		from tb_lendInfo tli 
+		inner JOIN tb_userInfo tui on tli.userName=tui.userName
+		inner JOIN tb_borrowInfo borrow on borrow.borrowId=tli.borrowId 
+		where  1=1	
+		<if test="lendInfo.promoCode != null and lendInfo.promoCode != '' ">
+			and tui.PromoCode = #{lendInfo.promoCode}
+		</if>
+		<if test="lendInfo.hasfuiou != null and lendInfo.hasfuiou != '' ">
+			and tui.HasFuiou = #{lendInfo.hasfuiou}
+		</if>
+		<if test="lendInfo.beginTime != null and lendInfo.beginTime != '' ">
+			<![CDATA[  and tli.lendDate >= #{lendInfo.beginTime}     ]]>
+		</if>
+		<if test="lendInfo.endTime != null and lendInfo.endTime != '' ">
+			<![CDATA[  and tli.lendDate <= #{lendInfo.endTime}   ]]>
+		</if>
+		) a
+		where 1=1 
+		<if test="page.page > 0">
+			<![CDATA[  and n > #{page.start} and n <= #{page.end}  ]]>
+		</if>
+		order by lendDate desc
+	</select>
+	<select id="getLendInfoListYY" resultType="com.zjgt.p2p.source.model.LendInfo">
+		select 
+			tui.Id as temp2,tui.AccountDate as temp3,tui.PromoCode,tui.registerDate as temp1, 
+			tli.userName,tli.lendMoney,tli.lendDate,borrow.borrowReason as temp4,borrow.dateline as dateline,tui.mobile as mobile
+		from tb_lendInfo tli 
+		inner JOIN tb_userInfo tui on tli.userName=tui.userName
+		inner JOIN tb_borrowInfo borrow on borrow.borrowId=tli.borrowId
+		where 1=1 
+		<if test="lendInfo.promoCode != null and lendInfo.promoCode != '' ">
+			and tui.PromoCode = #{lendInfo.promoCode}
+		</if>
+		<if test="lendInfo.beginTime != null and lendInfo.beginTime != '' ">
+			<![CDATA[  and tli.lendDate >= #{lendInfo.beginTime}     ]]>
+		</if>
+		<if test="lendInfo.endTime != null and lendInfo.endTime != '' ">
+			<![CDATA[  and tli.lendDate <= #{lendInfo.endTime}   ]]>
+		</if>
+		order by lendDate desc			
+	</select>
+	
+	
+	
+  	<select id="getDatagridTotal" resultType="long">	  		
+			CREATE TABLE #lendId_lsb (lendId int)
+			INSERT INTO #lendId_lsb (lendId)
+			select min(a.id) as id 
+			from tb_lendInfo a 
+			INNER JOIN tb_borrowInfo b 
+			on a.borrowId= b.borrowId 
+			where (b.BorrowType='' or b.BorrowType is null or b.BorrowType='超定期标')	
+			<!-- where   b.borrowType !='22%专享标' 
+			and b.borrowType !='债权转让' 
+			and b.borrowType !='金钱包'
+			and b.dateline in(1,2,3,4,5,6,12)  --> 
+			group by a.userName 
+			
+			select 
+			count(1)
+			from tb_lendInfo tli 
+			INNER JOIN tb_userInfo tui on tli.userName=tui.userName
+			INNER JOIN tb_borrowInfo borrow on borrow.borrowId=tli.borrowId
+			inner JOIN #lendId_lsb lsb on lsb.lendId=tli.id 
+			left JOIN Z_InvestOrderExtend oe on tli.temp2=oe.SerialNumber
+			where 1=1 		
+			and (tui.RecommPerson='' or tui.RecommPerson is null)		
+			<if test="lendInfo.promoCode != null and lendInfo.promoCode != '' ">
+				and tui.PromoCode = #{lendInfo.promoCode}
+			</if> 
+			<if test="lendInfo.beginTime != null and lendInfo.beginTime != '' ">
+				<![CDATA[  and tli.lendDate >= #{lendInfo.beginTime}     ]]>
+			</if>
+			<if test="lendInfo.endTime != null and lendInfo.endTime != '' ">
+				<![CDATA[  and tli.lendDate < #{lendInfo.endTime}   ]]>
+			</if>
+			DROP TABLE #lendId_lsb  
+	</select>	
+	<select id="datagridLend" resultType="com.zjgt.p2p.source.model.LendInfo">
+			CREATE TABLE #lendId_lsb (lendId int)
+			INSERT INTO #lendId_lsb (lendId)
+			select min(a.id) as id 
+			from tb_lendInfo a 
+			INNER join tb_borrowInfo b 
+			on a.borrowId= b.borrowId
+			where (b.BorrowType='' or b.BorrowType is null or b.BorrowType='超定期标' ) 
+			<!-- where   b.borrowType !='22%专享标' 
+			and b.borrowType !='债权转让' 
+			and b.borrowType !='金钱包'
+			and b.dateline in(1,3,4,6,12) -->  
+			group by a.userName 
+			
+			select * from (
+			select 
+				row_number() OVER (ORDER BY tli.lendDate DESC) n,
+				tui.Id as temp2,tui.AccountDate as temp3,tui.PromoCode,tui.registerDate as temp1, 
+				tli.userName,tli.lendMoney,tli.lendDate,borrow.borrowReason as temp4 ,borrow.dateline as dateline,tui.mobile as mobile,oe.InvestDays as incomeCount
+			from tb_lendInfo tli 
+			INNER JOIN tb_userInfo tui on tli.userName=tui.userName
+			INNER JOIN tb_borrowInfo borrow on borrow.borrowId=tli.borrowId
+			INNER JOIN #lendId_lsb lsb on lsb.lendId=tli.id 	
+			left JOIN Z_InvestOrderExtend oe on tli.temp2=oe.SerialNumber
+			where 1=1 	
+			and (tui.RecommPerson='' or tui.RecommPerson is null)
+			<if test="lendInfo.promoCode != null and lendInfo.promoCode != '' ">
+				and tui.PromoCode = #{lendInfo.promoCode}
+			</if>
+			<if test="lendInfo.beginTime != null and lendInfo.beginTime != '' ">
+				<![CDATA[  and tli.lendDate >= #{lendInfo.beginTime}     ]]>
+			</if>
+			<if test="lendInfo.endTime != null and lendInfo.endTime != '' ">
+				<![CDATA[  and tli.lendDate < #{lendInfo.endTime}   ]]>
+			</if>
+			) a 
+			where 1=1 
+			<if test="page.page > 0">
+				<![CDATA[  and n > #{page.start} and n <= #{page.end}  ]]>
+			</if>
+			order by lendDate desc
+			
+			DROP TABLE #lendId_lsb  
+	</select>	
+	<select id="getLendInfoList" resultType="com.zjgt.p2p.source.model.LendInfo">
+			CREATE TABLE #lendId_lsb (lendId int)
+			INSERT INTO #lendId_lsb (lendId)
+			select min(a.id) as id 
+			from tb_lendInfo a 
+			inner join tb_borrowInfo b 
+			on a.borrowId= b.borrowId 
+			where (b.BorrowType='' or b.BorrowType is null or b.BorrowType='超定期标')
+			<!-- where   b.borrowType !='22%专享标' 
+			and b.borrowType !='债权转让' 
+			and b.borrowType !='金钱包'
+			and b.dateline in(1,3,4,6,12)  --> 
+			group by a.userName 
+		
+			select 
+				tui.Id as temp2,tui.AccountDate as temp3,tui.PromoCode,tui.registerDate as temp1, 
+				tli.userName,tli.lendMoney,tli.lendDate,borrow.borrowReason as temp4,borrow.dateline as dateline,tui.mobile as mobile,oe.InvestDays as incomeCount
+			from tb_lendInfo tli 
+			INNER JOIN tb_userInfo tui on tli.userName=tui.userName
+			INNER JOIN tb_borrowInfo borrow on borrow.borrowId=tli.borrowId
+			INNER join #lendId_lsb lsb on lsb.lendId=tli.id 
+			left JOIN Z_InvestOrderExtend oe on tli.temp2=oe.SerialNumber
+			where 1=1 		
+			and (tui.RecommPerson='' or tui.RecommPerson is null)
+			<if test="lendInfo.promoCode != null and lendInfo.promoCode != '' ">
+				and tui.PromoCode = #{lendInfo.promoCode}
+			</if>
+			<if test="lendInfo.beginTime != null and lendInfo.beginTime != '' ">
+				<![CDATA[  and tli.lendDate >= #{lendInfo.beginTime}     ]]>
+			</if>
+			<if test="lendInfo.endTime != null and lendInfo.endTime != '' ">
+				<![CDATA[  and tli.lendDate <= #{lendInfo.endTime}   ]]>
+			</if>
+			order by lendDate desc			
+			DROP TABLE #lendId_lsb
+	</select>
+	
+	
+	
+	<select id="getDatagridTwoTotal" resultType="long">
+			select count(1) from(
+				select 
+					tui.Id ,	
+					tui.mobile,
+					tui.registerDate,
+					tui.HasFuiou as hasfuiou,
+					sum(tli.lendMoney) as a,
+					max(tli.lendDate) as b	
+				from tb_lendInfo tli 
+				inner JOIN tb_userInfo tui on tli.userName=tui.userName
+				where  1=1
+				<if test="lendInfo.promoCode != null and lendInfo.promoCode != '' ">
+					and tui.PromoCode=#{lendInfo.promoCode}							
+				</if>
+				<if test="lendInfo.hasfuiou != null and lendInfo.hasfuiou != '' ">
+					and tui.HasFuiou = #{lendInfo.hasfuiou}
+				</if> 
+				<if test="lendInfo.beginTime != null and lendInfo.beginTime != '' ">
+					<![CDATA[  and tui.registerDate >= #{lendInfo.beginTime}     ]]>
+				</if>
+				<if test="lendInfo.endTime != null and lendInfo.endTime != '' ">
+					<![CDATA[  and tui.registerDate <= #{lendInfo.endTime}   ]]>
+				</if>
+				group by tui.Id,tui.registerDate,tui.mobile,tui.HasFuiou
+			 )aa
+	</select>	
+	<select id="datagridTwoLend" resultType="com.zjgt.p2p.source.model.LendInfo">
+			select * from 
+			(
+				select 
+					row_number() OVER (ORDER BY tui.Id DESC) n,
+					tui.Id ,
+					tui.mobile as mobile,
+					tui.registerDate as temp1, 
+					tui.HasFuiou as hasfuiou,
+					sum(tli.lendMoney) as lendmoney,
+					max(tli.lendDate) as lenddate
+				from tb_lendInfo tli 
+				inner JOIN tb_userInfo tui on tli.userName=tui.userName
+				where  1=1 
+				<if test="lendInfo.promoCode != null and lendInfo.promoCode != '' ">
+					and tui.PromoCode=#{lendInfo.promoCode}
+				</if>
+				<if test="lendInfo.hasfuiou != null and lendInfo.hasfuiou != '' ">
+					and tui.HasFuiou = #{lendInfo.hasfuiou}
+				</if>
+				<if test="lendInfo.beginTime != null and lendInfo.beginTime != '' ">
+					<![CDATA[  and tui.registerDate >= #{lendInfo.beginTime}     ]]>
+				</if>
+				<if test="lendInfo.endTime != null and lendInfo.endTime != '' ">
+					<![CDATA[  and tui.registerDate <= #{lendInfo.endTime}   ]]>
+				</if>
+				group by tui.Id,tui.registerDate,tui.mobile,tui.HasFuiou
+			) t
+			where 1=1 
+			<if test="page.page > 0">
+				<![CDATA[  and n > #{page.start} and n <= #{page.end}  ]]>
+			</if>
+			
+	</select>	
+	<select id="getLendInfoTwoList" resultType="com.zjgt.p2p.source.model.LendInfo">
+			select 
+				tui.Id ,
+				tui.mobile as mobile,
+				tui.registerDate as temp1, 
+				tui.HasFuiou as hasfuiou,
+				sum(tli.lendMoney) as lendmoney,
+				max(tli.lendDate) as lenddate
+			from tb_lendInfo tli 
+			inner JOIN tb_userInfo tui on tli.userName=tui.userName
+			where  1=1
+			<if test="lendInfo.promoCode != null and lendInfo.promoCode != '' ">
+				and tui.PromoCode=#{lendInfo.promoCode}
+			</if>
+			<if test="lendInfo.hasfuiou != null and lendInfo.hasfuiou != '' ">
+				and tui.HasFuiou = #{lendInfo.hasfuiou}
+			</if>
+			<if test="lendInfo.beginTime != null and lendInfo.beginTime != '' ">
+				<![CDATA[  and tui.registerDate >= #{lendInfo.beginTime}     ]]>
+			</if>
+			<if test="lendInfo.endTime != null and lendInfo.endTime != '' ">
+				<![CDATA[  and tui.registerDate <= #{lendInfo.endTime}   ]]>
+			</if>
+			group by tui.Id,tui.registerDate,tui.mobile,tui.HasFuiou,tui.PromoCode
+	</select>
+	
+	
+	
+  	<select id="getDatagridTotalThree" resultType="long">	  		
+			CREATE TABLE #lendId_lsb (lendId int)
+			INSERT INTO #lendId_lsb (lendId)
+			select min(a.id) as id from tb_lendInfo a group by a.userName 
+			
+			select count(1)
+			from tb_lendInfo tli 
+			inner JOIN tb_userInfo tui on tli.userName=tui.userName
+			inner JOIN tb_borrowInfo borrow on borrow.borrowId=tli.borrowId
+			left JOIN Z_InvestOrderExtend oe on tli.temp2=oe.SerialNumber
+			inner join #lendId_lsb lsb on lsb.lendId=tli.id 		
+			<!-- where borrow.dateline in(1,3,5,6,12)   -->
+			where 1=1
+			and (tui.RecommPerson='' or tui.RecommPerson is null)		
+			<if test="lendInfo.promoCode != null and lendInfo.promoCode != '' ">
+				and tui.PromoCode = #{lendInfo.promoCode}
+			</if> 
+			<if test="lendInfo.beginTime != null and lendInfo.beginTime != '' ">
+				<![CDATA[  and tli.lendDate >= #{lendInfo.beginTime}     ]]>
+			</if>
+			<if test="lendInfo.endTime != null and lendInfo.endTime != '' ">
+				<![CDATA[  and tli.lendDate < #{lendInfo.endTime}   ]]>
+			</if>
+			DROP TABLE #lendId_lsb  
+	</select>	
+	<select id="datagridLendThree" resultType="com.zjgt.p2p.source.model.LendInfo">
+			CREATE TABLE #lendId_lsb (lendId  int)
+			INSERT INTO #lendId_lsb (lendId)
+			select min(a.id) as id from tb_lendInfo a group by a.userName 		
+				
+			select * from 
+			(
+				select 
+					row_number() OVER (ORDER BY tli.lendDate DESC) n,
+					tui.Id as temp2,tui.AccountDate as temp3,tui.PromoCode,tui.registerDate as temp1, 
+					tli.userName,tli.lendMoney,tli.lendDate,borrow.borrowReason as temp4 ,borrow.dateline as dateline,tui.mobile as mobile,oe.InvestDays as incomeCount
+				from tb_lendInfo tli 
+				inner JOIN tb_userInfo tui on tli.userName=tui.userName
+				inner JOIN tb_borrowInfo borrow on borrow.borrowId=tli.borrowId
+				left JOIN Z_InvestOrderExtend oe on tli.temp2=oe.SerialNumber
+				inner join #lendId_lsb lsb on lsb.lendId=tli.id 	
+				<!-- where borrow.dateline in(1,3,5,6,12)   -->
+				where 1=1				
+				and (tui.RecommPerson='' or tui.RecommPerson is null)
+				<if test="lendInfo.promoCode != null and lendInfo.promoCode != '' ">
+					and tui.PromoCode = #{lendInfo.promoCode}
+				</if>
+				<if test="lendInfo.beginTime != null and lendInfo.beginTime != '' ">
+					<![CDATA[  and tli.lendDate >= #{lendInfo.beginTime}     ]]>
+				</if>
+				<if test="lendInfo.endTime != null and lendInfo.endTime != '' ">
+					<![CDATA[  and tli.lendDate < #{lendInfo.endTime}   ]]>
+				</if>
+			) a
+			where 1=1 
+			<if test="page.page > 0">
+				<![CDATA[  and n > #{page.start} and n <= #{page.end}  ]]>
+			</if>
+			order by lendDate desc
+			
+			DROP TABLE #lendId_lsb  
+	</select>	
+	<select id="getLendInfoListThree" resultType="com.zjgt.p2p.source.model.LendInfo">
+			CREATE TABLE #lendId_lsb (lendId  int)
+			INSERT INTO #lendId_lsb (lendId)
+			select min(a.id) as id from tb_lendInfo a group by a.userName 
+		
+			select 
+				tui.Id as temp2,tui.AccountDate as temp3,tui.PromoCode,tui.registerDate as temp1, 
+				tli.userName,tli.lendMoney,tli.lendDate,borrow.borrowReason as temp4,borrow.dateline as dateline,tui.mobile as mobile,oe.InvestDays as incomeCount
+			from tb_lendInfo tli 
+			inner JOIN tb_userInfo tui on tli.userName=tui.userName
+			inner JOIN tb_borrowInfo borrow on borrow.borrowId=tli.borrowId
+			left JOIN Z_InvestOrderExtend oe on tli.temp2=oe.SerialNumber
+			inner join #lendId_lsb lsb on lsb.lendId=tli.id 
+			<!-- where borrow.dateline in(1,3,5,6,12)   -->
+			where 1=1
+			and (tui.RecommPerson='' or tui.RecommPerson is null)	
+			<if test="lendInfo.promoCode != null and lendInfo.promoCode != '' ">
+				and tui.PromoCode = #{lendInfo.promoCode}
+			</if>
+			<if test="lendInfo.beginTime != null and lendInfo.beginTime != '' ">
+				<![CDATA[  and tli.lendDate >= #{lendInfo.beginTime}     ]]>
+			</if>
+			<if test="lendInfo.endTime != null and lendInfo.endTime != '' ">
+				<![CDATA[  and tli.lendDate <= #{lendInfo.endTime}   ]]>
+			</if>
+			order by lendDate desc			
+			DROP TABLE #lendId_lsb
+	</select>
+	
+	
+	
+  	<select id="getDatagridTotalFour" resultType="long">	  		
+			CREATE TABLE #lendId_lsb (lendId int)
+			INSERT INTO #lendId_lsb (lendId)
+			select min(a.id) as id 
+			from tb_lendInfo a 
+			inner join tb_borrowInfo b 
+			on a.borrowId= b.borrowId 
+			where  1=1
+			<if test="lendInfo.iszxb == false ">
+				and b.borrowType !='22%专享标' 
+			</if> 
+			and b.borrowType !='债权转让' 
+			and b.borrowType !='金钱包'
+			and a.lendMoney>100
+			and b.dateline in(1,2,3,4,5,6,7,8,9,10,11,12)
+			group by a.userName 
+			
+			select 
+			count(1)
+			from tb_lendInfo tli 
+			inner JOIN tb_userInfo tui on tli.userName=tui.userName
+			inner JOIN tb_borrowInfo borrow on borrow.borrowId=tli.borrowId
+			inner join #lendId_lsb lsb on lsb.lendId=tli.id 	
+			left JOIN Z_InvestOrderExtend oe on tli.temp2=oe.SerialNumber	
+			where 1=1 
+			and (tui.RecommPerson='' or tui.RecommPerson is null)		
+			<if test="lendInfo.promoCode != null and lendInfo.promoCode != '' ">
+				and tui.PromoCode = #{lendInfo.promoCode}
+			</if> 
+			<if test="lendInfo.beginTime != null and lendInfo.beginTime != '' ">
+				<![CDATA[  and tli.lendDate >= #{lendInfo.beginTime}     ]]>
+			</if>
+			<if test="lendInfo.endTime != null and lendInfo.endTime != '' ">
+				<![CDATA[  and tli.lendDate < #{lendInfo.endTime}   ]]>
+			</if>
+			DROP TABLE #lendId_lsb  
+	</select>	
+	<select id="datagridLendFour" resultType="com.zjgt.p2p.source.model.LendInfo">
+			CREATE TABLE #lendId_lsb (lendId int)
+			
+			INSERT INTO #lendId_lsb (lendId)
+			select min(a.id) as id 
+			from tb_lendInfo a 
+			inner join tb_borrowInfo b 
+			on a.borrowId= b.borrowId 
+			where  1=1
+			<if test="lendInfo.iszxb == false ">
+				and b.borrowType !='22%专享标' 
+			</if> 
+			and b.borrowType !='债权转让' 
+			and b.borrowType !='金钱包'
+			and a.lendMoney>100
+			and b.dateline in(1,2,3,4,5,6,7,8,9,10,11,12)  
+			group by a.userName 
+			
+			select * from (
+			select 
+				row_number() OVER (ORDER BY tli.lendDate DESC) n,
+				tui.Id as temp2,tui.AccountDate as temp3,tui.PromoCode,tui.registerDate as temp1, 
+				tli.userName,tli.lendMoney,tli.lendDate,borrow.borrowReason as temp4 ,borrow.dateline as dateline,tui.mobile as mobile,oe.InvestDays as incomeCount
+			from tb_lendInfo tli 
+			inner JOIN tb_userInfo tui on tli.userName=tui.userName
+			inner JOIN tb_borrowInfo borrow on borrow.borrowId=tli.borrowId
+			inner join #lendId_lsb lsb on lsb.lendId=tli.id 
+			left JOIN Z_InvestOrderExtend oe on tli.temp2=oe.SerialNumber
+			where 1=1 		
+			and (tui.RecommPerson='' or tui.RecommPerson is null)
+			<if test="lendInfo.promoCode != null and lendInfo.promoCode != '' ">
+				and tui.PromoCode = #{lendInfo.promoCode}
+			</if>
+			<if test="lendInfo.beginTime != null and lendInfo.beginTime != '' ">
+				<![CDATA[  and tli.lendDate >= #{lendInfo.beginTime}     ]]>
+			</if>
+			<if test="lendInfo.endTime != null and lendInfo.endTime != '' ">
+				<![CDATA[  and tli.lendDate < #{lendInfo.endTime}   ]]>
+			</if>
+			) a 
+			where 1=1 
+			<if test="page.page > 0">
+				<![CDATA[  and n > #{page.start} and n <= #{page.end}  ]]>
+			</if>
+			order by lendDate desc
+			
+			DROP TABLE #lendId_lsb  
+	</select>	
+	<select id="getLendInfoListFour" resultType="com.zjgt.p2p.source.model.LendInfo">
+			CREATE TABLE #lendId_lsb (lendId int)
+			INSERT INTO #lendId_lsb (lendId)
+			select min(a.id) as id 
+			from tb_lendInfo a 
+			inner join tb_borrowInfo b on a.borrowId= b.borrowId 
+			where  1=1
+			<if test="lendInfo.iszxb == false ">
+				and b.borrowType !='22%专享标' 
+			</if>  
+			and b.borrowType !='债权转让' 
+			and b.borrowType !='金钱包'
+			and a.lendMoney>100
+			and b.dateline in(1,2,3,4,5,6,7,8,9,10,11,12)   
+			group by a.userName 
+		
+			select 
+				tui.Id as temp2,tui.AccountDate as temp3,tui.PromoCode,tui.registerDate as temp1, 
+				tli.userName,tli.lendMoney,tli.lendDate,borrow.borrowReason as temp4,borrow.dateline as dateline,tui.mobile as mobile,oe.InvestDays as incomeCount
+			from tb_lendInfo tli 
+			inner JOIN tb_userInfo tui on tli.userName=tui.userName
+			inner JOIN tb_borrowInfo borrow on borrow.borrowId=tli.borrowId
+			inner join #lendId_lsb lsb on lsb.lendId=tli.id 
+			left JOIN Z_InvestOrderExtend oe on tli.temp2=oe.SerialNumber
+			where 1=1 		
+			and (tui.RecommPerson='' or tui.RecommPerson is null)
+			<if test="lendInfo.promoCode != null and lendInfo.promoCode != '' ">
+				and tui.PromoCode = #{lendInfo.promoCode}
+			</if>
+			<if test="lendInfo.beginTime != null and lendInfo.beginTime != '' ">
+				<![CDATA[  and tli.lendDate >= #{lendInfo.beginTime}     ]]>
+			</if>
+			<if test="lendInfo.endTime != null and lendInfo.endTime != '' ">
+				<![CDATA[  and tli.lendDate <= #{lendInfo.endTime}   ]]>
+			</if>
+			order by lendDate desc			
+			DROP TABLE #lendId_lsb
+	</select>
+	
+
+  	<select id="getDatagridTotalFive" resultType="long">	  		
+			CREATE TABLE #lendId_lsb (lendId int)
+			INSERT INTO #lendId_lsb (lendId)
+			select min(a.id) as id from tb_lendInfo a group by a.userName 
+			
+			select 
+			count(1)
+			from tb_lendInfo tli 
+			inner JOIN tb_userInfo tui on tli.userName=tui.userName
+			inner JOIN tb_borrowInfo borrow on borrow.borrowId=tli.borrowId
+			inner join #lendId_lsb lsb on lsb.lendId=tli.id 
+			left JOIN Z_InvestOrderExtend oe on tli.temp2=oe.SerialNumber		
+			where 1=1 
+			and (tui.RecommPerson='' or tui.RecommPerson is null)		
+			<if test="lendInfo.promoCode != null and lendInfo.promoCode != '' ">
+				and tui.PromoCode = #{lendInfo.promoCode}
+			</if> 
+			<if test="lendInfo.beginTime != null and lendInfo.beginTime != '' ">
+				<![CDATA[  and tli.lendDate >= #{lendInfo.beginTime}     ]]>
+			</if>
+			<if test="lendInfo.endTime != null and lendInfo.endTime != '' ">
+				<![CDATA[  and tli.lendDate < #{lendInfo.endTime}   ]]>
+			</if>
+			DROP TABLE #lendId_lsb  
+	</select>	
+	<select id="datagridLendFive" resultType="com.zjgt.p2p.source.model.LendInfo">
+			CREATE TABLE #lendId_lsb (lendId  int)
+			INSERT INTO #lendId_lsb (lendId)
+			select min(a.id) as id from tb_lendInfo a group by a.userName 
+			
+			select * from (
+			select 
+				row_number() OVER (ORDER BY tli.lendDate DESC) n,
+				tui.Id as temp2,tui.AccountDate as temp3,tui.PromoCode,tui.registerDate as temp1, 
+				tli.userName,tli.lendMoney,tli.lendDate,borrow.borrowReason as temp4 ,borrow.dateline as dateline,tui.mobile as mobile,oe.InvestDays as incomeCount
+			from tb_lendInfo tli 
+			inner JOIN tb_userInfo tui on tli.userName=tui.userName
+			inner JOIN tb_borrowInfo borrow on borrow.borrowId=tli.borrowId
+			inner join #lendId_lsb lsb on lsb.lendId=tli.id 
+			left JOIN Z_InvestOrderExtend oe on tli.temp2=oe.SerialNumber
+			where 1=1 		
+			and (tui.RecommPerson='' or tui.RecommPerson is null)
+			<if test="lendInfo.promoCode != null and lendInfo.promoCode != '' ">
+				and tui.PromoCode = #{lendInfo.promoCode}
+			</if>
+			<if test="lendInfo.beginTime != null and lendInfo.beginTime != '' " >
+				<![CDATA[  and tli.lendDate >= #{lendInfo.beginTime}     ]]>
+			</if>
+			<if test="lendInfo.endTime != null and lendInfo.endTime != '' ">
+				<![CDATA[  and tli.lendDate < #{lendInfo.endTime}   ]]>
+			</if>
+			) a 
+			where 1=1 
+			<if test="page.page > 0">
+				<![CDATA[  and n > #{page.start} and n <= #{page.end}  ]]>
+			</if>
+			order by lendDate desc
+			
+			DROP TABLE #lendId_lsb  
+	</select>	
+	<select id="getLendInfoListFive" resultType="com.zjgt.p2p.source.model.LendInfo">
+			CREATE TABLE #lendId_lsb (lendId  int)
+			INSERT INTO #lendId_lsb (lendId)
+			select min(a.id) as id from tb_lendInfo a group by a.userName 
+		
+			select 
+				tui.Id as temp2,tui.AccountDate as temp3,tui.PromoCode,tui.registerDate as temp1, 
+				tli.userName,tli.lendMoney,tli.lendDate,borrow.borrowReason as temp4,borrow.dateline as dateline,tui.mobile as mobile,oe.InvestDays as incomeCount
+			from tb_lendInfo tli 
+			inner JOIN tb_userInfo tui on tli.userName=tui.userName
+			inner JOIN tb_borrowInfo borrow on borrow.borrowId=tli.borrowId
+			inner join #lendId_lsb lsb on lsb.lendId=tli.id 
+			left JOIN Z_InvestOrderExtend oe on tli.temp2=oe.SerialNumber	
+			where 1=1 
+			and (tui.RecommPerson='' or tui.RecommPerson is null)
+			<if test="lendInfo.promoCode != null and lendInfo.promoCode != '' ">
+				and tui.PromoCode = #{lendInfo.promoCode}
+			</if>
+			<if test="lendInfo.beginTime != null and lendInfo.beginTime != '' ">
+				<![CDATA[  and tli.lendDate >= #{lendInfo.beginTime}     ]]>
+			</if>
+			<if test="lendInfo.endTime != null and lendInfo.endTime != '' ">
+				<![CDATA[  and tli.lendDate <= #{lendInfo.endTime}   ]]>
+			</if>
+			order by lendDate desc			
+			DROP TABLE #lendId_lsb
+	</select>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<select id="getDatagridTotalSix" resultType="long">	  		
+			select count(1)
+			from tb_lendInfo tli 
+			inner JOIN tb_userInfo tui on tli.userName=tui.userName
+			inner JOIN tb_borrowInfo borrow on borrow.borrowId=tli.borrowId
+			left JOIN Z_InvestOrderExtend oe on tli.temp2=oe.SerialNumber
+			where 1=1
+			and (borrow.BorrowType='' or borrow.BorrowType is null or borrow.BorrowType='超定期标')	
+			<if test="lendInfo.iszxb == false ">
+				and <![CDATA[  tli.lendDate <= DATEADD("M",1,tui.registerDate)   ]]> 
+			</if> 
+			<if test="lendInfo.promoCode != null and lendInfo.promoCode != '' ">
+				and tui.PromoCode = #{lendInfo.promoCode}
+			</if> 
+			<if test="lendInfo.beginTime != null and lendInfo.beginTime != '' ">
+				<![CDATA[  and tli.lendDate >= #{lendInfo.beginTime}     ]]>
+			</if>
+			<if test="lendInfo.endTime != null and lendInfo.endTime != '' ">
+				<![CDATA[  and tli.lendDate < #{lendInfo.endTime}   ]]>
+			</if>
+	</select>	
+	<select id="datagridLendSix" resultType="com.zjgt.p2p.source.model.LendInfo">
+			select * from (
+			select 
+				row_number() OVER (ORDER BY tli.lendDate DESC) n,
+				borrow.boorowType,tui.Id as temp2,tui.AccountDate as temp3,tui.PromoCode,tui.registerDate as temp1, 
+				tli.userName,tli.lendMoney,tli.lendDate,borrow.borrowReason as temp4,borrow.dateline as dateline,tui.mobile as mobile,oe.InvestDays as incomecount
+			from tb_lendInfo tli 
+			inner JOIN tb_userInfo tui on tli.userName=tui.userName
+			inner JOIN tb_borrowInfo borrow on borrow.borrowId=tli.borrowId
+			left JOIN Z_InvestOrderExtend oe on tli.temp2=oe.SerialNumber
+			where 1=1
+			and (borrow.BorrowType='' or borrow.BorrowType is null or borrow.BorrowType='超定期标')	
+			<if test="lendInfo.iszxb == false ">
+				and <![CDATA[  tli.lendDate <= DATEADD("M",1,tui.registerDate)   ]]> 
+			</if> 
+			<if test="lendInfo.promoCode != null and lendInfo.promoCode != '' ">
+				and tui.PromoCode = #{lendInfo.promoCode}
+			</if> 
+			<if test="lendInfo.beginTime != null and lendInfo.beginTime != '' ">
+				<![CDATA[  and tli.lendDate >= #{lendInfo.beginTime}     ]]>
+			</if>
+			<if test="lendInfo.endTime != null and lendInfo.endTime != '' ">
+				<![CDATA[  and tli.lendDate < #{lendInfo.endTime}   ]]>
+			</if>
+			) a 
+			where 1=1 
+			<if test="page.page > 0">
+				<![CDATA[  and n > #{page.start} and n <= #{page.end}  ]]>
+			</if>
+			order by lendDate desc
+	</select>	
+	<select id="getLendInfoListSix" resultType="com.zjgt.p2p.source.model.LendInfo">
+			select 
+				row_number() OVER (ORDER BY tli.lendDate DESC) n,
+				borrow.boorowType,tui.Id as temp2,tui.AccountDate as temp3,tui.PromoCode,tui.registerDate as temp1, 
+				tli.userName,tli.lendMoney,tli.lendDate,borrow.borrowReason as temp4,borrow.dateline as dateline,tui.mobile as mobile,oe.InvestDays as incomecount
+			from tb_lendInfo tli 
+			inner JOIN tb_userInfo tui on tli.userName=tui.userName
+			inner JOIN tb_borrowInfo borrow on borrow.borrowId=tli.borrowId
+			left JOIN Z_InvestOrderExtend oe on tli.temp2=oe.SerialNumber
+			where 1=1
+			and (borrow.BorrowType='' or borrow.BorrowType is null or borrow.BorrowType='超定期标')	
+			<if test="lendInfo.iszxb == false ">
+				and <![CDATA[  tli.lendDate <= DATEADD("M",1,tui.registerDate)   ]]> 
+			</if> 
+			<if test="lendInfo.promoCode != null and lendInfo.promoCode != '' ">
+				and tui.PromoCode = #{lendInfo.promoCode}
+			</if> 
+			<if test="lendInfo.beginTime != null and lendInfo.beginTime != '' ">
+				<![CDATA[  and tli.lendDate >= #{lendInfo.beginTime}     ]]>
+			</if>
+			<if test="lendInfo.endTime != null and lendInfo.endTime != '' ">
+				<![CDATA[  and tli.lendDate < #{lendInfo.endTime}   ]]>
+			</if>
+			order by lendDate desc
+	</select>
+	
+	
+	
+	
+	<select id="getDatagridTotalSeven" resultType="long">	  		
+			select count(1)
+			from tb_lendInfo tli 
+			inner JOIN tb_userInfo tui on tli.userName=tui.userName
+			inner JOIN tb_borrowInfo borrow on borrow.borrowId=tli.borrowId 
+			left JOIN Z_InvestOrderExtend oe on tli.temp2=oe.SerialNumber
+			where  1=1	
+			and borrow.borrowType !='金钱包'
+			and (tui.RecommPerson='' or tui.RecommPerson is null)
+			<if test="lendInfo.promoCode != null and lendInfo.promoCode != '' ">
+				and tui.PromoCode = #{lendInfo.promoCode}
+			</if>
+			<if test="lendInfo.beginTime != null and lendInfo.beginTime != '' ">
+				<![CDATA[  and tli.lendDate >= #{lendInfo.beginTime}     ]]>
+			</if>
+			<if test="lendInfo.endTime != null and lendInfo.endTime != '' ">
+				<![CDATA[  and tli.lendDate <= #{lendInfo.endTime}   ]]>
+			</if>
+	</select>	
+	<select id="datagridLendSeven" resultType="com.zjgt.p2p.source.model.LendInfo">
+			select * from 
+			(
+				select 
+				row_number() OVER (ORDER BY tli.lendDate DESC) n,
+				tui.Id as temp2,tui.AccountDate as temp3,tui.PromoCode,tui.registerDate as temp1, 
+				tli.userName,tli.lendMoney,tli.lendDate,borrow.borrowReason as temp4,borrow.dateline as dateline,tui.mobile as mobile,oe.InvestDays as incomeCount
+				from tb_lendInfo tli 
+				inner JOIN tb_userInfo tui on tli.userName=tui.userName
+				inner JOIN tb_borrowInfo borrow on borrow.borrowId=tli.borrowId 
+				left JOIN Z_InvestOrderExtend oe on tli.temp2=oe.SerialNumber
+				where  1=1	
+				and borrow.borrowType !='金钱包'
+				and (tui.RecommPerson='' or tui.RecommPerson is null)
+				<if test="lendInfo.promoCode != null and lendInfo.promoCode != '' ">
+					and tui.PromoCode = #{lendInfo.promoCode}
+				</if>	
+				<if test="lendInfo.beginTime != null and lendInfo.beginTime != '' ">
+					<![CDATA[  and tli.lendDate >= #{lendInfo.beginTime}     ]]>
+				</if>
+				<if test="lendInfo.endTime != null and lendInfo.endTime != '' ">
+					<![CDATA[  and tli.lendDate <= #{lendInfo.endTime}   ]]>
+				</if>
+			) a
+			where 1=1 
+			<if test="page.page > 0">
+				<![CDATA[  and n > #{page.start} and n <= #{page.end}  ]]>
+			</if>
+	</select>	
+	<select id="getLendInfoListSeven" resultType="com.zjgt.p2p.source.model.LendInfo">
+			select 
+				row_number() OVER (ORDER BY tli.lendDate DESC) n,
+				tui.Id as temp2,tui.AccountDate as temp3,tui.PromoCode,tui.registerDate as temp1, 
+				tli.userName,tli.lendMoney,tli.lendDate,borrow.borrowReason as temp4,borrow.dateline as dateline,tui.mobile as mobile,oe.InvestDays as incomeCount
+			from tb_lendInfo tli 
+			inner JOIN tb_userInfo tui on tli.userName=tui.userName
+			inner JOIN tb_borrowInfo borrow on borrow.borrowId=tli.borrowId 
+			left JOIN Z_InvestOrderExtend oe on tli.temp2=oe.SerialNumber
+			where  1=1	
+			and borrow.borrowType !='金钱包'
+			and (tui.RecommPerson='' or tui.RecommPerson is null)
+			<if test="lendInfo.promoCode != null and lendInfo.promoCode != '' ">
+				and tui.PromoCode = #{lendInfo.promoCode}
+			</if>	
+			<if test="lendInfo.beginTime != null and lendInfo.beginTime != '' ">
+				<![CDATA[  and tli.lendDate >= #{lendInfo.beginTime}     ]]>
+			</if>
+			<if test="lendInfo.endTime != null and lendInfo.endTime != '' ">
+				<![CDATA[  and tli.lendDate <= #{lendInfo.endTime}   ]]>
+			</if>
+			order by lendDate desc
+	</select>
+	
+	
+	
+	
+	
+	
+	
+	<select id="getDatagridTotalEight" resultType="long">	  		
+			select count(1)
+			from tb_lendInfo tli 
+			inner JOIN tb_userInfo tui on tli.userName=tui.userName
+			inner JOIN tb_borrowInfo borrow on borrow.borrowId=tli.borrowId 
+			left JOIN Z_InvestOrderExtend oe on tli.temp2=oe.SerialNumber
+			where  1=1	
+			and borrow.borrowType !='金钱包'
+			and borrow.borrowType !='22%专享标' 
+			and borrow.dateline in(1,2,3,4,5,6,7,8,9,10,11,12)
+			and (tui.RecommPerson='' or tui.RecommPerson is null)
+			<if test="lendInfo.promoCode != null and lendInfo.promoCode != '' ">
+				and tui.PromoCode = #{lendInfo.promoCode}
+			</if>
+			<if test="lendInfo.beginTime != null and lendInfo.beginTime != '' ">
+				<![CDATA[  and tli.lendDate >= #{lendInfo.beginTime}     ]]>
+			</if>
+			<if test="lendInfo.endTime != null and lendInfo.endTime != '' ">
+				<![CDATA[  and tli.lendDate <= #{lendInfo.endTime}   ]]>
+			</if>
+	</select>	
+	<select id="datagridLendEight" resultType="com.zjgt.p2p.source.model.LendInfo">
+			select * from 
+			(
+				select 
+				row_number() OVER (ORDER BY tli.lendDate DESC) n,
+				tui.Id as temp2,tui.AccountDate as temp3,tui.PromoCode,tui.registerDate as temp1, 
+				tli.userName,tli.lendMoney,tli.lendDate,borrow.borrowReason as temp4,borrow.dateline as dateline,tui.mobile as mobile,oe.InvestDays as incomeCount
+				from tb_lendInfo tli 
+				inner JOIN tb_userInfo tui on tli.userName=tui.userName
+				inner JOIN tb_borrowInfo borrow on borrow.borrowId=tli.borrowId 
+				left JOIN Z_InvestOrderExtend oe on tli.temp2=oe.SerialNumber
+				where  1=1	
+				and borrow.borrowType !='金钱包'
+				and borrow.borrowType !='22%专享标' 
+				and borrow.dateline in(1,2,3,4,5,6,7,8,9,10,11,12)
+				and (tui.RecommPerson='' or tui.RecommPerson is null)
+				<if test="lendInfo.promoCode != null and lendInfo.promoCode != '' ">
+					and tui.PromoCode = #{lendInfo.promoCode}
+				</if>	
+				<if test="lendInfo.beginTime != null and lendInfo.beginTime != '' ">
+					<![CDATA[  and tli.lendDate >= #{lendInfo.beginTime}     ]]>
+				</if>
+				<if test="lendInfo.endTime != null and lendInfo.endTime != '' ">
+					<![CDATA[  and tli.lendDate <= #{lendInfo.endTime}   ]]>
+				</if>
+			) a
+			where 1=1 
+			<if test="page.page > 0">
+				<![CDATA[  and n > #{page.start} and n <= #{page.end}  ]]>
+			</if>
+	</select>	
+	<select id="getLendInfoListEight" resultType="com.zjgt.p2p.source.model.LendInfo">
+			select 
+				row_number() OVER (ORDER BY tli.lendDate DESC) n,
+				tui.Id as temp2,tui.AccountDate as temp3,tui.PromoCode,tui.registerDate as temp1, 
+				tli.userName,tli.lendMoney,tli.lendDate,borrow.borrowReason as temp4,borrow.dateline as dateline,tui.mobile as mobile,oe.InvestDays as incomeCount
+			from tb_lendInfo tli 
+			inner JOIN tb_userInfo tui on tli.userName=tui.userName
+			inner JOIN tb_borrowInfo borrow on borrow.borrowId=tli.borrowId 
+			left JOIN Z_InvestOrderExtend oe on tli.temp2=oe.SerialNumber
+			where  1=1	
+			and borrow.borrowType !='金钱包'
+			and borrow.borrowType !='22%专享标' 
+			and borrow.dateline in(1,2,3,4,5,6,7,8,9,10,11,12)
+			and (tui.RecommPerson='' or tui.RecommPerson is null)
+			<if test="lendInfo.promoCode != null and lendInfo.promoCode != '' ">
+				and tui.PromoCode = #{lendInfo.promoCode}
+			</if>	
+			<if test="lendInfo.beginTime != null and lendInfo.beginTime != '' ">
+				<![CDATA[  and tli.lendDate >= #{lendInfo.beginTime}     ]]>
+			</if>
+			<if test="lendInfo.endTime != null and lendInfo.endTime != '' ">
+				<![CDATA[  and tli.lendDate <= #{lendInfo.endTime}   ]]>
+			</if>
+			order by lendDate desc
+	</select>
+	
+	
+	
+	
+	<select id="getDatagridTotalNine" resultType="long">	  		
+			CREATE TABLE #lendId_lsb (lendId int)
+			INSERT INTO #lendId_lsb (lendId)
+			select min(a.id) as id 
+			from tb_lendInfo a 
+			INNER JOIN tb_borrowInfo b 
+			on a.borrowId= b.borrowId 
+			where b.dateline in(3,6,12)  
+			group by a.userName 
+			
+			select 
+			count(1)
+			from tb_lendInfo tli 
+			INNER JOIN tb_userInfo tui on tli.userName=tui.userName
+			INNER JOIN tb_borrowInfo borrow on borrow.borrowId=tli.borrowId
+			inner JOIN #lendId_lsb lsb on lsb.lendId=tli.id 
+			where 1=1 		
+			and (tui.RecommPerson='' or tui.RecommPerson is null)		
+			<if test="lendInfo.promoCode != null and lendInfo.promoCode != '' ">
+				and tui.PromoCode = #{lendInfo.promoCode}
+			</if> 
+			<if test="lendInfo.beginTime != null and lendInfo.beginTime != '' ">
+				<![CDATA[  and tli.lendDate >= #{lendInfo.beginTime}     ]]>
+			</if>
+			<if test="lendInfo.endTime != null and lendInfo.endTime != '' ">
+				<![CDATA[  and tli.lendDate < #{lendInfo.endTime}   ]]>
+			</if>
+			DROP TABLE #lendId_lsb  
+	</select>	
+	<select id="datagridLendNine" resultType="com.zjgt.p2p.source.model.LendInfo">
+			CREATE TABLE #lendId_lsb (lendId int)
+			INSERT INTO #lendId_lsb (lendId)
+			select min(a.id) as id 
+			from tb_lendInfo a 
+			INNER join tb_borrowInfo b 
+			on a.borrowId= b.borrowId
+			where b.dateline in(3,6,12)   
+			group by a.userName 
+			
+			select * from (
+			select 
+				row_number() OVER (ORDER BY tli.lendDate DESC) n,
+				tui.Id as temp2,tui.AccountDate as temp3,tui.PromoCode,tui.registerDate as temp1, 
+				tli.userName,tli.lendMoney,tli.lendDate,borrow.borrowReason as temp4 ,borrow.dateline as dateline,tui.mobile as mobile
+			from tb_lendInfo tli 
+			INNER JOIN tb_userInfo tui on tli.userName=tui.userName
+			INNER JOIN tb_borrowInfo borrow on borrow.borrowId=tli.borrowId
+			INNER JOIN #lendId_lsb lsb on lsb.lendId=tli.id 	
+			where 1=1 	
+			and (tui.RecommPerson='' or tui.RecommPerson is null)
+			<if test="lendInfo.promoCode != null and lendInfo.promoCode != '' ">
+				and tui.PromoCode = #{lendInfo.promoCode}
+			</if>
+			<if test="lendInfo.beginTime != null and lendInfo.beginTime != '' ">
+				<![CDATA[  and tli.lendDate >= #{lendInfo.beginTime}     ]]>
+			</if>
+			<if test="lendInfo.endTime != null and lendInfo.endTime != '' ">
+				<![CDATA[  and tli.lendDate < #{lendInfo.endTime}   ]]>
+			</if>
+			) a 
+			where 1=1 
+			<if test="page.page > 0">
+				<![CDATA[  and n > #{page.start} and n <= #{page.end}  ]]>
+			</if>
+			order by lendDate desc
+			
+			DROP TABLE #lendId_lsb  
+	</select>	
+	<select id="getLendInfoListNine" resultType="com.zjgt.p2p.source.model.LendInfo">
+			CREATE TABLE #lendId_lsb (lendId int)
+			INSERT INTO #lendId_lsb (lendId)
+			select min(a.id) as id 
+			from tb_lendInfo a 
+			inner join tb_borrowInfo b 
+			on a.borrowId= b.borrowId 
+			where b.dateline in(3,6,12)   
+			group by a.userName 
+		
+			select 
+				tui.Id as temp2,tui.AccountDate as temp3,tui.PromoCode,tui.registerDate as temp1, 
+				tli.userName,tli.lendMoney,tli.lendDate,borrow.borrowReason as temp4,borrow.dateline as dateline,tui.mobile as mobile
+			from tb_lendInfo tli 
+			INNER JOIN tb_userInfo tui on tli.userName=tui.userName
+			INNER JOIN tb_borrowInfo borrow on borrow.borrowId=tli.borrowId
+			INNER join #lendId_lsb lsb on lsb.lendId=tli.id 
+			where 1=1 		
+			and (tui.RecommPerson='' or tui.RecommPerson is null)
+			<if test="lendInfo.promoCode != null and lendInfo.promoCode != '' ">
+				and tui.PromoCode = #{lendInfo.promoCode}
+			</if>
+			<if test="lendInfo.beginTime != null and lendInfo.beginTime != '' ">
+				<![CDATA[  and tli.lendDate >= #{lendInfo.beginTime}     ]]>
+			</if>
+			<if test="lendInfo.endTime != null and lendInfo.endTime != '' ">
+				<![CDATA[  and tli.lendDate <= #{lendInfo.endTime}   ]]>
+			</if>
+			order by lendDate desc			
+			DROP TABLE #lendId_lsb
+	</select>
+	
+	
+	<select id="getDatagridTotalTen" resultType="long">	  		
+			select count(1) from
+				(
+					SELECT aa.* FROM 
+					(
+						SELECT  ROW_NUMBER() OVER(PARTITION BY tli.userName ORDER BY tli.Id) AS identityid ,
+							tli.*,
+							b.dateline,b.borrowReason,
+							tui.AccountDate,tui.PromoCode,tui.registerDate,tui.mobile	
+						FROM dbo.tb_lendInfo tli 
+						inner JOIN tb_borrowInfo b on b.borrowId=tli.borrowId 
+						inner JOIN tb_userInfo tui on tli.userName=tui.userName
+						left JOIN Z_InvestOrderExtend oe on tli.temp2=oe.SerialNumber
+						where 1=1
+						and (b.BorrowType='' or b.BorrowType is null or b.BorrowType='超定期标')
+						and (tui.RecommPerson='' or tui.RecommPerson is null)	
+					)aa 		
+					where (aa.identityid = 1 AND aa.lendMoney >= 500) OR (aa.identityid > 1 AND aa.lendMoney >= 10000)							
+				)bb			
+			WHERE 1=1	
+			<if test="lendInfo.promoCode != null and lendInfo.promoCode != '' ">
+				and bb.PromoCode = #{lendInfo.promoCode}
+			</if> 
+			<if test="lendInfo.beginTime != null and lendInfo.beginTime != '' ">
+				<![CDATA[  and bb.lendDate >= #{lendInfo.beginTime}     ]]>
+			</if>
+			<if test="lendInfo.endTime != null and lendInfo.endTime != '' ">
+				<![CDATA[  and bb.lendDate < #{lendInfo.endTime}   ]]>
+			</if>
+	</select>	
+	<select id="datagridLendTen" resultType="com.zjgt.p2p.source.model.LendInfo">
+			select * from 
+			(
+				select ROW_NUMBER() OVER(ORDER BY bb.Id)n ,
+					bb.userName,bb.lendMoney,bb.lendDate,bb.borrowReason as temp4,bb.dateline as dateline	,
+					bb.Id as temp2,bb.AccountDate as temp3,bb.PromoCode,bb.registerDate as temp1,bb.mobile as mobile 		
+					from
+				(
+					SELECT aa.* FROM 
+					(
+						SELECT  ROW_NUMBER() OVER(PARTITION BY tli.userName ORDER BY tli.Id) AS identityid ,
+							tli.*,
+							b.dateline,b.borrowReason,
+							tui.AccountDate,tui.PromoCode,tui.registerDate,tui.mobile	
+						FROM dbo.tb_lendInfo tli 
+						inner JOIN tb_borrowInfo b on b.borrowId=tli.borrowId 
+						inner JOIN tb_userInfo tui on tli.userName=tui.userName
+						left JOIN Z_InvestOrderExtend oe on tli.temp2=oe.SerialNumber
+						where 1=1
+						and (b.BorrowType='' or b.BorrowType is null or b.BorrowType='超定期标')
+						and (tui.RecommPerson='' or tui.RecommPerson is null)	
+					)aa 		
+					where (aa.identityid = 1 AND aa.lendMoney >= 500) OR (aa.identityid > 1 AND aa.lendMoney >= 10000)							
+				)bb					
+				WHERE 1=1					
+				<if test="lendInfo.promoCode != null and lendInfo.promoCode != '' ">
+					and bb.PromoCode = #{lendInfo.promoCode}
+				</if> 
+				<if test="lendInfo.beginTime != null and lendInfo.beginTime != '' ">
+					<![CDATA[  and bb.lendDate >= #{lendInfo.beginTime}     ]]>
+				</if>
+				<if test="lendInfo.endTime != null and lendInfo.endTime != '' ">
+					<![CDATA[  and bb.lendDate < #{lendInfo.endTime}   ]]>
+				</if>
+			)cc 
+			where 1=1 
+			<if test="page.page > 0">
+				<![CDATA[  and n > #{page.start} and n <= #{page.end}  ]]>
+			</if>
+			order by cc.lendDate desc
+	</select>	
+	<select id="getLendInfoListTen" resultType="com.zjgt.p2p.source.model.LendInfo">
+			select ROW_NUMBER() OVER(ORDER BY bb.Id)n ,
+					bb.userName,bb.lendMoney,bb.lendDate,bb.borrowReason as temp4,bb.dateline as dateline	,
+					bb.Id as temp2,bb.AccountDate as temp3,bb.PromoCode,bb.registerDate as temp1,bb.mobile as mobile 		
+					from
+				(
+					SELECT aa.* FROM 
+					(
+						SELECT  ROW_NUMBER() OVER(PARTITION BY tli.userName ORDER BY tli.Id) AS identityid ,
+							tli.*,
+							b.dateline,b.borrowReason,
+							tui.AccountDate,tui.PromoCode,tui.registerDate,tui.mobile	
+						FROM dbo.tb_lendInfo tli 
+						inner JOIN tb_borrowInfo b on b.borrowId=tli.borrowId 
+						inner JOIN tb_userInfo tui on tli.userName=tui.userName
+						left JOIN Z_InvestOrderExtend oe on tli.temp2=oe.SerialNumber
+						where 1=1
+						and (b.BorrowType='' or b.BorrowType is null or b.BorrowType='超定期标')
+						and (tui.RecommPerson='' or tui.RecommPerson is null)	
+					)aa 		
+					where (aa.identityid = 1 AND aa.lendMoney >= 500) OR (aa.identityid > 1 AND aa.lendMoney >= 10000)							
+				)bb					
+				WHERE 1=1					
+				<if test="lendInfo.promoCode != null and lendInfo.promoCode != '' ">
+					and bb.PromoCode = #{lendInfo.promoCode}
+				</if> 
+				<if test="lendInfo.beginTime != null and lendInfo.beginTime != '' ">
+					<![CDATA[  and bb.lendDate >= #{lendInfo.beginTime}     ]]>
+				</if>
+				<if test="lendInfo.endTime != null and lendInfo.endTime != '' ">
+					<![CDATA[  and bb.lendDate < #{lendInfo.endTime}   ]]>
+				</if>
+				order by bb.lendDate desc
+	</select>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<select id="getDatagridTotalEleven" resultType="long">	  		
+			select count(1) from 
+			(
+				SELECT aa.* FROM 
+				(
+					SELECT  ROW_NUMBER() OVER(PARTITION BY tli.userName ORDER BY tli.Id) AS identityid ,tli.*
+					FROM dbo.tb_lendInfo tli		
+				)aa 					
+			)bb	
+			inner JOIN tb_userInfo tui on bb.userName=tui.userName
+			inner JOIN tb_borrowInfo borrow on borrow.borrowId=bb.borrowId 
+			left JOIN Z_InvestOrderExtend oe on bb.temp2=oe.SerialNumber
+			WHERE 1=1				
+			and (tui.RecommPerson='' or tui.RecommPerson is null)	
+			and borrow.id = 1848
+			<if test="lendInfo.promoCode != null and lendInfo.promoCode != '' ">
+				and tui.PromoCode = #{lendInfo.promoCode}
+			</if> 
+			<if test="lendInfo.beginTime != null and lendInfo.beginTime != '' ">
+				<![CDATA[  and bb.lendDate >= #{lendInfo.beginTime}     ]]>
+			</if>
+			<if test="lendInfo.endTime != null and lendInfo.endTime != '' ">
+				<![CDATA[  and bb.lendDate < #{lendInfo.endTime}   ]]>
+			</if>
+	</select>	
+	<select id="datagridLendEleven" resultType="com.zjgt.p2p.source.model.LendInfo">
+			select * from 
+			(
+				select ROW_NUMBER() OVER(ORDER BY bb.Id)n ,
+						tui.Id as temp2,tui.AccountDate as temp3,tui.PromoCode,tui.registerDate as temp1, 
+						bb.userName,bb.lendMoney,bb.lendDate,borrow.borrowReason as temp4,borrow.dateline as dateline,tui.mobile as mobile ,oe.InvestDays as incomeCount
+						from
+				(
+					SELECT aa.* FROM 
+					(
+						SELECT  ROW_NUMBER() OVER(PARTITION BY tli.userName ORDER BY tli.Id) AS identityid ,tli.*
+						FROM dbo.tb_lendInfo tli		
+					)aa 					
+				)bb	
+				inner JOIN tb_userInfo tui on bb.userName=tui.userName
+				inner JOIN tb_borrowInfo borrow on borrow.borrowId=bb.borrowId 
+				left JOIN Z_InvestOrderExtend oe on bb.temp2=oe.SerialNumber
+				WHERE 1=1				
+				and (tui.RecommPerson='' or tui.RecommPerson is null)	
+				and borrow.id = 1848
+				<if test="lendInfo.promoCode != null and lendInfo.promoCode != '' ">
+					and tui.PromoCode = #{lendInfo.promoCode}
+				</if> 
+				<if test="lendInfo.beginTime != null and lendInfo.beginTime != '' ">
+					<![CDATA[  and bb.lendDate >= #{lendInfo.beginTime}     ]]>
+				</if>
+				<if test="lendInfo.endTime != null and lendInfo.endTime != '' ">
+					<![CDATA[  and bb.lendDate < #{lendInfo.endTime}   ]]>
+				</if>
+			)cc 
+			where 1=1 
+			<if test="page.page > 0">
+				<![CDATA[  and n > #{page.start} and n <= #{page.end}  ]]>
+			</if>
+			order by cc.lendDate desc
+	</select>	
+	<select id="getLendInfoListEleven" resultType="com.zjgt.p2p.source.model.LendInfo">
+			select ROW_NUMBER() OVER(ORDER BY bb.Id)n ,
+				tui.Id as temp2,tui.AccountDate as temp3,tui.PromoCode,tui.registerDate as temp1, 
+				bb.userName,bb.lendMoney,bb.lendDate,borrow.borrowReason as temp4,borrow.dateline as dateline,tui.mobile as mobile ,oe.InvestDays as incomeCount
+				from
+				(
+					SELECT aa.* FROM 
+					(
+						SELECT  ROW_NUMBER() OVER(PARTITION BY tli.userName ORDER BY tli.Id) AS identityid ,tli.*
+						FROM dbo.tb_lendInfo tli		
+					)aa 					
+				)bb	
+				inner JOIN tb_userInfo tui on bb.userName=tui.userName
+				inner JOIN tb_borrowInfo borrow on borrow.borrowId=bb.borrowId 
+				left JOIN Z_InvestOrderExtend oe on bb.temp2=oe.SerialNumber
+				WHERE 1=1				
+				and (tui.RecommPerson='' or tui.RecommPerson is null)	
+				and borrow.id = 1848
+				<if test="lendInfo.promoCode != null and lendInfo.promoCode != '' ">
+					and tui.PromoCode = #{lendInfo.promoCode}
+				</if> 
+				<if test="lendInfo.beginTime != null and lendInfo.beginTime != '' ">
+					<![CDATA[  and bb.lendDate >= #{lendInfo.beginTime}     ]]>
+				</if>
+				<if test="lendInfo.endTime != null and lendInfo.endTime != '' ">
+					<![CDATA[  and bb.lendDate < #{lendInfo.endTime}   ]]>
+				</if>
+				order by bb.lendDate desc
+	</select>
+	
+	
+	
+	
+</mapper>

@@ -1,0 +1,398 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zjgt.p2p.dao.BorrowerMapper" >
+  <resultMap id="BaseResultMap" type="com.zjgt.p2p.model.Borrower" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    <id column="ID" property="id" jdbcType="INTEGER" />
+    <result column="borrowerCode" property="borrowercode" jdbcType="VARCHAR" />
+    <result column="FullName" property="fullname" jdbcType="VARCHAR" />
+    <result column="borrowername" property="borrowername" jdbcType="VARCHAR" />
+    <result column="corpDesc" property="corpdesc" jdbcType="VARCHAR" />
+    <result column="corpLogo" property="corplogo" jdbcType="VARCHAR" />
+    <result column="UpOrg" property="uporg" jdbcType="VARCHAR" />
+    <result column="Level" property="level" jdbcType="INTEGER" />
+    <result column="Address" property="address" jdbcType="VARCHAR" />
+    <result column="ContactPerson" property="contactperson" jdbcType="VARCHAR" />
+    <result column="Mobile" property="mobile" jdbcType="VARCHAR" />
+    <result column="Phone" property="phone" jdbcType="VARCHAR" />
+    <result column="Fax" property="fax" jdbcType="VARCHAR" />
+    <result column="EMail" property="email" jdbcType="VARCHAR" />
+    <result column="agreement1" property="agreement1" jdbcType="VARCHAR" />
+    <result column="agreementImg" property="agreementimg" jdbcType="VARCHAR" />
+    <result column="ValidDate" property="validdate" jdbcType="DATE" />
+    <result column="OrgState" property="orgstate" jdbcType="INTEGER" />
+    <result column="identno" property="identno" jdbcType="VARCHAR" />
+    <result column="borrowtype" property="borrowtype" jdbcType="INTEGER" />
+    <result column="AdminUserID" property="adminuserid" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    ID, borrowerCode, FullName, borrowername, corpDesc, corpLogo, UpOrg, Level, Address, 
+    ContactPerson, Mobile, Phone, Fax, EMail, agreement1, agreementImg, ValidDate, OrgState, 
+    identno, borrowtype, AdminUserID
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.zjgt.p2p.model.BorrowerExample" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from borrower
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    select 
+    <include refid="Base_Column_List" />
+    from borrower
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    delete from borrower
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zjgt.p2p.model.Borrower" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    insert into borrower (ID, borrowerCode, FullName, 
+      borrowername, corpDesc, corpLogo, 
+      UpOrg, Level, Address, 
+      ContactPerson, Mobile, Phone, 
+      Fax, EMail, agreement1, 
+      agreementImg, ValidDate, OrgState, 
+      identno, borrowtype, AdminUserID
+      )
+    values (#{id,jdbcType=INTEGER}, #{borrowercode,jdbcType=VARCHAR}, #{fullname,jdbcType=VARCHAR}, 
+      #{borrowername,jdbcType=VARCHAR}, #{corpdesc,jdbcType=VARCHAR}, #{corplogo,jdbcType=VARCHAR}, 
+      #{uporg,jdbcType=VARCHAR}, #{level,jdbcType=INTEGER}, #{address,jdbcType=VARCHAR}, 
+      #{contactperson,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, 
+      #{fax,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{agreement1,jdbcType=VARCHAR}, 
+      #{agreementimg,jdbcType=VARCHAR}, #{validdate,jdbcType=DATE}, #{orgstate,jdbcType=INTEGER}, 
+      #{identno,jdbcType=VARCHAR}, #{borrowtype,jdbcType=INTEGER}, #{adminuserid,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.zjgt.p2p.model.Borrower" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    insert into borrower
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="borrowercode != null" >
+        borrowerCode,
+      </if>
+      <if test="fullname != null" >
+        FullName,
+      </if>
+      <if test="borrowername != null" >
+        borrowername,
+      </if>
+      <if test="corpdesc != null" >
+        corpDesc,
+      </if>
+      <if test="corplogo != null" >
+        corpLogo,
+      </if>
+      <if test="uporg != null" >
+        UpOrg,
+      </if>
+      <if test="level != null" >
+        Level,
+      </if>
+      <if test="address != null" >
+        Address,
+      </if>
+      <if test="contactperson != null" >
+        ContactPerson,
+      </if>
+      <if test="mobile != null" >
+        Mobile,
+      </if>
+      <if test="phone != null" >
+        Phone,
+      </if>
+      <if test="fax != null" >
+        Fax,
+      </if>
+      <if test="email != null" >
+        EMail,
+      </if>
+      <if test="agreement1 != null" >
+        agreement1,
+      </if>
+      <if test="agreementimg != null" >
+        agreementImg,
+      </if>
+      <if test="validdate != null" >
+        ValidDate,
+      </if>
+      <if test="orgstate != null" >
+        OrgState,
+      </if>
+      <if test="identno != null" >
+        identno,
+      </if>
+      <if test="borrowtype != null" >
+        borrowtype,
+      </if>
+      <if test="adminuserid != null" >
+        AdminUserID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="borrowercode != null" >
+        #{borrowercode,jdbcType=VARCHAR},
+      </if>
+      <if test="fullname != null" >
+        #{fullname,jdbcType=VARCHAR},
+      </if>
+      <if test="borrowername != null" >
+        #{borrowername,jdbcType=VARCHAR},
+      </if>
+      <if test="corpdesc != null" >
+        #{corpdesc,jdbcType=VARCHAR},
+      </if>
+      <if test="corplogo != null" >
+        #{corplogo,jdbcType=VARCHAR},
+      </if>
+      <if test="uporg != null" >
+        #{uporg,jdbcType=VARCHAR},
+      </if>
+      <if test="level != null" >
+        #{level,jdbcType=INTEGER},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="contactperson != null" >
+        #{contactperson,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null" >
+        #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="fax != null" >
+        #{fax,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="agreement1 != null" >
+        #{agreement1,jdbcType=VARCHAR},
+      </if>
+      <if test="agreementimg != null" >
+        #{agreementimg,jdbcType=VARCHAR},
+      </if>
+      <if test="validdate != null" >
+        #{validdate,jdbcType=DATE},
+      </if>
+      <if test="orgstate != null" >
+        #{orgstate,jdbcType=INTEGER},
+      </if>
+      <if test="identno != null" >
+        #{identno,jdbcType=VARCHAR},
+      </if>
+      <if test="borrowtype != null" >
+        #{borrowtype,jdbcType=INTEGER},
+      </if>
+      <if test="adminuserid != null" >
+        #{adminuserid,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zjgt.p2p.model.Borrower" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    update borrower
+    <set >
+      <if test="borrowercode != null" >
+        borrowerCode = #{borrowercode,jdbcType=VARCHAR},
+      </if>
+      <if test="fullname != null" >
+        FullName = #{fullname,jdbcType=VARCHAR},
+      </if>
+      <if test="borrowername != null" >
+        borrowername = #{borrowername,jdbcType=VARCHAR},
+      </if>
+      <if test="corpdesc != null" >
+        corpDesc = #{corpdesc,jdbcType=VARCHAR},
+      </if>
+      <if test="corplogo != null" >
+        corpLogo = #{corplogo,jdbcType=VARCHAR},
+      </if>
+      <if test="uporg != null" >
+        UpOrg = #{uporg,jdbcType=VARCHAR},
+      </if>
+      <if test="level != null" >
+        Level = #{level,jdbcType=INTEGER},
+      </if>
+      <if test="address != null" >
+        Address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="contactperson != null" >
+        ContactPerson = #{contactperson,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null" >
+        Mobile = #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        Phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="fax != null" >
+        Fax = #{fax,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        EMail = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="agreement1 != null" >
+        agreement1 = #{agreement1,jdbcType=VARCHAR},
+      </if>
+      <if test="agreementimg != null" >
+        agreementImg = #{agreementimg,jdbcType=VARCHAR},
+      </if>
+      <if test="validdate != null" >
+        ValidDate = #{validdate,jdbcType=DATE},
+      </if>
+      <if test="orgstate != null" >
+        OrgState = #{orgstate,jdbcType=INTEGER},
+      </if>
+      <if test="identno != null" >
+        identno = #{identno,jdbcType=VARCHAR},
+      </if>
+      <if test="borrowtype != null" >
+        borrowtype = #{borrowtype,jdbcType=INTEGER},
+      </if>
+      <if test="adminuserid != null" >
+        AdminUserID = #{adminuserid,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zjgt.p2p.model.Borrower" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    update borrower
+    set borrowerCode = #{borrowercode,jdbcType=VARCHAR},
+      FullName = #{fullname,jdbcType=VARCHAR},
+      borrowername = #{borrowername,jdbcType=VARCHAR},
+      corpDesc = #{corpdesc,jdbcType=VARCHAR},
+      corpLogo = #{corplogo,jdbcType=VARCHAR},
+      UpOrg = #{uporg,jdbcType=VARCHAR},
+      Level = #{level,jdbcType=INTEGER},
+      Address = #{address,jdbcType=VARCHAR},
+      ContactPerson = #{contactperson,jdbcType=VARCHAR},
+      Mobile = #{mobile,jdbcType=VARCHAR},
+      Phone = #{phone,jdbcType=VARCHAR},
+      Fax = #{fax,jdbcType=VARCHAR},
+      EMail = #{email,jdbcType=VARCHAR},
+      agreement1 = #{agreement1,jdbcType=VARCHAR},
+      agreementImg = #{agreementimg,jdbcType=VARCHAR},
+      ValidDate = #{validdate,jdbcType=DATE},
+      OrgState = #{orgstate,jdbcType=INTEGER},
+      identno = #{identno,jdbcType=VARCHAR},
+      borrowtype = #{borrowtype,jdbcType=INTEGER},
+      AdminUserID = #{adminuserid,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  
+      <!-- 分页 -->
+  <select id="selectByExampleLimit" resultMap="BaseResultMap" parameterType="com.zjgt.p2p.model.BorrowerExample" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+      This element : Tue Dec 09 13:48:21 CST 2014.
+    -->
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from Borrower
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="startPos != null" >
+      limit ${startPos} ,${pageSize}
+    </if>
+  </select>
+  <!-- 取得记录的总数 -->  
+<select id="getBorrowerCount" resultType="int" parameterType="com.zjgt.p2p.model.BorrowerExample">  
+  SELECT COUNT(*) FROM Borrower   
+      <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+</select>
+</mapper>

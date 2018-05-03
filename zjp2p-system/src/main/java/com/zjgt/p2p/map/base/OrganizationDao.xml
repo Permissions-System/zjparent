@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zjgt.p2p.base.dao.OrganizationDao" >
+  <resultMap id="BaseResultMap" type="com.zjgt.p2p.base.domain.Organization" >
+    <id column="ORG_CODE" property="orgCode" jdbcType="VARCHAR" />
+    <result column="ORG_NAME" property="orgName" jdbcType="VARCHAR" />
+    <result column="ORDER_NO" property="orderNo" jdbcType="DECIMAL" />
+    <result column="TREEPATH" property="treepath" jdbcType="VARCHAR" />
+    <result column="PARENT_ORG_CODE" property="parentOrgCode" jdbcType="VARCHAR" />
+  </resultMap>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from CP_ORG
+    where ORG_CODE = #{orgCode,jdbcType=VARCHAR}
+  </delete>
+  
+  <insert id="insert" parameterType="com.zjgt.p2p.base.domain.Organization" >
+    insert into CP_ORG (ORG_CODE, ORG_NAME, ORDER_NO, 
+      TREEPATH, PARENT_ORG_CODE)
+    values (#{orgCode,jdbcType=VARCHAR}, #{orgName,jdbcType=VARCHAR}, #{orderNo,jdbcType=DECIMAL}, 
+      #{treepath,jdbcType=VARCHAR}, #{parentOrgCode,jdbcType=VARCHAR})
+  </insert>
+  
+  <update id="updateByPrimaryKey" parameterType="com.zjgt.p2p.base.domain.Organization" >
+    update CP_ORG
+    set ORG_NAME = #{orgName,jdbcType=VARCHAR},
+      ORDER_NO = #{orderNo,jdbcType=DECIMAL},
+      TREEPATH = #{treepath,jdbcType=VARCHAR},
+      PARENT_ORG_CODE = #{parentOrgCode,jdbcType=VARCHAR}
+    where ORG_CODE = #{orgCode,jdbcType=VARCHAR}
+  </update>
+  
+  <!-- 根据组织编号ORG_CODE，获取组织对象 -->
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select ORG_CODE, ORG_NAME, ORDER_NO, TREEPATH, PARENT_ORG_CODE
+    from CP_ORG
+    where ORG_CODE = #{orgCode,jdbcType=VARCHAR}
+  </select>
+  
+  <!-- 根据“上级组织结构代码PARENT_ORG_CODE”，获取“组织”列表 -->
+  <select id="selectChildOrgs" resultMap="BaseResultMap"  parameterType="java.lang.String">
+    select ORG_CODE, ORG_NAME, ORDER_NO, TREEPATH, PARENT_ORG_CODE
+    from CP_ORG WHERE PARENT_ORG_CODE = #{orgCode,jdbcType=VARCHAR}
+  </select>
+  
+  <select id="getTreePath" resultType="java.lang.String" parameterType="java.lang.String">
+  	SELECT TREEPATH
+  	FROM CP_ORG WHERE ORG_CODE = #{orgCode,jdbcType=VARCHAR}
+  </select>
+  
+  <update id="updateTreePath" parameterType="java.util.Map">
+  	update CP_ORG
+	set TREEPATH = replace(TREEPATH,#{oldTreePath},#{newTreePath})
+    where TREEPATH like CONCAT('%',#{oldTreePath},'%')
+  </update>
+  
+  <select id="selectAllChildenOrgs" resultMap="BaseResultMap"  parameterType="java.lang.String">
+    select ORG_CODE, ORG_NAME, ORDER_NO, TREEPATH, PARENT_ORG_CODE
+    from CP_ORG WHERE TREEPATH like CONCAT('%',#{orgTreePath},'%')
+  </select>
+</mapper>

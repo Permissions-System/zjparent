@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zjgt.p2p.dao.MemberActPwdMapper" >
+  <resultMap id="BaseResultMap" type="com.zjgt.p2p.model.MemberActPwd" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+      This element : Mon Dec 15 17:41:02 CST 2014.
+    -->
+    <id column="ID" property="id" jdbcType="INTEGER" />
+    <result column="memberId" property="memberid" jdbcType="INTEGER" />
+    <result column="pwduuid" property="pwduuid" jdbcType="VARCHAR" />
+    <result column="uuidisvalid" property="uuidisvalid" jdbcType="BIT" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+      This element : Mon Dec 15 17:41:02 CST 2014.
+    -->
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+      This element : Mon Dec 15 17:41:02 CST 2014.
+    -->
+    ID, memberId, pwduuid, uuidisvalid, remark
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.zjgt.p2p.model.MemberActPwdExample" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+      This element : Mon Dec 15 17:41:02 CST 2014.
+    -->
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from memberActPwd
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+      This element : Mon Dec 15 17:41:02 CST 2014.
+    -->
+    select 
+    <include refid="Base_Column_List" />
+    from memberActPwd
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+      This element : Mon Dec 15 17:41:02 CST 2014.
+    -->
+    delete from memberActPwd
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zjgt.p2p.model.MemberActPwd" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+      This element : Mon Dec 15 17:41:02 CST 2014.
+    -->
+    insert into memberActPwd (ID, memberId, pwduuid, 
+      uuidisvalid, remark)
+    values (#{id,jdbcType=INTEGER}, #{memberid,jdbcType=INTEGER}, #{pwduuid,jdbcType=VARCHAR}, 
+      #{uuidisvalid,jdbcType=BIT}, #{remark,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zjgt.p2p.model.MemberActPwd" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+      This element : Mon Dec 15 17:41:02 CST 2014.
+    -->
+    insert into memberActPwd
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="memberid != null" >
+        memberId,
+      </if>
+      <if test="pwduuid != null" >
+        pwduuid,
+      </if>
+      <if test="uuidisvalid != null" >
+        uuidisvalid,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="memberid != null" >
+        #{memberid,jdbcType=INTEGER},
+      </if>
+      <if test="pwduuid != null" >
+        #{pwduuid,jdbcType=VARCHAR},
+      </if>
+      <if test="uuidisvalid != null" >
+        #{uuidisvalid,jdbcType=BIT},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zjgt.p2p.model.MemberActPwd" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+      This element : Mon Dec 15 17:41:02 CST 2014.
+    -->
+    update memberActPwd
+    <set >
+      <if test="memberid != null" >
+        memberId = #{memberid,jdbcType=INTEGER},
+      </if>
+      <if test="pwduuid != null" >
+        pwduuid = #{pwduuid,jdbcType=VARCHAR},
+      </if>
+      <if test="uuidisvalid != null" >
+        uuidisvalid = #{uuidisvalid,jdbcType=BIT},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zjgt.p2p.model.MemberActPwd" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+      This element : Mon Dec 15 17:41:02 CST 2014.
+    -->
+    update memberActPwd
+    set memberId = #{memberid,jdbcType=INTEGER},
+      pwduuid = #{pwduuid,jdbcType=VARCHAR},
+      uuidisvalid = #{uuidisvalid,jdbcType=BIT},
+      remark = #{remark,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

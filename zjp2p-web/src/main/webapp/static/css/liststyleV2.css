@@ -1,0 +1,86 @@
+.oe_wrapper ul.oe_menu{
+	list-style:none;
+	position:relative;
+	width:204px;
+	float:right;
+	padding-left:0
+}
+.oe_wrapper ul.oe_menu > li{
+	width:204px;
+	float:left;
+	position:relative;
+	
+}
+.oe_wrapper ul.oe_menu > li > a{
+	display:block;
+	color:#FF5051;
+	text-decoration:none;
+	font-size:16px;
+	width:204px;
+	height:72px;
+	margin:1px;	
+}
+.oe_wrapper ul.oe_menu > li > a:hover,
+.oe_wrapper ul.oe_menu > li.selected > a{
+	background:#233139;
+	color:#fff;
+	opacity:1.0;
+}
+
+.oe_wrapper {
+	position:absolute;
+	right:1px;
+}
+.oe_wrapper ul.hovered > li > a{
+	background:#233139;
+	color:#fff;
+}
+.oe_wrapper ul.oe_menu div{
+	position:absolute;
+	top:72px;
+	left:1px;
+	background:#474E5E;
+	width:204px;
+	height:186px;
+	display:none;
+}
+.oe_wrapper ul.oe_menu {
+	margin-bottom:0;
+	text-align:center;
+	line-height:82px;
+}
+.oe_wrapper ul.oe_menu div ul li a{
+	text-decoration:none;
+	color:#fff;
+	padding:2px 2px 2px 4px;
+	margin:2px;
+	margin-left:0px;
+	padding-left:0px;
+	text-indent:45px;
+	display:block;
+	font-size:14px;
+	text-align:left;
+	line-height:40px;
+}
+.oe_wrapper ul.oe_menu div ul.oe_full{
+	width:100%;
+}
+.oe_wrapper ul.oe_menu div ul li a:hover{
+	background:#233139;
+	color:#fff;
+	width:204px;
+	margin-left:0px;
+}
+.oe_wrapper ul.oe_menu li ul{
+	list-style:none;
+	float:left;
+	width: 204px;
+	margin-right:10px;
+	padding-left:0;
+}
+.oe_wrapper li.oe_heading{
+	color:#fff;
+	font-size:16px;
+	padding-bottom:6px;
+	border-bottom:1px solid #ddd;
+}

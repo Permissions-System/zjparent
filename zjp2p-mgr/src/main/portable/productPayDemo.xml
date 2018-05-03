@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<portable-config>
+	<config-file path="WEB-INF/classes/logback.xml">
+		<replace
+			xpath="/configuration/logger[@name='org.springframework.web']/@level">WARN</replace>
+		<replace
+			xpath="/configuration/logger[@name='org.springframework.beans']/@level">WARN</replace>
+		<replace
+			xpath="/configuration/logger[@name='org.springframework.core']/@level">WARN</replace>
+		<replace
+			xpath="/configuration/logger[@name='org.springframework.ui']/@level">WARN</replace>
+		<replace
+			xpath="/configuration/logger[@name='org.springframework.jndi']/@level">WARN</replace>
+		<replace
+			xpath="/configuration/logger[@name='org.springframework.context']/@level">WARN</replace>
+		<replace
+			xpath="/configuration/logger[@name='org.springframework.jdbc']/@level">WARN</replace>
+		<replace
+			xpath="/configuration/logger[@name='com.alisoft.xplatform.asf']/@level">WARN</replace>
+		<replace xpath="/configuration/logger[@name='org.apache.shiro']/@level">WARN</replace>
+		<replace xpath="/configuration/logger[@name='com.zjgt']/@level">DEBUG</replace>
+	</config-file>
+	<config-file path="WEB-INF/classes/memcached.xml">
+		<replace xpath="/memcached/socketpool[@name='pool0']/servers">127.0.0.1:11212</replace>
+		<replace xpath="/memcached/socketpool[@name='pool1']/servers">127.0.0.1:11212</replace>
+		<replace xpath="/memcached/socketpool[@name='pool2']/servers">127.0.0.1:11212</replace>
+	</config-file>
+	<config-file path="WEB-INF/config.xml">
+		<replace xpath="/config/baseURL">http://demo.biifoo.com/biifoo-manager/static/userfiles/</replace>
+	</config-file>
+	<config-file path="WEB-INF/classes/config.properties">
+		<replace key="jdbc_url">jdbc:mysql://127.0.0.1:3306/zjp2pdb?useUnicode=true&amp;amp;characterEncoding=UTF-8&amp;amp;zeroDateTimeBehavior=convertToNull
+		</replace>
+		<replace key="jdbc_username">bfdbuser</replace>
+		<replace key="jdbc_password">bf133Ala</replace>
+		<replace key="zookeeper.address">zookeeper://127.0.0.1:2181</replace>
+		<replace key="zjp2p-managerURL">http://demo.biifoo.com</replace>
+		<replace key="uploadimgpath">/var/lib/tomcat6/webapps/ROOT/static/upload</replace>
+		<replace key="uploadimgurl">/static/upload/bid</replace>
+		<replace key="email">http://demo.biifoo.com/</replace>
+	</config-file>
+	<config-file path="WEB-INF/classes/quartz.properties">
+		<replace key="org.quartz.dataSource.zjp2pdb.URL">jdbc:mysql://127.0.0.1:3306/zjp2pdb?useUnicode=true&amp;amp;characterEncoding=UTF-8&amp;amp;zeroDateTimeBehavior=convertToNull
+		</replace>
+		<replace key="org.quartz.dataSource.zjp2pdb.user">bfdbuser</replace>
+		<replace key="org.quartz.dataSource.zjp2pdb.password">bf133Ala</replace>
+	</config-file>
+</portable-config>

@@ -1,0 +1,546 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zjgt.p2p.report.dao.DailyStatMapper" >
+  <resultMap id="BaseResultMap" type="com.zjgt.p2p.report.model.DailyStat" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="currentDate" property="currentdate" jdbcType="TIMESTAMP" />
+    <result column="regcnt" property="regcnt" jdbcType="INTEGER" />
+    <result column="logincnt" property="logincnt" jdbcType="INTEGER" />
+    <result column="logintime" property="logintime" jdbcType="INTEGER" />
+    <result column="customersLogincnt" property="customerslogincnt" jdbcType="INTEGER" />
+    <result column="customersLogintime" property="customerslogintime" jdbcType="INTEGER" />
+    <result column="openActNum" property="openactnum" jdbcType="INTEGER" />
+    <result column="platformRechargeNum" property="platformrechargenum" jdbcType="INTEGER" />
+    <result column="platformRechargePerNum" property="platformrechargepernum" jdbcType="INTEGER" />
+    <result column="platformRechargeAmount" property="platformrechargeamount" jdbcType="DOUBLE" />
+    <result column="fuyouRechargeNum" property="fuyourechargenum" jdbcType="INTEGER" />
+    <result column="fuyouRechargePerNum" property="fuyourechargepernum" jdbcType="INTEGER" />
+    <result column="fuyouRechargeAmount" property="fuyourechargeamount" jdbcType="DOUBLE" />
+    <result column="investNum" property="investnum" jdbcType="INTEGER" />
+    <result column="investPerNum" property="investpernum" jdbcType="INTEGER" />
+    <result column="investAmount" property="investamount" jdbcType="DOUBLE" />
+    <result column="firstInvestPerNum" property="firstinvestpernum" jdbcType="INTEGER" />
+    <result column="firstInvestAmount" property="firstinvestamount" jdbcType="DOUBLE" />
+    <result column="platformWithdrawNum" property="platformwithdrawnum" jdbcType="INTEGER" />
+    <result column="platformWithdrawPerNumber" property="platformwithdrawpernumber" jdbcType="INTEGER" />
+    <result column="platformWithdrawAmount" property="platformwithdrawamount" jdbcType="DOUBLE" />
+    <result column="fuyouWithdrawNum" property="fuyouwithdrawnum" jdbcType="INTEGER" />
+    <result column="fuyouWithdrawPerNumber" property="fuyouwithdrawpernumber" jdbcType="INTEGER" />
+    <result column="fuyouWithdrawAmount" property="fuyouwithdrawamount" jdbcType="DOUBLE" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="createDate" property="createdate" jdbcType="TIMESTAMP" />
+    <result column="temp1" property="temp1" jdbcType="VARCHAR" />
+    <result column="temp2" property="temp2" jdbcType="VARCHAR" />
+    <result column="temp3" property="temp3" jdbcType="VARCHAR" />
+    <result column="temp4" property="temp4" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    id, currentDate, regcnt, logincnt, logintime, customersLogincnt, customersLogintime, 
+    openActNum, platformRechargeNum, platformRechargePerNum, platformRechargeAmount, 
+    fuyouRechargeNum, fuyouRechargePerNum, fuyouRechargeAmount, investNum, investPerNum, 
+    investAmount, firstInvestPerNum, firstInvestAmount, platformWithdrawNum, platformWithdrawPerNumber, 
+    platformWithdrawAmount, fuyouWithdrawNum, fuyouWithdrawPerNumber, fuyouWithdrawAmount, 
+    remark, createDate, temp1, temp2, temp3, temp4
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.zjgt.p2p.report.model.DailyStatExample" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from dailystat
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    select 
+    <include refid="Base_Column_List" />
+    from dailystat
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    delete from dailystat
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zjgt.p2p.report.model.DailyStat" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    insert into dailystat (id, currentDate, regcnt, 
+      logincnt, logintime, customersLogincnt, 
+      customersLogintime, openActNum, platformRechargeNum, 
+      platformRechargePerNum, platformRechargeAmount, 
+      fuyouRechargeNum, fuyouRechargePerNum, 
+      fuyouRechargeAmount, investNum, investPerNum, 
+      investAmount, firstInvestPerNum, firstInvestAmount, 
+      platformWithdrawNum, platformWithdrawPerNumber, 
+      platformWithdrawAmount, fuyouWithdrawNum, 
+      fuyouWithdrawPerNumber, fuyouWithdrawAmount, 
+      remark, createDate, temp1, 
+      temp2, temp3, temp4
+      )
+    values (#{id,jdbcType=INTEGER}, #{currentdate,jdbcType=TIMESTAMP}, #{regcnt,jdbcType=INTEGER}, 
+      #{logincnt,jdbcType=INTEGER}, #{logintime,jdbcType=INTEGER}, #{customerslogincnt,jdbcType=INTEGER}, 
+      #{customerslogintime,jdbcType=INTEGER}, #{openactnum,jdbcType=INTEGER}, #{platformrechargenum,jdbcType=INTEGER}, 
+      #{platformrechargepernum,jdbcType=INTEGER}, #{platformrechargeamount,jdbcType=DOUBLE}, 
+      #{fuyourechargenum,jdbcType=INTEGER}, #{fuyourechargepernum,jdbcType=INTEGER}, 
+      #{fuyourechargeamount,jdbcType=DOUBLE}, #{investnum,jdbcType=INTEGER}, #{investpernum,jdbcType=INTEGER}, 
+      #{investamount,jdbcType=DOUBLE}, #{firstinvestpernum,jdbcType=INTEGER}, #{firstinvestamount,jdbcType=DOUBLE}, 
+      #{platformwithdrawnum,jdbcType=INTEGER}, #{platformwithdrawpernumber,jdbcType=INTEGER}, 
+      #{platformwithdrawamount,jdbcType=DOUBLE}, #{fuyouwithdrawnum,jdbcType=INTEGER}, 
+      #{fuyouwithdrawpernumber,jdbcType=INTEGER}, #{fuyouwithdrawamount,jdbcType=DOUBLE}, 
+      #{remark,jdbcType=VARCHAR}, #{createdate,jdbcType=TIMESTAMP}, #{temp1,jdbcType=VARCHAR}, 
+      #{temp2,jdbcType=VARCHAR}, #{temp3,jdbcType=VARCHAR}, #{temp4,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.zjgt.p2p.report.model.DailyStat" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    insert into dailystat
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="currentdate != null" >
+        currentDate,
+      </if>
+      <if test="regcnt != null" >
+        regcnt,
+      </if>
+      <if test="logincnt != null" >
+        logincnt,
+      </if>
+      <if test="logintime != null" >
+        logintime,
+      </if>
+      <if test="customerslogincnt != null" >
+        customersLogincnt,
+      </if>
+      <if test="customerslogintime != null" >
+        customersLogintime,
+      </if>
+      <if test="openactnum != null" >
+        openActNum,
+      </if>
+      <if test="platformrechargenum != null" >
+        platformRechargeNum,
+      </if>
+      <if test="platformrechargepernum != null" >
+        platformRechargePerNum,
+      </if>
+      <if test="platformrechargeamount != null" >
+        platformRechargeAmount,
+      </if>
+      <if test="fuyourechargenum != null" >
+        fuyouRechargeNum,
+      </if>
+      <if test="fuyourechargepernum != null" >
+        fuyouRechargePerNum,
+      </if>
+      <if test="fuyourechargeamount != null" >
+        fuyouRechargeAmount,
+      </if>
+      <if test="investnum != null" >
+        investNum,
+      </if>
+      <if test="investpernum != null" >
+        investPerNum,
+      </if>
+      <if test="investamount != null" >
+        investAmount,
+      </if>
+      <if test="firstinvestpernum != null" >
+        firstInvestPerNum,
+      </if>
+      <if test="firstinvestamount != null" >
+        firstInvestAmount,
+      </if>
+      <if test="platformwithdrawnum != null" >
+        platformWithdrawNum,
+      </if>
+      <if test="platformwithdrawpernumber != null" >
+        platformWithdrawPerNumber,
+      </if>
+      <if test="platformwithdrawamount != null" >
+        platformWithdrawAmount,
+      </if>
+      <if test="fuyouwithdrawnum != null" >
+        fuyouWithdrawNum,
+      </if>
+      <if test="fuyouwithdrawpernumber != null" >
+        fuyouWithdrawPerNumber,
+      </if>
+      <if test="fuyouwithdrawamount != null" >
+        fuyouWithdrawAmount,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+      <if test="createdate != null" >
+        createDate,
+      </if>
+      <if test="temp1 != null" >
+        temp1,
+      </if>
+      <if test="temp2 != null" >
+        temp2,
+      </if>
+      <if test="temp3 != null" >
+        temp3,
+      </if>
+      <if test="temp4 != null" >
+        temp4,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="currentdate != null" >
+        #{currentdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="regcnt != null" >
+        #{regcnt,jdbcType=INTEGER},
+      </if>
+      <if test="logincnt != null" >
+        #{logincnt,jdbcType=INTEGER},
+      </if>
+      <if test="logintime != null" >
+        #{logintime,jdbcType=INTEGER},
+      </if>
+      <if test="customerslogincnt != null" >
+        #{customerslogincnt,jdbcType=INTEGER},
+      </if>
+      <if test="customerslogintime != null" >
+        #{customerslogintime,jdbcType=INTEGER},
+      </if>
+      <if test="openactnum != null" >
+        #{openactnum,jdbcType=INTEGER},
+      </if>
+      <if test="platformrechargenum != null" >
+        #{platformrechargenum,jdbcType=INTEGER},
+      </if>
+      <if test="platformrechargepernum != null" >
+        #{platformrechargepernum,jdbcType=INTEGER},
+      </if>
+      <if test="platformrechargeamount != null" >
+        #{platformrechargeamount,jdbcType=DOUBLE},
+      </if>
+      <if test="fuyourechargenum != null" >
+        #{fuyourechargenum,jdbcType=INTEGER},
+      </if>
+      <if test="fuyourechargepernum != null" >
+        #{fuyourechargepernum,jdbcType=INTEGER},
+      </if>
+      <if test="fuyourechargeamount != null" >
+        #{fuyourechargeamount,jdbcType=DOUBLE},
+      </if>
+      <if test="investnum != null" >
+        #{investnum,jdbcType=INTEGER},
+      </if>
+      <if test="investpernum != null" >
+        #{investpernum,jdbcType=INTEGER},
+      </if>
+      <if test="investamount != null" >
+        #{investamount,jdbcType=DOUBLE},
+      </if>
+      <if test="firstinvestpernum != null" >
+        #{firstinvestpernum,jdbcType=INTEGER},
+      </if>
+      <if test="firstinvestamount != null" >
+        #{firstinvestamount,jdbcType=DOUBLE},
+      </if>
+      <if test="platformwithdrawnum != null" >
+        #{platformwithdrawnum,jdbcType=INTEGER},
+      </if>
+      <if test="platformwithdrawpernumber != null" >
+        #{platformwithdrawpernumber,jdbcType=INTEGER},
+      </if>
+      <if test="platformwithdrawamount != null" >
+        #{platformwithdrawamount,jdbcType=DOUBLE},
+      </if>
+      <if test="fuyouwithdrawnum != null" >
+        #{fuyouwithdrawnum,jdbcType=INTEGER},
+      </if>
+      <if test="fuyouwithdrawpernumber != null" >
+        #{fuyouwithdrawpernumber,jdbcType=INTEGER},
+      </if>
+      <if test="fuyouwithdrawamount != null" >
+        #{fuyouwithdrawamount,jdbcType=DOUBLE},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="createdate != null" >
+        #{createdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="temp1 != null" >
+        #{temp1,jdbcType=VARCHAR},
+      </if>
+      <if test="temp2 != null" >
+        #{temp2,jdbcType=VARCHAR},
+      </if>
+      <if test="temp3 != null" >
+        #{temp3,jdbcType=VARCHAR},
+      </if>
+      <if test="temp4 != null" >
+        #{temp4,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zjgt.p2p.report.model.DailyStat" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    update dailystat
+    <set >
+      <if test="currentdate != null" >
+        currentDate = #{currentdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="regcnt != null" >
+        regcnt = #{regcnt,jdbcType=INTEGER},
+      </if>
+      <if test="logincnt != null" >
+        logincnt = #{logincnt,jdbcType=INTEGER},
+      </if>
+      <if test="logintime != null" >
+        logintime = #{logintime,jdbcType=INTEGER},
+      </if>
+      <if test="customerslogincnt != null" >
+        customersLogincnt = #{customerslogincnt,jdbcType=INTEGER},
+      </if>
+      <if test="customerslogintime != null" >
+        customersLogintime = #{customerslogintime,jdbcType=INTEGER},
+      </if>
+      <if test="openactnum != null" >
+        openActNum = #{openactnum,jdbcType=INTEGER},
+      </if>
+      <if test="platformrechargenum != null" >
+        platformRechargeNum = #{platformrechargenum,jdbcType=INTEGER},
+      </if>
+      <if test="platformrechargepernum != null" >
+        platformRechargePerNum = #{platformrechargepernum,jdbcType=INTEGER},
+      </if>
+      <if test="platformrechargeamount != null" >
+        platformRechargeAmount = #{platformrechargeamount,jdbcType=DOUBLE},
+      </if>
+      <if test="fuyourechargenum != null" >
+        fuyouRechargeNum = #{fuyourechargenum,jdbcType=INTEGER},
+      </if>
+      <if test="fuyourechargepernum != null" >
+        fuyouRechargePerNum = #{fuyourechargepernum,jdbcType=INTEGER},
+      </if>
+      <if test="fuyourechargeamount != null" >
+        fuyouRechargeAmount = #{fuyourechargeamount,jdbcType=DOUBLE},
+      </if>
+      <if test="investnum != null" >
+        investNum = #{investnum,jdbcType=INTEGER},
+      </if>
+      <if test="investpernum != null" >
+        investPerNum = #{investpernum,jdbcType=INTEGER},
+      </if>
+      <if test="investamount != null" >
+        investAmount = #{investamount,jdbcType=DOUBLE},
+      </if>
+      <if test="firstinvestpernum != null" >
+        firstInvestPerNum = #{firstinvestpernum,jdbcType=INTEGER},
+      </if>
+      <if test="firstinvestamount != null" >
+        firstInvestAmount = #{firstinvestamount,jdbcType=DOUBLE},
+      </if>
+      <if test="platformwithdrawnum != null" >
+        platformWithdrawNum = #{platformwithdrawnum,jdbcType=INTEGER},
+      </if>
+      <if test="platformwithdrawpernumber != null" >
+        platformWithdrawPerNumber = #{platformwithdrawpernumber,jdbcType=INTEGER},
+      </if>
+      <if test="platformwithdrawamount != null" >
+        platformWithdrawAmount = #{platformwithdrawamount,jdbcType=DOUBLE},
+      </if>
+      <if test="fuyouwithdrawnum != null" >
+        fuyouWithdrawNum = #{fuyouwithdrawnum,jdbcType=INTEGER},
+      </if>
+      <if test="fuyouwithdrawpernumber != null" >
+        fuyouWithdrawPerNumber = #{fuyouwithdrawpernumber,jdbcType=INTEGER},
+      </if>
+      <if test="fuyouwithdrawamount != null" >
+        fuyouWithdrawAmount = #{fuyouwithdrawamount,jdbcType=DOUBLE},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="createdate != null" >
+        createDate = #{createdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="temp1 != null" >
+        temp1 = #{temp1,jdbcType=VARCHAR},
+      </if>
+      <if test="temp2 != null" >
+        temp2 = #{temp2,jdbcType=VARCHAR},
+      </if>
+      <if test="temp3 != null" >
+        temp3 = #{temp3,jdbcType=VARCHAR},
+      </if>
+      <if test="temp4 != null" >
+        temp4 = #{temp4,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zjgt.p2p.report.model.DailyStat" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    update dailystat
+    set currentDate = #{currentdate,jdbcType=TIMESTAMP},
+      regcnt = #{regcnt,jdbcType=INTEGER},
+      logincnt = #{logincnt,jdbcType=INTEGER},
+      logintime = #{logintime,jdbcType=INTEGER},
+      customersLogincnt = #{customerslogincnt,jdbcType=INTEGER},
+      customersLogintime = #{customerslogintime,jdbcType=INTEGER},
+      openActNum = #{openactnum,jdbcType=INTEGER},
+      platformRechargeNum = #{platformrechargenum,jdbcType=INTEGER},
+      platformRechargePerNum = #{platformrechargepernum,jdbcType=INTEGER},
+      platformRechargeAmount = #{platformrechargeamount,jdbcType=DOUBLE},
+      fuyouRechargeNum = #{fuyourechargenum,jdbcType=INTEGER},
+      fuyouRechargePerNum = #{fuyourechargepernum,jdbcType=INTEGER},
+      fuyouRechargeAmount = #{fuyourechargeamount,jdbcType=DOUBLE},
+      investNum = #{investnum,jdbcType=INTEGER},
+      investPerNum = #{investpernum,jdbcType=INTEGER},
+      investAmount = #{investamount,jdbcType=DOUBLE},
+      firstInvestPerNum = #{firstinvestpernum,jdbcType=INTEGER},
+      firstInvestAmount = #{firstinvestamount,jdbcType=DOUBLE},
+      platformWithdrawNum = #{platformwithdrawnum,jdbcType=INTEGER},
+      platformWithdrawPerNumber = #{platformwithdrawpernumber,jdbcType=INTEGER},
+      platformWithdrawAmount = #{platformwithdrawamount,jdbcType=DOUBLE},
+      fuyouWithdrawNum = #{fuyouwithdrawnum,jdbcType=INTEGER},
+      fuyouWithdrawPerNumber = #{fuyouwithdrawpernumber,jdbcType=INTEGER},
+      fuyouWithdrawAmount = #{fuyouwithdrawamount,jdbcType=DOUBLE},
+      remark = #{remark,jdbcType=VARCHAR},
+      createDate = #{createdate,jdbcType=TIMESTAMP},
+      temp1 = #{temp1,jdbcType=VARCHAR},
+      temp2 = #{temp2,jdbcType=VARCHAR},
+      temp3 = #{temp3,jdbcType=VARCHAR},
+      temp4 = #{temp4,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  
+  	 <insert id="insertList" parameterType="java.util.Map" >
+   			${str}
+     </insert>
+     
+     <delete id="deleteDailyBytemp1" parameterType="java.lang.String" >
+
+   		 delete from dailystat where temp1 = #{temp1,jdbcType=VARCHAR}
+   		 
+  	</delete>
+  
+  
+    <delete id="deleteDailyBytemp2" parameterType="java.lang.String" >
+
+   		 delete from dailystat where temp2 = #{temp2,jdbcType=VARCHAR}
+   		 
+  	</delete>
+  
+  
+	
+  	<select id="getDatagridTotal" resultType="long">
+		select 	count(1) from dailystat d where 1=1
+		<if test="dailyStat.beginTime != null and dailyStat.beginTime != '' ">
+			<![CDATA[  and currentDate >= #{dailyStat.beginTime}  ]]>
+		</if>
+		<if test="dailyStat.endTime != null and dailyStat.endTime != '' ">
+			<![CDATA[  and currentDate <= #{dailyStat.endTime}   ]]>
+		</if>
+	</select>
+	
+	<select id="datagridLend" resultMap="BaseResultMap" resultType="com.zjgt.p2p.report.model.DailyStat">
+		select * from dailystat where 1=1
+		<if test="dailyStat.beginTime != null and dailyStat.beginTime != '' ">
+			<![CDATA[  and currentDate >= #{dailyStat.beginTime}  ]]>
+		</if>
+		<if test="dailyStat.endTime != null and dailyStat.endTime != '' ">
+			<![CDATA[  and currentDate <= #{dailyStat.endTime}   ]]>
+		</if>
+		<if test="page.sort != null and page.sort != ''">
+			order by #{page.sort} #{page.order}
+		</if>
+		<if test="page.page > 0">
+			limit #{page.start},#{page.rows}
+		</if>
+		
+	</select>
+	
+	<select id="getDailyStatList" resultMap="BaseResultMap" resultType="com.zjgt.p2p.report.model.DailyStat">
+		select * from dailystat where 1=1
+		<if test="dailyStat.beginTime != null and dailyStat.beginTime != '' ">
+			<![CDATA[  and currentDate >= #{dailyStat.beginTime}  ]]>
+		</if>
+		<if test="dailyStat.endTime != null and dailyStat.endTime != '' ">
+			<![CDATA[  and currentDate <= #{dailyStat.endTime}   ]]>
+		</if>
+	</select>
+</mapper>

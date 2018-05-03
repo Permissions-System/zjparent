@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<portable-config>
+	<config-file path="WEB-INF/classes/logback.xml">
+		<replace
+			xpath="/configuration/logger[@name='org.springframework.web']/@level">WARN</replace>
+		<replace
+			xpath="/configuration/logger[@name='org.springframework.beans']/@level">WARN</replace>
+		<replace
+			xpath="/configuration/logger[@name='org.springframework.core']/@level">WARN</replace>
+		<replace
+			xpath="/configuration/logger[@name='org.springframework.ui']/@level">WARN</replace>
+		<replace
+			xpath="/configuration/logger[@name='org.springframework.jndi']/@level">WARN</replace>
+		<replace
+			xpath="/configuration/logger[@name='org.springframework.context']/@level">WARN</replace>
+		<replace
+			xpath="/configuration/logger[@name='com.alisoft.xplatform.asf']/@level">WARN</replace>
+		<replace xpath="/configuration/logger[@name='org.apache.shiro']/@level">WARN</replace>
+		<replace xpath="/configuration/logger[@name='com.zjgt']/@level">DEBUG</replace>
+	</config-file>
+	<config-file path="WEB-INF/classes/config.properties">
+		<replace key="jdbc_url">jdbc:mysql://127.0.0.1:3306/biifoodb?useUnicode=true&amp;amp;characterEncoding=UTF-8&amp;amp;zeroDateTimeBehavior=convertToNull
+		</replace>
+		<replace key="jdbc_username">bfdbuser</replace>
+		<replace key="jdbc_password">bf133Ala</replace>		
+	</config-file>
+</portable-config>

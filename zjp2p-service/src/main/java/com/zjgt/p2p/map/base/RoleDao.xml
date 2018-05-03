@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zjgt.p2p.base.dao.RoleDao" >
+	<resultMap id="BaseResultMap" type="com.zjgt.p2p.base.domain.Role" >
+	  <id column="ROLE_CODE" property="roleCode" jdbcType="VARCHAR" />
+	  <result column="ROLE_NAME" property="roleName" jdbcType="VARCHAR" />
+	  <result column="ORG_CODE" property="orgCode" jdbcType="VARCHAR" />
+	  <result column="ROLE_TYPE" property="roleType" jdbcType="VARCHAR" />
+	</resultMap>
+	 
+	<resultMap id="TransRelResultMap" type="com.zjgt.p2p.base.domain.RoleTransRel" >
+	  <id column="REC_NO" property="recNo" jdbcType="VARCHAR" />
+	  <result column="ROLE_CODE" property="roleCode" jdbcType="VARCHAR" />
+	  <result column="TRANS_CODE" property="transCode" jdbcType="VARCHAR" />
+	</resultMap>
+	
+	<resultMap id="ModuleResultMap" type="com.zjgt.p2p.base.domain.Module" >
+	  <id column="MODULE_CODE" property="moduleCode" jdbcType="VARCHAR" />
+	  <result column="MODULE_NAME" property="moduleName" jdbcType="VARCHAR" />
+	  <result column="TREEPATH" property="treepath" jdbcType="VARCHAR" />
+	  <result column="MODULE_STATUS" property="moduleStatus" jdbcType="VARCHAR" />
+	  <result column="PARENT_MODULE_CODE" property="parentModuleCode" jdbcType="VARCHAR" />
+	</resultMap>
+	
+	<resultMap id="TransactionResultMap" type="com.zjgt.p2p.base.domain.Transaction" >
+	  <id column="TRANS_CODE" property="transCode" jdbcType="VARCHAR" />
+	  <result column="TRANS_NAME" property="transName" jdbcType="VARCHAR" />
+	  <result column="URL" property="url" jdbcType="VARCHAR" />
+	  <result column="TRANS_STATUS" property="transStatus" jdbcType="VARCHAR" />
+	  <result column="VALIDATE_FLAG" property="validateFlag" jdbcType="VARCHAR" />
+	  <result column="MODULE_CODE" property="moduleCode" jdbcType="VARCHAR" />
+	  <result column="CHECKED" property="checked" jdbcType="BOOLEAN" />
+	  <result column="DISABLED" property="disabled" jdbcType="BOOLEAN" />
+	</resultMap>
+	
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+	  delete from CP_ROLE
+	  where ROLE_CODE = #{roleCode,jdbcType=VARCHAR}
+	</delete>
+	
+	<insert id="insert" parameterType="com.zjgt.p2p.base.domain.Role" >
+	  insert into CP_ROLE (ROLE_CODE, ROLE_NAME, ORG_CODE, ROLE_TYPE
+	    )
+	  values (#{roleCode,jdbcType=VARCHAR}, #{roleName,jdbcType=VARCHAR}, 
+	  		#{orgCode,jdbcType=VARCHAR}, #{roleType,jdbcType=VARCHAR}
+	    )
+	</insert>
+	
+	<update id="updateByPrimaryKey" parameterType="com.zjgt.p2p.base.domain.Role" >
+	  update CP_ROLE
+	  set ROLE_NAME = #{roleName,jdbcType=VARCHAR},
+	    ORG_CODE = #{orgCode,jdbcType=VARCHAR},
+	    ROLE_TYPE = #{roleType,jdbcType=VARCHAR}
+	  where ROLE_CODE = #{roleCode,jdbcType=VARCHAR}
+	</update>
+	
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+	  select ROLE_CODE, ROLE_NAME, ORG_CODE, ROLE_TYPE
+	  from CP_ROLE
+	  where ROLE_CODE = #{roleCode,jdbcType=VARCHAR}
+	</select>
+	
+	<select id="selectByOrg" resultMap="BaseResultMap" >
+		select ROLE_CODE, ROLE_NAME, ORG_CODE, ROLE_TYPE
+	  from CP_ROLE
+	  where ORG_CODE = #{orgCode,jdbcType=VARCHAR}
+	</select>
+	
+	<select id="selectByOrgAndPage" parameterType="java.util.Map" resultMap="BaseResultMap">
+	  select ROLE_CODE, ROLE_NAME, ORG_CODE, ROLE_TYPE
+	  from CP_ROLE
+	  where ORG_CODE = #{orgcode,jdbcType=VARCHAR}
+	  order by ROLE_CODE
+	</select>
+  
+	<select id="selectByOrgs" parameterType="java.util.Map" resultMap="BaseResultMap" >
+		SELECT 
+	           ROLE_CODE,
+	           ROLE_NAME, 
+	           ORG_CODE, 
+	           ROLE_TYPE
+	       FROM CP_ROLE
+	      <where>
+	      		ORG_CODE in
+	        <foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+			      #{item}
+			</foreach>
+		</where>
+			order by ROLE_CODE
+	</select>
+	
+	 <select id="selectByOrgsAndPage" parameterType="java.util.Map" resultMap="BaseResultMap">
+	   select ROLE_CODE, ROLE_NAME, ORG_CODE, ROLE_TYPE
+	   from CP_ROLE
+	   WHERE ORG_CODE in
+	 <foreach item="orgCode" index="index" collection="orgCodes"
+	     open="(" separator="," close=")">
+	       #{orgCode}
+	 </foreach>
+	  order by ORG_CODE
+	 </select>
+	 
+	 <insert id="insertRoleTransRel" parameterType="com.zjgt.p2p.base.domain.RoleTransRel" >
+	   insert into CP_ROLE_TRANS_REL (REC_NO, ROLE_CODE, TRANS_CODE
+	     )
+	   values (#{recNo,jdbcType=VARCHAR}, #{roleCode,jdbcType=VARCHAR}, #{transCode,jdbcType=VARCHAR}
+	     )
+	 </insert>
+	 
+	 <select id="selectRoleTransByRoleCode" resultMap="TransRelResultMap" parameterType="java.lang.String" >
+	   select REC_NO, ROLE_CODE, TRANS_CODE
+	   from CP_ROLE_TRANS_REL
+	   where ROLE_CODE = #{roleCode,jdbcType=VARCHAR}
+	 </select>
+	 
+	 <delete id="deleteRoleTransByRoleCode" parameterType="java.lang.String" >
+	   delete from CP_ROLE_TRANS_REL
+	   where ROLE_CODE = #{roleCode,jdbcType=VARCHAR}
+	 </delete>
+	 
+	 <select id="findRoleModuleByRoleCode" resultMap="ModuleResultMap" parameterType="java.lang.String" >
+	   select distinct m.MODULE_CODE, m.MODULE_NAME, m.TREEPATH, m.MODULE_STATUS, m.PARENT_MODULE_CODE
+	  from cp_role_trans_rel rtr, cp_trans t, cp_module m, cp_role r
+	 where rtr.role_code = #{roleCode,jdbcType=VARCHAR}
+	   and r.role_code = rtr.role_code
+	   and t.trans_code = rtr.trans_code
+	   and t.module_code = m.module_code
+	 order by m.treepath
+	 </select>
+	 
+	 <select id="findRoleTransByRoleCode" resultMap="TransactionResultMap" parameterType="java.lang.String" >
+		select t.TRANS_CODE, t.TRANS_NAME, t.URL, t.TRANS_STATUS, t.VALIDATE_FLAG, t.MODULE_CODE
+		from cp_role_trans_rel rtr, cp_trans t
+		where rtr.role_code = #{roleCode,jdbcType=VARCHAR}
+		and t.trans_code = rtr.trans_code
+		order by t.MODULE_CODE, t.TRANS_CODE
+	 </select>
+	 
+	<select id="getRoleTransByRoleCodes" resultMap="TransactionResultMap" parameterType="java.util.List" >
+        select t.TRANS_CODE, t.TRANS_NAME, t.URL, t.TRANS_STATUS, t.VALIDATE_FLAG, t.MODULE_CODE
+        from cp_role_trans_rel rtr, cp_trans t
+        where rtr.role_code in
+		<foreach item="roleCodes" index="index" collection="list" open="(" separator="," close=")">
+			#{roleCodes}
+		</foreach>	
+        and t.trans_code = rtr.trans_code
+        order by t.MODULE_CODE, t.TRANS_CODE
+     </select>
+	 
+	 <select id="findTransByModuleCodeForRole" resultMap="TransactionResultMap" parameterType="java.util.Map">
+		select t.trans_code as trans_code,
+		       t.trans_name as trans_name,
+		       t.url as url,
+		       t.trans_status as trans_status,
+		       t.validate_flag as validate_flag,
+		       t.module_code as module_code,
+		       case
+		         when rtr.role_code is null then
+		          'false'
+		         when rtr.role_code is not null then
+		          'true'
+		       end as checked,
+		       'false'			as disabled
+		  from cp_trans t
+		  left join cp_role_trans_rel rtr
+		    on rtr.trans_code = t.trans_code
+		   and rtr.role_code =  #{roleCode,jdbcType=VARCHAR}
+		 where t.module_code =  #{moduleCode,jdbcType=VARCHAR}
+		 order by t.trans_code
+	 </select>
+	 
+	 <select id="findAvailableTransByModuleCodeForRole" resultMap="TransactionResultMap" parameterType="java.util.Map">
+		select distinct t.trans_code    as trans_code,
+		                t.trans_name    as trans_name,
+		                t.url           as url,
+		                t.trans_status  as trans_status,
+		                t.validate_flag as validate_flag,
+		                t.module_code   as module_code,
+		                'true'			as checked,
+		                'false'			as disabled
+		  from cp_trans t, cp_role_trans_rel rtr
+		 where rtr.trans_code = t.trans_code
+		   and rtr.role_code = #{roleCode,jdbcType=VARCHAR}
+		   and t.module_code = #{moduleCode,jdbcType=VARCHAR}
+		 order by t.trans_code
+	 </select>
+	 
+	 <select id="findTransByModuleCodeForAdminStaff" resultMap="TransactionResultMap" parameterType="java.util.Map">
+		select distinct t.trans_code    as trans_code,
+		                t.trans_name    as trans_name,
+		                t.url           as url,
+		                t.trans_status  as trans_status,
+		                t.validate_flag as validate_flag,
+		                t.module_code   as module_code,
+		                'false'			as checked,
+		                'false'			as disabled
+		from cp_staff          s,
+		     cp_staff_role_rel srr,
+		     cp_role           r,
+		     cp_role_trans_rel rtr,
+		     cp_trans          t
+		where s.staff_no = #{staffNo,jdbcType=VARCHAR}
+		  and srr.staff_no = s.staff_no
+		  and r.role_code = srr.role_code
+		  <!-- 不限定只有管理员角色的权限才可以分配 
+		 and r.role_type = '0'
+		  -->
+		 and rtr.role_code = r.role_code
+		 and t.trans_code = rtr.trans_code
+		 and t.module_code = #{moduleCode,jdbcType=VARCHAR}
+		order by t.trans_code
+	</select>
+	
+	<!-- 根据transCode查询对应的角色列表 -->
+	<select id="selectRoleByTranscode" parameterType="java.lang.String" resultMap="BaseResultMap">
+	  select t.ROLE_CODE, t.ROLE_NAME, t.ORG_CODE, t.ROLE_TYPE
+	  from CP_ROLE_TRANS_REL cptr,CP_ROLE t
+	  where cptr.ROLE_CODE=t.ROLE_CODE and cptr.TRANS_CODE = #{transCode,jdbcType=VARCHAR}
+	  order by t.ORG_CODE
+	</select>
+
+</mapper>

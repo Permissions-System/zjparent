@@ -1,0 +1,76 @@
+﻿<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<title>Highcharts Example</title>
+
+		<script type="text/javascript" src="http://cdn.bootcss.com/jquery/1.11.2/jquery.min.js"></script>
+		<style type="text/css">
+${demo.css}
+		</style>
+		<script type="text/javascript">
+	$(function () {
+   	 $('#container').highcharts({
+        chart: {
+            type: 'column'
+        },
+        title: {
+            text: 'Daily Fortune VS Yu EBao (天天富 vs 余X宝)'
+        },
+        xAxis: {
+            categories: [
+                'Jan',
+                'Feb',
+                'Mar',
+                'Apr',
+                'May',
+                'Jun',
+                'Jul',
+                'Aug',
+                'Sep',
+                'Oct',
+                'Nov',
+                'Dec'
+            ],
+            crosshair: true
+        },
+        yAxis: {
+            min: 0,
+            title: {
+                text: 'Annual Interest Rate (%)'
+            }
+        },
+        tooltip: {
+            headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+            pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                '<td style="padding:0">{point.y:.1f} %</td></tr>',
+            footerFormat: '</table>',
+            shared: true,
+            useHTML: true
+        },
+        plotOptions: {
+            column: {
+                pointPadding: 0.2,
+                borderWidth: 0
+            }
+        },
+        series: [{
+            name: 'Daily Fortune(天天富)',
+            data: [9.2, 9.2, 9.2, 9.2, 9.2, 9.2, 9.2, 9.2, 9.2, 9.2, 9.2, 9.2]
+
+        }, {
+            name: '余X宝',
+            data: [4.6, 4.8, 4.5, 4.4, 4.0, 4.5, 4.1, 4.3, 4.2, 4.5, 4.6, 4.3]
+
+        }]
+    });
+});
+   </script>
+	</head>
+	<body>
+<script src="../js/highcharts.js"></script>
+<script src="../js/sand-signika.js"></script>
+<div id="container" style="min-width: 880px; height: 280px;"></div>
+
+	</body>
+</html>

@@ -1,0 +1,50 @@
+.box {
+	width: 500px;
+	margin: 10px auto 0;
+	background: #fff;
+	border: 1px solid #d3d3d3;
+}
+.tab_menu {
+	overflow: hidden;
+	float: left;
+}
+.tab_menu li {
+	width: 100px;
+	height: 30px;
+	line-height: 30px;
+	color: #fff;
+	background: #666;
+	text-align: center;
+	cursor: pointer;
+	list-style-type: none;
+}
+.tab_menu li.current {
+	color: #333;
+	background: #fff;
+}
+.tab_menu li a {
+	color: #fff;
+	text-decoration: none;
+}
+.tab_menu li.current a {
+	color: #333;
+}
+.tab_box {
+	padding: 20px;
+}
+.tab_box li {
+	height: 24px;
+	line-height: 24px;
+	overflow: hidden;
+	list-style-type: none;
+}
+.tab_box li span {
+	margin: 0 5px 0 0;
+	font-family: "ËÎÌו";
+	font-size: 12px;
+	font-weight: 400;
+	color: #ddd;
+}
+.tab_box .hide {
+	display: none;
+}

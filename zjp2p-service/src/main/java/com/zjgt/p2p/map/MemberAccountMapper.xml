@@ -1,0 +1,431 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zjgt.p2p.dao.MemberAccountMapper" >
+  <resultMap id="BaseResultMap" type="com.zjgt.p2p.model.MemberAccount" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="memberid" property="memberid" jdbcType="BIGINT" />
+    <result column="account" property="account" jdbcType="DECIMAL" />
+    <result column="blance" property="blance" jdbcType="DECIMAL" />
+    <result column="usedaccount" property="usedaccount" jdbcType="DECIMAL" />
+    <result column="freeze_blance" property="freezeBlance" jdbcType="DECIMAL" />
+    <result column="totalIncome" property="totalincome" jdbcType="DECIMAL" />
+    <result column="income" property="income" jdbcType="DECIMAL" />
+    <result column="recvincome" property="recvincome" jdbcType="DECIMAL" />
+    <result column="goldAccount" property="goldaccount" jdbcType="DECIMAL" />
+    <result column="goldblance" property="goldblance" jdbcType="DECIMAL" />
+    <result column="freezegoldblance" property="freezegoldblance" jdbcType="DECIMAL" />
+    <result column="usedgoldaccount" property="usedgoldaccount" jdbcType="DECIMAL" />
+    <result column="commisiontotalaccount" property="commisiontotalaccount" jdbcType="DECIMAL" />
+    <result column="commisionaccount" property="commisionaccount" jdbcType="DECIMAL" />
+    <result column="memberType" property="membertype" jdbcType="INTEGER" />
+    <result column="modify_date" property="modifyDate" jdbcType="TIMESTAMP" />
+    <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="freeze_date" property="freezeDate" jdbcType="TIMESTAMP" />
+    <result column="update_date" property="updateDate" jdbcType="TIMESTAMP" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    id, memberid, account, blance, usedaccount, freeze_blance, totalIncome, income, recvincome, 
+    goldAccount, goldblance, freezegoldblance, usedgoldaccount, commisiontotalaccount, 
+    commisionaccount, memberType, modify_date, create_date, freeze_date, update_date, 
+    remark
+  </sql>
+  <!-- 用户账户汇总 -->
+  <select id="selectAccountSummary" resultType="java.util.Map" parameterType="java.util.Map" >
+     	SELECT 
+		acc.memberid,
+		-- 账户总额
+		acc.account AS totalAccount,
+		-- 可用余额
+		acc.blance AS availableBalance,
+		-- 冻结金额
+		acc.freeze_blance AS freezeTotal,
+		-- 待收本金
+		acc.income  AS collectionPrincipal,
+		-- 待收利息
+		acc.recvincome AS collectionInterest,
+		-- 收益总额
+		acc.totalincome  AS earningsTotal,
+		-- 投资总额
+		acc.usedaccount AS investmentTotal,
+		-- 充值总额
+		(SELECT SUM(amount) FROM translog WHERE transcode = 1001 AND (payeememberid = acc.memberid OR paymemberid = acc.memberid) AND Transstatus = 1) AS rechargeTotal,
+		-- 提现总额
+		(SELECT SUM(amount) FROM translog WHERE transcode = 1002 AND (payeememberid = acc.memberid OR paymemberid = acc.memberid) AND Transstatus = 1) AS withdrawTotal,
+		-- 已收本金 payeememberid
+		(SELECT SUM(amount) FROM translog WHERE transcode = 1015 AND (payeememberid = acc.memberid OR paymemberid = acc.memberid) AND Transstatus = 1) AS receivedPrincipal,
+		-- 已收利息
+		(SELECT SUM(amount) FROM translog WHERE transcode = 1016 AND (payeememberid = acc.memberid OR paymemberid = acc.memberid) AND Transstatus = 1) AS receivedInterest,
+		-- 转让费
+		(SELECT SUM(amount) FROM translog WHERE transcode = 1105 AND (payeememberid = acc.memberid OR paymemberid = acc.memberid) AND Transstatus = 1) AS transferFee,
+		-- 提前赎回费用
+		(SELECT SUM(amount) FROM translog WHERE transcode = 1110 AND (payeememberid = acc.memberid OR paymemberid = acc.memberid) AND Transstatus = 1) AS redemptionFee
+		FROM memberaccount acc 
+		WHERE acc.memberid = #{memberId}
+		GROUP BY acc.memberid
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.zjgt.p2p.model.MemberAccountExample" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from memberaccount
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    select 
+    <include refid="Base_Column_List" />
+    from memberaccount
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <select id="selectByMemberIdForUpdate" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from memberaccount
+    where memberId = #{memberId} for update
+  </select>
+  
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    delete from memberaccount
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.zjgt.p2p.model.MemberAccount" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    insert into memberaccount (id, memberid, account, 
+      blance, usedaccount, freeze_blance, 
+      totalIncome, income, recvincome, 
+      goldAccount, goldblance, freezegoldblance, 
+      usedgoldaccount, commisiontotalaccount, 
+      commisionaccount, memberType, modify_date, 
+      create_date, freeze_date, update_date, 
+      remark)
+    values (#{id,jdbcType=BIGINT}, #{memberid,jdbcType=BIGINT}, #{account,jdbcType=DECIMAL}, 
+      #{blance,jdbcType=DECIMAL}, #{usedaccount,jdbcType=DECIMAL}, #{freezeBlance,jdbcType=DECIMAL}, 
+      #{totalincome,jdbcType=DECIMAL}, #{income,jdbcType=DECIMAL}, #{recvincome,jdbcType=DECIMAL}, 
+      #{goldaccount,jdbcType=DECIMAL}, #{goldblance,jdbcType=DECIMAL}, #{freezegoldblance,jdbcType=DECIMAL}, 
+      #{usedgoldaccount,jdbcType=DECIMAL}, #{commisiontotalaccount,jdbcType=DECIMAL}, 
+      #{commisionaccount,jdbcType=DECIMAL}, #{membertype,jdbcType=INTEGER}, #{modifyDate,jdbcType=TIMESTAMP}, 
+      #{createDate,jdbcType=TIMESTAMP}, #{freezeDate,jdbcType=TIMESTAMP}, #{updateDate,jdbcType=TIMESTAMP}, 
+      #{remark,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zjgt.p2p.model.MemberAccount" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    insert into memberaccount
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="memberid != null" >
+        memberid,
+      </if>
+      <if test="account != null" >
+        account,
+      </if>
+      <if test="blance != null" >
+        blance,
+      </if>
+      <if test="usedaccount != null" >
+        usedaccount,
+      </if>
+      <if test="freezeBlance != null" >
+        freeze_blance,
+      </if>
+      <if test="totalincome != null" >
+        totalIncome,
+      </if>
+      <if test="income != null" >
+        income,
+      </if>
+      <if test="recvincome != null" >
+        recvincome,
+      </if>
+      <if test="goldaccount != null" >
+        goldAccount,
+      </if>
+      <if test="goldblance != null" >
+        goldblance,
+      </if>
+      <if test="freezegoldblance != null" >
+        freezegoldblance,
+      </if>
+      <if test="usedgoldaccount != null" >
+        usedgoldaccount,
+      </if>
+      <if test="commisiontotalaccount != null" >
+        commisiontotalaccount,
+      </if>
+      <if test="commisionaccount != null" >
+        commisionaccount,
+      </if>
+      <if test="membertype != null" >
+        memberType,
+      </if>
+      <if test="modifyDate != null" >
+        modify_date,
+      </if>
+      <if test="createDate != null" >
+        create_date,
+      </if>
+      <if test="freezeDate != null" >
+        freeze_date,
+      </if>
+      <if test="updateDate != null" >
+        update_date,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="memberid != null" >
+        #{memberid,jdbcType=BIGINT},
+      </if>
+      <if test="account != null" >
+        #{account,jdbcType=DECIMAL},
+      </if>
+      <if test="blance != null" >
+        #{blance,jdbcType=DECIMAL},
+      </if>
+      <if test="usedaccount != null" >
+        #{usedaccount,jdbcType=DECIMAL},
+      </if>
+      <if test="freezeBlance != null" >
+        #{freezeBlance,jdbcType=DECIMAL},
+      </if>
+      <if test="totalincome != null" >
+        #{totalincome,jdbcType=DECIMAL},
+      </if>
+      <if test="income != null" >
+        #{income,jdbcType=DECIMAL},
+      </if>
+      <if test="recvincome != null" >
+        #{recvincome,jdbcType=DECIMAL},
+      </if>
+      <if test="goldaccount != null" >
+        #{goldaccount,jdbcType=DECIMAL},
+      </if>
+      <if test="goldblance != null" >
+        #{goldblance,jdbcType=DECIMAL},
+      </if>
+      <if test="freezegoldblance != null" >
+        #{freezegoldblance,jdbcType=DECIMAL},
+      </if>
+      <if test="usedgoldaccount != null" >
+        #{usedgoldaccount,jdbcType=DECIMAL},
+      </if>
+      <if test="commisiontotalaccount != null" >
+        #{commisiontotalaccount,jdbcType=DECIMAL},
+      </if>
+      <if test="commisionaccount != null" >
+        #{commisionaccount,jdbcType=DECIMAL},
+      </if>
+      <if test="membertype != null" >
+        #{membertype,jdbcType=INTEGER},
+      </if>
+      <if test="modifyDate != null" >
+        #{modifyDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="freezeDate != null" >
+        #{freezeDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null" >
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zjgt.p2p.model.MemberAccount" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    update memberaccount
+    <set >
+      <if test="memberid != null" >
+        memberid = #{memberid,jdbcType=BIGINT},
+      </if>
+      <if test="account != null" >
+        account = #{account,jdbcType=DECIMAL},
+      </if>
+      <if test="blance != null" >
+        blance = #{blance,jdbcType=DECIMAL},
+      </if>
+      <if test="usedaccount != null" >
+        usedaccount = #{usedaccount,jdbcType=DECIMAL},
+      </if>
+      <if test="freezeBlance != null" >
+        freeze_blance = #{freezeBlance,jdbcType=DECIMAL},
+      </if>
+      <if test="totalincome != null" >
+        totalIncome = #{totalincome,jdbcType=DECIMAL},
+      </if>
+      <if test="income != null" >
+        income = #{income,jdbcType=DECIMAL},
+      </if>
+      <if test="recvincome != null" >
+        recvincome = #{recvincome,jdbcType=DECIMAL},
+      </if>
+      <if test="goldaccount != null" >
+        goldAccount = #{goldaccount,jdbcType=DECIMAL},
+      </if>
+      <if test="goldblance != null" >
+        goldblance = #{goldblance,jdbcType=DECIMAL},
+      </if>
+      <if test="freezegoldblance != null" >
+        freezegoldblance = #{freezegoldblance,jdbcType=DECIMAL},
+      </if>
+      <if test="usedgoldaccount != null" >
+        usedgoldaccount = #{usedgoldaccount,jdbcType=DECIMAL},
+      </if>
+      <if test="commisiontotalaccount != null" >
+        commisiontotalaccount = #{commisiontotalaccount,jdbcType=DECIMAL},
+      </if>
+      <if test="commisionaccount != null" >
+        commisionaccount = #{commisionaccount,jdbcType=DECIMAL},
+      </if>
+      <if test="membertype != null" >
+        memberType = #{membertype,jdbcType=INTEGER},
+      </if>
+      <if test="modifyDate != null" >
+        modify_date = #{modifyDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createDate != null" >
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="freezeDate != null" >
+        freeze_date = #{freezeDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null" >
+        update_date = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zjgt.p2p.model.MemberAccount" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    update memberaccount
+    set memberid = #{memberid,jdbcType=BIGINT},
+      account = #{account,jdbcType=DECIMAL},
+      blance = #{blance,jdbcType=DECIMAL},
+      usedaccount = #{usedaccount,jdbcType=DECIMAL},
+      freeze_blance = #{freezeBlance,jdbcType=DECIMAL},
+      totalIncome = #{totalincome,jdbcType=DECIMAL},
+      income = #{income,jdbcType=DECIMAL},
+      recvincome = #{recvincome,jdbcType=DECIMAL},
+      goldAccount = #{goldaccount,jdbcType=DECIMAL},
+      goldblance = #{goldblance,jdbcType=DECIMAL},
+      freezegoldblance = #{freezegoldblance,jdbcType=DECIMAL},
+      usedgoldaccount = #{usedgoldaccount,jdbcType=DECIMAL},
+      commisiontotalaccount = #{commisiontotalaccount,jdbcType=DECIMAL},
+      commisionaccount = #{commisionaccount,jdbcType=DECIMAL},
+      memberType = #{membertype,jdbcType=INTEGER},
+      modify_date = #{modifyDate,jdbcType=TIMESTAMP},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      freeze_date = #{freezeDate,jdbcType=TIMESTAMP},
+      update_date = #{updateDate,jdbcType=TIMESTAMP},
+      remark = #{remark,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="selectAccountSum" resultType="java.util.Map" parameterType="java.util.Map" >
+     	SELECT 
+		acc.memberid,
+		-- 账户总额
+		acc.account AS totalAccount,
+		-- 可用余额
+		acc.blance AS availableBalance,
+		-- 待收本金
+		acc.income  AS collectionPrincipal,
+		-- 待收利息
+		acc.recvincome AS collectionInterest,
+		-- 收益总额
+		acc.totalincome  AS earningsTotal,
+		-- 投资总额
+		acc.usedaccount AS investmentTotal,
+		-- 提现总额
+		(SELECT SUM(amount) FROM translog WHERE transcode = 1002 AND (payeememberid = acc.memberid OR paymemberid = acc.memberid) AND Transstatus = 1) AS withdrawTotal
+		FROM memberaccount acc 
+		WHERE acc.memberid = #{memberId}
+		GROUP BY acc.memberid
+  </select>
+</mapper>

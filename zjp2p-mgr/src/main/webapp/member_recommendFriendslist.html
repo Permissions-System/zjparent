@@ -1,0 +1,323 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+ <meta name="viewport"
+        content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>百富网后台管理系统</title>
+<link href="assets/css/amazeui.css" rel="stylesheet" type="text/css">
+<link href="assets/css/app.css" rel="stylesheet" type="text/css">
+<script src="assets/js/jquery.min.js"></script>
+<script src="assets/js/handlebars.min.js"></script>
+<script>
+$(function() {
+  $('#doc-confirm-toggle-1').on('click', function() {
+	$('#my-confirm-1').modal({
+      relatedElement: this,
+      onConfirm: function() {
+        alert('帐号被冻结')
+      },
+      onCancel: function() {
+        alert('取消')
+      }
+    });
+  });
+});
+
+$(function() {
+  $('#doc-confirm-toggle-2').on('click', function() {
+	$('#my-confirm-2').modal({
+      relatedElement: this,
+      onConfirm: function() {
+        alert('密码被重置')
+      },
+      onCancel: function() {
+        alert('取消')
+      }
+    });
+  });
+});
+
+$(function() {
+  $('#doc-confirm-toggle-3').on('click', function() {
+	$('#my-confirm-3').modal({
+      relatedElement: this,
+      onConfirm: function() {
+        alert('记录已被删除')
+      },
+      onCancel: function() {
+        alert('记录未被删除')
+      }
+    });
+  });
+});
+
+$(function() {
+  $('#doc-confirm-toggle-4').on('click', function() {
+	$('#my-confirm-4').modal({
+      relatedElement: this,
+      onConfirm: function() {
+        alert('申请成功')
+      },
+      onCancel: function() {
+        alert('取消')
+      }
+    });
+  });
+});
+
+</script>
+</head>
+<body>
+<header class="am-topbar" style="margin-bottom:0px;"><img src="img/logo.png" style="margin-top:13px; margin-left:15px;"alt=""/> 
+<div class="top_user">
+  <button class="am-btn am-btn-blue" style="height:50px; margin-right:0px;">
+    <span class="am-icon-bell" style="margin-top:5px;"></span>
+    <span style="font-size:14px; font-weight:bold;color:#F00;">1</span>
+  </button>
+  <div class="am-dropdown" data-am-dropdown style="margin-left:-5px;">
+  <button class="am-btn am-btn-primary am-dropdown-toggle" data-am-dropdown-toggle style="height:50px; margin-left:0px;">Hello, administrator <span class="am-icon-caret-down"></span></button>
+  <ul class="am-dropdown-content">
+    <li><a href="#"><span class="am-icon-user">　个人设置</span></a></li>
+    <li><a href="#"><span class="am-icon-cog">　修改密码</span></a></li>
+    <li class="am-divider"></li>
+    <li><a href="#"><span class="am-icon-power-off">　退　出</span></a></li>
+  </ul>
+  </div>
+</div>
+</header>
+
+
+
+<div class="leftslider"><!-- sidebar start -->
+<button class="am-btn am-btn-primary am-dropdown-toggle" data-am-dropdown-toggle style="height:50px; min-width:160px; width:91%; margin-left:9px; margin-bottom:10px; margin-top:8px;"><span class="am-icon-home am-icon-sm">　系统首页</span></button>
+<section data-am-widget="accordion" class="am-accordion am-accordion-gapped"
+data-am-accordion='{  }'>
+  <dl class="am-accordion-item" >
+    <dt class="am-accordion-title"><span class="am-icon-tags">　标的管理</span></dt>
+    <dd class="am-accordion-bd am-collapse">
+      <!-- 规避 Collapase 处理有 padding 的折叠内容计算计算有误问题， 加一个容器 -->
+      <div class="am-accordion-content" style="margin-left:33px; background-color:#FFF; line-height:30px;"><a href="#">标的管理</a>
+        <br/><a href="targets_approval.html">标的审批</a>
+        </div>
+    </dd>
+  </dl>
+  <dl class="am-accordion-item">
+    <dt class="am-accordion-title"><span class="am-icon-users">　平台用户管理</span></dt>
+    <dd class="am-accordion-bd am-collapse ">
+      <!-- 规避 Collapase 处理有 padding 的折叠内容计算计算有误问题， 加一个容器 -->
+      <div class="am-accordion-content" style="margin-left:33px; background-color:#FFF; line-height:30px;"><a href="#">平台用户管理</a></div>
+    </dd>
+  </dl>
+  <dl class="am-accordion-item">
+    <dt class="am-accordion-title"><span class="am-icon-pie-chart" style="margin-left:2px;">　平台交易管理</span></dt>
+    <dd class="am-accordion-bd am-collapse ">
+      <!-- 规避 Collapase 处理有 padding 的折叠内容计算计算有误问题， 加一个容器 -->
+      <div class="am-accordion-content" style="margin-left:33px; background-color:#FFF; line-height:30px;"><a href="#">平台交易管理</a></div>
+    </dd>
+  </dl>
+  <dl class="am-accordion-item">
+    <dt class="am-accordion-title"><span class="am-icon-line-chart">　运营统计</span></dt>
+    <dd class="am-accordion-bd am-collapse ">
+      <!-- 规避 Collapase 处理有 padding 的折叠内容计算计算有误问题， 加一个容器 -->
+      <div class="am-accordion-content" style="margin-left:33px; background-color:#FFF; line-height:30px;"><a href="#">运营统计</a></div>
+    </dd>
+  </dl>
+  <dl class="am-accordion-item">
+    <dt class="am-accordion-title"><span class="am-icon-tachometer">　资讯管理</span></dt>
+    <dd class="am-accordion-bd am-collapse ">
+      <!-- 规避 Collapase 处理有 padding 的折叠内容计算计算有误问题， 加一个容器 -->
+      <div class="am-accordion-content" style="margin-left:33px; background-color:#FFF; line-height:30px;"><a href="#">新 闻</a>
+        <br/><a href="#">公 告</a></div>
+    </dd>
+  </dl>
+  <dl class="am-accordion-item">
+    <dt class="am-accordion-title"><span class="am-icon-info-circle" style="margin-left:2px;">　消息管理</span></dt>
+    <dd class="am-accordion-bd am-collapse ">
+      <!-- 规避 Collapase 处理有 padding 的折叠内容计算计算有误问题， 加一个容器 -->
+      <div class="am-accordion-content" style="margin-left:33px; background-color:#FFF; line-height:30px;"><a href="#">站内消息</a>
+        <br/><a href="#">短信消息</a>
+        <br/><a href="#">邮件消息</a></div>
+    </dd>
+  </dl>
+  <dl class="am-accordion-item">
+    <dt class="am-accordion-title"><span class="am-icon-jpy" style="margin-left:3px;">　 红包管理</span></dt>
+    <dd class="am-accordion-bd am-collapse ">
+      <!-- 规避 Collapase 处理有 padding 的折叠内容计算计算有误问题， 加一个容器 -->
+      <div class="am-accordion-content" style="margin-left:33px; background-color:#FFF; line-height:30px;"><a href="#">红包管理</a></div>
+    </dd>
+  </dl>
+  <dl class="am-accordion-item">
+    <dt class="am-accordion-title"><span class=" am-icon-calculator">　积分管理</span></dt>
+    <dd class="am-accordion-bd am-collapse">
+      <!-- 规避 Collapase 处理有 padding 的折叠内容计算计算有误问题， 加一个容器 -->
+      <div class="am-accordion-content" style="margin-left:33px; background-color:#FFF; line-height:30px;"><a href="#">积分管理</a></div>
+    </dd>
+  </dl>
+  <dl class="am-accordion-item">
+    <dt class="am-accordion-title"><span class="am-icon-tasks">　权限管理</span></dt>
+    <dd class="am-accordion-bd am-collapse">
+      <!-- 规避 Collapase 处理有 padding 的折叠内容计算计算有误问题， 加一个容器 -->
+      <div class="am-accordion-content" style="margin-left:33px; background-color:#FFF; line-height:30px;"><a href="#">系统用户</a>
+        <br/><a href="#">角色管理</a></div>
+    </dd>
+  </dl>
+  
+  <dl class="am-accordion-item">
+    <dt class="am-accordion-title"><span class="am-icon-info" style="margin-left:6px;">　 平台信息管理</span></dt>
+    <dd class="am-accordion-bd am-collapse">
+      <!-- 规避 Collapase 处理有 padding 的折叠内容计算计算有误问题， 加一个容器 -->
+      <div class="am-accordion-content" style="margin-left:33px; background-color:#FFF; line-height:30px;"><a href="#">担保机构管理</a>
+        <br/><a href="#">协议书管理</a>
+        <br/><a href="#">公司信息</a>
+        <br/><a href="#">安全与帮助</a>
+        <br/><a href="#">平台页面管理</a></div>
+    </dd>
+  </dl>
+  <dl class="am-accordion-item">
+    <dt class="am-accordion-title"><span class="am-icon-cogs">　系统设置</span></dt>
+    <dd class="am-accordion-bd am-collapse">
+      <!-- 规避 Collapase 处理有 padding 的折叠内容计算计算有误问题， 加一个容器 -->
+      <div class="am-accordion-content" style="margin-left:33px; background-color:#FFF; line-height:30px;"><a href="#">系统设置</a></div>
+    </dd>
+  </dl>
+  <dl class="am-accordion-item">
+    <dt class="am-accordion-title"><span class="am-icon-user">　 个人中心</span></dt>
+    <dd class="am-accordion-bd am-collapse">
+      <!-- 规避 Collapase 处理有 padding 的折叠内容计算计算有误问题， 加一个容器 -->
+      <div class="am-accordion-content" style="margin-left:33px; background-color:#FFF; line-height:30px;"><a href="#">基本信息设置</a>
+        <br/><a href="#">消 息</a>
+        <br/><a href="#">修改密码</a></div>
+    </dd>
+  </dl>
+</section>
+</div><!-- sidebar end -->
+<div class="backcontent">
+  <div class="breadcrumb">
+    <ol class="am-breadcrumb am-breadcrumb-slash">
+      <li><a href="#">首 页</a></li>
+      <li><a href="#">平台用户管理</a></li>
+      <li class="am-active">用户信息管理</li>
+    </ol>
+  </div>
+  <div class="tag_h">用户 ID 123456　　用户账号:Jack　　用户姓名:刘大力</div>
+  
+  <div class="tag_record_2" style="font-size:1.4rem">该用户推荐的会员：158***（朱炎），共交易<span style="color:#F00"> 8 </span>笔，共获现金红包<span style="color:#F00"> 225 </span>元</div>
+    
+  <div class="tablecontent"><table class="am-table am-table-bordered am-table-striped am-table-hover" style="text-align:center;">
+    <thead>
+        <tr style="text-align:center;">
+            <th style="text-align:center;">序 号</th>
+            <th style="text-align:center;">标的名称</th>
+            <th style="text-align:center;">标的编号</th>
+            <th style="text-align:center;">年化收益率</th>
+            <th style="text-align:center;">交易金额</th>
+            <th style="text-align:center;">交易份额</th>
+            <th style="text-align:center;">交易时间</th>
+            <th style="text-align:center;">现金红包</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>1</td>
+            <td>标的A</td>
+            <td>XSB00001</td>
+            <td>10%</td>
+            <td>10,000</td>
+            <td>10</td>
+            <td>2014-11-17 17:44:00</td>
+            <td>50</td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td>标的B</td>
+            <td>XSB00001</td>
+            <td>10%</td>
+            <td>10,000</td>
+            <td>10</td>
+            <td>2014-11-17 17:44:00</td>
+            <td>50</td>
+        </tr>
+        <tr>
+            <td>3</td>
+            <td>标的B</td>
+            <td>XSB00001</td>
+            <td>10%</td>
+            <td>10,000</td>
+            <td>10</td>
+            <td>2014-11-17 17:44:00</td>
+            <td>50</td>
+        </tr>
+        <tr>
+            <td>4</td>
+            <td>标的B</td>
+            <td>XSB00001</td>
+            <td>10%</td>
+            <td>10,000</td>
+            <td>10</td>
+            <td>2014-11-17 17:44:00</td>
+            <td>50</td>
+        </tr>
+        <tr>
+            <td>5</td>
+            <td>标的B</td>
+            <td>XSB00001</td>
+            <td>10%</td>
+            <td>10,000</td>
+            <td>10</td>
+            <td>2014-11-17 17:44:00</td>
+            <td>50</td>
+        </tr>
+        <tr>
+            <td>6</td>
+            <td>标的B</td>
+            <td>XSB00001</td>
+            <td>10%</td>
+            <td>10,000</td>
+            <td>10</td>
+            <td>2014-11-17 17:44:00</td>
+            <td>50</td>
+        </tr>
+        <tr>
+            <td>7</td>
+            <td>标的B</td>
+            <td>XSB00001</td>
+            <td>10%</td>
+            <td>10,000</td>
+            <td>10</td>
+            <td>2014-11-17 17:44:00</td>
+            <td>50</td>
+        </tr>
+        <tr>
+            <td>8</td>
+            <td>标的B</td>
+            <td>XSB00001</td>
+            <td>10%</td>
+            <td>10,000</td>
+            <td>10</td>
+            <td>2014-11-17 17:44:00</td>
+            <td>50</td>
+        </tr>
+    </tbody>
+</table>
+<ul class="am-pagination am-pagination-right">
+  <li class="am-disabled"><a href="#">&laquo;</a></li>
+  <li class="am-active"><a href="#">1</a></li>
+  <li><a href="#">2</a></li>
+  <li><a href="#">3</a></li>
+  <li><a href="#">4</a></li>
+  <li><a href="#">5</a></li>
+  <li><a href="#">&raquo;</a></li>
+</ul>
+</div>
+</div>
+<footer>
+  <p class="am-padding-left">© 2014 zjp2p.com Backend Management System Ver 1.0</p>
+</footer>
+
+
+<script src="assets/js/amazeui.js"></script>
+</body>
+</html>

@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zjgt.p2p.dao.MemberProdIncomeMapper" >
+  <resultMap id="BaseResultMap" type="com.zjgt.p2p.model.MemberProdIncome" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="memberid" property="memberid" jdbcType="BIGINT" />
+    <result column="bidtypeid" property="bidtypeid" jdbcType="INTEGER" />
+    <result column="bidclassname" property="bidclassname" jdbcType="VARCHAR" />
+    <result column="totalIncome" property="totalincome" jdbcType="DECIMAL" />
+    <result column="income" property="income" jdbcType="DECIMAL" />
+    <result column="recvincome" property="recvincome" jdbcType="DECIMAL" />
+    <result column="memberType" property="membertype" jdbcType="INTEGER" />
+    <result column="modify_date" property="modifyDate" jdbcType="TIMESTAMP" />
+    <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="freeze_date" property="freezeDate" jdbcType="TIMESTAMP" />
+    <result column="update_date" property="updateDate" jdbcType="TIMESTAMP" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    id, memberid, bidtypeid, bidclassname, totalIncome, income, recvincome, memberType, 
+    modify_date, create_date, freeze_date, update_date, remark
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.zjgt.p2p.model.MemberProdIncomeExample" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from memberprodincome
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    select 
+    <include refid="Base_Column_List" />
+    from memberprodincome
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    delete from memberprodincome
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.zjgt.p2p.model.MemberProdIncome" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    insert into memberprodincome (id, memberid, bidtypeid, 
+      bidclassname, totalIncome, income, 
+      recvincome, memberType, modify_date, 
+      create_date, freeze_date, update_date, 
+      remark)
+    values (#{id,jdbcType=BIGINT}, #{memberid,jdbcType=BIGINT}, #{bidtypeid,jdbcType=INTEGER}, 
+      #{bidclassname,jdbcType=VARCHAR}, #{totalincome,jdbcType=DECIMAL}, #{income,jdbcType=DECIMAL}, 
+      #{recvincome,jdbcType=DECIMAL}, #{membertype,jdbcType=INTEGER}, #{modifyDate,jdbcType=TIMESTAMP}, 
+      #{createDate,jdbcType=TIMESTAMP}, #{freezeDate,jdbcType=TIMESTAMP}, #{updateDate,jdbcType=TIMESTAMP}, 
+      #{remark,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zjgt.p2p.model.MemberProdIncome" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    insert into memberprodincome
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="memberid != null" >
+        memberid,
+      </if>
+      <if test="bidtypeid != null" >
+        bidtypeid,
+      </if>
+      <if test="bidclassname != null" >
+        bidclassname,
+      </if>
+      <if test="totalincome != null" >
+        totalIncome,
+      </if>
+      <if test="income != null" >
+        income,
+      </if>
+      <if test="recvincome != null" >
+        recvincome,
+      </if>
+      <if test="membertype != null" >
+        memberType,
+      </if>
+      <if test="modifyDate != null" >
+        modify_date,
+      </if>
+      <if test="createDate != null" >
+        create_date,
+      </if>
+      <if test="freezeDate != null" >
+        freeze_date,
+      </if>
+      <if test="updateDate != null" >
+        update_date,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="memberid != null" >
+        #{memberid,jdbcType=BIGINT},
+      </if>
+      <if test="bidtypeid != null" >
+        #{bidtypeid,jdbcType=INTEGER},
+      </if>
+      <if test="bidclassname != null" >
+        #{bidclassname,jdbcType=VARCHAR},
+      </if>
+      <if test="totalincome != null" >
+        #{totalincome,jdbcType=DECIMAL},
+      </if>
+      <if test="income != null" >
+        #{income,jdbcType=DECIMAL},
+      </if>
+      <if test="recvincome != null" >
+        #{recvincome,jdbcType=DECIMAL},
+      </if>
+      <if test="membertype != null" >
+        #{membertype,jdbcType=INTEGER},
+      </if>
+      <if test="modifyDate != null" >
+        #{modifyDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="freezeDate != null" >
+        #{freezeDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null" >
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zjgt.p2p.model.MemberProdIncome" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    update memberprodincome
+    <set >
+      <if test="memberid != null" >
+        memberid = #{memberid,jdbcType=BIGINT},
+      </if>
+      <if test="bidtypeid != null" >
+        bidtypeid = #{bidtypeid,jdbcType=INTEGER},
+      </if>
+      <if test="bidclassname != null" >
+        bidclassname = #{bidclassname,jdbcType=VARCHAR},
+      </if>
+      <if test="totalincome != null" >
+        totalIncome = #{totalincome,jdbcType=DECIMAL},
+      </if>
+      <if test="income != null" >
+        income = #{income,jdbcType=DECIMAL},
+      </if>
+      <if test="recvincome != null" >
+        recvincome = #{recvincome,jdbcType=DECIMAL},
+      </if>
+      <if test="membertype != null" >
+        memberType = #{membertype,jdbcType=INTEGER},
+      </if>
+      <if test="modifyDate != null" >
+        modify_date = #{modifyDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createDate != null" >
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="freezeDate != null" >
+        freeze_date = #{freezeDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null" >
+        update_date = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zjgt.p2p.model.MemberProdIncome" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    update memberprodincome
+    set memberid = #{memberid,jdbcType=BIGINT},
+      bidtypeid = #{bidtypeid,jdbcType=INTEGER},
+      bidclassname = #{bidclassname,jdbcType=VARCHAR},
+      totalIncome = #{totalincome,jdbcType=DECIMAL},
+      income = #{income,jdbcType=DECIMAL},
+      recvincome = #{recvincome,jdbcType=DECIMAL},
+      memberType = #{membertype,jdbcType=INTEGER},
+      modify_date = #{modifyDate,jdbcType=TIMESTAMP},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      freeze_date = #{freezeDate,jdbcType=TIMESTAMP},
+      update_date = #{updateDate,jdbcType=TIMESTAMP},
+      remark = #{remark,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="getSumAmount" resultType="java.math.BigDecimal" parameterType="long">
+  	select sum(income) from memberprodincome
+  	where memberid=#{memberid}
+  </select>
+</mapper>

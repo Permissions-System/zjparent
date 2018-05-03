@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<portable-config>
+	<config-file path="WEB-INF/classes/logback.xml">
+		<replace
+			xpath="/configuration/logger[@name='org.springframework.web']/@level">WARN</replace>
+		<replace
+			xpath="/configuration/logger[@name='org.springframework.beans']/@level">WARN</replace>
+		<replace
+			xpath="/configuration/logger[@name='org.springframework.core']/@level">WARN</replace>
+		<replace
+			xpath="/configuration/logger[@name='org.springframework.ui']/@level">WARN</replace>
+		<replace
+			xpath="/configuration/logger[@name='org.springframework.jndi']/@level">WARN</replace>
+		<replace
+			xpath="/configuration/logger[@name='org.springframework.context']/@level">WARN</replace>
+		<replace
+			xpath="/configuration/logger[@name='org.springframework.jdbc']/@level">WARN</replace>
+		<replace
+			xpath="/configuration/logger[@name='com.alisoft.xplatform.asf']/@level">WARN</replace>
+		<replace xpath="/configuration/logger[@name='org.apache.shiro']/@level">WARN</replace>
+		<replace xpath="/configuration/logger[@name='com.zjgt']/@level">WARN</replace>
+	</config-file>
+	<config-file path="WEB-INF/classes/memcached.xml">
+		<replace xpath="/memcached/socketpool[@name='pool0']/servers">211.152.43.6:11211</replace>
+		<replace xpath="/memcached/socketpool[@name='pool1']/servers">211.152.43.6:11211</replace>
+		<replace xpath="/memcached/socketpool[@name='pool2']/servers">211.152.43.6:11211</replace>
+	</config-file>
+	<config-file path="WEB-INF/classes/config.properties">
+		<replace key="jdbc_url">jdbc:mysql://211.152.43.6:3306/zjp2pdb?useUnicode=true&amp;amp;characterEncoding=UTF-8&amp;amp;zeroDateTimeBehavior=convertToNull
+		</replace>
+		<replace key="jdbc_username">bfdbuser01</replace>
+		<replace key="jdbc_password">bfdbAb001</replace>
+		<replace key="zookeeper.address">zookeeper://211.152.43.6:2181</replace>
+		<replace key="email">http://www.biifoo.com/</replace>
+		<replace key="uploadimgpath">http://www.biifoo.com/</replace>
+		
+		<replace key="pay.isDebug">false</replace>
+		<replace key="pay.pid">200008699367</replace>
+		<replace key="pay.merchantAcctId">200100100120000869936700001</replace>
+		<replace key="pay.key">MIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQChjTMfd5UmQjMmNWH/AePHmvJ2joHC8903cM65mWkJfIiHQNNlgrY5/EfwHbD8baXNNa/l2TGYFpED7tlzbPv3Gm4IcwJ4GJVMSErAXZCcxowrdNgtRNLnb04sFVyhs9ofB+NRh22+umnHAJTDzgz/cDXyQh3SPUEn+NhsdzOWgLIbRPj7vWVOhwyHfe13z7T4IhVhUZzhi9+GsZmFgoEYqMG8GnstVoBUrE3Z5UEm0IJETn741yOG1bNufifeA2nfG898R6R70a85RkgxrbvYzYKYF12jgfYgs745Lrd/OiQY2su3J4SVaSKLBZdEZIsvL068stF4cjFlkUlNnfv9AgMBAAECggEAG3r1U0j4KgXgxYMXJFWh9XY6AEjFcfAhlSivQYsC/wYcA0XXr9DIRpzPb9zdGlNcfMfBIAwOD5znFhAvFR9YzPPF+9H0fZFQ9CTn8kj4LHLprQq3Kxwl9BBO79jCZQ8+70BcPqYW2PbEv4EtzRDjzR+9TXRJtlWNG8uMpQax08vTUFSVbI4RhJ9Q3yEu26WQ6NEciDY6SlssV+KqupoAXqxMTF2fL7O8PFYOYVlU8LeHsk3jxoZteV5KoUNi7P6raO4B2/WxVI/2cPLctIjo97tLdhNmHjyHijHp+bgZZH7/C70AJbZhY7u8FFfSWBiHDQF7mc/MCVcIRv33Fn6OgQKBgQDLwUOkMu6Y04M75wVuD/MGC7+A5weOQIwLlGt3RzoLfLyv90IM34ZYYafSnx8G6AOUZVKZFiR65D7QEjF0BNObBUlj2ni4kpKWy5vkJyKpYYohWr3SktgRDAy0lvbCzpu143RYm3FoYFbotoIRlCbaGNsrHbenzu8j8SV0F/XvZQKBgQDK+abQTaRQahgsJnCk9JMAtiTqDmNaB0rPvh9+ns5Q2gA1k8AxAZki5UdKGc4TEWnO366xJrY9uHTPWKvEpiuqTUBOj4oXrJeqpAOLRvJf4os6oQnmg+GEqYQg+ShcYW5PGUqexNmtv78Z9GPFQQfK3P+13tWNNPghbsQ90mpMuQKBgGMEzAN7APriJ2+wCLKBK8BvaySQodpewfBKs6MmyS2V8/ir97xb0GUZKD6yN5jangq65tYgrZ/PVjs17DSOt+spOY4+ONax3G1OC7dn0W9xSHiHKaKw3DIEohQNHWR0lbViEUOSXx2zW+kB8NnsHql01OXyLjNt3EeiRGpTzqAFAoGBALxxjbME8pGJ/ok24wvy2WwmrxzyYMEb1hQLUpgu/iNIUjtrwlp9PlyMe2RLkuxXFWHwf/KOm1GwKBq9GzQGhrGk6RhG4ZFbNrBBd9zd8HafEF5NVrDCLiUJcNdgG12xQ0WCmKnQ3rwWMmj5YYun9YEdLvb+PEvOKrR3bxBqgzBZAoGAec46nB+aOfaZfd8SCT2ACt+ahz1TwYIH2Iym1DasZ08VB0vAX4nIwGj7FvldVfPTFFosJfsIp3olxhRGmH76+CEPVpKHW5fW9wnGR+XjPcn+/JTZExVPoUprjXQfbdk3hLKhq7VQLPVFkJKOkvimjv06RCZolxo8q9+WpDXxats=</replace>
+		<replace key="pay.sinaCrtFilePath">pay/weihuimas.crt</replace>
+		<replace key="pay.actionUrl">https://gate.pay.sina.com.cn/acquire-order-channel/gateway/receiveOrderLoading.htm</replace>
+		<replace key="pay.rechargeBgUrl">http://www.biifoo.com/pay/recharge/back.do</replace>
+		<replace key="pay.rechargeRedirectUrl">http://www.biifoo.com/pay/recharge/success.do</replace>
+		<replace key="pay.rapidPayToBankUrl">https://gate.pay.sina.com.cn/acquire-order-channel/gateway/batchRapidPayToBankcard.htm</replace>
+		<replace key="pay.rapidPayToBankBackUrl">http://www.biifoo.com/pay/withdraw/back.do</replace>
+		<replace key="pay.payToBankUrl">https://mas.weibopay.com/acquire-order-channel/gateway/batchPayToBankcard.htm</replace>
+		<replace key="pay.payToBankBackUrl">http://www.biifoo.com/pay/withdraw/back.do</replace>  
+	</config-file>
+</portable-config>

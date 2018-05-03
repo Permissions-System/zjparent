@@ -1,0 +1,351 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zjgt.p2p.report.dao.CpsStatMapper" >
+  <resultMap id="BaseResultMap" type="com.zjgt.p2p.report.model.CpsStat" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="curDate" property="curdate" jdbcType="TIMESTAMP" />
+    <result column="cpscode" property="cpscode" jdbcType="VARCHAR" />
+    <result column="cpsname" property="cpsname" jdbcType="VARCHAR" />
+    <result column="regcnt" property="regcnt" jdbcType="INTEGER" />
+    <result column="openaccnt" property="openaccnt" jdbcType="INTEGER" />
+    <result column="investamount" property="investamount" jdbcType="DOUBLE" />
+    <result column="investcnt" property="investcnt" jdbcType="INTEGER" />
+    <result column="avginvestamount" property="avginvestamount" jdbcType="DOUBLE" />
+    <result column="investrate" property="investrate" jdbcType="DECIMAL" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="createDate" property="createdate" jdbcType="TIMESTAMP" />
+    <result column="temp1" property="temp1" jdbcType="VARCHAR" />
+    <result column="temp2" property="temp2" jdbcType="VARCHAR" />
+    <result column="temp3" property="temp3" jdbcType="VARCHAR" />
+    <result column="temp4" property="temp4" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    id, curDate, cpscode, cpsname, regcnt, openaccnt, investamount, investcnt, avginvestamount, 
+    investrate, remark, createDate, temp1, temp2, temp3, temp4
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.zjgt.p2p.report.model.CpsStatExample" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from cpsstat
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    select 
+    <include refid="Base_Column_List" />
+    from cpsstat
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    delete from cpsstat
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zjgt.p2p.report.model.CpsStat" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    insert into cpsstat (id, curDate, cpscode, 
+      cpsname, regcnt, openaccnt, 
+      investamount, investcnt, avginvestamount, 
+      investrate, remark, createDate, 
+      temp1, temp2, temp3, 
+      temp4)
+    values (#{id,jdbcType=INTEGER}, #{curdate,jdbcType=TIMESTAMP}, #{cpscode,jdbcType=VARCHAR}, 
+      #{cpsname,jdbcType=VARCHAR}, #{regcnt,jdbcType=INTEGER}, #{openaccnt,jdbcType=INTEGER}, 
+      #{investamount,jdbcType=DOUBLE}, #{investcnt,jdbcType=INTEGER}, #{avginvestamount,jdbcType=DOUBLE}, 
+      #{investrate,jdbcType=DECIMAL}, #{remark,jdbcType=VARCHAR}, #{createdate,jdbcType=TIMESTAMP}, 
+      #{temp1,jdbcType=VARCHAR}, #{temp2,jdbcType=VARCHAR}, #{temp3,jdbcType=VARCHAR}, 
+      #{temp4,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zjgt.p2p.report.model.CpsStat" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    insert into cpsstat
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="curdate != null" >
+        curDate,
+      </if>
+      <if test="cpscode != null" >
+        cpscode,
+      </if>
+      <if test="cpsname != null" >
+        cpsname,
+      </if>
+      <if test="regcnt != null" >
+        regcnt,
+      </if>
+      <if test="openaccnt != null" >
+        openaccnt,
+      </if>
+      <if test="investamount != null" >
+        investamount,
+      </if>
+      <if test="investcnt != null" >
+        investcnt,
+      </if>
+      <if test="avginvestamount != null" >
+        avginvestamount,
+      </if>
+      <if test="investrate != null" >
+        investrate,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+      <if test="createdate != null" >
+        createDate,
+      </if>
+      <if test="temp1 != null" >
+        temp1,
+      </if>
+      <if test="temp2 != null" >
+        temp2,
+      </if>
+      <if test="temp3 != null" >
+        temp3,
+      </if>
+      <if test="temp4 != null" >
+        temp4,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="curdate != null" >
+        #{curdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cpscode != null" >
+        #{cpscode,jdbcType=VARCHAR},
+      </if>
+      <if test="cpsname != null" >
+        #{cpsname,jdbcType=VARCHAR},
+      </if>
+      <if test="regcnt != null" >
+        #{regcnt,jdbcType=INTEGER},
+      </if>
+      <if test="openaccnt != null" >
+        #{openaccnt,jdbcType=INTEGER},
+      </if>
+      <if test="investamount != null" >
+        #{investamount,jdbcType=DOUBLE},
+      </if>
+      <if test="investcnt != null" >
+        #{investcnt,jdbcType=INTEGER},
+      </if>
+      <if test="avginvestamount != null" >
+        #{avginvestamount,jdbcType=DOUBLE},
+      </if>
+      <if test="investrate != null" >
+        #{investrate,jdbcType=DECIMAL},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="createdate != null" >
+        #{createdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="temp1 != null" >
+        #{temp1,jdbcType=VARCHAR},
+      </if>
+      <if test="temp2 != null" >
+        #{temp2,jdbcType=VARCHAR},
+      </if>
+      <if test="temp3 != null" >
+        #{temp3,jdbcType=VARCHAR},
+      </if>
+      <if test="temp4 != null" >
+        #{temp4,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zjgt.p2p.report.model.CpsStat" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    update cpsstat
+    <set >
+      <if test="curdate != null" >
+        curDate = #{curdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cpscode != null" >
+        cpscode = #{cpscode,jdbcType=VARCHAR},
+      </if>
+      <if test="cpsname != null" >
+        cpsname = #{cpsname,jdbcType=VARCHAR},
+      </if>
+      <if test="regcnt != null" >
+        regcnt = #{regcnt,jdbcType=INTEGER},
+      </if>
+      <if test="openaccnt != null" >
+        openaccnt = #{openaccnt,jdbcType=INTEGER},
+      </if>
+      <if test="investamount != null" >
+        investamount = #{investamount,jdbcType=DOUBLE},
+      </if>
+      <if test="investcnt != null" >
+        investcnt = #{investcnt,jdbcType=INTEGER},
+      </if>
+      <if test="avginvestamount != null" >
+        avginvestamount = #{avginvestamount,jdbcType=DOUBLE},
+      </if>
+      <if test="investrate != null" >
+        investrate = #{investrate,jdbcType=DECIMAL},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="createdate != null" >
+        createDate = #{createdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="temp1 != null" >
+        temp1 = #{temp1,jdbcType=VARCHAR},
+      </if>
+      <if test="temp2 != null" >
+        temp2 = #{temp2,jdbcType=VARCHAR},
+      </if>
+      <if test="temp3 != null" >
+        temp3 = #{temp3,jdbcType=VARCHAR},
+      </if>
+      <if test="temp4 != null" >
+        temp4 = #{temp4,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zjgt.p2p.report.model.CpsStat" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    update cpsstat
+    set curDate = #{curdate,jdbcType=TIMESTAMP},
+      cpscode = #{cpscode,jdbcType=VARCHAR},
+      cpsname = #{cpsname,jdbcType=VARCHAR},
+      regcnt = #{regcnt,jdbcType=INTEGER},
+      openaccnt = #{openaccnt,jdbcType=INTEGER},
+      investamount = #{investamount,jdbcType=DOUBLE},
+      investcnt = #{investcnt,jdbcType=INTEGER},
+      avginvestamount = #{avginvestamount,jdbcType=DOUBLE},
+      investrate = #{investrate,jdbcType=DECIMAL},
+      remark = #{remark,jdbcType=VARCHAR},
+      createDate = #{createdate,jdbcType=TIMESTAMP},
+      temp1 = #{temp1,jdbcType=VARCHAR},
+      temp2 = #{temp2,jdbcType=VARCHAR},
+      temp3 = #{temp3,jdbcType=VARCHAR},
+      temp4 = #{temp4,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+	<insert id="insertCpsAnalysis" parameterType="java.util.Map">
+		${cpsAnalysis}
+	</insert>
+	
+	<select id="getDatagridTotal" resultType="long">
+		select count(1) from cpsstat where 1=1
+		<if test="cpsStat.cpscode != null and cpsStat.cpscode != '' ">
+			and cpscode = #{cpsStat.cpscode}
+		</if>
+		<if test="cpsStat.beginTime != null and cpsStat.beginTime != '' ">
+			<![CDATA[  and curdate >= #{cpsStat.beginTime}  ]]>
+		</if>
+		<if test="cpsStat.endTime != null and cpsStat.endTime != '' ">
+			<![CDATA[  and curdate < #{cpsStat.endTime}  ]]>
+		</if>
+	</select>
+
+	<select id="datagridUser" resultType="com.zjgt.p2p.report.model.CpsStat" resultMap="BaseResultMap">
+		<!-- select id,curdate,cpscode,cpsname,regcnt,openaccnt,investamount,investcnt,avginvestamount,investrate,remark from cpsstat where 1=1 -->
+		select * from cpsstat where 1=1
+		<if test="cpsStat.cpscode != null and cpsStat.cpscode != '' ">
+			and cpscode = #{cpsStat.cpscode}
+		</if>
+		<if test="cpsStat.beginTime != null and cpsStat.beginTime != '' ">
+			<![CDATA[  and curdate >= #{cpsStat.beginTime}  ]]>
+		</if>
+		<if test="cpsStat.endTime != null and cpsStat.endTime != '' ">
+			<![CDATA[  and curdate < #{cpsStat.endTime}  ]]>
+		</if>
+		<if test="page.sort != null and page.sort != ''">
+			order by #{page.sort} #{page.order}
+		</if>
+		<if test="page.page > 0">
+			limit #{page.start},#{page.rows}
+		</if>
+	</select>
+	
+	 <delete id="deleteCpscpa" >
+	 
+   			 delete from cpsstat
+   			 
+ 	 </delete>
+	
+</mapper>

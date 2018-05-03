@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zjgt.p2p.base.dao.LoginLocaleDao" >
+  <resultMap id="BaseResultMap" type="com.zjgt.p2p.base.domain.LoginLocale" >
+    <result column="REC_NO" property="recNo" jdbcType="VARCHAR" />
+    <result column="USER_NO" property="userNo" jdbcType="VARCHAR" />
+    <result column="LOCALE" property="locale" jdbcType="VARCHAR" />
+    <result column="LOGIN_TIMES" property="loginTimes" jdbcType="DECIMAL" />
+    <result column="LAST_TIME" property="lastTime" jdbcType="CHAR" />
+  </resultMap>
+  
+  <sql id="baseColumns">REC_NO, USER_NO, LOCALE, LOGIN_TIMES, LAST_TIME</sql>
+  
+  <insert id="insert" parameterType="com.zjgt.p2p.base.domain.LoginLocale" >
+    insert into CP_LOGIN_LOCALE (REC_NO, USER_NO, LOCALE, 
+      LOGIN_TIMES, LAST_TIME)
+    values (#{recNo,jdbcType=VARCHAR}, #{userNo,jdbcType=VARCHAR}, #{locale,jdbcType=VARCHAR}, 
+      #{loginTimes,jdbcType=DECIMAL}, #{lastTime,jdbcType=CHAR})
+  </insert>
+  
+  <update id="update" parameterType="com.zjgt.p2p.base.domain.LoginLocale">
+    update CP_WEB_LOGIN_LOG
+    set
+      LOGIN_TIMES = #{loginTimes,jdbcType=DECIMAL},
+      LAST_TIME = #{lastTime,jdbcType=CHAR}
+    where USER_NO = #{userNo, jdbcType=VARCHAR} and LOCALE = #{locale, jdbcType=VARCHAR}
+  </update>
+  
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select <include refid="baseColumns" />
+    from CP_LOGIN_LOCALE
+  </select>
+  
+  <select id="getLoginLocaleByUserNoAndLocale" resultMap="BaseResultMap">
+    select <include refid="baseColumns" />
+    from CP_LOGIN_LOCALE
+    where USER_NO = #{userNo, jdbcType=VARCHAR} and LOCALE = #{locale, jdbcType=VARCHAR}
+  </select>
+  
+  <select id="selectByUserNo" resultMap="BaseResultMap" parameterType="java.lang.String">
+    select <include refid="baseColumns" />
+    from CP_LOGIN_LOCALE
+    where USER_NO = #{userNo, jdbcType=VARCHAR}
+  </select>
+  
+  <select id="getLoginLocaleGreaterThanThreshold" resultMap="BaseResultMap">
+    select <include refid="baseColumns" />
+    from CP_LOGIN_LOCALE
+    where USER_NO = #{userNo, jdbcType=VARCHAR} and LOGIN_TIMES &gt;= #{threshold, jdbcType=SMALLINT}
+  </select>
+  
+</mapper>

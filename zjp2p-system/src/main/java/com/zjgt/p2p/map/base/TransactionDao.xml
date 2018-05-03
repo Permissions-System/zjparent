@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zjgt.p2p.base.dao.TransactionDao" >
+	<resultMap id="BaseResultMap" type="com.zjgt.p2p.base.domain.Transaction" >
+	  <id column="TRANS_CODE" property="transCode" jdbcType="VARCHAR" />
+	  <result column="TRANS_NAME" property="transName" jdbcType="VARCHAR" />
+	  <result column="URL" property="url" jdbcType="VARCHAR" />
+	  <result column="TRANS_STATUS" property="transStatus" jdbcType="CHAR" />
+	  <result column="VALIDATE_FLAG" property="validateFlag" jdbcType="CHAR" />
+	  <result column="MODULE_CODE" property="moduleCode" jdbcType="VARCHAR" />
+	</resultMap>
+	
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+	  delete from CP_TRANS
+	  where TRANS_CODE = #{transCode,jdbcType=VARCHAR}
+	</delete>
+	
+	<insert id="insert" parameterType="com.zjgt.p2p.base.domain.Transaction" >
+	  insert into CP_TRANS (TRANS_CODE, TRANS_NAME, URL, 
+	    TRANS_STATUS, VALIDATE_FLAG, MODULE_CODE
+	    )
+	  values (#{transCode,jdbcType=VARCHAR}, #{transName,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR}, 
+	    #{transStatus,jdbcType=CHAR}, #{validateFlag,jdbcType=CHAR}, #{moduleCode,jdbcType=VARCHAR}
+	    )
+	</insert>
+	
+	<update id="updateByPrimaryKey" parameterType="com.zjgt.p2p.base.domain.Transaction" >
+	  update CP_TRANS
+	  set TRANS_NAME = #{transName,jdbcType=VARCHAR},
+	    URL = #{url,jdbcType=VARCHAR},
+	    TRANS_STATUS = #{transStatus,jdbcType=CHAR},
+	    VALIDATE_FLAG = #{validateFlag,jdbcType=CHAR},
+	    MODULE_CODE = #{moduleCode,jdbcType=VARCHAR}
+	  where TRANS_CODE = #{transCode,jdbcType=VARCHAR}
+	</update>
+	
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+	  select TRANS_CODE, TRANS_NAME, URL, TRANS_STATUS, VALIDATE_FLAG, MODULE_CODE
+	  from CP_TRANS
+	  where TRANS_CODE = #{transCode,jdbcType=VARCHAR}
+	</select>
+	
+	<select id="selectTransByModuleCode" resultMap="BaseResultMap" parameterType="java.lang.String" >
+	  select TRANS_CODE, TRANS_NAME, URL, TRANS_STATUS, VALIDATE_FLAG, MODULE_CODE
+	  from CP_TRANS where MODULE_CODE = #{moduleCode,jdbcType=VARCHAR}
+	  order by TRANS_CODE
+	</select>
+ 
+	<select id="selectByModulesAndPage" parameterType="java.util.Map" resultMap="BaseResultMap">
+		select TRANS_CODE, TRANS_NAME, URL, TRANS_STATUS, VALIDATE_FLAG, MODULE_CODE
+		from CP_TRANS
+		WHERE MODULE_CODE in
+		<foreach item="moduleCode" index="index" collection="moduleCodes"
+		    open="(" separator="," close=")">
+		      #{moduleCode}
+		</foreach>
+		order by TRANS_CODE
+	</select>
+
+	<select id="findCountByTransCode" parameterType="java.lang.String" resultType="int">
+		SELECT count(1)
+		FROM CP_TRANS WHERE TRANS_CODE = #{transCode,jdbcType=VARCHAR}
+	</select>
+	
+	<select id="findCountByTransName" parameterType="java.lang.String" resultType="int">
+		SELECT count(1)
+		FROM CP_TRANS WHERE TRANS_NAME = #{transName,jdbcType=VARCHAR}
+	</select>
+	
+	<select id="getTransByPage" parameterType="org.springfk.pancloud.paginator.vo.Page" resultMap="BaseResultMap">
+		SELECT TRANS_CODE, TRANS_NAME, URL, TRANS_STATUS, VALIDATE_FLAG, MODULE_CODE
+		from CP_TRANS
+		order by TRANS_CODE
+	</select>
+	
+	<select id="getTransByModuleCodePage" parameterType="java.util.Map" resultMap="BaseResultMap">
+		SELECT TRANS_CODE, TRANS_NAME, URL, TRANS_STATUS, VALIDATE_FLAG, MODULE_CODE
+		from CP_TRANS
+		where MODULE_CODE = #{moduleCode,jdbcType=VARCHAR}
+		order by TRANS_CODE
+	</select>
+</mapper>

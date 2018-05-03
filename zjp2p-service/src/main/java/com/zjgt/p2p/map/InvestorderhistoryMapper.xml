@@ -1,0 +1,461 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zjgt.p2p.dao.InvestorderhistoryMapper" >
+  <resultMap id="BaseResultMap" type="com.zjgt.p2p.model.Investorderhistory" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    <id column="ID" property="id" jdbcType="INTEGER" />
+    <result column="SerialId" property="serialid" jdbcType="INTEGER" />
+    <result column="InvestOrderCode" property="investordercode" jdbcType="VARCHAR" />
+    <result column="preOrderCode" property="preordercode" jdbcType="VARCHAR" />
+    <result column="BidCode" property="bidcode" jdbcType="VARCHAR" />
+    <result column="CreditMatchRuleId" property="creditmatchruleid" jdbcType="INTEGER" />
+    <result column="CustomerID" property="customerid" jdbcType="BIGINT" />
+    <result column="CustomerNickName" property="customernickname" jdbcType="VARCHAR" />
+    <result column="CustomerName" property="customername" jdbcType="VARCHAR" />
+    <result column="SalerID" property="salerid" jdbcType="BIGINT" />
+    <result column="BusinessType" property="businesstype" jdbcType="VARCHAR" />
+    <result column="Amount" property="amount" jdbcType="DECIMAL" />
+    <result column="Fee" property="fee" jdbcType="DECIMAL" />
+    <result column="bonusamount" property="bonusamount" jdbcType="DECIMAL" />
+    <result column="bonustype" property="bonustype" jdbcType="INTEGER" />
+    <result column="InvestTerm" property="investterm" jdbcType="INTEGER" />
+    <result column="TermType" property="termtype" jdbcType="VARCHAR" />
+    <result column="ChannelCode" property="channelcode" jdbcType="VARCHAR" />
+    <result column="exptIncome" property="exptincome" jdbcType="DECIMAL" />
+    <result column="transname" property="transname" jdbcType="VARCHAR" />
+    <result column="TransStatus" property="transstatus" jdbcType="INTEGER" />
+    <result column="ApproStatus" property="approstatus" jdbcType="INTEGER" />
+    <result column="OrderStatus" property="orderstatus" jdbcType="INTEGER" />
+    <result column="OrderStatusDesc" property="orderstatusdesc" jdbcType="VARCHAR" />
+    <result column="OrderDate" property="orderdate" jdbcType="TIMESTAMP" />
+    <result column="Opdate" property="opdate" jdbcType="TIMESTAMP" />
+    <result column="Remark" property="remark" jdbcType="VARCHAR" />
+    <result column="expiredate" property="expiredate" jdbcType="TIMESTAMP" />
+    <result column="ifsum" property="ifsum" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    ID, SerialId, InvestOrderCode, preOrderCode, BidCode, CreditMatchRuleId, CustomerID, 
+    CustomerNickName, CustomerName, SalerID, BusinessType, Amount, Fee, bonusamount, 
+    bonustype, InvestTerm, TermType, ChannelCode, exptIncome, transname, TransStatus, 
+    ApproStatus, OrderStatus, OrderStatusDesc, OrderDate, Opdate, Remark, expiredate, 
+    ifsum
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.zjgt.p2p.model.InvestorderhistoryExample" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from investorderhistory
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    select 
+    <include refid="Base_Column_List" />
+    from investorderhistory
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    delete from investorderhistory
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zjgt.p2p.model.Investorderhistory" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    insert into investorderhistory (ID, SerialId, InvestOrderCode, 
+      preOrderCode, BidCode, CreditMatchRuleId, 
+      CustomerID, CustomerNickName, CustomerName, 
+      SalerID, BusinessType, Amount, 
+      Fee, bonusamount, bonustype, 
+      InvestTerm, TermType, ChannelCode, 
+      exptIncome, transname, TransStatus, 
+      ApproStatus, OrderStatus, OrderStatusDesc, 
+      OrderDate, Opdate, Remark, 
+      expiredate, ifsum)
+    values (#{id,jdbcType=INTEGER}, #{serialid,jdbcType=INTEGER}, #{investordercode,jdbcType=VARCHAR}, 
+      #{preordercode,jdbcType=VARCHAR}, #{bidcode,jdbcType=VARCHAR}, #{creditmatchruleid,jdbcType=INTEGER}, 
+      #{customerid,jdbcType=BIGINT}, #{customernickname,jdbcType=VARCHAR}, #{customername,jdbcType=VARCHAR}, 
+      #{salerid,jdbcType=BIGINT}, #{businesstype,jdbcType=VARCHAR}, #{amount,jdbcType=DECIMAL}, 
+      #{fee,jdbcType=DECIMAL}, #{bonusamount,jdbcType=DECIMAL}, #{bonustype,jdbcType=INTEGER}, 
+      #{investterm,jdbcType=INTEGER}, #{termtype,jdbcType=VARCHAR}, #{channelcode,jdbcType=VARCHAR}, 
+      #{exptincome,jdbcType=DECIMAL}, #{transname,jdbcType=VARCHAR}, #{transstatus,jdbcType=INTEGER}, 
+      #{approstatus,jdbcType=INTEGER}, #{orderstatus,jdbcType=INTEGER}, #{orderstatusdesc,jdbcType=VARCHAR}, 
+      #{orderdate,jdbcType=TIMESTAMP}, #{opdate,jdbcType=TIMESTAMP}, #{remark,jdbcType=VARCHAR}, 
+      #{expiredate,jdbcType=TIMESTAMP}, #{ifsum,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zjgt.p2p.model.Investorderhistory" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    insert into investorderhistory
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="serialid != null" >
+        SerialId,
+      </if>
+      <if test="investordercode != null" >
+        InvestOrderCode,
+      </if>
+      <if test="preordercode != null" >
+        preOrderCode,
+      </if>
+      <if test="bidcode != null" >
+        BidCode,
+      </if>
+      <if test="creditmatchruleid != null" >
+        CreditMatchRuleId,
+      </if>
+      <if test="customerid != null" >
+        CustomerID,
+      </if>
+      <if test="customernickname != null" >
+        CustomerNickName,
+      </if>
+      <if test="customername != null" >
+        CustomerName,
+      </if>
+      <if test="salerid != null" >
+        SalerID,
+      </if>
+      <if test="businesstype != null" >
+        BusinessType,
+      </if>
+      <if test="amount != null" >
+        Amount,
+      </if>
+      <if test="fee != null" >
+        Fee,
+      </if>
+      <if test="bonusamount != null" >
+        bonusamount,
+      </if>
+      <if test="bonustype != null" >
+        bonustype,
+      </if>
+      <if test="investterm != null" >
+        InvestTerm,
+      </if>
+      <if test="termtype != null" >
+        TermType,
+      </if>
+      <if test="channelcode != null" >
+        ChannelCode,
+      </if>
+      <if test="exptincome != null" >
+        exptIncome,
+      </if>
+      <if test="transname != null" >
+        transname,
+      </if>
+      <if test="transstatus != null" >
+        TransStatus,
+      </if>
+      <if test="approstatus != null" >
+        ApproStatus,
+      </if>
+      <if test="orderstatus != null" >
+        OrderStatus,
+      </if>
+      <if test="orderstatusdesc != null" >
+        OrderStatusDesc,
+      </if>
+      <if test="orderdate != null" >
+        OrderDate,
+      </if>
+      <if test="opdate != null" >
+        Opdate,
+      </if>
+      <if test="remark != null" >
+        Remark,
+      </if>
+      <if test="expiredate != null" >
+        expiredate,
+      </if>
+      <if test="ifsum != null" >
+        ifsum,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="serialid != null" >
+        #{serialid,jdbcType=INTEGER},
+      </if>
+      <if test="investordercode != null" >
+        #{investordercode,jdbcType=VARCHAR},
+      </if>
+      <if test="preordercode != null" >
+        #{preordercode,jdbcType=VARCHAR},
+      </if>
+      <if test="bidcode != null" >
+        #{bidcode,jdbcType=VARCHAR},
+      </if>
+      <if test="creditmatchruleid != null" >
+        #{creditmatchruleid,jdbcType=INTEGER},
+      </if>
+      <if test="customerid != null" >
+        #{customerid,jdbcType=BIGINT},
+      </if>
+      <if test="customernickname != null" >
+        #{customernickname,jdbcType=VARCHAR},
+      </if>
+      <if test="customername != null" >
+        #{customername,jdbcType=VARCHAR},
+      </if>
+      <if test="salerid != null" >
+        #{salerid,jdbcType=BIGINT},
+      </if>
+      <if test="businesstype != null" >
+        #{businesstype,jdbcType=VARCHAR},
+      </if>
+      <if test="amount != null" >
+        #{amount,jdbcType=DECIMAL},
+      </if>
+      <if test="fee != null" >
+        #{fee,jdbcType=DECIMAL},
+      </if>
+      <if test="bonusamount != null" >
+        #{bonusamount,jdbcType=DECIMAL},
+      </if>
+      <if test="bonustype != null" >
+        #{bonustype,jdbcType=INTEGER},
+      </if>
+      <if test="investterm != null" >
+        #{investterm,jdbcType=INTEGER},
+      </if>
+      <if test="termtype != null" >
+        #{termtype,jdbcType=VARCHAR},
+      </if>
+      <if test="channelcode != null" >
+        #{channelcode,jdbcType=VARCHAR},
+      </if>
+      <if test="exptincome != null" >
+        #{exptincome,jdbcType=DECIMAL},
+      </if>
+      <if test="transname != null" >
+        #{transname,jdbcType=VARCHAR},
+      </if>
+      <if test="transstatus != null" >
+        #{transstatus,jdbcType=INTEGER},
+      </if>
+      <if test="approstatus != null" >
+        #{approstatus,jdbcType=INTEGER},
+      </if>
+      <if test="orderstatus != null" >
+        #{orderstatus,jdbcType=INTEGER},
+      </if>
+      <if test="orderstatusdesc != null" >
+        #{orderstatusdesc,jdbcType=VARCHAR},
+      </if>
+      <if test="orderdate != null" >
+        #{orderdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="opdate != null" >
+        #{opdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="expiredate != null" >
+        #{expiredate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ifsum != null" >
+        #{ifsum,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zjgt.p2p.model.Investorderhistory" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    update investorderhistory
+    <set >
+      <if test="serialid != null" >
+        SerialId = #{serialid,jdbcType=INTEGER},
+      </if>
+      <if test="investordercode != null" >
+        InvestOrderCode = #{investordercode,jdbcType=VARCHAR},
+      </if>
+      <if test="preordercode != null" >
+        preOrderCode = #{preordercode,jdbcType=VARCHAR},
+      </if>
+      <if test="bidcode != null" >
+        BidCode = #{bidcode,jdbcType=VARCHAR},
+      </if>
+      <if test="creditmatchruleid != null" >
+        CreditMatchRuleId = #{creditmatchruleid,jdbcType=INTEGER},
+      </if>
+      <if test="customerid != null" >
+        CustomerID = #{customerid,jdbcType=BIGINT},
+      </if>
+      <if test="customernickname != null" >
+        CustomerNickName = #{customernickname,jdbcType=VARCHAR},
+      </if>
+      <if test="customername != null" >
+        CustomerName = #{customername,jdbcType=VARCHAR},
+      </if>
+      <if test="salerid != null" >
+        SalerID = #{salerid,jdbcType=BIGINT},
+      </if>
+      <if test="businesstype != null" >
+        BusinessType = #{businesstype,jdbcType=VARCHAR},
+      </if>
+      <if test="amount != null" >
+        Amount = #{amount,jdbcType=DECIMAL},
+      </if>
+      <if test="fee != null" >
+        Fee = #{fee,jdbcType=DECIMAL},
+      </if>
+      <if test="bonusamount != null" >
+        bonusamount = #{bonusamount,jdbcType=DECIMAL},
+      </if>
+      <if test="bonustype != null" >
+        bonustype = #{bonustype,jdbcType=INTEGER},
+      </if>
+      <if test="investterm != null" >
+        InvestTerm = #{investterm,jdbcType=INTEGER},
+      </if>
+      <if test="termtype != null" >
+        TermType = #{termtype,jdbcType=VARCHAR},
+      </if>
+      <if test="channelcode != null" >
+        ChannelCode = #{channelcode,jdbcType=VARCHAR},
+      </if>
+      <if test="exptincome != null" >
+        exptIncome = #{exptincome,jdbcType=DECIMAL},
+      </if>
+      <if test="transname != null" >
+        transname = #{transname,jdbcType=VARCHAR},
+      </if>
+      <if test="transstatus != null" >
+        TransStatus = #{transstatus,jdbcType=INTEGER},
+      </if>
+      <if test="approstatus != null" >
+        ApproStatus = #{approstatus,jdbcType=INTEGER},
+      </if>
+      <if test="orderstatus != null" >
+        OrderStatus = #{orderstatus,jdbcType=INTEGER},
+      </if>
+      <if test="orderstatusdesc != null" >
+        OrderStatusDesc = #{orderstatusdesc,jdbcType=VARCHAR},
+      </if>
+      <if test="orderdate != null" >
+        OrderDate = #{orderdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="opdate != null" >
+        Opdate = #{opdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null" >
+        Remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="expiredate != null" >
+        expiredate = #{expiredate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ifsum != null" >
+        ifsum = #{ifsum,jdbcType=INTEGER},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zjgt.p2p.model.Investorderhistory" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    update investorderhistory
+    set SerialId = #{serialid,jdbcType=INTEGER},
+      InvestOrderCode = #{investordercode,jdbcType=VARCHAR},
+      preOrderCode = #{preordercode,jdbcType=VARCHAR},
+      BidCode = #{bidcode,jdbcType=VARCHAR},
+      CreditMatchRuleId = #{creditmatchruleid,jdbcType=INTEGER},
+      CustomerID = #{customerid,jdbcType=BIGINT},
+      CustomerNickName = #{customernickname,jdbcType=VARCHAR},
+      CustomerName = #{customername,jdbcType=VARCHAR},
+      SalerID = #{salerid,jdbcType=BIGINT},
+      BusinessType = #{businesstype,jdbcType=VARCHAR},
+      Amount = #{amount,jdbcType=DECIMAL},
+      Fee = #{fee,jdbcType=DECIMAL},
+      bonusamount = #{bonusamount,jdbcType=DECIMAL},
+      bonustype = #{bonustype,jdbcType=INTEGER},
+      InvestTerm = #{investterm,jdbcType=INTEGER},
+      TermType = #{termtype,jdbcType=VARCHAR},
+      ChannelCode = #{channelcode,jdbcType=VARCHAR},
+      exptIncome = #{exptincome,jdbcType=DECIMAL},
+      transname = #{transname,jdbcType=VARCHAR},
+      TransStatus = #{transstatus,jdbcType=INTEGER},
+      ApproStatus = #{approstatus,jdbcType=INTEGER},
+      OrderStatus = #{orderstatus,jdbcType=INTEGER},
+      OrderStatusDesc = #{orderstatusdesc,jdbcType=VARCHAR},
+      OrderDate = #{orderdate,jdbcType=TIMESTAMP},
+      Opdate = #{opdate,jdbcType=TIMESTAMP},
+      Remark = #{remark,jdbcType=VARCHAR},
+      expiredate = #{expiredate,jdbcType=TIMESTAMP},
+      ifsum = #{ifsum,jdbcType=INTEGER}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

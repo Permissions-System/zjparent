@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zjgt.p2p.base.dao.WebTransDao" >
+    
+    <!-- 定义查询结果集Map 查询WebTrans转换Map数据集-->
+    <resultMap id="webTransMap" type="com.zjgt.p2p.base.domain.WebTrans" >
+        <result column="TRANS_CODE" property="transCode" jdbcType="VARCHAR" />
+        <result column="TRANS_NAME" property="transName" jdbcType="VARCHAR" />
+        <result column="PRODUCT_CODE" property="productCode" jdbcType="CHAR" />
+        <result column="MODULE_NAME" property="moduleName" jdbcType="VARCHAR" />
+        <result column="RECHECK_LEVEL" property="recheckLevel" jdbcType="DECIMAL" />
+        <result column="RECHECK_DETAIL_PAGE" property="recheckDetailPage" jdbcType="VARCHAR" />
+        <result column="RECHECK_HANDLE_PAGE" property="recheckHandlePage" jdbcType="VARCHAR" />
+    </resultMap>
+    
+    <!-- 新增记录 -->
+    <insert id="insert" parameterType="com.zjgt.p2p.base.domain.WebTrans" >
+        INSERT INTO 
+            cp_web_trans (
+	            trans_code, trans_name, product_code, 
+	            module_name, recheck_level, recheck_detail_page, 
+	            recheck_handle_page
+            )
+        VALUES (
+            #{transCode,jdbcType=VARCHAR}, #{transName,jdbcType=VARCHAR}, #{productCode,jdbcType=CHAR}, 
+            #{moduleName,jdbcType=VARCHAR}, #{recheckLevel,jdbcType=DECIMAL}, #{recheckDetailPage,jdbcType=VARCHAR}, 
+            #{recheckHandlePage,jdbcType=VARCHAR}
+        )
+    </insert>
+    
+    <!-- 根据主键更新记录  -->
+    <update id="update" parameterType="com.zjgt.p2p.base.domain.WebTrans">
+        UPDATE
+            cp_web_trans
+        <set>
+            <if test=" transName!=null">
+                trans_name = #{transName,jdbcType=VARCHAR},
+            </if>
+            <if test=" productCode!=null">
+                product_code = #{productCode,jdbcType=CHAR},
+            </if>
+            <if test=" moduleName!=null">
+                module_name = #{moduleName,jdbcType=VARCHAR},
+            </if>
+            <if test=" recheckLevel!=null">
+                recheck_level = #{recheckLevel,jdbcType=DECIMAL},
+            </if>
+            <if test=" recheckDetailPage!=null">
+                recheck_detail_page = #{recheckDetailPage,jdbcType=VARCHAR},
+            </if>
+            <if test=" recheckHandlePage!=null">
+                recheck_handle_page = #{recheckHandlePage,jdbcType=VARCHAR},
+            </if>
+        </set>
+        WHERE
+            trans_code = #{transCode,jdbcType=VARCHAR}
+    </update>
+    
+    <!-- 根据主键删除 交易配置记录 -->
+    <delete id="delete" parameterType="java.lang.String">
+        DELETE FROM 
+            cp_web_trans
+        WHERE 
+            trans_code = #{transCode,jdbcType=VARCHAR}
+    </delete>
+    
+    <!-- 根据主键查询 交易配置记录 -->
+    <select id="getWebTransInfo" parameterType="java.lang.String" resultMap="webTransMap">
+        SELECT 
+            trans_code, trans_name, product_code, module_name, recheck_level, recheck_detail_page, 
+            recheck_handle_page
+        FROM 
+            cp_web_trans
+        WHERE  
+            trans_code = #{transCode,jdbcType=VARCHAR}
+    </select>
+    
+    <!-- 新增数据的 重复性校验使用 返回符合条件的记录数 -->
+    <select id="getCountWebTransInfo" parameterType="java.lang.String" resultType="java.lang.Integer" >
+        SELECT 
+            COUNT(1) 
+        FROM 
+            cp_web_trans 
+        WHERE
+            trans_code = #{transCode,jdbcType=VARCHAR}
+    </select>
+    
+    <!-- 获取交易的 复核级别  -->
+    <select id="getRecheckLevel" resultType="java.lang.Integer" parameterType="java.lang.String">
+		SELECT 
+		    recheck_level
+		FROM 
+		    cp_web_trans
+		WHERE 
+		    trans_code = #{transCode, jdbcType=VARCHAR}
+    </select>
+    
+    <!-- 根据传入 产品代码 获取产品下配置 获取产品配置 -->
+    <select id="getWebTransInfoListByProductCode" parameterType="java.lang.String" resultMap="webTransMap" >
+        SELECT 
+            trans_code, trans_name, product_code, module_name, recheck_level, recheck_detail_page, 
+            recheck_handle_page
+        FROM 
+            cp_web_trans
+        WHERE 
+            product_code = #{productCode,jdbcType=CHAR}
+    </select>
+    
+    <!-- 获取交易的 复核详细页面  -->
+    <select id="getRecheckDetailPage" resultType="java.lang.String" parameterType="java.lang.String">
+   	 	SELECT 
+   	 	    recheck_detail_page
+   		FROM 
+   		    cp_web_trans
+   		WHERE 
+   		    trans_code = #{transCode, jdbcType=VARCHAR}
+    </select>
+  
+	<!-- 获取交易的 复核回调级别  -->
+  	<select id="getRecheckHandlePage" resultType="java.lang.String" parameterType="java.lang.String">
+  		SELECT 
+  		    recheck_handle_page
+  		FROM 
+  		    cp_web_trans
+  		WHERE 
+  		    trans_code = #{transCode, jdbcType=VARCHAR}
+  	</select>
+  	
+  	<!-- 分页查询 配置记录  支持 产品管理员权限访问查询-->
+    <select id="getWebTransInfoListByPage" parameterType="java.util.Map"  resultMap="webTransMap" >
+        SELECT 
+            trans_code, trans_name, product_code, module_name, recheck_level, recheck_detail_page, 
+            recheck_handle_page
+        FROM 
+            cp_web_trans
+        WHERE 
+            1 = 1
+        <if test=" productCode!=null">
+            AND product_code = #{productCode,jdbcType=CHAR}
+        </if>
+        <if test=" transName!=null">
+            AND trans_name LIKE CONCAT('%', #{transName} ,'%')
+        </if>
+        <if test=" moduleName!=null">
+            AND module_name LIKE CONCAT('%', #{moduleName} ,'%')
+        </if>
+        ORDER BY trans_code
+    </select>
+</mapper>

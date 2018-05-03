@@ -1,0 +1,15 @@
+<svg version="1.1"
+	 xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:a="http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/"
+	 x="0px" y="0px" width="150.5px" height="142.504px" viewBox="0 0 150.5 142.504" enable-background="new 0 0 150.5 142.504"
+	 xml:space="preserve">
+<defs>
+</defs>
+<g>
+	<g>
+		<path fill="#FFFFFF" d="M148.25,6.254H84.016l-7.713-5.938l-7.711,5.938H2.25c-1.105,0-2,0.895-2,2v132c0,1.104,0.895,2,2,2h146
+			c1.105,0,2-0.896,2-2v-132C150.25,7.149,149.355,6.254,148.25,6.254z"/>
+		<path fill="none" stroke="#ABABAB" stroke-width="0.5" stroke-miterlimit="10" d="M148.25,6.254H84.016l-7.713-5.938l-7.711,5.938
+			H2.25c-1.105,0-2,0.895-2,2v132c0,1.104,0.895,2,2,2h146c1.105,0,2-0.896,2-2v-132C150.25,7.149,149.355,6.254,148.25,6.254z"/>
+	</g>
+</g>
+</svg>

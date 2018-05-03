@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zjgt.p2p.base.dao.MenuDao" >
+	<resultMap id="BaseResultMap" type="com.zjgt.p2p.base.domain.Menu" >
+	  <id column="MENU_CODE" property="menuCode" jdbcType="VARCHAR" />
+	  <result column="MENU_NAME" property="menuName" jdbcType="VARCHAR" />
+	  <result column="TRANS_CODE" property="transCode" jdbcType="VARCHAR" />
+	  <result column="TREEPATH" property="treepath" jdbcType="VARCHAR" />
+	  <result column="ORDER_NUM" property="orderNum" jdbcType="DECIMAL" />
+	  <result column="MENU_STATUS" property="menuStatus" jdbcType="CHAR" />
+	  <result column="PARENT_MENU_CODE" property="parentMenuCode" jdbcType="VARCHAR" />
+	  <result column="URL" property="url" jdbcType="VARCHAR" />
+	</resultMap>
+	
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+	  delete from CP_MENU
+	  where MENU_CODE = #{menuCode,jdbcType=VARCHAR}
+	</delete>
+	
+	<insert id="insert" parameterType="com.zjgt.p2p.base.domain.Menu" >
+	  insert into CP_MENU (MENU_CODE, MENU_NAME, TRANS_CODE, 
+	    TREEPATH, ORDER_NUM, MENU_STATUS, PARENT_MENU_CODE
+	    )
+	  values (#{menuCode,jdbcType=VARCHAR}, #{menuName,jdbcType=VARCHAR}, #{transCode,jdbcType=VARCHAR}, 
+	    #{treepath,jdbcType=VARCHAR}, #{orderNum,jdbcType=DECIMAL}, #{menuStatus,jdbcType=CHAR}, #{parentMenuCode,jdbcType=VARCHAR}
+	    )
+	</insert>
+	
+	<update id="updateByPrimaryKey" parameterType="com.zjgt.p2p.base.domain.Menu" >
+	  update CP_MENU
+	  set MENU_NAME = #{menuName,jdbcType=VARCHAR},
+	    TRANS_CODE = #{transCode,jdbcType=VARCHAR},
+	    TREEPATH = #{treepath,jdbcType=VARCHAR},
+	    ORDER_NUM = #{orderNum,jdbcType=DECIMAL},
+	    MENU_STATUS = #{menuStatus,jdbcType=CHAR},
+	    PARENT_MENU_CODE = #{parentMenuCode,jdbcType=VARCHAR}
+	  where MENU_CODE = #{menuCode,jdbcType=VARCHAR}
+	</update>
+	
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+	  select MENU_CODE, MENU_NAME, TRANS_CODE, TREEPATH, ORDER_NUM, MENU_STATUS, PARENT_MENU_CODE
+	  from CP_MENU
+	  where MENU_CODE = #{menuCode,jdbcType=VARCHAR}
+	</select>
+	
+	<select id="selectAll" resultMap="BaseResultMap" >
+	  select MENU_CODE, MENU_NAME, TRANS_CODE, TREEPATH, ORDER_NUM, MENU_STATUS, PARENT_MENU_CODE
+	  from CP_MENU order by TREEPATH, ORDER_NUM
+	</select>
+	
+	<select id="getRootMenuList" resultMap="BaseResultMap" >
+	  select MENU_CODE, MENU_NAME, TRANS_CODE, TREEPATH, ORDER_NUM, MENU_STATUS, PARENT_MENU_CODE
+	  from CP_MENU where PARENT_MENU_CODE = 'ROOT' order by ORDER_NUM
+	</select>
+	
+	<select id="getSubMenuList" resultMap="BaseResultMap" parameterType="java.lang.String">
+	  select MENU_CODE, MENU_NAME, TRANS_CODE, TREEPATH, ORDER_NUM, MENU_STATUS, PARENT_MENU_CODE
+	  from CP_MENU where PARENT_MENU_CODE = #{menuCode}  order by ORDER_NUM
+	</select>
+	
+	<select id="getAllSubMenus" resultMap="BaseResultMap" parameterType="java.lang.String">
+		select MENU_CODE, MENU_NAME, TRANS_CODE, TREEPATH, ORDER_NUM, MENU_STATUS, PARENT_MENU_CODE
+		from CP_MENU
+		where MENU_CODE != #{menuCode}
+		  AND INSTR(CONCAT(TREEPATH ,'/'), CONCAT('/',#{menuCode},'/') > 0
+		order by TREEPATH, ORDER_NUM
+	</select> 
+  
+    <select id="getMenuTreeListByStaffNo" resultMap="BaseResultMap" parameterType="java.util.Map">
+		SELECT DISTINCT s.MENU_CODE AS MENU_CODE,
+		                s.MENU_NAME AS MENU_NAME,
+		                s.PARENT_MENU_CODE AS PARENT_MENU_CODE,
+		                s.ORDER_NUM AS ORDER_NUM,
+		                s.TREEPATH,
+		                CASE
+		                  WHEN s.MENU_CODE = t.MENU_CODE then
+		                   t.URL
+		                  WHEN s.MENU_CODE != t.MENU_CODE then
+		                   ''
+		                END AS URL
+		  FROM cp_menu s,
+		       (SELECT menu.MENU_NAME,
+		               menu.MENU_CODE,
+		               menu.PARENT_MENU_CODE,
+		               menu.TREEPATH,
+		               trans.URL
+		          FROM CP_MENU           menu,
+		               CP_STAFF          staff,
+		               CP_TRANS          trans,
+		               CP_ROLE           role,
+		               CP_ROLE_TRANS_REL rtr,
+		               CP_STAFF_ROLE_REL srr
+		         WHERE staff.STAFF_NO = #{staffNo,jdbcType=VARCHAR}
+		           AND srr.STAFF_NO = staff.STAFF_NO
+		           AND role.ROLE_CODE = srr.ROLE_CODE
+		           AND rtr.ROLE_CODE = role.ROLE_CODE
+		           AND trans.TRANS_CODE = rtr.TRANS_CODE
+		           AND menu.TRANS_CODE = trans.TRANS_CODE
+		           AND menu.MENU_STATUS = '1'
+		           AND trans.TRANS_STATUS = '1'
+		           AND staff.STAFF_STATUS = '1') t
+		 WHERE (s.MENU_CODE = t.MENU_CODE OR
+		       INSTR(CONCAT(t.TREEPATH , '/'), CONCAT('/',s.MENU_CODE,'/')) > 0)
+		   AND s.MENU_STATUS = '1'
+		   AND (s.MENU_CODE = #{startMenuCode,jdbcType=VARCHAR} OR
+		       INSTR(CONCAT(s.TREEPATH ,'/'), CONCAT('/',#{startMenuCode,jdbcType=VARCHAR}, '/')) > 0)
+		 ORDER BY s.TREEPATH, s.ORDER_NUM
+    </select>
+  
+	<select id="getMenuTreeForAdmin" resultMap="BaseResultMap" parameterType="java.util.Map">
+		SELECT m.MENU_CODE        AS MENU_CODE,
+		       m.MENU_NAME        AS MENU_NAME,
+		       m.PARENT_MENU_CODE AS PARENT_MENU_CODE,
+		       m.ORDER_NUM        AS ORDER_NUM,
+		       m.TREEPATH         as TREEPATH,
+		       t.URL              as URL
+		FROM CP_MENU m
+		LEFT JOIN CP_TRANS t
+		   ON t.TRANS_CODE = m.TRANS_CODE
+		WHERE (m.MENU_CODE = #{startMenuCode,jdbcType=VARCHAR} OR
+		      INSTR(CONCAT(m.TREEPATH, '/'), CONCAT('/',#{startMenuCode,jdbcType=VARCHAR},'/')) > 0)
+		ORDER BY m.TREEPATH, m.ORDER_NUM
+	</select> 
+</mapper>

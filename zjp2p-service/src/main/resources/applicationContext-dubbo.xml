@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+		http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd"
+	default-lazy-init="true">
+	<!-- Dubbo配置 -->
+	<!-- 提供方应用名称信息，这个相当于起一个名字，我们dubbo管理页面比较清晰是哪个应用暴露出来的 -->
+	<dubbo:application name="zjgt-p2p-service" />
+	<!-- 使用zookeeper注册中心暴露服务地址 --> 
+	<dubbo:registry address="${zookeeper.address}" />
+	<!-- 服务消费者全局配置，为方便调试设置超时时间为1000s -->
+	<dubbo:consumer filter="ReferenceFilter" timeout="1000000"
+		cluster="failfast" check="false" />
+	<!--（一）、基本模块开始 -->
+	<dubbo:reference id="errorLogsService"
+		interface="com.zjgt.p2p.base.service.IErrorLogsService">
+		<dubbo:method name="writeErrorLog" async="true" />
+	</dubbo:reference>
+	<dubbo:reference id="loginLogService"
+		interface="com.zjgt.p2p.base.service.ILoginLogService">
+		<dubbo:method name="addLoginLog" async="true" />
+	</dubbo:reference>
+	<dubbo:reference id="maintenanceLogService"
+		interface="com.zjgt.p2p.base.service.IMaintenanceLogService">
+		<dubbo:method name="insert" async="true" />
+	</dubbo:reference>
+	<dubbo:reference id="errorCompInfoService"
+		interface="com.zjgt.p2p.base.service.IErrorCompInfoService">
+		<dubbo:method name="addErrorCompInfo" async="true" />
+	</dubbo:reference>
+	<dubbo:reference id="webLoginLogService"
+		interface="com.zjgt.p2p.base.service.IWebLoginLogService">
+		<dubbo:method name="addWebLoginLog" async="true" />
+	</dubbo:reference>
+</beans>

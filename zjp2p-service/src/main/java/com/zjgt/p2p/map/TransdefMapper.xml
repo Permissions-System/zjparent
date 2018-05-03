@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zjgt.p2p.dao.TransdefMapper" >
+  <resultMap id="BaseResultMap" type="com.zjgt.p2p.model.Transdef" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    <id column="TranCode" property="trancode" jdbcType="CHAR" />
+    <result column="TranType" property="trantype" jdbcType="CHAR" />
+    <result column="TranName" property="tranname" jdbcType="VARCHAR" />
+    <result column="TranStatus" property="transtatus" jdbcType="CHAR" />
+    <result column="TranDesc" property="trandesc" jdbcType="VARCHAR" />
+    <result column="IsNotify" property="isnotify" jdbcType="TINYINT" />
+    <result column="NotifyMethod" property="notifymethod" jdbcType="CHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    TranCode, TranType, TranName, TranStatus, TranDesc, IsNotify, NotifyMethod
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.zjgt.p2p.model.TransdefExample" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from transdef
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    select 
+    <include refid="Base_Column_List" />
+    from transdef
+    where TranCode = #{trancode,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    delete from transdef
+    where TranCode = #{trancode,jdbcType=CHAR}
+  </delete>
+  <insert id="insert" parameterType="com.zjgt.p2p.model.Transdef" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    insert into transdef (TranCode, TranType, TranName, 
+      TranStatus, TranDesc, IsNotify, 
+      NotifyMethod)
+    values (#{trancode,jdbcType=CHAR}, #{trantype,jdbcType=CHAR}, #{tranname,jdbcType=VARCHAR}, 
+      #{transtatus,jdbcType=CHAR}, #{trandesc,jdbcType=VARCHAR}, #{isnotify,jdbcType=TINYINT}, 
+      #{notifymethod,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zjgt.p2p.model.Transdef" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    insert into transdef
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="trancode != null" >
+        TranCode,
+      </if>
+      <if test="trantype != null" >
+        TranType,
+      </if>
+      <if test="tranname != null" >
+        TranName,
+      </if>
+      <if test="transtatus != null" >
+        TranStatus,
+      </if>
+      <if test="trandesc != null" >
+        TranDesc,
+      </if>
+      <if test="isnotify != null" >
+        IsNotify,
+      </if>
+      <if test="notifymethod != null" >
+        NotifyMethod,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="trancode != null" >
+        #{trancode,jdbcType=CHAR},
+      </if>
+      <if test="trantype != null" >
+        #{trantype,jdbcType=CHAR},
+      </if>
+      <if test="tranname != null" >
+        #{tranname,jdbcType=VARCHAR},
+      </if>
+      <if test="transtatus != null" >
+        #{transtatus,jdbcType=CHAR},
+      </if>
+      <if test="trandesc != null" >
+        #{trandesc,jdbcType=VARCHAR},
+      </if>
+      <if test="isnotify != null" >
+        #{isnotify,jdbcType=TINYINT},
+      </if>
+      <if test="notifymethod != null" >
+        #{notifymethod,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zjgt.p2p.model.Transdef" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    update transdef
+    <set >
+      <if test="trantype != null" >
+        TranType = #{trantype,jdbcType=CHAR},
+      </if>
+      <if test="tranname != null" >
+        TranName = #{tranname,jdbcType=VARCHAR},
+      </if>
+      <if test="transtatus != null" >
+        TranStatus = #{transtatus,jdbcType=CHAR},
+      </if>
+      <if test="trandesc != null" >
+        TranDesc = #{trandesc,jdbcType=VARCHAR},
+      </if>
+      <if test="isnotify != null" >
+        IsNotify = #{isnotify,jdbcType=TINYINT},
+      </if>
+      <if test="notifymethod != null" >
+        NotifyMethod = #{notifymethod,jdbcType=CHAR},
+      </if>
+    </set>
+    where TranCode = #{trancode,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zjgt.p2p.model.Transdef" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    update transdef
+    set TranType = #{trantype,jdbcType=CHAR},
+      TranName = #{tranname,jdbcType=VARCHAR},
+      TranStatus = #{transtatus,jdbcType=CHAR},
+      TranDesc = #{trandesc,jdbcType=VARCHAR},
+      IsNotify = #{isnotify,jdbcType=TINYINT},
+      NotifyMethod = #{notifymethod,jdbcType=CHAR}
+    where TranCode = #{trancode,jdbcType=CHAR}
+  </update>
+</mapper>

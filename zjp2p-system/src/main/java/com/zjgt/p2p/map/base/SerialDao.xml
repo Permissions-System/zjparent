@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zjgt.p2p.base.dao.SerialDao">
+    	
+	<!--获取全部码表记录的List集合  -->
+	<select id="getSerialTemplateList" resultType="com.zjgt.p2p.base.domain.SerialTemplate">
+		SELECT 			
+			TEMPLATE_CODE as templateCode,
+			TEMPLATE as template,
+			CACHED_COUNT as cachedCount,
+			COUNTER as counter,
+			DESCRIPTION as description
+		FROM cp_serial_template
+	</select>	
+
+	<select id="getSerialTemplate" parameterType="java.lang.String" resultType="com.zjgt.p2p.base.domain.SerialTemplate">
+		SELECT 			
+			TEMPLATE_CODE as templateCode,
+			TEMPLATE as template,
+			COUNTER as counter,
+			DESCRIPTION as description,
+			CACHED_COUNT as cachedCount
+		FROM cp_serial_template
+		WHERE template_code = #{templateCode}
+	</select>
+	
+	<select id="getSerialTemplateForUpdate" parameterType="java.lang.String" resultType="com.zjgt.p2p.base.domain.SerialTemplate">
+		SELECT 			
+			TEMPLATE_CODE as templateCode,
+			TEMPLATE as template,
+			COUNTER as counter,
+			DESCRIPTION as description,
+			CACHED_COUNT as cachedCount
+		FROM cp_serial_template
+		WHERE template_code = #{templateCode} for update
+	</select>
+	
+	<insert id="insertSerialTemplate" parameterType="com.zjgt.p2p.base.domain.SerialTemplate" keyProperty="template_code">
+		INSERT INTO cp_serial_template(template_code,template,description,cached_count)
+		VALUES(#{templateCode},#{template},#{description},#{cachedCount})
+	</insert>
+	
+ 	<delete id="deleteSerialTemplate" parameterType="java.lang.String" >
+    	delete from cp_serial_template
+    	where template_code = #{templateCode}
+  	</delete>		
+	
+	<update id="updateSerialTemplate" parameterType="com.zjgt.p2p.base.domain.SerialTemplate">
+		UPDATE 
+			cp_serial_template  
+		SET 
+			template=#{template}, description=#{description}, cached_count=#{cachedCount}, counter=#{counter}
+		WHERE 
+			template_code=#{templateCode}
+	</update>				
+
+</mapper>

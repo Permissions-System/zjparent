@@ -1,0 +1,646 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zjgt.p2p.report.dao.UserInvestInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.zjgt.p2p.report.model.UserInvestInfo" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="memberName" property="membername" jdbcType="VARCHAR" />
+    <result column="realName" property="realname" jdbcType="VARCHAR" />
+    <result column="mobile" property="mobile" jdbcType="VARCHAR" />
+    <result column="HasFuiou" property="hasfuiou" jdbcType="INTEGER" />
+    <result column="regTime" property="regtime" jdbcType="TIMESTAMP" />
+    <result column="nearlyInvestMoney" property="nearlyinvestmoney" jdbcType="DECIMAL" />
+    <result column="nearlyInvestTime" property="nearlyinvesttime" jdbcType="TIMESTAMP" />
+    <result column="firstInvestMoney" property="firstinvestmoney" jdbcType="DECIMAL" />
+    <result column="firstInvestTime" property="firstinvesttime" jdbcType="TIMESTAMP" />
+    <result column="recommendPerson" property="recommendperson" jdbcType="VARCHAR" />
+    <result column="recommendCode" property="recommendcode" jdbcType="VARCHAR" />
+    <result column="promoteCode" property="promotecode" jdbcType="VARCHAR" />
+    <result column="identity" property="identity" jdbcType="VARCHAR" />
+    <result column="area" property="area" jdbcType="VARCHAR" />
+    <result column="province" property="province" jdbcType="VARCHAR" />
+    <result column="city" property="city" jdbcType="VARCHAR" />
+    <result column="region" property="region" jdbcType="VARCHAR" />
+    <result column="gender" property="gender" jdbcType="VARCHAR" />
+    <result column="age" property="age" jdbcType="INTEGER" />
+    <result column="accountBalance" property="accountbalance" jdbcType="DECIMAL" />
+    <result column="addRechargeMoney" property="addrechargemoney" jdbcType="DECIMAL" />
+    <result column="addWithdrawalMoney" property="addwithdrawalmoney" jdbcType="DECIMAL" />
+    <result column="addInvestMoney" property="addinvestmoney" jdbcType="DECIMAL" />
+    <result column="addInvestCnt" property="addinvestcnt" jdbcType="INTEGER" />
+    <result column="ZJBNum" property="zjbnum" jdbcType="INTEGER" />
+    <result column="recommendRegCnt" property="recommendregcnt" jdbcType="INTEGER" />
+    <result column="addLoginCnt" property="addlogincnt" jdbcType="INTEGER" />
+    <result column="lastLoginTime" property="lastlogintime" jdbcType="TIMESTAMP" />
+    <result column="record" property="record" jdbcType="VARCHAR" />
+    <result column="createDate" property="createdate" jdbcType="TIMESTAMP" />
+    <result column="temp1" property="temp1" jdbcType="VARCHAR" />
+    <result column="temp2" property="temp2" jdbcType="VARCHAR" />
+    <result column="temp3" property="temp3" jdbcType="VARCHAR" />
+    <result column="temp4" property="temp4" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    id, memberName, realName, mobile, HasFuiou, regTime, nearlyInvestMoney, nearlyInvestTime, 
+    firstInvestMoney, firstInvestTime, recommendPerson, recommendCode, promoteCode, identity, 
+    area, province, city, region, gender, age, accountBalance, addRechargeMoney, addWithdrawalMoney, 
+    addInvestMoney, addInvestCnt, ZJBNum, recommendRegCnt, addLoginCnt, lastLoginTime, 
+    record, createDate, temp1, temp2, temp3, temp4
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.zjgt.p2p.report.model.UserInvestInfoExample" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from userinvestinfo
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    select 
+    <include refid="Base_Column_List" />
+    from userinvestinfo
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    delete from userinvestinfo
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zjgt.p2p.report.model.UserInvestInfo" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    insert into userinvestinfo (id, memberName, realName, 
+      mobile, HasFuiou, regTime, 
+      nearlyInvestMoney, nearlyInvestTime, 
+      firstInvestMoney, firstInvestTime, recommendPerson, 
+      recommendCode, promoteCode, identity, 
+      area, province, city, 
+      region, gender, age, 
+      accountBalance, addRechargeMoney, addWithdrawalMoney, 
+      addInvestMoney, addInvestCnt, ZJBNum, 
+      recommendRegCnt, addLoginCnt, lastLoginTime, 
+      record, createDate, temp1, 
+      temp2, temp3, temp4
+      )
+    values (#{id,jdbcType=INTEGER}, #{membername,jdbcType=VARCHAR}, #{realname,jdbcType=VARCHAR}, 
+      #{mobile,jdbcType=VARCHAR}, #{hasfuiou,jdbcType=INTEGER}, #{regtime,jdbcType=TIMESTAMP}, 
+      #{nearlyinvestmoney,jdbcType=DECIMAL}, #{nearlyinvesttime,jdbcType=TIMESTAMP}, 
+      #{firstinvestmoney,jdbcType=DECIMAL}, #{firstinvesttime,jdbcType=TIMESTAMP}, #{recommendperson,jdbcType=VARCHAR}, 
+      #{recommendcode,jdbcType=VARCHAR}, #{promotecode,jdbcType=VARCHAR}, #{identity,jdbcType=VARCHAR}, 
+      #{area,jdbcType=VARCHAR}, #{province,jdbcType=VARCHAR}, #{city,jdbcType=VARCHAR}, 
+      #{region,jdbcType=VARCHAR}, #{gender,jdbcType=VARCHAR}, #{age,jdbcType=INTEGER}, 
+      #{accountbalance,jdbcType=DECIMAL}, #{addrechargemoney,jdbcType=DECIMAL}, #{addwithdrawalmoney,jdbcType=DECIMAL}, 
+      #{addinvestmoney,jdbcType=DECIMAL}, #{addinvestcnt,jdbcType=INTEGER}, #{zjbnum,jdbcType=INTEGER}, 
+      #{recommendregcnt,jdbcType=INTEGER}, #{addlogincnt,jdbcType=INTEGER}, #{lastlogintime,jdbcType=TIMESTAMP}, 
+      #{record,jdbcType=VARCHAR}, #{createdate,jdbcType=TIMESTAMP}, #{temp1,jdbcType=VARCHAR}, 
+      #{temp2,jdbcType=VARCHAR}, #{temp3,jdbcType=VARCHAR}, #{temp4,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.zjgt.p2p.report.model.UserInvestInfo" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    insert into userinvestinfo
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="membername != null" >
+        memberName,
+      </if>
+      <if test="realname != null" >
+        realName,
+      </if>
+      <if test="mobile != null" >
+        mobile,
+      </if>
+      <if test="hasfuiou != null" >
+        HasFuiou,
+      </if>
+      <if test="regtime != null" >
+        regTime,
+      </if>
+      <if test="nearlyinvestmoney != null" >
+        nearlyInvestMoney,
+      </if>
+      <if test="nearlyinvesttime != null" >
+        nearlyInvestTime,
+      </if>
+      <if test="firstinvestmoney != null" >
+        firstInvestMoney,
+      </if>
+      <if test="firstinvesttime != null" >
+        firstInvestTime,
+      </if>
+      <if test="recommendperson != null" >
+        recommendPerson,
+      </if>
+      <if test="recommendcode != null" >
+        recommendCode,
+      </if>
+      <if test="promotecode != null" >
+        promoteCode,
+      </if>
+      <if test="identity != null" >
+        identity,
+      </if>
+      <if test="area != null" >
+        area,
+      </if>
+      <if test="province != null" >
+        province,
+      </if>
+      <if test="city != null" >
+        city,
+      </if>
+      <if test="region != null" >
+        region,
+      </if>
+      <if test="gender != null" >
+        gender,
+      </if>
+      <if test="age != null" >
+        age,
+      </if>
+      <if test="accountbalance != null" >
+        accountBalance,
+      </if>
+      <if test="addrechargemoney != null" >
+        addRechargeMoney,
+      </if>
+      <if test="addwithdrawalmoney != null" >
+        addWithdrawalMoney,
+      </if>
+      <if test="addinvestmoney != null" >
+        addInvestMoney,
+      </if>
+      <if test="addinvestcnt != null" >
+        addInvestCnt,
+      </if>
+      <if test="zjbnum != null" >
+        ZJBNum,
+      </if>
+      <if test="recommendregcnt != null" >
+        recommendRegCnt,
+      </if>
+      <if test="addlogincnt != null" >
+        addLoginCnt,
+      </if>
+      <if test="lastlogintime != null" >
+        lastLoginTime,
+      </if>
+      <if test="record != null" >
+        record,
+      </if>
+      <if test="createdate != null" >
+        createDate,
+      </if>
+      <if test="temp1 != null" >
+        temp1,
+      </if>
+      <if test="temp2 != null" >
+        temp2,
+      </if>
+      <if test="temp3 != null" >
+        temp3,
+      </if>
+      <if test="temp4 != null" >
+        temp4,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="membername != null" >
+        #{membername,jdbcType=VARCHAR},
+      </if>
+      <if test="realname != null" >
+        #{realname,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null" >
+        #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="hasfuiou != null" >
+        #{hasfuiou,jdbcType=INTEGER},
+      </if>
+      <if test="regtime != null" >
+        #{regtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="nearlyinvestmoney != null" >
+        #{nearlyinvestmoney,jdbcType=DECIMAL},
+      </if>
+      <if test="nearlyinvesttime != null" >
+        #{nearlyinvesttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="firstinvestmoney != null" >
+        #{firstinvestmoney,jdbcType=DECIMAL},
+      </if>
+      <if test="firstinvesttime != null" >
+        #{firstinvesttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="recommendperson != null" >
+        #{recommendperson,jdbcType=VARCHAR},
+      </if>
+      <if test="recommendcode != null" >
+        #{recommendcode,jdbcType=VARCHAR},
+      </if>
+      <if test="promotecode != null" >
+        #{promotecode,jdbcType=VARCHAR},
+      </if>
+      <if test="identity != null" >
+        #{identity,jdbcType=VARCHAR},
+      </if>
+      <if test="area != null" >
+        #{area,jdbcType=VARCHAR},
+      </if>
+      <if test="province != null" >
+        #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null" >
+        #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="region != null" >
+        #{region,jdbcType=VARCHAR},
+      </if>
+      <if test="gender != null" >
+        #{gender,jdbcType=VARCHAR},
+      </if>
+      <if test="age != null" >
+        #{age,jdbcType=INTEGER},
+      </if>
+      <if test="accountbalance != null" >
+        #{accountbalance,jdbcType=DECIMAL},
+      </if>
+      <if test="addrechargemoney != null" >
+        #{addrechargemoney,jdbcType=DECIMAL},
+      </if>
+      <if test="addwithdrawalmoney != null" >
+        #{addwithdrawalmoney,jdbcType=DECIMAL},
+      </if>
+      <if test="addinvestmoney != null" >
+        #{addinvestmoney,jdbcType=DECIMAL},
+      </if>
+      <if test="addinvestcnt != null" >
+        #{addinvestcnt,jdbcType=INTEGER},
+      </if>
+      <if test="zjbnum != null" >
+        #{zjbnum,jdbcType=INTEGER},
+      </if>
+      <if test="recommendregcnt != null" >
+        #{recommendregcnt,jdbcType=INTEGER},
+      </if>
+      <if test="addlogincnt != null" >
+        #{addlogincnt,jdbcType=INTEGER},
+      </if>
+      <if test="lastlogintime != null" >
+        #{lastlogintime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record != null" >
+        #{record,jdbcType=VARCHAR},
+      </if>
+      <if test="createdate != null" >
+        #{createdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="temp1 != null" >
+        #{temp1,jdbcType=VARCHAR},
+      </if>
+      <if test="temp2 != null" >
+        #{temp2,jdbcType=VARCHAR},
+      </if>
+      <if test="temp3 != null" >
+        #{temp3,jdbcType=VARCHAR},
+      </if>
+      <if test="temp4 != null" >
+        #{temp4,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zjgt.p2p.report.model.UserInvestInfo" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    update userinvestinfo
+    <set >
+      <if test="membername != null" >
+        memberName = #{membername,jdbcType=VARCHAR},
+      </if>
+      <if test="realname != null" >
+        realName = #{realname,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null" >
+        mobile = #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="hasfuiou != null" >
+        HasFuiou = #{hasfuiou,jdbcType=INTEGER},
+      </if>
+      <if test="regtime != null" >
+        regTime = #{regtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="nearlyinvestmoney != null" >
+        nearlyInvestMoney = #{nearlyinvestmoney,jdbcType=DECIMAL},
+      </if>
+      <if test="nearlyinvesttime != null" >
+        nearlyInvestTime = #{nearlyinvesttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="firstinvestmoney != null" >
+        firstInvestMoney = #{firstinvestmoney,jdbcType=DECIMAL},
+      </if>
+      <if test="firstinvesttime != null" >
+        firstInvestTime = #{firstinvesttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="recommendperson != null" >
+        recommendPerson = #{recommendperson,jdbcType=VARCHAR},
+      </if>
+      <if test="recommendcode != null" >
+        recommendCode = #{recommendcode,jdbcType=VARCHAR},
+      </if>
+      <if test="promotecode != null" >
+        promoteCode = #{promotecode,jdbcType=VARCHAR},
+      </if>
+      <if test="identity != null" >
+        identity = #{identity,jdbcType=VARCHAR},
+      </if>
+      <if test="area != null" >
+        area = #{area,jdbcType=VARCHAR},
+      </if>
+      <if test="province != null" >
+        province = #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null" >
+        city = #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="region != null" >
+        region = #{region,jdbcType=VARCHAR},
+      </if>
+      <if test="gender != null" >
+        gender = #{gender,jdbcType=VARCHAR},
+      </if>
+      <if test="age != null" >
+        age = #{age,jdbcType=INTEGER},
+      </if>
+      <if test="accountbalance != null" >
+        accountBalance = #{accountbalance,jdbcType=DECIMAL},
+      </if>
+      <if test="addrechargemoney != null" >
+        addRechargeMoney = #{addrechargemoney,jdbcType=DECIMAL},
+      </if>
+      <if test="addwithdrawalmoney != null" >
+        addWithdrawalMoney = #{addwithdrawalmoney,jdbcType=DECIMAL},
+      </if>
+      <if test="addinvestmoney != null" >
+        addInvestMoney = #{addinvestmoney,jdbcType=DECIMAL},
+      </if>
+      <if test="addinvestcnt != null" >
+        addInvestCnt = #{addinvestcnt,jdbcType=INTEGER},
+      </if>
+      <if test="zjbnum != null" >
+        ZJBNum = #{zjbnum,jdbcType=INTEGER},
+      </if>
+      <if test="recommendregcnt != null" >
+        recommendRegCnt = #{recommendregcnt,jdbcType=INTEGER},
+      </if>
+      <if test="addlogincnt != null" >
+        addLoginCnt = #{addlogincnt,jdbcType=INTEGER},
+      </if>
+      <if test="lastlogintime != null" >
+        lastLoginTime = #{lastlogintime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record != null" >
+        record = #{record,jdbcType=VARCHAR},
+      </if>
+      <if test="createdate != null" >
+        createDate = #{createdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="temp1 != null" >
+        temp1 = #{temp1,jdbcType=VARCHAR},
+      </if>
+      <if test="temp2 != null" >
+        temp2 = #{temp2,jdbcType=VARCHAR},
+      </if>
+      <if test="temp3 != null" >
+        temp3 = #{temp3,jdbcType=VARCHAR},
+      </if>
+      <if test="temp4 != null" >
+        temp4 = #{temp4,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zjgt.p2p.report.model.UserInvestInfo" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    update userinvestinfo
+    set memberName = #{membername,jdbcType=VARCHAR},
+      realName = #{realname,jdbcType=VARCHAR},
+      mobile = #{mobile,jdbcType=VARCHAR},
+      HasFuiou = #{hasfuiou,jdbcType=INTEGER},
+      regTime = #{regtime,jdbcType=TIMESTAMP},
+      nearlyInvestMoney = #{nearlyinvestmoney,jdbcType=DECIMAL},
+      nearlyInvestTime = #{nearlyinvesttime,jdbcType=TIMESTAMP},
+      firstInvestMoney = #{firstinvestmoney,jdbcType=DECIMAL},
+      firstInvestTime = #{firstinvesttime,jdbcType=TIMESTAMP},
+      recommendPerson = #{recommendperson,jdbcType=VARCHAR},
+      recommendCode = #{recommendcode,jdbcType=VARCHAR},
+      promoteCode = #{promotecode,jdbcType=VARCHAR},
+      identity = #{identity,jdbcType=VARCHAR},
+      area = #{area,jdbcType=VARCHAR},
+      province = #{province,jdbcType=VARCHAR},
+      city = #{city,jdbcType=VARCHAR},
+      region = #{region,jdbcType=VARCHAR},
+      gender = #{gender,jdbcType=VARCHAR},
+      age = #{age,jdbcType=INTEGER},
+      accountBalance = #{accountbalance,jdbcType=DECIMAL},
+      addRechargeMoney = #{addrechargemoney,jdbcType=DECIMAL},
+      addWithdrawalMoney = #{addwithdrawalmoney,jdbcType=DECIMAL},
+      addInvestMoney = #{addinvestmoney,jdbcType=DECIMAL},
+      addInvestCnt = #{addinvestcnt,jdbcType=INTEGER},
+      ZJBNum = #{zjbnum,jdbcType=INTEGER},
+      recommendRegCnt = #{recommendregcnt,jdbcType=INTEGER},
+      addLoginCnt = #{addlogincnt,jdbcType=INTEGER},
+      lastLoginTime = #{lastlogintime,jdbcType=TIMESTAMP},
+      record = #{record,jdbcType=VARCHAR},
+      createDate = #{createdate,jdbcType=TIMESTAMP},
+      temp1 = #{temp1,jdbcType=VARCHAR},
+      temp2 = #{temp2,jdbcType=VARCHAR},
+      temp3 = #{temp3,jdbcType=VARCHAR},
+      temp4 = #{temp4,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  
+      <insert id="insertList" parameterType="java.util.Map" >
+  		${str}
+    </insert>
+   	
+   	<select id="getDatagridTotal" resultType="long">
+		select count(1) from userinvestinfo where 1=1
+		<if test="userInvestInfo.membername != null and userInvestInfo.membername!='' ">
+			and memberName like concat('%',#{userInvestInfo.membername},'%')  
+		</if>
+		<if test="userInvestInfo.mobile != null and userInvestInfo.mobile!='' ">
+			and mobile = #{userInvestInfo.mobile}
+		</if>
+		<if test="userInvestInfo.recommendcode != null and userInvestInfo.recommendcode!='' ">
+			and recommendCode = #{userInvestInfo.recommendcode}
+		</if> 
+		<if test="userInvestInfo.recommendperson != null and userInvestInfo.recommendcode!=''  ">
+			and recommendPerson like concat('%',#{userInvestInfo.recommendperson},'%')  
+		</if> 
+		<if test="userInvestInfo.promotecode != null and userInvestInfo.promotecode!=''">
+			and promoteCode = #{userInvestInfo.promotecode}
+		</if>
+		
+		<if test="userInvestInfo.firstinvestmoney!=null and userInvestInfo.firstinvestmoney > -1 ">
+			and firstInvestMoney = #{userInvestInfo.firstinvestmoney}
+		</if>
+		
+		<if test="userInvestInfo.hasfuiou != null ">
+			and HasFuiou = #{userInvestInfo.hasfuiou}
+		</if> 
+		<if test="userInvestInfo.regBeginTime != null and userInvestInfo.regBeginTime != '' ">
+			<![CDATA[  and regTime >= #{userInvestInfo.regBeginTime}  ]]>
+		</if>
+		<if test="userInvestInfo.regEndTime != null and userInvestInfo.regEndTime != '' ">
+			<![CDATA[  and regTime < #{userInvestInfo.regEndTime}  ]]>
+		</if>
+		<if test="userInvestInfo.firstInvBeginTime != null and userInvestInfo.firstInvBeginTime != '' ">
+			<![CDATA[  and firstInvestTime >= #{userInvestInfo.firstInvBeginTime}  ]]>
+		</if>
+		<if test="userInvestInfo.firstInvEndTime != null and userInvestInfo.firstInvEndTime != '' ">
+			<![CDATA[  and firstInvestTime < #{userInvestInfo.firstInvEndTime}  ]]>
+		</if>
+	</select>
+
+	<select id="datagridUserInvestInfo" resultMap="BaseResultMap" resultType="com.zjgt.p2p.report.model.UserInvestInfo">
+		select * from userinvestinfo where 1=1
+		<if test="userInvestInfo.membername != null and userInvestInfo.membername!='' ">
+			and memberName like concat('%',#{userInvestInfo.membername},'%')  
+		</if>
+		<if test="userInvestInfo.mobile != null and userInvestInfo.mobile!='' ">
+			and mobile = #{userInvestInfo.mobile}
+		</if>
+		<if test="userInvestInfo.recommendcode != null and userInvestInfo.recommendcode!='' ">
+			and recommendCode = #{userInvestInfo.recommendcode}
+		</if> 
+		<if test="userInvestInfo.recommendperson != null and userInvestInfo.recommendcode!=''  ">
+			and recommendPerson like concat('%',#{userInvestInfo.recommendperson},'%')  
+		</if> 
+		<if test="userInvestInfo.promotecode != null and userInvestInfo.promotecode!=''">
+			and promoteCode = #{userInvestInfo.promotecode}
+		</if>
+		
+		<if test="userInvestInfo.firstinvestmoney!=null and userInvestInfo.firstinvestmoney > -1 ">
+			and firstInvestMoney = #{userInvestInfo.firstinvestmoney}
+		</if>
+		
+		<if test="userInvestInfo.hasfuiou != null ">
+			and HasFuiou = #{userInvestInfo.hasfuiou}
+		</if> 
+		<if test="userInvestInfo.regBeginTime != null and userInvestInfo.regBeginTime != '' ">
+			<![CDATA[  and regTime >= #{userInvestInfo.regBeginTime}  ]]>
+		</if>
+		<if test="userInvestInfo.regEndTime != null and userInvestInfo.regEndTime != '' ">
+			<![CDATA[  and regTime < #{userInvestInfo.regEndTime}  ]]>
+		</if>
+		<if test="userInvestInfo.firstInvBeginTime != null and userInvestInfo.firstInvBeginTime != '' ">
+			<![CDATA[  and firstInvestTime >= #{userInvestInfo.firstInvBeginTime}  ]]>
+		</if>
+		<if test="userInvestInfo.firstInvEndTime != null and userInvestInfo.firstInvEndTime != '' ">
+			<![CDATA[  and firstInvestTime < #{userInvestInfo.firstInvEndTime}  ]]>
+		</if>
+		<if test="page.sort != null and page.sort != ''">
+			order by #{page.sort} #{page.order}
+		</if>
+		<if test="page.page > 0">
+			limit #{page.start},#{page.rows}
+		</if>
+	</select>
+	
+	<select id="selectByExampleLimit" resultMap="BaseResultMap" resultType="com.zjgt.p2p.report.model.UserInvestInfo">
+		select  * from userinvestinfo  order by createDate desc limit 0,1
+	</select>
+	
+	<select id="getProvince" resultType="java.lang.String" parameterType="java.lang.String" >
+				SELECT  proName AS province FROM province WHERE proId = #{provinceCode}
+	</select>
+	
+	<select id="getCity" resultType="java.lang.String" parameterType="java.lang.String" >
+				SELECT  cityName AS city FROM city WHERE cityId = #{cityCode}
+	</select>
+	
+	<select id="getRegion" resultType="java.lang.String" parameterType="java.lang.String" >
+				SELECT  areaName AS area FROM area WHERE areaId = #{regionCode}
+	</select>
+	
+	
+	<delete id="deleteUserSum" parameterType="java.util.Map" >
+	    delete from userinvestinfo where memberName in ${userNameList}
+  	</delete>
+  
+	<delete id="deleteUser">
+		delete from userinvestinfo 
+	</delete>
+</mapper>

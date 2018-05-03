@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd"
+	default-lazy-init="true">
+
+	<description>Shiro安全配置</description>
+
+	<!-- Shiro's main business-tier object for web-enabled applications -->
+	<bean id="securityManager" class="com.zjgt.shiro.BiifooDefaultSecurityManager">
+		<!-- <property name="realm" ref="shiroDbRealm" /> -->
+		<property name="realms">
+			<list>
+				<ref bean="shiroDbRealm" />
+				<ref bean="shiroOAuthRealm" />
+				<ref bean="shiroNoPasswordRealm" />
+			</list>
+		</property>
+	</bean>
+
+	<!-- 項目自定义的Realm, 所有staffAccountService依赖的dao都需要用depends-on声明 -->
+	<bean id="shiroDbRealm" class="com.zjgt.shiro.ShiroDbRealm">
+	</bean>
+
+	<bean id="shiroOAuthRealm" class="com.zjgt.shiro.ShiroOAuthRealm">
+	</bean>
+	<bean id="shiroNoPasswordRealm" class="com.zjgt.shiro.ShiroNoPasswordRealm">
+	</bean>
+
+	<!-- Shiro Filter -->
+	<bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
+		<property name="securityManager" ref="securityManager" />
+		<property name="loginUrl" value="/login.do" />
+		<property name="successUrl" value="/member/investdoc.do" />
+		<property name="filterChainDefinitions">
+			<value>
+				/ = anon
+				/login.do = authc
+				/loginout.do = logout
+				/static/** = anon
+				/demo/** = anon
+				/member/authenticationEmail.do = anon
+				/member/* = user
+				/pay/recharge/back.do = anon
+                /pay/recharge/success.do = anon
+				/pay/withdraw/back.do = anon
+				/pay/rechargeV2/back.do = anon
+                /pay/rechargeV2/success.do = anon
+				/pay/withdrawV2/back.do = anon
+				/pay/ll/recharge/back.do = anon
+                /pay/ll/recharge/success.do = anon
+                /pay/ll/authRecharge/back.do = anon
+                /pay/ll/authRecharge/success.do = anon
+                /pay/ll/wapRecharge/back.do = anon
+                /pay/ll/wapRecharge/success.do = anon
+				/pay/ll/withdraw/back.do = anon
+                /pay/** = user
+                /buyConform.do = user
+				/** = anon
+			</value>
+		</property>
+		<property name="filters">
+            <map> 
+            	  <entry key="authc" value-ref="loginFormAuthenticationFilter" />
+                  <entry key="user" value-ref="simpleUserFilter" />  
+            </map>
+        </property>
+	</bean>
+	<bean id="loginFormAuthenticationFilter" class="com.zjgt.shiro.LoginFormAuthenticationFilter" />
+	<!-- shiro用户资源访问过滤 -->
+	<bean id="simpleUserFilter" class="com.zjgt.shiro.AjaxUserFilter" />
+	
+	<!-- 保证实现了Shiro内部lifecycle函数的bean执行 -->
+	<bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor" />
+</beans>

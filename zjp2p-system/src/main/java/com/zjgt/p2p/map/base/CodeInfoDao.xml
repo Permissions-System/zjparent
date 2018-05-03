@@ -1,0 +1,396 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zjgt.p2p.base.dao.CodeInfoDao" >
+    <cache readOnly="true" type="org.springfk.pancloud.daoframework.cache.PanLoggingCache">
+		<property name="cacheGroup" value="mclient0" />
+    </cache>
+
+    <!-- 定义查询结果集Map 查询CodeInfo转换Map数据集-->
+    <resultMap id="codeInfoMap" type="com.zjgt.p2p.base.domain.CodeInfo" >
+     <result column="TYPE_CODE" property="typeCode" jdbcType="VARCHAR" />
+     <result column="TYPE_NAME" property="typeName" jdbcType="VARCHAR" />
+     <result column="CONFIG_CODE" property="configCode" jdbcType="VARCHAR" />
+     <result column="CONFIG_NAME" property="configName" jdbcType="VARCHAR" />
+     <result column="INDEX_NO" property="indexNo" jdbcType="DECIMAL" />
+     <result column="READ_FLAG" property="readFlag" jdbcType="CHAR" />
+     <result column="DELETE_FLAG" property="deleteFlag" jdbcType="CHAR" />
+     <result column="DESCRIPTION" property="description" jdbcType="VARCHAR" />
+    </resultMap>
+    
+    <!-- 新增数据字典 -->
+    <insert id="insert" parameterType="com.zjgt.p2p.base.domain.CodeInfo" flushCache="true" >
+     INSERT INTO cp_code_info (
+         type_code, 
+         type_name, 
+         config_code, 
+         config_name, 
+         index_no, 
+         read_flag, 
+         delete_flag, 
+         description
+     )
+     VALUES (
+         #{typeCode,jdbcType=VARCHAR}, 
+         #{typeName,jdbcType=VARCHAR}, 
+         #{configCode,jdbcType=VARCHAR}, 
+         #{configName,jdbcType=VARCHAR}, 
+         #{indexNo,jdbcType=DECIMAL}, 
+         #{readFlag,jdbcType=CHAR}, 
+         #{deleteFlag,jdbcType=CHAR}, 
+         #{description,jdbcType=VARCHAR}
+      )
+    </insert>
+    
+    <!-- 根据联合主键(type_code and config_code) 更新数据字典记录  -->
+    <update id="update" parameterType="com.zjgt.p2p.base.domain.CodeInfo" flushCache="true" >
+	     UPDATE 
+	         cp_code_info
+         <set>
+          <if test="typeName!=null">
+              type_name = #{typeName,jdbcType=VARCHAR},
+          </if> 
+          <if test="configName!=null">
+              config_name = #{configName,jdbcType=VARCHAR},
+          </if>
+          <if test="indexNo!=null">
+              index_no = #{indexNo,jdbcType=DECIMAL},
+          </if>
+          <if test="readFlag!=null">
+              read_flag = #{readFlag,jdbcType=CHAR},
+          </if>
+          <if test="deleteFlag!=null">
+              delete_flag = #{deleteFlag,jdbcType=CHAR},
+          </if>
+          <if test="description!=null">
+              description = #{description,jdbcType=VARCHAR}
+          </if>
+         </set>
+	     WHERE 1 = 1
+         <choose>
+			<when test=" typeCode!=null and configCode !=null">
+				AND type_code = #{typeCode,jdbcType=VARCHAR} 
+				AND config_code = #{configCode,jdbcType=VARCHAR}
+			</when>
+			<otherwise>
+				AND 1 > 2
+			</otherwise>
+         </choose>
+    </update>
+    
+    <!-- 批量修改 数据字典类别 的类别名称 -->
+    <update id="updateCodeType" parameterType="com.zjgt.p2p.base.domain.CodeInfo" flushCache="true">
+	     UPDATE 
+	         cp_code_info
+	     <set>
+	         <if test="typeName!=null">
+	          type_name = #{typeName,jdbcType=VARCHAR}
+	         </if> 
+	     </set>
+	     WHERE 1 = 1
+	     <choose>
+	         <when test=" typeCode!=null">
+		          AND type_code = #{typeCode,jdbcType=VARCHAR} 
+	         </when>
+	         <otherwise>
+		          AND 1 > 2
+	         </otherwise>
+	     </choose>
+    </update>
+    
+    <!-- 根据联合主键 typeCode configCode 删除 数据字典记录 -->
+    <delete id="delete" parameterType="com.zjgt.p2p.base.domain.CodeInfo" flushCache="true" >
+	    DELETE FROM 
+	        cp_code_info 
+	    WHERE 1 = 1
+		<choose>
+			<when test=" typeCode!=null and configCode !=null">
+				AND type_code = #{typeCode,jdbcType=VARCHAR} 
+				AND config_code = #{configCode,jdbcType=VARCHAR}
+			</when>
+			<when test=" typeCode!=null">
+				AND type_code = #{typeCode,jdbcType=VARCHAR} 
+			</when>
+			<otherwise>
+				 AND 1 > 2
+			</otherwise>
+		</choose>
+    </delete>
+
+    <!-- 根据联合主键 typeCode configCode 查询数据字典记录  -->
+    <select id="getCodeInfo" resultType="com.zjgt.p2p.base.domain.CodeInfo" parameterType="com.zjgt.p2p.base.domain.CodeInfo" useCache="true">
+		SELECT 
+		    type_code as typeCode, 
+		    type_name as typeName, 
+		    config_code as configCode, 
+		    config_name as configName, 
+		    index_no as indexNo, 
+		    read_flag as readFlag, 
+		    delete_flag as deleteFlag, 
+		    description
+		FROM 
+		    cp_code_info
+		WHERE 1 = 1
+		<choose>
+		   <when test=" typeCode!=null and configCode !=null">
+		       AND type_code = #{typeCode,jdbcType=VARCHAR} 
+		       AND config_code = #{configCode,jdbcType=VARCHAR}
+		   </when>
+		   <otherwise>
+		       AND 1 > 2
+		   </otherwise>
+		</choose>
+    </select>
+    
+    <!-- 组合查询 数据字典用 码表管理 根据字典类型 获取 数据字典明细列表  -->
+    <select id="getCodeInfoList" resultMap="codeInfoMap" parameterType="com.zjgt.p2p.base.domain.CodeInfo" useCache="true">
+	     SELECT 
+	         type_code,
+	         type_name, 
+	         config_code, 
+	         config_name,
+	         index_no, 
+	         read_flag, 
+	         delete_flag,
+	         description
+	     FROM 
+	         cp_code_info
+	     WHERE 1 = 1 
+	     <if test="typeCode!=null">
+	         AND type_code LIKE CONCAT('%',#{typeCode},'%')
+	     </if>
+	     <if test="typeName!=null">
+	         AND type_name LIKE CONCAT('%',#{typeName},'%')
+	     </if>
+	     <if test="configCode!=null">
+	         AND config_code LIKE CONCAT('%',#{configCode},'%')
+	     </if>
+	     <if test="configName!=null">
+	         AND config_name LIKE CONCAT('%',#{configName},'%')
+	     </if>
+	     <if test="indexNo!=null">
+	         AND index_no = #{indexNo} 
+	     </if>
+	     <if test="deleteFlag!=null">
+	         AND delete_flag = #{deleteFlag} 
+	     </if>
+	     <if test="readFlag!=null">
+	         AND read_flag = #{readFlag} 
+	     </if>
+	     ORDER BY type_code,index_no
+    </select>
+    
+    <!-- 数据字典用 码表管理 根据字典类型 获取 数据字典明细列表 不区分是否删除全部查出 -->
+    <select id="getCodeInfoListByTypeCode" resultMap="codeInfoMap" parameterType="java.lang.String" useCache="true">
+	     SELECT 
+	         type_code,
+	         type_name, 
+	         config_code, 
+	         config_name,
+	         index_no, 
+	         read_flag, 
+	         delete_flag,
+	         description
+	     FROM 
+	         cp_code_info
+	     WHERE 1 = 1
+	     AND DELETE_FLAG != '0'
+	     AND type_code = #{typeCode,jdbcType=VARCHAR} 
+	     ORDER BY index_no
+    </select>
+    
+    <!-- 获取数据字典中配置的全部字典类型数据 -->
+    <select id="getTypeCodeList"  resultMap="codeInfoMap">
+	     SELECT 
+	         DISTINCT code.type_code,
+	         code.type_name 
+	     FROM 
+	         cp_code_info code
+	     ORDER BY code.type_code
+    </select>
+    
+    <!-- 分页查询 数据字典类型数据  2013-12-14 15:50:59 增加筛选条件的判断条件-->
+    <select id="getTypeCodeListByPage" parameterType="java.util.Map"  resultMap="codeInfoMap" useCache="false" >
+	     SELECT 
+	         DISTINCT code.type_code,
+	         code.type_name 
+	     FROM 
+	         cp_code_info code
+	     WHERE 1=1
+	     <if test="typeCode!=null">
+             AND ( 
+                 code.type_code LIKE CONCAT('%',#{typeCode},'%')
+                 OR code.type_name LIKE CONCAT('%',#{typeCode},'%'))
+             AND DELETE_FLAG != '0'
+         </if>
+         <if test="typeName!=null">
+             AND code.type_name LIKE CONCAT('%',#{typeName},'%')
+         </if>
+	     ORDER BY code.type_code
+    </select>
+    
+    <!-- 分页查询 数据字典类型数据 -->
+    <select id="getCodeDetailListByPage" parameterType="java.util.Map"  resultMap="codeInfoMap"  useCache="false">
+		SELECT 
+		    type_code,
+		    type_name, 
+		    config_code, 
+		    config_name,
+		    index_no, 
+		    read_flag, 
+		    delete_flag,
+		    description
+		FROM 
+		    cp_code_info
+		WHERE 1 = 1
+		<choose>
+		   <when test=" typeCode!=null">
+		    AND type_code = #{typeCode,jdbcType=VARCHAR} 
+		   </when>
+		   <otherwise>
+		    AND 1 > 2
+		   </otherwise>
+		</choose>
+		ORDER BY index_no,type_code,config_code
+    </select>
+    
+    <!-- 新增数据的 重复性校验使用 返回符合条件的记录数 -->
+    <select id="getCountCodeInfo" parameterType="com.zjgt.p2p.base.domain.CodeInfo" resultType="java.lang.Integer" useCache="false" >
+		SELECT 
+		    COUNT(1) 
+		FROM 
+		    cp_code_info 
+		where 1=1
+		<choose>
+		   <when test=" typeCode!=null and configCode !=null">
+		    AND type_code = #{typeCode,jdbcType=VARCHAR} 
+		        AND config_code = #{configCode,jdbcType=VARCHAR}
+		   </when>
+		   <when test=" typeCode!=null " >
+		    AND type_code = #{typeCode,jdbcType=VARCHAR} 
+		   </when>
+		</choose>
+    </select>
+    
+    <!-- 查询数据字典类型下删除标志为零的记录个数 -->
+    <select id="getCountNotDel" parameterType="java.lang.String" resultType="java.lang.Integer" useCache="false" >
+		SELECT 
+		    COUNT(1) 
+		FROM 
+		    cp_code_info 
+		WHERE 
+		    type_code = #{typeCode,jdbcType=VARCHAR} 
+		AND delete_flag = '0'
+    </select>
+    
+    <!-- 多类别编号查询数据字典明细记录 -->
+    <select id="getCodeInfoListByTypeCodes"  parameterType="java.util.Map"  resultMap="codeInfoMap" ><!-- flushCache="false"  useCache="true" -->
+		SELECT 
+		    type_code,
+		    type_name, 
+		    config_code, 
+		    config_name,
+		    index_no, 
+		    read_flag, 
+		    delete_flag,
+		    description
+		FROM 
+		    cp_code_info
+		WHERE 1 = 1 
+		AND type_code in
+		<foreach item="item" index="index" collection="typeCodes" open="(" separator="," close=")">
+		   #{item}
+		</foreach>
+		ORDER BY type_code,index_no
+    </select>
+    
+    <!-- 查询特定需求下 数据字典编码 和有限多个configCode 获取相应数据字典列表 -->
+    <select id="getCodeInfoListByTypeAndCodes"  parameterType="java.util.Map"  resultMap="codeInfoMap" flushCache="false"  useCache="true">
+        SELECT 
+            type_code,
+            type_name, 
+            config_code, 
+            config_name,
+            index_no, 
+            read_flag, 
+            delete_flag,
+            description
+        FROM 
+            cp_code_info
+        WHERE 1 = 1 
+        <choose>
+           <when test=" typeCode!=null and configCodes!=null">
+            AND type_code = #{typeCode,jdbcType=VARCHAR} 
+            AND config_code in
+	        <foreach item="item" index="index" collection="configCodes" open="(" separator="," close=")">
+	           #{item}
+	        </foreach>
+           </when>
+           <otherwise>
+            AND 1 > 2
+           </otherwise>
+        </choose>
+        ORDER BY index_no
+    </select>
+    
+    <!-- 用于解决联动下拉数据的查询，支持3级 级联数据查询 
+    ADDED ON 2013-12-12 09:39:57
+          例子：一级 数据 内资（不可选） 100
+                 港、澳、台商投资（不可选）200
+             二级 父节点 100 
+                数据    国有全资 110
+                          股份合作（不可选） 130
+             三级 父节点 130
+                         数据  国有控股股份合作 131
+                         集体控股股份合作 132
+    -->
+    <select id="getCascadeCodeInfoList"  parameterType="java.util.Map"  resultMap="codeInfoMap" flushCache="false" useCache="true" >
+		SELECT 
+		    type_code,
+		    type_name, 
+		    config_code, 
+		    config_name,
+		    index_no, 
+		    read_flag, 
+		    delete_flag,
+		    description
+		FROM 
+		    cp_code_info
+		WHERE 1 = 1
+		AND type_code =  #{typeCode,jdbcType=VARCHAR} 
+		<if test="lv==1">
+		    AND MOD(config_code,100) = 0
+		</if>
+		<if test="lv==2">
+		    AND config_code LIKE CONCAT(SUBSTR(#{superConfigCode,jdbcType=VARCHAR},0,1),'%',SUBSTR(#{superConfigCode,jdbcType=VARCHAR},2,1))
+		    AND config_code != #{superConfigCode,jdbcType=VARCHAR} 
+		</if>
+		<if test ="lv==3">
+		    AND config_code LIKE SUBSTR(#{superConfigCode,jdbcType=VARCHAR},0,2),'%')
+		    AND config_code != #{superConfigCode,jdbcType=VARCHAR} 
+		</if>
+		ORDER BY index_no
+    </select>
+    
+    <!-- 基于完全匹配类型 TYPE_CODE 和 CONFIG_CODE的模糊匹配的数据查询 分页查询 -->
+    <select id="getCodeDetailInfoListByTypeAndCode"  parameterType="java.util.Map"  resultMap="codeInfoMap" useCache="false">
+    	SELECT 
+		    type_code,
+		    type_name, 
+		    config_code, 
+		    config_name,
+		    index_no, 
+		    read_flag, 
+		    delete_flag,
+		    description
+		FROM 
+		    cp_code_info
+		WHERE 1 = 1
+		AND type_code =  #{typeCode,jdbcType=VARCHAR} 
+ 	    <if test="configCode!=null">
+         AND ( 
+              config_code LIKE CONCAT('%',#{configCode},'%')
+              OR config_name LIKE CONCAT('%',#{configCode},'%')
+         )
+        </if>
+    </select>
+</mapper>

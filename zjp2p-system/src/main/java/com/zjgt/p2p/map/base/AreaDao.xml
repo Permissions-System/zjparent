@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zjgt.p2p.base.dao.AreaDao" >
+  <cache readOnly="true" type="org.springfk.pancloud.daoframework.cache.PanLoggingCache">
+		<property name="cacheGroup" value="mclient0" />
+  </cache>
+	
+  <resultMap id="BaseResultMap" type="com.zjgt.p2p.base.domain.Area" >
+    <result column="AREA_CODE" property="areaCode" jdbcType="VARCHAR" />
+    <result column="AREA_NAME" property="areaName" jdbcType="VARCHAR" />
+  </resultMap>
+  
+  <select id="getAreaByAreaCode" resultMap="BaseResultMap" parameterType="java.lang.String" useCache="true">
+    select AREA_CODE, AREA_NAME
+    from CP_AREA
+    where AREA_CODE = #{areaCode,jdbcType=CHAR}
+  </select>
+    
+  <select id="getProvinceList" resultMap="BaseResultMap" useCache="true">
+    select AREA_CODE, AREA_NAME
+    from CP_AREA
+    where SUBSTR(AREA_CODE, 3, 4) = '0000' 
+    order by AREA_CODE
+  </select>
+  
+  <select id="getCityList" resultMap="BaseResultMap" parameterType="com.zjgt.p2p.base.domain.Area" useCache="true">
+    select AREA_CODE, AREA_NAME
+    from CP_AREA
+    where AREA_CODE !=#{areaCode ,jdbcType=VARCHAR} and SUBSTR(AREA_CODE,5,2) = '00' and SUBSTR(AREA_CODE,0,2) = SUBSTR(#{areaCode ,jdbcType=VARCHAR},0,2) 
+    order by AREA_CODE
+  </select>
+  
+  <select id="getCountyList" resultMap="BaseResultMap" parameterType="java.lang.String" useCache="true">
+    select AREA_CODE, AREA_NAME
+    from CP_AREA
+    where AREA_CODE !=#{areaCode ,jdbcType=VARCHAR} and substr(AREA_CODE,0,4) = substr(#{areaCode ,jdbcType=VARCHAR},0,4) 
+    order by AREA_CODE
+  </select>
+  
+  <select id="getFullArea" resultMap="BaseResultMap" parameterType="java.lang.String"  useCache="true">
+	select AREA_CODE, AREA_NAME
+	  from CP_AREA
+	 where (substr(AREA_CODE, 0, 2) = substr(#{areaCode ,jdbcType=VARCHAR}, 0, 2)
+	 			and substr(AREA_CODE, 3, 4) = '0000')
+	    or (substr(AREA_CODE, 0, 4) = substr(#{areaCode ,jdbcType=VARCHAR}, 0, 4) 
+	    		and substr(AREA_CODE, 5, 2) = '00')
+	    or AREA_CODE = #{areaCode ,jdbcType=VARCHAR}
+	 order by AREA_CODE
+  </select>
+</mapper>

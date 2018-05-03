@@ -1,0 +1,74 @@
+﻿<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<title>Highcharts Example</title>
+
+		<script type="text/javascript" src="http://cdn.bootcss.com/jquery/1.11.2/jquery.min.js"></script>
+		
+		<script type="text/javascript">
+$(function () {
+    $('#container').highcharts({
+        chart: {
+            type: 'areaspline'
+        },
+        title: {
+            text: 'Daily Fortune VS Yu EBao (天天富 vs 余X宝)'
+        },
+        legend: {
+            layout: 'vertical',
+            align: 'left',
+            verticalAlign: 'top',
+            x: 60,
+            y: 45,
+            floating: true,
+            borderWidth: 1,
+            backgroundColor: (Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'
+        },
+        xAxis: {
+            categories: [
+                'Monday',
+                'Tuesday',
+                'Wednesday',
+                'Thursday',
+                'Friday',
+                'Saturday',
+                'Sunday'
+            ]
+        },
+        yAxis: {
+            title: {
+                text: 'Annual Interest Rate (%)'
+            }
+        },
+        tooltip: {
+            shared: true,
+            valueSuffix: ' %'
+        },
+        credits: {
+            enabled: false
+        },
+        plotOptions: {
+            areaspline: {
+                fillOpacity: 0.5
+            }
+        },
+        series: [{
+            name: '天天富',
+            data: [8, 8, 8, 8, 8, 8, 8]
+        }, {
+            name: '余X宝',
+            data: [4, 4, 4, 4, 4, 4, 4]
+        }]
+    });
+});
+		</script>
+	</head>
+	<body>
+<script src="../js/highcharts.js"></script>
+<script src="../js/sand-signika.js"></script>
+
+<div id="container" style="min-width: 880px; height: 280px;"></div>
+
+	</body>
+</html>

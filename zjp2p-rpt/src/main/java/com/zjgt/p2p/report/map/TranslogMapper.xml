@@ -1,0 +1,800 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zjgt.p2p.report.dao.TranslogMapper" >
+  <resultMap id="BaseResultMap" type="com.zjgt.p2p.report.model.Translog" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="username" property="username" jdbcType="VARCHAR" />
+    <result column="serv_type" property="servType" jdbcType="VARCHAR" />
+    <result column="serv_desp" property="servDesp" jdbcType="VARCHAR" />
+    <result column="ext_tp" property="extTp" jdbcType="VARCHAR" />
+    <result column="txn_date" property="txnDate" jdbcType="DATE" />
+    <result column="txn_time" property="txnTime" jdbcType="TIME" />
+    <result column="mchnt_ssn" property="mchntSsn" jdbcType="VARCHAR" />
+    <result column="txn_amt" property="txnAmt" jdbcType="DECIMAL" />
+    <result column="txn_amt_suc" property="txnAmtSuc" jdbcType="DECIMAL" />
+    <result column="contract_no" property="contractNo" jdbcType="VARCHAR" />
+    <result column="out_fuiou_acct_no" property="outFuiouAcctNo" jdbcType="VARCHAR" />
+    <result column="out_cust_no" property="outCustNo" jdbcType="VARCHAR" />
+    <result column="out_artif_nm" property="outArtifNm" jdbcType="VARCHAR" />
+    <result column="in_fuiou_acct_no" property="inFuiouAcctNo" jdbcType="VARCHAR" />
+    <result column="in_cust_no" property="inCustNo" jdbcType="VARCHAR" />
+    <result column="in_artif_nm" property="inArtifNm" jdbcType="VARCHAR" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="txn_rsp_cd" property="txnRspCd" jdbcType="VARCHAR" />
+    <result column="rsp_cd_desc" property="rspCdDesc" jdbcType="VARCHAR" />
+    <result column="sour_code" property="sourCode" jdbcType="VARCHAR" />
+    <result column="busi_tp" property="busiTp" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="checkflag" property="checkflag" jdbcType="VARCHAR" />
+    <result column="checkdesp" property="checkdesp" jdbcType="VARCHAR" />
+    <result column="createDate" property="createdate" jdbcType="VARCHAR" />
+    <result column="fundFlow" property="fundflow" jdbcType="VARCHAR" />
+    <result column="investId" property="investid" jdbcType="VARCHAR" />
+    <result column="describes" property="describes" jdbcType="VARCHAR" />
+    <result column="temp1" property="temp1" jdbcType="VARCHAR" />
+    <result column="temp2" property="temp2" jdbcType="VARCHAR" />
+    <result column="temp3" property="temp3" jdbcType="VARCHAR" />
+    <result column="temp4" property="temp4" jdbcType="VARCHAR" />
+    <result column="temp5" property="temp5" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    id, username, serv_type, serv_desp, ext_tp, txn_date, txn_time, mchnt_ssn, txn_amt, 
+    txn_amt_suc, contract_no, out_fuiou_acct_no, out_cust_no, out_artif_nm, in_fuiou_acct_no, 
+    in_cust_no, in_artif_nm, remark, txn_rsp_cd, rsp_cd_desc, sour_code, busi_tp, status, 
+    checkflag, checkdesp, createDate, fundFlow, investId, describes, temp1, temp2, temp3, 
+    temp4, temp5
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.zjgt.p2p.report.model.TranslogExample" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from translog
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    select 
+    <include refid="Base_Column_List" />
+    from translog
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    delete from translog
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zjgt.p2p.report.model.Translog" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    insert into translog (id, username, serv_type, 
+      serv_desp, ext_tp, txn_date, 
+      txn_time, mchnt_ssn, txn_amt, 
+      txn_amt_suc, contract_no, out_fuiou_acct_no, 
+      out_cust_no, out_artif_nm, in_fuiou_acct_no, 
+      in_cust_no, in_artif_nm, remark, 
+      txn_rsp_cd, rsp_cd_desc, sour_code, 
+      busi_tp, status, checkflag, 
+      checkdesp, createDate, fundFlow, 
+      investId, describes, temp1, 
+      temp2, temp3, temp4, 
+      temp5)
+    values (#{id,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{servType,jdbcType=VARCHAR}, 
+      #{servDesp,jdbcType=VARCHAR}, #{extTp,jdbcType=VARCHAR}, #{txnDate,jdbcType=DATE}, 
+      #{txnTime,jdbcType=TIME}, #{mchntSsn,jdbcType=VARCHAR}, #{txnAmt,jdbcType=DECIMAL}, 
+      #{txnAmtSuc,jdbcType=DECIMAL}, #{contractNo,jdbcType=VARCHAR}, #{outFuiouAcctNo,jdbcType=VARCHAR}, 
+      #{outCustNo,jdbcType=VARCHAR}, #{outArtifNm,jdbcType=VARCHAR}, #{inFuiouAcctNo,jdbcType=VARCHAR}, 
+      #{inCustNo,jdbcType=VARCHAR}, #{inArtifNm,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, 
+      #{txnRspCd,jdbcType=VARCHAR}, #{rspCdDesc,jdbcType=VARCHAR}, #{sourCode,jdbcType=VARCHAR}, 
+      #{busiTp,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, #{checkflag,jdbcType=VARCHAR}, 
+      #{checkdesp,jdbcType=VARCHAR}, #{createdate,jdbcType=VARCHAR}, #{fundflow,jdbcType=VARCHAR}, 
+      #{investid,jdbcType=VARCHAR}, #{describes,jdbcType=VARCHAR}, #{temp1,jdbcType=VARCHAR}, 
+      #{temp2,jdbcType=VARCHAR}, #{temp3,jdbcType=VARCHAR}, #{temp4,jdbcType=VARCHAR}, 
+      #{temp5,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zjgt.p2p.report.model.Translog" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    insert into translog
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="username != null" >
+        username,
+      </if>
+      <if test="servType != null" >
+        serv_type,
+      </if>
+      <if test="servDesp != null" >
+        serv_desp,
+      </if>
+      <if test="extTp != null" >
+        ext_tp,
+      </if>
+      <if test="txnDate != null" >
+        txn_date,
+      </if>
+      <if test="txnTime != null" >
+        txn_time,
+      </if>
+      <if test="mchntSsn != null" >
+        mchnt_ssn,
+      </if>
+      <if test="txnAmt != null" >
+        txn_amt,
+      </if>
+      <if test="txnAmtSuc != null" >
+        txn_amt_suc,
+      </if>
+      <if test="contractNo != null" >
+        contract_no,
+      </if>
+      <if test="outFuiouAcctNo != null" >
+        out_fuiou_acct_no,
+      </if>
+      <if test="outCustNo != null" >
+        out_cust_no,
+      </if>
+      <if test="outArtifNm != null" >
+        out_artif_nm,
+      </if>
+      <if test="inFuiouAcctNo != null" >
+        in_fuiou_acct_no,
+      </if>
+      <if test="inCustNo != null" >
+        in_cust_no,
+      </if>
+      <if test="inArtifNm != null" >
+        in_artif_nm,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+      <if test="txnRspCd != null" >
+        txn_rsp_cd,
+      </if>
+      <if test="rspCdDesc != null" >
+        rsp_cd_desc,
+      </if>
+      <if test="sourCode != null" >
+        sour_code,
+      </if>
+      <if test="busiTp != null" >
+        busi_tp,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="checkflag != null" >
+        checkflag,
+      </if>
+      <if test="checkdesp != null" >
+        checkdesp,
+      </if>
+      <if test="createdate != null" >
+        createDate,
+      </if>
+      <if test="fundflow != null" >
+        fundFlow,
+      </if>
+      <if test="investid != null" >
+        investId,
+      </if>
+      <if test="describes != null" >
+        describes,
+      </if>
+      <if test="temp1 != null" >
+        temp1,
+      </if>
+      <if test="temp2 != null" >
+        temp2,
+      </if>
+      <if test="temp3 != null" >
+        temp3,
+      </if>
+      <if test="temp4 != null" >
+        temp4,
+      </if>
+      <if test="temp5 != null" >
+        temp5,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="username != null" >
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="servType != null" >
+        #{servType,jdbcType=VARCHAR},
+      </if>
+      <if test="servDesp != null" >
+        #{servDesp,jdbcType=VARCHAR},
+      </if>
+      <if test="extTp != null" >
+        #{extTp,jdbcType=VARCHAR},
+      </if>
+      <if test="txnDate != null" >
+        #{txnDate,jdbcType=DATE},
+      </if>
+      <if test="txnTime != null" >
+        #{txnTime,jdbcType=TIME},
+      </if>
+      <if test="mchntSsn != null" >
+        #{mchntSsn,jdbcType=VARCHAR},
+      </if>
+      <if test="txnAmt != null" >
+        #{txnAmt,jdbcType=DECIMAL},
+      </if>
+      <if test="txnAmtSuc != null" >
+        #{txnAmtSuc,jdbcType=DECIMAL},
+      </if>
+      <if test="contractNo != null" >
+        #{contractNo,jdbcType=VARCHAR},
+      </if>
+      <if test="outFuiouAcctNo != null" >
+        #{outFuiouAcctNo,jdbcType=VARCHAR},
+      </if>
+      <if test="outCustNo != null" >
+        #{outCustNo,jdbcType=VARCHAR},
+      </if>
+      <if test="outArtifNm != null" >
+        #{outArtifNm,jdbcType=VARCHAR},
+      </if>
+      <if test="inFuiouAcctNo != null" >
+        #{inFuiouAcctNo,jdbcType=VARCHAR},
+      </if>
+      <if test="inCustNo != null" >
+        #{inCustNo,jdbcType=VARCHAR},
+      </if>
+      <if test="inArtifNm != null" >
+        #{inArtifNm,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="txnRspCd != null" >
+        #{txnRspCd,jdbcType=VARCHAR},
+      </if>
+      <if test="rspCdDesc != null" >
+        #{rspCdDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="sourCode != null" >
+        #{sourCode,jdbcType=VARCHAR},
+      </if>
+      <if test="busiTp != null" >
+        #{busiTp,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="checkflag != null" >
+        #{checkflag,jdbcType=VARCHAR},
+      </if>
+      <if test="checkdesp != null" >
+        #{checkdesp,jdbcType=VARCHAR},
+      </if>
+      <if test="createdate != null" >
+        #{createdate,jdbcType=VARCHAR},
+      </if>
+      <if test="fundflow != null" >
+        #{fundflow,jdbcType=VARCHAR},
+      </if>
+      <if test="investid != null" >
+        #{investid,jdbcType=VARCHAR},
+      </if>
+      <if test="describes != null" >
+        #{describes,jdbcType=VARCHAR},
+      </if>
+      <if test="temp1 != null" >
+        #{temp1,jdbcType=VARCHAR},
+      </if>
+      <if test="temp2 != null" >
+        #{temp2,jdbcType=VARCHAR},
+      </if>
+      <if test="temp3 != null" >
+        #{temp3,jdbcType=VARCHAR},
+      </if>
+      <if test="temp4 != null" >
+        #{temp4,jdbcType=VARCHAR},
+      </if>
+      <if test="temp5 != null" >
+        #{temp5,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zjgt.p2p.report.model.Translog" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    update translog
+    <set >
+      <if test="username != null" >
+        username = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="servType != null" >
+        serv_type = #{servType,jdbcType=VARCHAR},
+      </if>
+      <if test="servDesp != null" >
+        serv_desp = #{servDesp,jdbcType=VARCHAR},
+      </if>
+      <if test="extTp != null" >
+        ext_tp = #{extTp,jdbcType=VARCHAR},
+      </if>
+      <if test="txnDate != null" >
+        txn_date = #{txnDate,jdbcType=DATE},
+      </if>
+      <if test="txnTime != null" >
+        txn_time = #{txnTime,jdbcType=TIME},
+      </if>
+      <if test="mchntSsn != null" >
+        mchnt_ssn = #{mchntSsn,jdbcType=VARCHAR},
+      </if>
+      <if test="txnAmt != null" >
+        txn_amt = #{txnAmt,jdbcType=DECIMAL},
+      </if>
+      <if test="txnAmtSuc != null" >
+        txn_amt_suc = #{txnAmtSuc,jdbcType=DECIMAL},
+      </if>
+      <if test="contractNo != null" >
+        contract_no = #{contractNo,jdbcType=VARCHAR},
+      </if>
+      <if test="outFuiouAcctNo != null" >
+        out_fuiou_acct_no = #{outFuiouAcctNo,jdbcType=VARCHAR},
+      </if>
+      <if test="outCustNo != null" >
+        out_cust_no = #{outCustNo,jdbcType=VARCHAR},
+      </if>
+      <if test="outArtifNm != null" >
+        out_artif_nm = #{outArtifNm,jdbcType=VARCHAR},
+      </if>
+      <if test="inFuiouAcctNo != null" >
+        in_fuiou_acct_no = #{inFuiouAcctNo,jdbcType=VARCHAR},
+      </if>
+      <if test="inCustNo != null" >
+        in_cust_no = #{inCustNo,jdbcType=VARCHAR},
+      </if>
+      <if test="inArtifNm != null" >
+        in_artif_nm = #{inArtifNm,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="txnRspCd != null" >
+        txn_rsp_cd = #{txnRspCd,jdbcType=VARCHAR},
+      </if>
+      <if test="rspCdDesc != null" >
+        rsp_cd_desc = #{rspCdDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="sourCode != null" >
+        sour_code = #{sourCode,jdbcType=VARCHAR},
+      </if>
+      <if test="busiTp != null" >
+        busi_tp = #{busiTp,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="checkflag != null" >
+        checkflag = #{checkflag,jdbcType=VARCHAR},
+      </if>
+      <if test="checkdesp != null" >
+        checkdesp = #{checkdesp,jdbcType=VARCHAR},
+      </if>
+      <if test="createdate != null" >
+        createDate = #{createdate,jdbcType=VARCHAR},
+      </if>
+      <if test="fundflow != null" >
+        fundFlow = #{fundflow,jdbcType=VARCHAR},
+      </if>
+      <if test="investid != null" >
+        investId = #{investid,jdbcType=VARCHAR},
+      </if>
+      <if test="describes != null" >
+        describes = #{describes,jdbcType=VARCHAR},
+      </if>
+      <if test="temp1 != null" >
+        temp1 = #{temp1,jdbcType=VARCHAR},
+      </if>
+      <if test="temp2 != null" >
+        temp2 = #{temp2,jdbcType=VARCHAR},
+      </if>
+      <if test="temp3 != null" >
+        temp3 = #{temp3,jdbcType=VARCHAR},
+      </if>
+      <if test="temp4 != null" >
+        temp4 = #{temp4,jdbcType=VARCHAR},
+      </if>
+      <if test="temp5 != null" >
+        temp5 = #{temp5,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zjgt.p2p.report.model.Translog" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    update translog
+    set username = #{username,jdbcType=VARCHAR},
+      serv_type = #{servType,jdbcType=VARCHAR},
+      serv_desp = #{servDesp,jdbcType=VARCHAR},
+      ext_tp = #{extTp,jdbcType=VARCHAR},
+      txn_date = #{txnDate,jdbcType=DATE},
+      txn_time = #{txnTime,jdbcType=TIME},
+      mchnt_ssn = #{mchntSsn,jdbcType=VARCHAR},
+      txn_amt = #{txnAmt,jdbcType=DECIMAL},
+      txn_amt_suc = #{txnAmtSuc,jdbcType=DECIMAL},
+      contract_no = #{contractNo,jdbcType=VARCHAR},
+      out_fuiou_acct_no = #{outFuiouAcctNo,jdbcType=VARCHAR},
+      out_cust_no = #{outCustNo,jdbcType=VARCHAR},
+      out_artif_nm = #{outArtifNm,jdbcType=VARCHAR},
+      in_fuiou_acct_no = #{inFuiouAcctNo,jdbcType=VARCHAR},
+      in_cust_no = #{inCustNo,jdbcType=VARCHAR},
+      in_artif_nm = #{inArtifNm,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      txn_rsp_cd = #{txnRspCd,jdbcType=VARCHAR},
+      rsp_cd_desc = #{rspCdDesc,jdbcType=VARCHAR},
+      sour_code = #{sourCode,jdbcType=VARCHAR},
+      busi_tp = #{busiTp,jdbcType=VARCHAR},
+      status = #{status,jdbcType=INTEGER},
+      checkflag = #{checkflag,jdbcType=VARCHAR},
+      checkdesp = #{checkdesp,jdbcType=VARCHAR},
+      createDate = #{createdate,jdbcType=VARCHAR},
+      fundFlow = #{fundflow,jdbcType=VARCHAR},
+      investId = #{investid,jdbcType=VARCHAR},
+      describes = #{describes,jdbcType=VARCHAR},
+      temp1 = #{temp1,jdbcType=VARCHAR},
+      temp2 = #{temp2,jdbcType=VARCHAR},
+      temp3 = #{temp3,jdbcType=VARCHAR},
+      temp4 = #{temp4,jdbcType=VARCHAR},
+      temp5 = #{temp5,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  
+  <!-- 数据核对 -->
+  <select id="czTxDataCheck" resultMap="BaseResultMap" parameterType="com.zjgt.p2p.report.model.Translog" >
+   	   select m.id,c.id as temp2,m.username,m.txn_amt as checkYw,c.txn_amt as checkFy,
+   	          m.mchnt_ssn,c.mchnt_ssn as fy_mchntSsn,
+   	   		  m.busi_tp,c.busi_tp as fy_busiTp,
+   	   		  m.txn_amt,c.txn_amt as fy_amt,
+	          m.ext_tp,m.txn_rsp_cd,m.rsp_cd_desc,
+	          case when (m.mchnt_ssn = c.mchnt_ssn and  m.txn_amt = c.txn_amt)  then  '1'
+	               when (m.mchnt_ssn = c.mchnt_ssn AND  m.txn_amt != c.txn_amt) THEN  '0'
+              else  '2'
+              end as checkflag
+       from (
+       		select * from translog where  1=1  and  mchnt_ssn is not null 
+       		
+       		<if test="translog.beginTime != null" >
+        		<![CDATA[ and txn_date >= #{translog.beginTime} ]]> 
+      		</if>
+      		<if test="translog.endTime != null" >
+        		<![CDATA[ and txn_date <= #{translog.endTime} ]]> 
+      		</if>
+      		
+    		<if test="translog.busiTp != null and translog.busiTp == '' " >
+      			and busi_tp like= #{translog.busiTp}
+      		</if>
+       ) m 
+       left join optranslog  c
+       on c.mchnt_ssn= m.mchnt_ssn
+  </select>
+  
+  <select id="getTranslogTotal" resultType="long">
+		select count(id) from translog where 1=1
+		
+		<if test="translog.transQueryType != null and translog.transQueryType == 'checkQuery'" >
+      		and checkflag != '1'
+      	</if>
+      	
+		<if test="translog.beginTime != null and translog.beginTime != ''" >
+        	<![CDATA[ and txn_date >= #{translog.beginTime} ]]> 
+      	</if>
+      	
+      	<if test="translog.endTime != null and translog.endTime != ''" >
+        	<![CDATA[ and txn_date <= #{translog.endTime} ]]> 
+      	</if>
+      		
+    	<if test="translog.busiTp != null and translog.busiTp != ''" >
+      		and busi_tp= #{translog.busiTp}
+      	</if>
+      	
+      	<if test="translog.checkflag != null and translog.checkflag != ''" >
+      		and checkflag= #{translog.checkflag}
+      	</if>
+      	
+      	<if test="translog.username != null and translog.username != ''" >
+      		and username like concat('%',#{translog.username},'%') 
+      	</if>
+      	
+  </select>
+  
+  <select id="queryCheckResult" resultMap="BaseResultMap" parameterType="com.zjgt.p2p.report.model.Translog" >
+       		select * from translog where  1=1 
+       		
+       		<if test="translog.transQueryType != null and translog.transQueryType == 'checkQuery'" >
+      			and checkflag != '1'
+      		</if>
+      	
+			<if test="translog.beginTime != null and translog.beginTime != ''" >
+        		<![CDATA[ and txn_date >= #{translog.beginTime} ]]> 
+      		</if>
+      	
+      		<if test="translog.endTime != null and translog.endTime != ''" >
+        		<![CDATA[ and txn_date <= #{translog.endTime} ]]> 
+      		</if>
+      		
+    		<if test="translog.busiTp != null and translog.busiTp != ''" >
+      			and busi_tp like concat('%',#{translog.busiTp},'%') 
+      		</if>
+      	
+      		<if test="translog.checkflag != null and translog.checkflag != ''" >
+      			and checkflag= #{translog.checkflag}
+      		</if>
+      	
+      		<if test="translog.username != null and translog.username != ''" >
+      			and username like concat('%',#{translog.username},'%') 
+      		</if>
+      	
+      		<if test="page.sort != null and page.sort != ''">
+				order by #{page.sort} #{page.order}
+			</if>
+			
+			<if test="page.page > 0">
+				limit #{page.start},#{page.end}
+			</if>
+  </select>
+  
+  <select id="getSumForYw" resultType="long">
+	   select ifnull(sum(txn_amt),0) from  translog  where 1=1 
+	   <if test="translog.beginTime != null and translog.beginTime != ''" >
+        	<![CDATA[ and txn_date >= #{translog.beginTime} ]]> 
+      	</if>
+      	
+      	<if test="translog.endTime != null and translog.endTime != ''" >
+        	<![CDATA[ and txn_date <= #{translog.endTime} ]]> 
+      	</if>
+      		
+    	<if test="translog.busiTp != null and translog.busiTp != ''" >
+      		and busi_tp like concat('%',#{translog.busiTp},'%') 
+      	</if>
+      	
+      	<if test="translog.username != null and translog.username != ''" >
+      		and username like concat('%',#{translog.username},'%') 
+      	</if>
+	</select>
+  
+  	<select id="queryCheckResult_bak" resultMap="BaseResultMap" parameterType="com.zjgt.p2p.report.model.Translog" >
+       		select * from translog where  1=1 
+       		
+			<if test="translog.beginTime != null and translog.beginTime != ''" >
+        		<![CDATA[ and txn_date >= #{translog.beginTime} ]]> 
+      		</if>
+      	
+      		<if test="translog.endTime != null and translog.endTime != ''" >
+        		<![CDATA[ and txn_date <= #{translog.endTime} ]]> 
+      		</if>
+      		
+    		<if test="translog.busiTp != null and translog.busiTp != ''" >
+      			and busi_tp like concat('%',#{translog.busiTp},'%') 
+      		</if>
+      	
+      		<if test="translog.username != null and translog.username != ''" >
+      			and username like concat('%',#{translog.username},'%') 
+      		</if>
+      	
+      		<!-- 活动专区-->
+      		<if test="translog.activityId != null and translog.activityId != ''" >
+        		and temp1 = #{translog.activityId} 
+      		</if>
+      	
+      		<if test="translog.activityId == null or  translog.activityId == ''" >
+        		and temp1 = 0 
+      		</if>
+      		
+      		<if test="page.sort != null and page.sort != ''">
+				order by #{page.sort} #{page.order}
+			</if>
+			
+			<if test="page.page > 0">
+				limit #{page.start},#{page.end}
+			</if>
+  	</select>
+  	
+  	<select id="getTranslogTotal_bak" resultType="long">
+		select count(id) from translog where 1=1 
+		
+		<if test="translog.beginTime != null and translog.beginTime != ''" >
+        	<![CDATA[ and txn_date >= #{translog.beginTime} ]]> 
+      	</if>
+      	
+      	<if test="translog.endTime != null and translog.endTime != ''" >
+        	<![CDATA[ and txn_date <= #{translog.endTime} ]]> 
+      	</if>
+      		
+    	<if test="translog.busiTp != null and translog.busiTp != ''" >
+      		and busi_tp like concat('%',#{translog.busiTp},'%') 
+      	</if>
+      	
+      	<if test="translog.username != null and translog.username != ''" >
+      		and username like concat('%',#{translog.username},'%') 
+      	</if>
+      	
+      	<if test="translog.activityId == null or translog.activityId == ''" >
+        		and temp1 = 0 
+      	</if>
+      		
+      	<!-- 活动专区-->
+      	<if test="translog.activityId != null and translog.activityId != ''" >
+        	and temp1 = #{translog.activityId} 
+      	</if>
+  </select>
+  
+  <!-- 数据核对_备份 -->
+  <select id="czTxDataCheck_bak" resultMap="BaseResultMap" parameterType="com.zjgt.p2p.report.model.Translog" >
+   	   select m.id,c.id as temp2,m.username,m.txn_amt as checkYw,c.txn_amt as checkFy,
+   	          m.mchnt_ssn,c.mchnt_ssn as fy_mchntSsn,
+   	   		  m.busi_tp,c.busi_tp as fy_busiTp,
+   	   		  m.txn_amt,c.txn_amt as fy_amt,
+	          m.ext_tp,m.txn_rsp_cd,m.rsp_cd_desc,
+	          case when (m.mchnt_ssn = c.mchnt_ssn and  m.txn_amt = c.txn_amt)  then  '1'
+	               when (m.mchnt_ssn = c.mchnt_ssn AND  m.txn_amt != c.txn_amt) THEN  '0'
+              else  '2'
+              end as checkflag
+       from (
+       		select * from translog where  1=1  and  mchnt_ssn is not null 
+       		
+       		<if test="translog.beginTime != null" >
+        		<![CDATA[ and txn_date >= #{translog.beginTime} ]]> 
+      		</if>
+      		<if test="translog.endTime != null" >
+        		<![CDATA[ and txn_date <= #{translog.endTime} ]]> 
+      		</if>
+      		
+    		<if test="translog.busiTp != null and translog.busiTp == '充值' " >
+      			and busi_tp like concat('%',#{translog.busiTp},'%') 
+      		</if>
+      		  
+      		<if test="translog.busiTp != null and translog.busiTp == '提现' " >
+      			and busi_tp like concat('%',#{translog.busiTp},'%') 
+      		</if>
+      			
+      		<!-- 投资,不包括活动项目 -->
+      		<if test="translog.busiTp != null and translog.busiTp == '投资' " >
+      			and busi_tp like concat('%',#{translog.busiTp},'%') 
+        		and temp1 = '0' 
+      		</if>
+      		
+      		<!-- 活动专区,比如：22% -->
+      		<if test="translog.activityId != null " >
+        		and temp1 = #{translog.activityId} 
+      		</if>
+       ) m 
+       left join optranslog  c
+       on c.mchnt_ssn= m.mchnt_ssn
+       AND c.txn_rsp_cd='0000'
+       
+  </select>
+  
+  <select id="queryByUserName" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select * from Translog  where 1=1
+    <if test="username != null " >
+    	and username = #{username} 
+     </if>
+  </select>
+  
+  <select id="queryByGroup"  resultMap="BaseResultMap" parameterType="com.zjgt.p2p.report.model.Translog">
+    	 select ts.username,ts.busi_tp,sum(ts.txn_amt) txn_amt 
+		 from translog  ts  
+		 where  1=1 
+		  
+		<if test="ts.beginTime != null and ts.beginTime != '' ">
+			<![CDATA[ and ts.txn_date >= #{ts.beginTime} ]]>
+		</if>
+		<if test="ts.endTime != null and ts.endTime != '' ">
+			<![CDATA[ and ts.txn_date >= #{ts.beginTime} ]]>
+		</if>
+		<if test="ts.busiTp != null  and ts.busiTp !='' " >  
+         	and ts.busi_tp = #{ts.busiTp} 
+        </if>
+         GROUP BY ts.username
+  	</select>
+  	
+  	<update id="updateByGroup"  parameterType="com.zjgt.p2p.report.model.Translog">
+		update translog 
+    	set 
+    	<if test="ts.checkflag != null and ts.checkflag != '' ">
+   	    	checkflag = #{ts.checkflag}
+   	    </if>
+   	    <if test="ts.checkdesp != null and ts.checkdesp != '' ">
+   	    	,checkdesp = #{ts.checkdesp}
+   	    </if>
+   	    
+    	where 1=1 
+    	  
+      	<if test="ts.beginTime != null and ts.beginTime != '' ">
+			<![CDATA[ and txn_date >= #{ts.beginTime} ]]>
+		</if>
+		<if test="ts.endTime != null and ts.endTime != '' ">
+			<![CDATA[ and txn_date >= #{ts.endTime} ]]>
+		</if>
+		<if test="ts.busiTp != null  and ts.busiTp !='' " >  
+         	and busi_tp = #{ts.busiTp} 
+        </if>
+          
+        <if test="ts.userNameList != null" >
+       		and username in 
+       		<foreach item="userName" index="index" collection="ts.userNameList" open="(" separator="," close=")"> 
+       			#{userName} 
+       		</foreach>
+       	</if>
+  	</update>
+  
+</mapper>

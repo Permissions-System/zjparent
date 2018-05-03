@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:jaxws="http://cxf.apache.org/jaxws"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+       http://cxf.apache.org/jaxws
+       http://cxf.apache.org/schemas/jaxws.xsd">
+
+	<jaxws:endpoint id="helloWorld" implementor="com.zjgt.msg.cxf.impl.HelloWorldImpl"
+		address="/spring/hello" />		
+	<jaxws:client id="helloService" serviceClass="com.zjgt.msg.cxf.impl.HelloWorldImpl"
+		address="http://localhost:8080/zjp2p-web-cxf/spring/hello" />
+		
+
+	<jaxws:endpoint id="getStaffName" implementor="com.zjgt.msg.cxf.impl.StaffServiceImpl"
+		address="/staffNameService" />		
+	<jaxws:client id="staffNameService2" serviceClass="com.zjgt.msg.cxf.impl.StaffServiceImpl"
+		address="http://localhost:8080/zjp2p-web-cxf/staffNameService" />
+		
+	<jaxws:endpoint id="getStaffLogin" implementor="com.zjgt.msg.cxf.impl.StaffLoginServiceImpl"
+		address="/staffLoginService" />		
+	<jaxws:client id="getStaffLogin2" serviceClass="com.zjgt.msg.cxf.impl.StaffLoginServiceImpl"
+		address="http://localhost:8080/zjp2p-web-cxf/staffLoginService" />
+		
+
+</beans> 

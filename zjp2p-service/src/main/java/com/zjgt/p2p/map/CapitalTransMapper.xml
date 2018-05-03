@@ -1,0 +1,488 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zjgt.p2p.dao.CapitaltransMapper">
+	<resultMap id="BaseResultMap" type="com.zjgt.p2p.model.Capitaltrans">
+		<!-- common class - @ET model 属性定义, do not modify. -->
+		<id column="Id" property="id" jdbcType="BIGINT" />
+		<result column="TransNo" property="transno" jdbcType="VARCHAR" />
+		<result column="TransTime" property="transtime" jdbcType="TIMESTAMP" />
+		<result column="TransType" property="transtype" jdbcType="INTEGER" />
+		<result column="member_acctid" property="memberAcctid"
+			jdbcType="INTEGER" />
+		<result column="memberid" property="memberid" jdbcType="INTEGER" />
+		<result column="realname" property="realname" jdbcType="VARCHAR" />
+		<result column="amount" property="amount" jdbcType="DECIMAL" />
+		<result column="availAmount" property="availamount" jdbcType="DECIMAL" />
+		<result column="fees" property="fees" jdbcType="DECIMAL" />
+		<result column="feerate" property="feerate" jdbcType="DECIMAL" />
+		<result column="Currency" property="currency" jdbcType="CHAR" />
+		<result column="PayAccountId" property="payaccountid" jdbcType="BIGINT" />
+		<result column="PayAccountNo" property="payaccountno" jdbcType="VARCHAR" />
+		<result column="PayerName" property="payername" jdbcType="VARCHAR" />
+		<result column="PayCardNum" property="paycardnum" jdbcType="VARCHAR" />
+		<result column="PayAccountType" property="payaccounttype"
+			jdbcType="INTEGER" />
+		<result column="PayeeAccountId" property="payeeaccountid"
+			jdbcType="BIGINT" />
+		<result column="PayeeAccountNo" property="payeeaccountno"
+			jdbcType="VARCHAR" />
+		<result column="PayeeName" property="payeename" jdbcType="VARCHAR" />
+		<result column="PayeeCardNum" property="payeecardnum" jdbcType="VARCHAR" />
+		<result column="PayeeAccountType" property="payeeaccounttype"
+			jdbcType="INTEGER" />
+		<result column="TransStatus" property="transstatus" jdbcType="INTEGER" />
+		<result column="remark" property="remark" jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Example_Where_Clause">
+		<!-- common class - @ET model 属性定义, do not modify. -->
+		<where>
+			<foreach collection="oredCriteria" item="criteria" separator="or">
+				<if test="criteria.valid">
+					<trim prefix="(" suffix=")" prefixOverrides="and">
+						<foreach collection="criteria.criteria" item="criterion">
+							<choose>
+								<when test="criterion.noValue">
+									and ${criterion.condition}
+								</when>
+								<when test="criterion.singleValue">
+									and ${criterion.condition} #{criterion.value}
+								</when>
+								<when test="criterion.betweenValue">
+									and ${criterion.condition} #{criterion.value} and
+									#{criterion.secondValue}
+								</when>
+								<when test="criterion.listValue">
+									and ${criterion.condition}
+									<foreach collection="criterion.value" item="listItem"
+										open="(" close=")" separator=",">
+										#{listItem}
+									</foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+	<sql id="Base_Column_List">
+		<!-- common class - @ET model 属性定义, do not modify. -->
+		Id, TransNo, TransTime, TransType, member_acctid, memberid, realname,
+		amount, availAmount,
+		fees, feerate, Currency, PayAccountId, PayAccountNo, PayerName, PayCardNum,
+		PayAccountType,
+		PayeeAccountId, PayeeAccountNo, PayeeName, PayeeCardNum, PayeeAccountType,
+		TransStatus,
+		remark
+	</sql>
+	<select id="selectByExample" resultMap="BaseResultMap"
+		parameterType="com.zjgt.p2p.model.CapitaltransExample">
+		<!-- common class - @ET model 属性定义, do not modify. -->
+		select
+		<if test="distinct">
+			distinct
+		</if>
+		'true' as QUERYID,
+		<include refid="Base_Column_List" />
+		from capitaltrans
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+		<if test="orderByClause != null">
+			order by ${orderByClause}
+		</if>
+	</select>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Long">
+		<!-- common class - @ET model 属性定义, do not modify. -->
+		select
+		<include refid="Base_Column_List" />
+		from capitaltrans
+		where Id = #{id,jdbcType=BIGINT}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+		<!-- common class - @ET model 属性定义, do not modify. -->
+		delete from capitaltrans
+		where Id = #{id,jdbcType=BIGINT}
+	</delete>
+	<insert id="insert" parameterType="com.zjgt.p2p.model.Capitaltrans" useGeneratedKeys="true" keyProperty="id">
+		<!-- common class - @ET model 属性定义, do not modify. -->
+		insert into capitaltrans (Id, TransNo, TransTime,
+		TransType, member_acctid, memberid,
+		realname, amount, availAmount,
+		fees, feerate, Currency,
+		PayAccountId, PayAccountNo, PayerName,
+		PayCardNum, PayAccountType, PayeeAccountId,
+		PayeeAccountNo, PayeeName, PayeeCardNum,
+		PayeeAccountType, TransStatus, remark
+		)
+		values (#{id,jdbcType=BIGINT}, #{transno,jdbcType=VARCHAR},
+		#{transtime,jdbcType=TIMESTAMP},
+		#{transtype,jdbcType=INTEGER}, #{memberAcctid,jdbcType=INTEGER}, #{memberid,jdbcType=INTEGER},
+		#{realname,jdbcType=VARCHAR}, #{amount,jdbcType=DECIMAL},
+		#{availamount,jdbcType=DECIMAL},
+		#{fees,jdbcType=DECIMAL}, #{feerate,jdbcType=DECIMAL}, #{currency,jdbcType=CHAR},
+		#{payaccountid,jdbcType=BIGINT}, #{payaccountno,jdbcType=VARCHAR},
+		#{payername,jdbcType=VARCHAR},
+		#{paycardnum,jdbcType=VARCHAR}, #{payaccounttype,jdbcType=INTEGER},
+		#{payeeaccountid,jdbcType=BIGINT},
+		#{payeeaccountno,jdbcType=VARCHAR}, #{payeename,jdbcType=VARCHAR}, #{payeecardnum,jdbcType=VARCHAR},
+		#{payeeaccounttype,jdbcType=INTEGER}, #{transstatus,jdbcType=INTEGER},
+		#{remark,jdbcType=VARCHAR}
+		)
+	</insert>
+	<insert id="insertSelective" parameterType="com.zjgt.p2p.model.Capitaltrans" useGeneratedKeys="true" keyProperty="id">
+		<!-- common class - @ET model 属性定义, do not modify. -->
+		insert into capitaltrans
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				Id,
+			</if>
+			<if test="transno != null">
+				TransNo,
+			</if>
+			<if test="transtime != null">
+				TransTime,
+			</if>
+			<if test="transtype != null">
+				TransType,
+			</if>
+			<if test="memberAcctid != null">
+				member_acctid,
+			</if>
+			<if test="memberid != null">
+				memberid,
+			</if>
+			<if test="realname != null">
+				realname,
+			</if>
+			<if test="amount != null">
+				amount,
+			</if>
+			<if test="availamount != null">
+				availAmount,
+			</if>
+			<if test="fees != null">
+				fees,
+			</if>
+			<if test="feerate != null">
+				feerate,
+			</if>
+			<if test="currency != null">
+				Currency,
+			</if>
+			<if test="payaccountid != null">
+				PayAccountId,
+			</if>
+			<if test="payaccountno != null">
+				PayAccountNo,
+			</if>
+			<if test="payername != null">
+				PayerName,
+			</if>
+			<if test="paycardnum != null">
+				PayCardNum,
+			</if>
+			<if test="payaccounttype != null">
+				PayAccountType,
+			</if>
+			<if test="payeeaccountid != null">
+				PayeeAccountId,
+			</if>
+			<if test="payeeaccountno != null">
+				PayeeAccountNo,
+			</if>
+			<if test="payeename != null">
+				PayeeName,
+			</if>
+			<if test="payeecardnum != null">
+				PayeeCardNum,
+			</if>
+			<if test="payeeaccounttype != null">
+				PayeeAccountType,
+			</if>
+			<if test="transstatus != null">
+				TransStatus,
+			</if>
+			<if test="remark != null">
+				remark,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=BIGINT},
+			</if>
+			<if test="transno != null">
+				#{transno,jdbcType=VARCHAR},
+			</if>
+			<if test="transtime != null">
+				#{transtime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="transtype != null">
+				#{transtype,jdbcType=INTEGER},
+			</if>
+			<if test="memberAcctid != null">
+				#{memberAcctid,jdbcType=INTEGER},
+			</if>
+			<if test="memberid != null">
+				#{memberid,jdbcType=INTEGER},
+			</if>
+			<if test="realname != null">
+				#{realname,jdbcType=VARCHAR},
+			</if>
+			<if test="amount != null">
+				#{amount,jdbcType=DECIMAL},
+			</if>
+			<if test="availamount != null">
+				#{availamount,jdbcType=DECIMAL},
+			</if>
+			<if test="fees != null">
+				#{fees,jdbcType=DECIMAL},
+			</if>
+			<if test="feerate != null">
+				#{feerate,jdbcType=DECIMAL},
+			</if>
+			<if test="currency != null">
+				#{currency,jdbcType=CHAR},
+			</if>
+			<if test="payaccountid != null">
+				#{payaccountid,jdbcType=BIGINT},
+			</if>
+			<if test="payaccountno != null">
+				#{payaccountno,jdbcType=VARCHAR},
+			</if>
+			<if test="payername != null">
+				#{payername,jdbcType=VARCHAR},
+			</if>
+			<if test="paycardnum != null">
+				#{paycardnum,jdbcType=VARCHAR},
+			</if>
+			<if test="payaccounttype != null">
+				#{payaccounttype,jdbcType=INTEGER},
+			</if>
+			<if test="payeeaccountid != null">
+				#{payeeaccountid,jdbcType=BIGINT},
+			</if>
+			<if test="payeeaccountno != null">
+				#{payeeaccountno,jdbcType=VARCHAR},
+			</if>
+			<if test="payeename != null">
+				#{payeename,jdbcType=VARCHAR},
+			</if>
+			<if test="payeecardnum != null">
+				#{payeecardnum,jdbcType=VARCHAR},
+			</if>
+			<if test="payeeaccounttype != null">
+				#{payeeaccounttype,jdbcType=INTEGER},
+			</if>
+			<if test="transstatus != null">
+				#{transstatus,jdbcType=INTEGER},
+			</if>
+			<if test="remark != null">
+				#{remark,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateStatusByTransNo" parameterType="java.util.Map">
+	    update capitaltrans set transStatus = #{transStatus} where TransNo = #{transNo}
+	</update>
+	<update id="updateByPrimaryKeySelective" parameterType="com.zjgt.p2p.model.Capitaltrans">
+		<!-- common class - @ET model 属性定义, do not modify. -->
+		update capitaltrans
+		<set>
+			<if test="transno != null">
+				TransNo = #{transno,jdbcType=VARCHAR},
+			</if>
+			<if test="transtime != null">
+				TransTime = #{transtime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="transtype != null">
+				TransType = #{transtype,jdbcType=INTEGER},
+			</if>
+			<if test="memberAcctid != null">
+				member_acctid = #{memberAcctid,jdbcType=INTEGER},
+			</if>
+			<if test="memberid != null">
+				memberid = #{memberid,jdbcType=INTEGER},
+			</if>
+			<if test="realname != null">
+				realname = #{realname,jdbcType=VARCHAR},
+			</if>
+			<if test="amount != null">
+				amount = #{amount,jdbcType=DECIMAL},
+			</if>
+			<if test="availamount != null">
+				availAmount = #{availamount,jdbcType=DECIMAL},
+			</if>
+			<if test="fees != null">
+				fees = #{fees,jdbcType=DECIMAL},
+			</if>
+			<if test="feerate != null">
+				feerate = #{feerate,jdbcType=DECIMAL},
+			</if>
+			<if test="currency != null">
+				Currency = #{currency,jdbcType=CHAR},
+			</if>
+			<if test="payaccountid != null">
+				PayAccountId = #{payaccountid,jdbcType=BIGINT},
+			</if>
+			<if test="payaccountno != null">
+				PayAccountNo = #{payaccountno,jdbcType=VARCHAR},
+			</if>
+			<if test="payername != null">
+				PayerName = #{payername,jdbcType=VARCHAR},
+			</if>
+			<if test="paycardnum != null">
+				PayCardNum = #{paycardnum,jdbcType=VARCHAR},
+			</if>
+			<if test="payaccounttype != null">
+				PayAccountType = #{payaccounttype,jdbcType=INTEGER},
+			</if>
+			<if test="payeeaccountid != null">
+				PayeeAccountId = #{payeeaccountid,jdbcType=BIGINT},
+			</if>
+			<if test="payeeaccountno != null">
+				PayeeAccountNo = #{payeeaccountno,jdbcType=VARCHAR},
+			</if>
+			<if test="payeename != null">
+				PayeeName = #{payeename,jdbcType=VARCHAR},
+			</if>
+			<if test="payeecardnum != null">
+				PayeeCardNum = #{payeecardnum,jdbcType=VARCHAR},
+			</if>
+			<if test="payeeaccounttype != null">
+				PayeeAccountType = #{payeeaccounttype,jdbcType=INTEGER},
+			</if>
+			<if test="transstatus != null">
+				TransStatus = #{transstatus,jdbcType=INTEGER},
+			</if>
+			<if test="remark != null">
+				remark = #{remark,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where Id = #{id,jdbcType=BIGINT}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.zjgt.p2p.model.Capitaltrans">
+		<!-- common class - @ET model 属性定义, do not modify. -->
+		update capitaltrans
+		set TransNo = #{transno,jdbcType=VARCHAR},
+		TransTime = #{transtime,jdbcType=TIMESTAMP},
+		TransType = #{transtype,jdbcType=INTEGER},
+		member_acctid = #{memberAcctid,jdbcType=INTEGER},
+		memberid = #{memberid,jdbcType=INTEGER},
+		realname = #{realname,jdbcType=VARCHAR},
+		amount = #{amount,jdbcType=DECIMAL},
+		availAmount = #{availamount,jdbcType=DECIMAL},
+		fees = #{fees,jdbcType=DECIMAL},
+		feerate = #{feerate,jdbcType=DECIMAL},
+		Currency = #{currency,jdbcType=CHAR},
+		PayAccountId = #{payaccountid,jdbcType=BIGINT},
+		PayAccountNo = #{payaccountno,jdbcType=VARCHAR},
+		PayerName = #{payername,jdbcType=VARCHAR},
+		PayCardNum = #{paycardnum,jdbcType=VARCHAR},
+		PayAccountType = #{payaccounttype,jdbcType=INTEGER},
+		PayeeAccountId = #{payeeaccountid,jdbcType=BIGINT},
+		PayeeAccountNo = #{payeeaccountno,jdbcType=VARCHAR},
+		PayeeName = #{payeename,jdbcType=VARCHAR},
+		PayeeCardNum = #{payeecardnum,jdbcType=VARCHAR},
+		PayeeAccountType = #{payeeaccounttype,jdbcType=INTEGER},
+		TransStatus = #{transstatus,jdbcType=INTEGER},
+		remark = #{remark,jdbcType=VARCHAR}
+		where Id = #{id,jdbcType=BIGINT}
+	</update>
+	
+<!-- 取得记录的总数 -->  
+<select id="getCapitaltransCountBySettle" resultType="long" parameterType="com.zjgt.p2p.model.CapitaltransExample">  
+  SELECT COUNT(*) FROM capitaltrans   
+      <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+</select>  
+
+<select id="selectByExampleLimitBySettle" resultMap="BaseResultMap" parameterType="com.zjgt.p2p.model.CapitaltransExample" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+      This element : Tue Dec 09 13:48:21 CST 2014.
+    -->
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from capitaltrans
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="startPos != null" >
+      limit ${startPos} ,${pageSize}
+    </if>
+  </select>
+    <!-- 充值记录 -->
+  <select id="selectRechargeBySettle" resultType="java.util.Map" parameterType="java.util.Map" >
+  	SELECT c.TransTime as rechargeDate,c.amount,c.fees,c.availAmount,
+  	sum(if(c.fees!=0,c.fees/2,t.Amount))AS plat,t.PayerName AS thirdpay,
+  	  	c.TransNo as transNo ,m.realname,cps.channel
+	FROM capitaltrans c INNER JOIN translog t ON t.TransNo=c.Id
+						INNER JOIN member m ON c.memberid=m.id
+						LEFT  JOIN (SELECT * FROM cpsrec cps WHERE cps.operation='register')cps ON m.id=cps.memberid
+	WHERE c.TransType=1001 AND c.TransStatus=1
+	<if test="dateStart!=null  and dateStart!=''">
+	 <![CDATA[
+        AND DATE(t.TransTime) >= #{dateStart,jdbcType=CHAR} 
+        ]]>
+	</if>
+	<if test="dateEnd!=null  and dateEnd!=''">
+	    <![CDATA[
+        AND DATE(t.TransTime) <= #{dateEnd,jdbcType=CHAR} 
+            ]]>
+	</if>
+	GROUP BY t.TransNo  order by c.TransTime DESC
+  </select>
+
+  <!-- 充值记录总数 -->
+  <select id="selectCountRechargeBySettle" resultType="long"  parameterType="java.util.Map" >
+  	SELECT count(*)
+	FROM capitaltrans c  
+	WHERE c.TransType=1001 AND c.TransStatus=1
+	<if test="dateStart!=null  and dateStart!=''">
+	 <![CDATA[
+        AND DATE(t.TransTime) >= #{dateStart,jdbcType=CHAR} 
+        ]]>
+	</if>
+	<if test="dateEnd!=null  and dateEnd!=''">
+	    <![CDATA[
+        AND DATE(t.TransTime) <= #{dateEnd,jdbcType=CHAR} 
+            ]]>
+	</if>
+	   
+  </select>
+    <!-- 提现记录 -->
+  <select id="selectWithdrawBySettle" resultType="java.util.Map" parameterType="java.util.Map" >
+  	SELECT c.TransTime as withdrawDate,c.amount,c.fees,c.availAmount,
+  	sum(if(c.fees!=0,c.fees/2,t.Amount))AS plat,t.PayeeName AS thirdpay,
+  	  	c.TransNo as transNo ,m.realname
+	FROM capitaltrans c INNER JOIN translog t ON t.TransNo=c.Id
+						INNER JOIN member m ON c.memberid=m.id
+	WHERE c.TransType=1002 AND c.TransStatus=1
+	<if test="dateStart!=null  and dateStart!=''">
+	 <![CDATA[
+        AND DATE(t.TransTime) >= #{dateStart,jdbcType=CHAR} 
+        ]]>
+	</if>
+	<if test="dateEnd!=null  and dateEnd!=''">
+	    <![CDATA[
+        AND DATE(t.TransTime) <= #{dateEnd,jdbcType=CHAR} 
+            ]]>
+	</if>
+	GROUP BY t.TransNo  order by c.TransTime DESC
+  </select>
+  
+  <!--  -->
+  <select id="getRechargeSuccessCount" resultType="java.lang.Integer" parameterType="java.lang.Long" >
+      select count(*) FROM capitaltrans c WHERE c.TransType=1001 AND c.TransStatus=1 AND c.memberid = #{memberId}
+  </select>
+</mapper>

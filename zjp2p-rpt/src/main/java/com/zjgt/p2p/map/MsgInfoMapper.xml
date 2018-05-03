@@ -1,0 +1,356 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zjgt.p2p.dao.MsgInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.zjgt.p2p.report.model.MsgInfo" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="type" property="type" jdbcType="INTEGER" />
+    <result column="msgtype" property="msgtype" jdbcType="INTEGER" />
+    <result column="senddate" property="senddate" jdbcType="TIMESTAMP" />
+    <result column="servtype" property="servtype" jdbcType="INTEGER" />
+    <result column="servno" property="servno" jdbcType="VARCHAR" />
+    <result column="servdesc" property="servdesc" jdbcType="VARCHAR" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="mobile" property="mobile" jdbcType="VARCHAR" />
+    <result column="username" property="username" jdbcType="VARCHAR" />
+    <result column="userid" property="userid" jdbcType="BIGINT" />
+    <result column="createdate" property="createdate" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.zjgt.p2p.report.model.MsgInfo" extends="BaseResultMap" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    <result column="content" property="content" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    id, status, type, msgtype, senddate, servtype, servno, servdesc, title, mobile, username, 
+    userid, createdate
+  </sql>
+  <sql id="Blob_Column_List" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    content
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.zjgt.p2p.report.model.MsgInfoExample" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from msginfo
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.zjgt.p2p.report.model.MsgInfoExample" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from msginfo
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from msginfo
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    delete from msginfo
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.zjgt.p2p.report.model.MsgInfo" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    insert into msginfo (id, status, type, 
+      msgtype, senddate, servtype, 
+      servno, servdesc, title, 
+      mobile, username, userid, 
+      createdate, content)
+    values (#{id,jdbcType=BIGINT}, #{status,jdbcType=INTEGER}, #{type,jdbcType=INTEGER}, 
+      #{msgtype,jdbcType=INTEGER}, #{senddate,jdbcType=TIMESTAMP}, #{servtype,jdbcType=INTEGER}, 
+      #{servno,jdbcType=VARCHAR}, #{servdesc,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, 
+      #{mobile,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, #{userid,jdbcType=BIGINT}, 
+      #{createdate,jdbcType=TIMESTAMP}, #{content,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zjgt.p2p.report.model.MsgInfo" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    insert into msginfo
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="msgtype != null" >
+        msgtype,
+      </if>
+      <if test="senddate != null" >
+        senddate,
+      </if>
+      <if test="servtype != null" >
+        servtype,
+      </if>
+      <if test="servno != null" >
+        servno,
+      </if>
+      <if test="servdesc != null" >
+        servdesc,
+      </if>
+      <if test="title != null" >
+        title,
+      </if>
+      <if test="mobile != null" >
+        mobile,
+      </if>
+      <if test="username != null" >
+        username,
+      </if>
+      <if test="userid != null" >
+        userid,
+      </if>
+      <if test="createdate != null" >
+        createdate,
+      </if>
+      <if test="content != null" >
+        content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=INTEGER},
+      </if>
+      <if test="msgtype != null" >
+        #{msgtype,jdbcType=INTEGER},
+      </if>
+      <if test="senddate != null" >
+        #{senddate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="servtype != null" >
+        #{servtype,jdbcType=INTEGER},
+      </if>
+      <if test="servno != null" >
+        #{servno,jdbcType=VARCHAR},
+      </if>
+      <if test="servdesc != null" >
+        #{servdesc,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null" >
+        #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null" >
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="userid != null" >
+        #{userid,jdbcType=BIGINT},
+      </if>
+      <if test="createdate != null" >
+        #{createdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="content != null" >
+        #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zjgt.p2p.report.model.MsgInfo" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    update msginfo
+    <set >
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=INTEGER},
+      </if>
+      <if test="msgtype != null" >
+        msgtype = #{msgtype,jdbcType=INTEGER},
+      </if>
+      <if test="senddate != null" >
+        senddate = #{senddate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="servtype != null" >
+        servtype = #{servtype,jdbcType=INTEGER},
+      </if>
+      <if test="servno != null" >
+        servno = #{servno,jdbcType=VARCHAR},
+      </if>
+      <if test="servdesc != null" >
+        servdesc = #{servdesc,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null" >
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null" >
+        mobile = #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null" >
+        username = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="userid != null" >
+        userid = #{userid,jdbcType=BIGINT},
+      </if>
+      <if test="createdate != null" >
+        createdate = #{createdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="content != null" >
+        content = #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.zjgt.p2p.report.model.MsgInfo" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    update msginfo
+    set status = #{status,jdbcType=INTEGER},
+      type = #{type,jdbcType=INTEGER},
+      msgtype = #{msgtype,jdbcType=INTEGER},
+      senddate = #{senddate,jdbcType=TIMESTAMP},
+      servtype = #{servtype,jdbcType=INTEGER},
+      servno = #{servno,jdbcType=VARCHAR},
+      servdesc = #{servdesc,jdbcType=VARCHAR},
+      title = #{title,jdbcType=VARCHAR},
+      mobile = #{mobile,jdbcType=VARCHAR},
+      username = #{username,jdbcType=VARCHAR},
+      userid = #{userid,jdbcType=BIGINT},
+      createdate = #{createdate,jdbcType=TIMESTAMP},
+      content = #{content,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zjgt.p2p.report.model.MsgInfo" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    update msginfo
+    set status = #{status,jdbcType=INTEGER},
+      type = #{type,jdbcType=INTEGER},
+      msgtype = #{msgtype,jdbcType=INTEGER},
+      senddate = #{senddate,jdbcType=TIMESTAMP},
+      servtype = #{servtype,jdbcType=INTEGER},
+      servno = #{servno,jdbcType=VARCHAR},
+      servdesc = #{servdesc,jdbcType=VARCHAR},
+      title = #{title,jdbcType=VARCHAR},
+      mobile = #{mobile,jdbcType=VARCHAR},
+      username = #{username,jdbcType=VARCHAR},
+      userid = #{userid,jdbcType=BIGINT},
+      createdate = #{createdate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  
+  <select id="registerSevenNoCardInfo"  resultType="com.zjgt.p2p.report.model.MsgInfo" >
+   
+  SELECT * FROM msginfo
+   <!-- select id,userName,mobile from tb_userInfo where HasFuiou=0 and registerDate<= dateadd(DAY,-7,getdate()) -->
+    
+  </select>
+  
+  
+    <select id="bingCardNoInvestInfo"   resultType="com.zjgt.p2p.report.model.MsgInfo" >
+   
+     SELECT * FROM msginfo
+      
+  <!--  select id,userName,mobile from tb_userInfo where HasFuiou=1 and registerDate<= dateadd(DAY,-3,getdate()) and  userName not in (select userName from tb_lendInfo group by userName) -->
+    
+    
+  </select>
+</mapper>

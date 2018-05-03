@@ -1,0 +1,106 @@
+2015-12-18 15:02:42,568 [main] DEBUG org.apache.axis.i18n.ProjectResourceBundle - getBundle(org.apache.axis,org.apache.axis.i18n,resource,null,...)
+2015-12-18 15:02:42,583 [main] DEBUG org.apache.axis.i18n.ProjectResourceBundle - loadBundle: Ignoring MissingResourceException: Can't find bundle for base name org.apache.axis.resource, locale zh_CN
+2015-12-18 15:02:42,584 [main] DEBUG org.apache.axis.i18n.ProjectResourceBundle - Created org.apache.axis.i18n.resource, linked to parent null
+2015-12-18 15:02:42,584 [main] DEBUG org.apache.axis.i18n.ProjectResourceBundle - getBundle(org.apache.axis,org.apache.axis.utils,resource,null,...)
+2015-12-18 15:02:42,586 [main] DEBUG org.apache.axis.i18n.ProjectResourceBundle - loadBundle: Ignoring MissingResourceException: Can't find bundle for base name org.apache.axis.utils.resource, locale zh_CN
+2015-12-18 15:02:42,587 [main] DEBUG org.apache.axis.i18n.ProjectResourceBundle - loadBundle: Ignoring MissingResourceException: Can't find bundle for base name org.apache.axis.resource, locale zh_CN
+2015-12-18 15:02:42,587 [main] DEBUG org.apache.axis.i18n.ProjectResourceBundle - Root package not found, cross link to org.apache.axis.i18n.resource
+2015-12-18 15:02:42,587 [main] DEBUG org.apache.axis.i18n.ProjectResourceBundle - Root package not found, cross link to org.apache.axis.i18n.resource
+2015-12-18 15:02:42,587 [main] DEBUG org.apache.axis.i18n.ProjectResourceBundle - org.apache.axis.i18n.resource::handleGetObject(engineFactory)
+2015-12-18 15:02:42,588 [main] DEBUG org.apache.axis.configuration.EngineConfigurationFactoryFinder - Got EngineFactory: org.apache.axis.configuration.EngineConfigurationFactoryDefault
+2015-12-18 15:02:42,590 [main] DEBUG org.apache.axis.AxisEngine - Enter: AxisEngine::init
+2015-12-18 15:02:42,645 [main] DEBUG org.apache.axis.i18n.ProjectResourceBundle - org.apache.axis.i18n.resource::handleGetObject(attachEnabled)
+2015-12-18 15:02:42,646 [main] DEBUG org.apache.axis.utils.JavaUtils - Attachment support is enabled?  true
+2015-12-18 15:02:42,660 [main] DEBUG org.apache.axis.encoding.ser.JAFDataHandlerDeserializerFactory - Enter/Exit: JAFDataHandlerDeserializerFactory(class java.lang.String, {http://xml.apache.org/xml-soap}PlainText)
+2015-12-18 15:02:42,662 [main] DEBUG org.apache.axis.i18n.ProjectResourceBundle - org.apache.axis.i18n.resource::handleGetObject(oddDigits00)
+2015-12-18 15:02:42,662 [main] DEBUG org.apache.axis.i18n.ProjectResourceBundle - org.apache.axis.i18n.resource::handleGetObject(badChars01)
+2015-12-18 15:02:42,698 [main] DEBUG org.apache.axis.encoding.ser.JAFDataHandlerDeserializerFactory - Enter/Exit: JAFDataHandlerDeserializerFactory(class java.awt.Image, {http://xml.apache.org/xml-soap}Image)
+2015-12-18 15:02:42,699 [main] DEBUG org.apache.axis.encoding.ser.JAFDataHandlerDeserializerFactory - Enter/Exit: JAFDataHandlerDeserializerFactory(class javax.mail.internet.MimeMultipart, {http://xml.apache.org/xml-soap}Multipart)
+2015-12-18 15:02:42,700 [main] DEBUG org.apache.axis.encoding.ser.JAFDataHandlerDeserializerFactory - Enter/Exit: JAFDataHandlerDeserializerFactory(interface javax.xml.transform.Source, {http://xml.apache.org/xml-soap}Source)
+2015-12-18 15:02:42,701 [main] DEBUG org.apache.axis.encoding.ser.JAFDataHandlerDeserializerFactory - Enter/Exit: JAFDataHandlerDeserializerFactory(class org.apache.axis.attachments.OctetStream, {http://xml.apache.org/xml-soap}octet-stream)
+2015-12-18 15:02:42,702 [main] DEBUG org.apache.axis.encoding.ser.JAFDataHandlerDeserializerFactory - Enter/Exit: JAFDataHandlerDeserializerFactory()
+2015-12-18 15:02:42,725 [main] DEBUG org.apache.axis.AxisEngine - Exit: AxisEngine::init
+2015-12-18 15:02:42,731 [main] DEBUG org.apache.axis.description.OperationDesc - @1ce3dab5 added parameter >name:       {MerchantAPI}staff_No
+typeEntry:  null
+mode:       IN
+position:   0
+isReturn:   false
+typeQName:  {http://www.w3.org/2001/XMLSchema}string
+javaType:   class java.lang.String
+inHeader:   false
+outHeader:  false
+@332bafe4<total parameters:1
+2015-12-18 15:02:42,731 [main] DEBUG org.apache.axis.description.OperationDesc - @1ce3dab5 added parameter >name:       {MerchantAPI}name
+typeEntry:  null
+mode:       IN
+position:   1
+isReturn:   false
+typeQName:  {http://www.w3.org/2001/XMLSchema}string
+javaType:   class java.lang.String
+inHeader:   false
+outHeader:  false
+@7928bbfa<total parameters:2
+2015-12-18 15:02:42,731 [main] DEBUG org.apache.axis.description.OperationDesc - @1ce3dab5setReturnType({http://www.w3.org/2001/XMLSchema}string)
+2015-12-18 15:02:42,734 [main] DEBUG org.apache.axis.description.OperationDesc - @4648acd3 added parameter >name:       {MerchantAPI}staff_No
+typeEntry:  null
+mode:       IN
+position:   0
+isReturn:   false
+typeQName:  {http://www.w3.org/2001/XMLSchema}string
+javaType:   class java.lang.String
+inHeader:   false
+outHeader:  false
+@4d4a74b1<total parameters:1
+2015-12-18 15:02:42,735 [main] DEBUG org.apache.axis.description.OperationDesc - @4648acd3 added parameter >name:       {MerchantAPI}name
+typeEntry:  null
+mode:       IN
+position:   1
+isReturn:   false
+typeQName:  {http://www.w3.org/2001/XMLSchema}string
+javaType:   class java.lang.String
+inHeader:   false
+outHeader:  false
+@5333381b<total parameters:2
+2015-12-18 15:02:42,735 [main] DEBUG org.apache.axis.description.OperationDesc - @4648acd3setReturnType({http://www.w3.org/2001/XMLSchema}string)
+2015-12-18 15:02:42,735 [main] DEBUG org.apache.axis.description.OperationDesc - @47a89f49 added parameter >name:       {MerchantAPI}json
+typeEntry:  null
+mode:       IN
+position:   0
+isReturn:   false
+typeQName:  {http://www.w3.org/2001/XMLSchema}string
+javaType:   class java.lang.String
+inHeader:   false
+outHeader:  false
+@f719660<total parameters:1
+2015-12-18 15:02:42,735 [main] DEBUG org.apache.axis.description.OperationDesc - @47a89f49 added parameter >name:       {MerchantAPI}key
+typeEntry:  null
+mode:       IN
+position:   1
+isReturn:   false
+typeQName:  {http://www.w3.org/2001/XMLSchema}string
+javaType:   class java.lang.String
+inHeader:   false
+outHeader:  false
+@6a47808b<total parameters:2
+2015-12-18 15:02:42,735 [main] DEBUG org.apache.axis.description.OperationDesc - @47a89f49setReturnType({http://www.w3.org/2001/XMLSchema}string)
+2015-12-18 15:02:42,735 [main] DEBUG org.apache.axis.description.OperationDesc - @7c485c2f added parameter >name:       {MerchantAPI}json
+typeEntry:  null
+mode:       IN
+position:   0
+isReturn:   false
+typeQName:  {http://www.w3.org/2001/XMLSchema}string
+javaType:   class java.lang.String
+inHeader:   false
+outHeader:  false
+@729c5167<total parameters:1
+2015-12-18 15:02:42,735 [main] DEBUG org.apache.axis.description.OperationDesc - @7c485c2f added parameter >name:       {MerchantAPI}key
+typeEntry:  null
+mode:       IN
+position:   1
+isReturn:   false
+typeQName:  {http://www.w3.org/2001/XMLSchema}string
+javaType:   class java.lang.String
+inHeader:   false
+outHeader:  false
+@74a47bf9<total parameters:2
+2015-12-18 15:02:42,735 [main] DEBUG org.apache.axis.description.OperationDesc - @7c485c2fsetReturnType({http://www.w3.org/2001/XMLSchema}string)

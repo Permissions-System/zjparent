@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zjgt.p2p.dao.MemberAcctAttriMapper" >
+  <resultMap id="BaseResultMap" type="com.zjgt.p2p.model.MemberAcctAttri" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="memberid" property="memberid" jdbcType="BIGINT" />
+    <result column="capital_status" property="capitalStatus" jdbcType="INTEGER" />
+    <result column="withdraw_status" property="withdrawStatus" jdbcType="INTEGER" />
+    <result column="oper_user" property="operUser" jdbcType="VARCHAR" />
+    <result column="oper_date" property="operDate" jdbcType="TIMESTAMP" />
+    <result column="memo" property="memo" jdbcType="VARCHAR" />
+    <result column="update_date" property="updateDate" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    create_date, memberid, capital_status, withdraw_status, oper_user, oper_date, memo, 
+    update_date
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.zjgt.p2p.model.MemberAcctAttriExample" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from member_acct_attri
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <insert id="insert" parameterType="com.zjgt.p2p.model.MemberAcctAttri" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    insert into member_acct_attri (create_date, memberid, capital_status, 
+      withdraw_status, oper_user, oper_date, 
+      memo, update_date)
+    values (#{createDate,jdbcType=TIMESTAMP}, #{memberid,jdbcType=BIGINT}, #{capitalStatus,jdbcType=INTEGER}, 
+      #{withdrawStatus,jdbcType=INTEGER}, #{operUser,jdbcType=VARCHAR}, #{operDate,jdbcType=TIMESTAMP}, 
+      #{memo,jdbcType=VARCHAR}, #{updateDate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zjgt.p2p.model.MemberAcctAttri" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    insert into member_acct_attri
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="createDate != null" >
+        create_date,
+      </if>
+      <if test="memberid != null" >
+        memberid,
+      </if>
+      <if test="capitalStatus != null" >
+        capital_status,
+      </if>
+      <if test="withdrawStatus != null" >
+        withdraw_status,
+      </if>
+      <if test="operUser != null" >
+        oper_user,
+      </if>
+      <if test="operDate != null" >
+        oper_date,
+      </if>
+      <if test="memo != null" >
+        memo,
+      </if>
+      <if test="updateDate != null" >
+        update_date,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="memberid != null" >
+        #{memberid,jdbcType=BIGINT},
+      </if>
+      <if test="capitalStatus != null" >
+        #{capitalStatus,jdbcType=INTEGER},
+      </if>
+      <if test="withdrawStatus != null" >
+        #{withdrawStatus,jdbcType=INTEGER},
+      </if>
+      <if test="operUser != null" >
+        #{operUser,jdbcType=VARCHAR},
+      </if>
+      <if test="operDate != null" >
+        #{operDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="memo != null" >
+        #{memo,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDate != null" >
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+</mapper>

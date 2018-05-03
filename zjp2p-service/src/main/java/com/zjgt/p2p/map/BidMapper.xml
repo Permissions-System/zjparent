@@ -1,0 +1,1324 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zjgt.p2p.dao.BidMapper" >
+  <resultMap id="BaseResultMap" type="com.zjgt.p2p.model.Bid" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="BidCode" property="bidcode" jdbcType="VARCHAR" />
+    <result column="bidno" property="bidno" jdbcType="VARCHAR" />
+    <result column="bidclassno" property="bidclassno" jdbcType="VARCHAR" />
+    <result column="bidtypeid" property="bidtypeid" jdbcType="INTEGER" />
+    <result column="bidtype" property="bidtype" jdbcType="VARCHAR" />
+    <result column="bidclassname" property="bidclassname" jdbcType="VARCHAR" />
+    <result column="bidclasssubject" property="bidclasssubject" jdbcType="VARCHAR" />
+    <result column="bidimg" property="bidimg" jdbcType="VARCHAR" />
+    <result column="amount" property="amount" jdbcType="DECIMAL" />
+    <result column="RemainPriAmount" property="remainpriamount" jdbcType="DECIMAL" />
+    <result column="investperiodtypeid" property="investperiodtypeid" jdbcType="INTEGER" />
+    <result column="investperiod" property="investperiod" jdbcType="INTEGER" />
+    <result column="raiseperiod" property="raiseperiod" jdbcType="VARCHAR" />
+    <result column="raisebegindate" property="raisebegindate" jdbcType="DATE" />
+    <result column="raiseenddate" property="raiseenddate" jdbcType="DATE" />
+    <result column="exptinterestdate" property="exptinterestdate" jdbcType="DATE" />
+    <result column="exptexpiredate" property="exptexpiredate" jdbcType="DATE" />
+    <result column="annualizedrate" property="annualizedrate" jdbcType="DECIMAL" />
+    <result column="intestcalctypeid" property="intestcalctypeid" jdbcType="INTEGER" />
+    <result column="intestcalctype" property="intestcalctype" jdbcType="VARCHAR" />
+    <result column="exptlastacctdate" property="exptlastacctdate" jdbcType="DATE" />
+    <result column="mininvestamount" property="mininvestamount" jdbcType="DECIMAL" />
+    <result column="maxinvestamount" property="maxinvestamount" jdbcType="DECIMAL" />
+    <result column="ifredeem" property="ifredeem" jdbcType="INTEGER" />
+    <result column="redeemfeetype" property="redeemfeetype" jdbcType="INTEGER" />
+    <result column="redeemfee" property="redeemfee" jdbcType="DECIMAL" />
+    <result column="iftransfer" property="iftransfer" jdbcType="INTEGER" />
+    <result column="transfertype" property="transfertype" jdbcType="INTEGER" />
+    <result column="transfee" property="transfee" jdbcType="DECIMAL" />
+    <result column="pledgetype" property="pledgetype" jdbcType="VARCHAR" />
+    <result column="borrowerCode" property="borrowercode" jdbcType="VARCHAR" />
+    <result column="borrowername" property="borrowername" jdbcType="VARCHAR" />
+    <result column="borrowerdesc" property="borrowerdesc" jdbcType="VARCHAR" />
+    <result column="borrowerinterest" property="borrowerinterest" jdbcType="DECIMAL" />
+    <result column="instCode" property="instcode" jdbcType="VARCHAR" />
+    <result column="assureinstname" property="assureinstname" jdbcType="VARCHAR" />
+    <result column="ensuretype" property="ensuretype" jdbcType="VARCHAR" />
+    <result column="agreement1" property="agreement1" jdbcType="INTEGER" />
+    <result column="agreement2" property="agreement2" jdbcType="INTEGER" />
+    <result column="agreement3" property="agreement3" jdbcType="INTEGER" />
+    <result column="raisemoney" property="raisemoney" jdbcType="DECIMAL" />
+    <result column="raisestate" property="raisestate" jdbcType="INTEGER" />
+    <result column="repaymentway" property="repaymentway" jdbcType="VARCHAR" />
+    <result column="bindinnerno" property="bindinnerno" jdbcType="VARCHAR" />
+    <result column="bidclassintro" property="bidclassintro" jdbcType="VARCHAR" />
+    <result column="investscope" property="investscope" jdbcType="VARCHAR" />
+    <result column="incomedesc" property="incomedesc" jdbcType="VARCHAR" />
+    <result column="incomeway" property="incomeway" jdbcType="INTEGER" />
+    <result column="raisecond" property="raisecond" jdbcType="VARCHAR" />
+    <result column="redeemway" property="redeemway" jdbcType="VARCHAR" />
+    <result column="raiserate" property="raiserate" jdbcType="DECIMAL" />
+    <result column="redemrate" property="redemrate" jdbcType="DECIMAL" />
+    <result column="transrate" property="transrate" jdbcType="DECIMAL" />
+    <result column="prepayrate" property="prepayrate" jdbcType="DECIMAL" />
+    <result column="receiptdesc" property="receiptdesc" jdbcType="VARCHAR" />
+    <result column="bidnum" property="bidnum" jdbcType="INTEGER" />
+    <result column="pubdate" property="pubdate" jdbcType="TIMESTAMP" />
+    <result column="memberid" property="memberid" jdbcType="INTEGER" />
+    <result column="staff_no" property="staffNo" jdbcType="VARCHAR" />
+    <result column="membername" property="membername" jdbcType="VARCHAR" />
+    <result column="riskmgrfee" property="riskmgrfee" jdbcType="DECIMAL" />
+    <result column="transname" property="transname" jdbcType="VARCHAR" />
+    <result column="projectCode" property="projectcode" jdbcType="VARCHAR" />
+    <result column="projectfeature" property="projectfeature" jdbcType="VARCHAR" />
+    <result column="yearservicefee" property="yearservicefee" jdbcType="DECIMAL" />
+    <result column="pubfee" property="pubfee" jdbcType="DECIMAL" />
+    <result column="infofee" property="infofee" jdbcType="DECIMAL" />
+    <result column="overduefee" property="overduefee" jdbcType="DECIMAL" />
+    <result column="unpaidfee" property="unpaidfee" jdbcType="DECIMAL" />
+    <result column="InvestOrderCode" property="investordercode" jdbcType="VARCHAR" />
+    <result column="ifextrarate" property="ifextrarate" jdbcType="INTEGER" />
+    <result column="ifvirtual" property="ifvirtual" jdbcType="INTEGER" />
+    <result column="extrarate" property="extrarate" jdbcType="DECIMAL" />
+    <result column="ApproStatus" property="approstatus" jdbcType="INTEGER" />
+    <result column="bidstatus" property="bidstatus" jdbcType="INTEGER" />
+    <result column="borrowstatus" property="borrowstatus" jdbcType="INTEGER" />
+    <result column="lockupperiod" property="lockupperiod" jdbcType="INTEGER" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.zjgt.p2p.model.Bid" extends="BaseResultMap" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    <result column="assureinstdesc" property="assureinstdesc" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    id, BidCode, bidno, bidclassno, bidtypeid, bidtype, bidclassname, bidclasssubject, 
+    bidimg, amount, RemainPriAmount, investperiodtypeid, investperiod, raiseperiod, raisebegindate, 
+    raiseenddate, exptinterestdate, exptexpiredate, annualizedrate, intestcalctypeid, 
+    intestcalctype, exptlastacctdate, mininvestamount, maxinvestamount, ifredeem, redeemfeetype, 
+    redeemfee, iftransfer, transfertype, transfee, pledgetype, borrowerCode, borrowername, 
+    borrowerdesc, borrowerinterest, instCode, assureinstname, ensuretype, agreement1, 
+    agreement2, agreement3, raisemoney, raisestate, repaymentway, bindinnerno, bidclassintro, 
+    investscope, incomedesc, incomeway, raisecond, redeemway, raiserate, redemrate, transrate, 
+    prepayrate, receiptdesc, bidnum, pubdate, memberid, staff_no, membername, riskmgrfee, 
+    transname, projectCode, projectfeature, yearservicefee, pubfee, infofee, overduefee, 
+    unpaidfee, InvestOrderCode, ifextrarate, ifvirtual, extrarate, ApproStatus, bidstatus, 
+    borrowstatus, lockupperiod, remark
+  </sql>
+  <sql id="Blob_Column_List" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    assureinstdesc
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.zjgt.p2p.model.BidExample" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from bid
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.zjgt.p2p.model.BidExample" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from bid
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from bid
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    delete from bid
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zjgt.p2p.model.Bid"  useGeneratedKeys="true" keyProperty="id" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    insert into bid (id, BidCode, bidno, 
+      bidclassno, bidtypeid, bidtype, 
+      bidclassname, bidclasssubject, bidimg, 
+      amount, RemainPriAmount, investperiodtypeid, 
+      investperiod, raiseperiod, raisebegindate, 
+      raiseenddate, exptinterestdate, exptexpiredate, 
+      annualizedrate, intestcalctypeid, intestcalctype, 
+      exptlastacctdate, mininvestamount, maxinvestamount, 
+      ifredeem, redeemfeetype, redeemfee, 
+      iftransfer, transfertype, transfee, 
+      pledgetype, borrowerCode, borrowername, 
+      borrowerdesc, borrowerinterest, instCode, 
+      assureinstname, ensuretype, agreement1, 
+      agreement2, agreement3, raisemoney, 
+      raisestate, repaymentway, bindinnerno, 
+      bidclassintro, investscope, incomedesc, 
+      incomeway, raisecond, redeemway, 
+      raiserate, redemrate, transrate, 
+      prepayrate, receiptdesc, bidnum, 
+      pubdate, memberid, staff_no, 
+      membername, riskmgrfee, transname, 
+      projectCode, projectfeature, yearservicefee, 
+      pubfee, infofee, overduefee, 
+      unpaidfee, InvestOrderCode, ifextrarate, 
+      ifvirtual, extrarate, ApproStatus, 
+      bidstatus, borrowstatus, lockupperiod, 
+      remark, assureinstdesc)
+    values (#{id,jdbcType=INTEGER}, #{bidcode,jdbcType=VARCHAR}, #{bidno,jdbcType=VARCHAR}, 
+      #{bidclassno,jdbcType=VARCHAR}, #{bidtypeid,jdbcType=INTEGER}, #{bidtype,jdbcType=VARCHAR}, 
+      #{bidclassname,jdbcType=VARCHAR}, #{bidclasssubject,jdbcType=VARCHAR}, #{bidimg,jdbcType=VARCHAR}, 
+      #{amount,jdbcType=DECIMAL}, #{remainpriamount,jdbcType=DECIMAL}, #{investperiodtypeid,jdbcType=INTEGER}, 
+      #{investperiod,jdbcType=INTEGER}, #{raiseperiod,jdbcType=VARCHAR}, #{raisebegindate,jdbcType=DATE}, 
+      #{raiseenddate,jdbcType=DATE}, #{exptinterestdate,jdbcType=DATE}, #{exptexpiredate,jdbcType=DATE}, 
+      #{annualizedrate,jdbcType=DECIMAL}, #{intestcalctypeid,jdbcType=INTEGER}, #{intestcalctype,jdbcType=VARCHAR}, 
+      #{exptlastacctdate,jdbcType=DATE}, #{mininvestamount,jdbcType=DECIMAL}, #{maxinvestamount,jdbcType=DECIMAL}, 
+      #{ifredeem,jdbcType=INTEGER}, #{redeemfeetype,jdbcType=INTEGER}, #{redeemfee,jdbcType=DECIMAL}, 
+      #{iftransfer,jdbcType=INTEGER}, #{transfertype,jdbcType=INTEGER}, #{transfee,jdbcType=DECIMAL}, 
+      #{pledgetype,jdbcType=VARCHAR}, #{borrowercode,jdbcType=VARCHAR}, #{borrowername,jdbcType=VARCHAR}, 
+      #{borrowerdesc,jdbcType=VARCHAR}, #{borrowerinterest,jdbcType=DECIMAL}, #{instcode,jdbcType=VARCHAR}, 
+      #{assureinstname,jdbcType=VARCHAR}, #{ensuretype,jdbcType=VARCHAR}, #{agreement1,jdbcType=INTEGER}, 
+      #{agreement2,jdbcType=INTEGER}, #{agreement3,jdbcType=INTEGER}, #{raisemoney,jdbcType=DECIMAL}, 
+      #{raisestate,jdbcType=INTEGER}, #{repaymentway,jdbcType=VARCHAR}, #{bindinnerno,jdbcType=VARCHAR}, 
+      #{bidclassintro,jdbcType=VARCHAR}, #{investscope,jdbcType=VARCHAR}, #{incomedesc,jdbcType=VARCHAR}, 
+      #{incomeway,jdbcType=INTEGER}, #{raisecond,jdbcType=VARCHAR}, #{redeemway,jdbcType=VARCHAR}, 
+      #{raiserate,jdbcType=DECIMAL}, #{redemrate,jdbcType=DECIMAL}, #{transrate,jdbcType=DECIMAL}, 
+      #{prepayrate,jdbcType=DECIMAL}, #{receiptdesc,jdbcType=VARCHAR}, #{bidnum,jdbcType=INTEGER}, 
+      #{pubdate,jdbcType=TIMESTAMP}, #{memberid,jdbcType=INTEGER}, #{staffNo,jdbcType=VARCHAR}, 
+      #{membername,jdbcType=VARCHAR}, #{riskmgrfee,jdbcType=DECIMAL}, #{transname,jdbcType=VARCHAR}, 
+      #{projectcode,jdbcType=VARCHAR}, #{projectfeature,jdbcType=VARCHAR}, #{yearservicefee,jdbcType=DECIMAL}, 
+      #{pubfee,jdbcType=DECIMAL}, #{infofee,jdbcType=DECIMAL}, #{overduefee,jdbcType=DECIMAL}, 
+      #{unpaidfee,jdbcType=DECIMAL}, #{investordercode,jdbcType=VARCHAR}, #{ifextrarate,jdbcType=INTEGER}, 
+      #{ifvirtual,jdbcType=INTEGER}, #{extrarate,jdbcType=DECIMAL}, #{approstatus,jdbcType=INTEGER}, 
+      #{bidstatus,jdbcType=INTEGER}, #{borrowstatus,jdbcType=INTEGER}, #{lockupperiod,jdbcType=INTEGER}, 
+      #{remark,jdbcType=VARCHAR}, #{assureinstdesc,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zjgt.p2p.model.Bid" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    insert into bid
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="bidcode != null" >
+        BidCode,
+      </if>
+      <if test="bidno != null" >
+        bidno,
+      </if>
+      <if test="bidclassno != null" >
+        bidclassno,
+      </if>
+      <if test="bidtypeid != null" >
+        bidtypeid,
+      </if>
+      <if test="bidtype != null" >
+        bidtype,
+      </if>
+      <if test="bidclassname != null" >
+        bidclassname,
+      </if>
+      <if test="bidclasssubject != null" >
+        bidclasssubject,
+      </if>
+      <if test="bidimg != null" >
+        bidimg,
+      </if>
+      <if test="amount != null" >
+        amount,
+      </if>
+      <if test="remainpriamount != null" >
+        RemainPriAmount,
+      </if>
+      <if test="investperiodtypeid != null" >
+        investperiodtypeid,
+      </if>
+      <if test="investperiod != null" >
+        investperiod,
+      </if>
+      <if test="raiseperiod != null" >
+        raiseperiod,
+      </if>
+      <if test="raisebegindate != null" >
+        raisebegindate,
+      </if>
+      <if test="raiseenddate != null" >
+        raiseenddate,
+      </if>
+      <if test="exptinterestdate != null" >
+        exptinterestdate,
+      </if>
+      <if test="exptexpiredate != null" >
+        exptexpiredate,
+      </if>
+      <if test="annualizedrate != null" >
+        annualizedrate,
+      </if>
+      <if test="intestcalctypeid != null" >
+        intestcalctypeid,
+      </if>
+      <if test="intestcalctype != null" >
+        intestcalctype,
+      </if>
+      <if test="exptlastacctdate != null" >
+        exptlastacctdate,
+      </if>
+      <if test="mininvestamount != null" >
+        mininvestamount,
+      </if>
+      <if test="maxinvestamount != null" >
+        maxinvestamount,
+      </if>
+      <if test="ifredeem != null" >
+        ifredeem,
+      </if>
+      <if test="redeemfeetype != null" >
+        redeemfeetype,
+      </if>
+      <if test="redeemfee != null" >
+        redeemfee,
+      </if>
+      <if test="iftransfer != null" >
+        iftransfer,
+      </if>
+      <if test="transfertype != null" >
+        transfertype,
+      </if>
+      <if test="transfee != null" >
+        transfee,
+      </if>
+      <if test="pledgetype != null" >
+        pledgetype,
+      </if>
+      <if test="borrowercode != null" >
+        borrowerCode,
+      </if>
+      <if test="borrowername != null" >
+        borrowername,
+      </if>
+      <if test="borrowerdesc != null" >
+        borrowerdesc,
+      </if>
+      <if test="borrowerinterest != null" >
+        borrowerinterest,
+      </if>
+      <if test="instcode != null" >
+        instCode,
+      </if>
+      <if test="assureinstname != null" >
+        assureinstname,
+      </if>
+      <if test="ensuretype != null" >
+        ensuretype,
+      </if>
+      <if test="agreement1 != null" >
+        agreement1,
+      </if>
+      <if test="agreement2 != null" >
+        agreement2,
+      </if>
+      <if test="agreement3 != null" >
+        agreement3,
+      </if>
+      <if test="raisemoney != null" >
+        raisemoney,
+      </if>
+      <if test="raisestate != null" >
+        raisestate,
+      </if>
+      <if test="repaymentway != null" >
+        repaymentway,
+      </if>
+      <if test="bindinnerno != null" >
+        bindinnerno,
+      </if>
+      <if test="bidclassintro != null" >
+        bidclassintro,
+      </if>
+      <if test="investscope != null" >
+        investscope,
+      </if>
+      <if test="incomedesc != null" >
+        incomedesc,
+      </if>
+      <if test="incomeway != null" >
+        incomeway,
+      </if>
+      <if test="raisecond != null" >
+        raisecond,
+      </if>
+      <if test="redeemway != null" >
+        redeemway,
+      </if>
+      <if test="raiserate != null" >
+        raiserate,
+      </if>
+      <if test="redemrate != null" >
+        redemrate,
+      </if>
+      <if test="transrate != null" >
+        transrate,
+      </if>
+      <if test="prepayrate != null" >
+        prepayrate,
+      </if>
+      <if test="receiptdesc != null" >
+        receiptdesc,
+      </if>
+      <if test="bidnum != null" >
+        bidnum,
+      </if>
+      <if test="pubdate != null" >
+        pubdate,
+      </if>
+      <if test="memberid != null" >
+        memberid,
+      </if>
+      <if test="staffNo != null" >
+        staff_no,
+      </if>
+      <if test="membername != null" >
+        membername,
+      </if>
+      <if test="riskmgrfee != null" >
+        riskmgrfee,
+      </if>
+      <if test="transname != null" >
+        transname,
+      </if>
+      <if test="projectcode != null" >
+        projectCode,
+      </if>
+      <if test="projectfeature != null" >
+        projectfeature,
+      </if>
+      <if test="yearservicefee != null" >
+        yearservicefee,
+      </if>
+      <if test="pubfee != null" >
+        pubfee,
+      </if>
+      <if test="infofee != null" >
+        infofee,
+      </if>
+      <if test="overduefee != null" >
+        overduefee,
+      </if>
+      <if test="unpaidfee != null" >
+        unpaidfee,
+      </if>
+      <if test="investordercode != null" >
+        InvestOrderCode,
+      </if>
+      <if test="ifextrarate != null" >
+        ifextrarate,
+      </if>
+      <if test="ifvirtual != null" >
+        ifvirtual,
+      </if>
+      <if test="extrarate != null" >
+        extrarate,
+      </if>
+      <if test="approstatus != null" >
+        ApproStatus,
+      </if>
+      <if test="bidstatus != null" >
+        bidstatus,
+      </if>
+      <if test="borrowstatus != null" >
+        borrowstatus,
+      </if>
+      <if test="lockupperiod != null" >
+        lockupperiod,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+      <if test="assureinstdesc != null" >
+        assureinstdesc,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="bidcode != null" >
+        #{bidcode,jdbcType=VARCHAR},
+      </if>
+      <if test="bidno != null" >
+        #{bidno,jdbcType=VARCHAR},
+      </if>
+      <if test="bidclassno != null" >
+        #{bidclassno,jdbcType=VARCHAR},
+      </if>
+      <if test="bidtypeid != null" >
+        #{bidtypeid,jdbcType=INTEGER},
+      </if>
+      <if test="bidtype != null" >
+        #{bidtype,jdbcType=VARCHAR},
+      </if>
+      <if test="bidclassname != null" >
+        #{bidclassname,jdbcType=VARCHAR},
+      </if>
+      <if test="bidclasssubject != null" >
+        #{bidclasssubject,jdbcType=VARCHAR},
+      </if>
+      <if test="bidimg != null" >
+        #{bidimg,jdbcType=VARCHAR},
+      </if>
+      <if test="amount != null" >
+        #{amount,jdbcType=DECIMAL},
+      </if>
+      <if test="remainpriamount != null" >
+        #{remainpriamount,jdbcType=DECIMAL},
+      </if>
+      <if test="investperiodtypeid != null" >
+        #{investperiodtypeid,jdbcType=INTEGER},
+      </if>
+      <if test="investperiod != null" >
+        #{investperiod,jdbcType=INTEGER},
+      </if>
+      <if test="raiseperiod != null" >
+        #{raiseperiod,jdbcType=VARCHAR},
+      </if>
+      <if test="raisebegindate != null" >
+        #{raisebegindate,jdbcType=DATE},
+      </if>
+      <if test="raiseenddate != null" >
+        #{raiseenddate,jdbcType=DATE},
+      </if>
+      <if test="exptinterestdate != null" >
+        #{exptinterestdate,jdbcType=DATE},
+      </if>
+      <if test="exptexpiredate != null" >
+        #{exptexpiredate,jdbcType=DATE},
+      </if>
+      <if test="annualizedrate != null" >
+        #{annualizedrate,jdbcType=DECIMAL},
+      </if>
+      <if test="intestcalctypeid != null" >
+        #{intestcalctypeid,jdbcType=INTEGER},
+      </if>
+      <if test="intestcalctype != null" >
+        #{intestcalctype,jdbcType=VARCHAR},
+      </if>
+      <if test="exptlastacctdate != null" >
+        #{exptlastacctdate,jdbcType=DATE},
+      </if>
+      <if test="mininvestamount != null" >
+        #{mininvestamount,jdbcType=DECIMAL},
+      </if>
+      <if test="maxinvestamount != null" >
+        #{maxinvestamount,jdbcType=DECIMAL},
+      </if>
+      <if test="ifredeem != null" >
+        #{ifredeem,jdbcType=INTEGER},
+      </if>
+      <if test="redeemfeetype != null" >
+        #{redeemfeetype,jdbcType=INTEGER},
+      </if>
+      <if test="redeemfee != null" >
+        #{redeemfee,jdbcType=DECIMAL},
+      </if>
+      <if test="iftransfer != null" >
+        #{iftransfer,jdbcType=INTEGER},
+      </if>
+      <if test="transfertype != null" >
+        #{transfertype,jdbcType=INTEGER},
+      </if>
+      <if test="transfee != null" >
+        #{transfee,jdbcType=DECIMAL},
+      </if>
+      <if test="pledgetype != null" >
+        #{pledgetype,jdbcType=VARCHAR},
+      </if>
+      <if test="borrowercode != null" >
+        #{borrowercode,jdbcType=VARCHAR},
+      </if>
+      <if test="borrowername != null" >
+        #{borrowername,jdbcType=VARCHAR},
+      </if>
+      <if test="borrowerdesc != null" >
+        #{borrowerdesc,jdbcType=VARCHAR},
+      </if>
+      <if test="borrowerinterest != null" >
+        #{borrowerinterest,jdbcType=DECIMAL},
+      </if>
+      <if test="instcode != null" >
+        #{instcode,jdbcType=VARCHAR},
+      </if>
+      <if test="assureinstname != null" >
+        #{assureinstname,jdbcType=VARCHAR},
+      </if>
+      <if test="ensuretype != null" >
+        #{ensuretype,jdbcType=VARCHAR},
+      </if>
+      <if test="agreement1 != null" >
+        #{agreement1,jdbcType=INTEGER},
+      </if>
+      <if test="agreement2 != null" >
+        #{agreement2,jdbcType=INTEGER},
+      </if>
+      <if test="agreement3 != null" >
+        #{agreement3,jdbcType=INTEGER},
+      </if>
+      <if test="raisemoney != null" >
+        #{raisemoney,jdbcType=DECIMAL},
+      </if>
+      <if test="raisestate != null" >
+        #{raisestate,jdbcType=INTEGER},
+      </if>
+      <if test="repaymentway != null" >
+        #{repaymentway,jdbcType=VARCHAR},
+      </if>
+      <if test="bindinnerno != null" >
+        #{bindinnerno,jdbcType=VARCHAR},
+      </if>
+      <if test="bidclassintro != null" >
+        #{bidclassintro,jdbcType=VARCHAR},
+      </if>
+      <if test="investscope != null" >
+        #{investscope,jdbcType=VARCHAR},
+      </if>
+      <if test="incomedesc != null" >
+        #{incomedesc,jdbcType=VARCHAR},
+      </if>
+      <if test="incomeway != null" >
+        #{incomeway,jdbcType=INTEGER},
+      </if>
+      <if test="raisecond != null" >
+        #{raisecond,jdbcType=VARCHAR},
+      </if>
+      <if test="redeemway != null" >
+        #{redeemway,jdbcType=VARCHAR},
+      </if>
+      <if test="raiserate != null" >
+        #{raiserate,jdbcType=DECIMAL},
+      </if>
+      <if test="redemrate != null" >
+        #{redemrate,jdbcType=DECIMAL},
+      </if>
+      <if test="transrate != null" >
+        #{transrate,jdbcType=DECIMAL},
+      </if>
+      <if test="prepayrate != null" >
+        #{prepayrate,jdbcType=DECIMAL},
+      </if>
+      <if test="receiptdesc != null" >
+        #{receiptdesc,jdbcType=VARCHAR},
+      </if>
+      <if test="bidnum != null" >
+        #{bidnum,jdbcType=INTEGER},
+      </if>
+      <if test="pubdate != null" >
+        #{pubdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="memberid != null" >
+        #{memberid,jdbcType=INTEGER},
+      </if>
+      <if test="staffNo != null" >
+        #{staffNo,jdbcType=VARCHAR},
+      </if>
+      <if test="membername != null" >
+        #{membername,jdbcType=VARCHAR},
+      </if>
+      <if test="riskmgrfee != null" >
+        #{riskmgrfee,jdbcType=DECIMAL},
+      </if>
+      <if test="transname != null" >
+        #{transname,jdbcType=VARCHAR},
+      </if>
+      <if test="projectcode != null" >
+        #{projectcode,jdbcType=VARCHAR},
+      </if>
+      <if test="projectfeature != null" >
+        #{projectfeature,jdbcType=VARCHAR},
+      </if>
+      <if test="yearservicefee != null" >
+        #{yearservicefee,jdbcType=DECIMAL},
+      </if>
+      <if test="pubfee != null" >
+        #{pubfee,jdbcType=DECIMAL},
+      </if>
+      <if test="infofee != null" >
+        #{infofee,jdbcType=DECIMAL},
+      </if>
+      <if test="overduefee != null" >
+        #{overduefee,jdbcType=DECIMAL},
+      </if>
+      <if test="unpaidfee != null" >
+        #{unpaidfee,jdbcType=DECIMAL},
+      </if>
+      <if test="investordercode != null" >
+        #{investordercode,jdbcType=VARCHAR},
+      </if>
+      <if test="ifextrarate != null" >
+        #{ifextrarate,jdbcType=INTEGER},
+      </if>
+      <if test="ifvirtual != null" >
+        #{ifvirtual,jdbcType=INTEGER},
+      </if>
+      <if test="extrarate != null" >
+        #{extrarate,jdbcType=DECIMAL},
+      </if>
+      <if test="approstatus != null" >
+        #{approstatus,jdbcType=INTEGER},
+      </if>
+      <if test="bidstatus != null" >
+        #{bidstatus,jdbcType=INTEGER},
+      </if>
+      <if test="borrowstatus != null" >
+        #{borrowstatus,jdbcType=INTEGER},
+      </if>
+      <if test="lockupperiod != null" >
+        #{lockupperiod,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="assureinstdesc != null" >
+        #{assureinstdesc,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zjgt.p2p.model.Bid" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    update bid
+    <set >
+      <if test="bidcode != null" >
+        BidCode = #{bidcode,jdbcType=VARCHAR},
+      </if>
+      <if test="bidno != null" >
+        bidno = #{bidno,jdbcType=VARCHAR},
+      </if>
+      <if test="bidclassno != null" >
+        bidclassno = #{bidclassno,jdbcType=VARCHAR},
+      </if>
+      <if test="bidtypeid != null" >
+        bidtypeid = #{bidtypeid,jdbcType=INTEGER},
+      </if>
+      <if test="bidtype != null" >
+        bidtype = #{bidtype,jdbcType=VARCHAR},
+      </if>
+      <if test="bidclassname != null" >
+        bidclassname = #{bidclassname,jdbcType=VARCHAR},
+      </if>
+      <if test="bidclasssubject != null" >
+        bidclasssubject = #{bidclasssubject,jdbcType=VARCHAR},
+      </if>
+      <if test="bidimg != null" >
+        bidimg = #{bidimg,jdbcType=VARCHAR},
+      </if>
+      <if test="amount != null" >
+        amount = #{amount,jdbcType=DECIMAL},
+      </if>
+      <if test="remainpriamount != null" >
+        RemainPriAmount = #{remainpriamount,jdbcType=DECIMAL},
+      </if>
+      <if test="investperiodtypeid != null" >
+        investperiodtypeid = #{investperiodtypeid,jdbcType=INTEGER},
+      </if>
+      <if test="investperiod != null" >
+        investperiod = #{investperiod,jdbcType=INTEGER},
+      </if>
+      <if test="raiseperiod != null" >
+        raiseperiod = #{raiseperiod,jdbcType=VARCHAR},
+      </if>
+      <if test="raisebegindate != null" >
+        raisebegindate = #{raisebegindate,jdbcType=DATE},
+      </if>
+      <if test="raiseenddate != null" >
+        raiseenddate = #{raiseenddate,jdbcType=DATE},
+      </if>
+      <if test="exptinterestdate != null" >
+        exptinterestdate = #{exptinterestdate,jdbcType=DATE},
+      </if>
+      <if test="exptexpiredate != null" >
+        exptexpiredate = #{exptexpiredate,jdbcType=DATE},
+      </if>
+      <if test="annualizedrate != null" >
+        annualizedrate = #{annualizedrate,jdbcType=DECIMAL},
+      </if>
+      <if test="intestcalctypeid != null" >
+        intestcalctypeid = #{intestcalctypeid,jdbcType=INTEGER},
+      </if>
+      <if test="intestcalctype != null" >
+        intestcalctype = #{intestcalctype,jdbcType=VARCHAR},
+      </if>
+      <if test="exptlastacctdate != null" >
+        exptlastacctdate = #{exptlastacctdate,jdbcType=DATE},
+      </if>
+      <if test="mininvestamount != null" >
+        mininvestamount = #{mininvestamount,jdbcType=DECIMAL},
+      </if>
+      <if test="maxinvestamount != null" >
+        maxinvestamount = #{maxinvestamount,jdbcType=DECIMAL},
+      </if>
+      <if test="ifredeem != null" >
+        ifredeem = #{ifredeem,jdbcType=INTEGER},
+      </if>
+      <if test="redeemfeetype != null" >
+        redeemfeetype = #{redeemfeetype,jdbcType=INTEGER},
+      </if>
+      <if test="redeemfee != null" >
+        redeemfee = #{redeemfee,jdbcType=DECIMAL},
+      </if>
+      <if test="iftransfer != null" >
+        iftransfer = #{iftransfer,jdbcType=INTEGER},
+      </if>
+      <if test="transfertype != null" >
+        transfertype = #{transfertype,jdbcType=INTEGER},
+      </if>
+      <if test="transfee != null" >
+        transfee = #{transfee,jdbcType=DECIMAL},
+      </if>
+      <if test="pledgetype != null" >
+        pledgetype = #{pledgetype,jdbcType=VARCHAR},
+      </if>
+      <if test="borrowercode != null" >
+        borrowerCode = #{borrowercode,jdbcType=VARCHAR},
+      </if>
+      <if test="borrowername != null" >
+        borrowername = #{borrowername,jdbcType=VARCHAR},
+      </if>
+      <if test="borrowerdesc != null" >
+        borrowerdesc = #{borrowerdesc,jdbcType=VARCHAR},
+      </if>
+      <if test="borrowerinterest != null" >
+        borrowerinterest = #{borrowerinterest,jdbcType=DECIMAL},
+      </if>
+      <if test="instcode != null" >
+        instCode = #{instcode,jdbcType=VARCHAR},
+      </if>
+      <if test="assureinstname != null" >
+        assureinstname = #{assureinstname,jdbcType=VARCHAR},
+      </if>
+      <if test="ensuretype != null" >
+        ensuretype = #{ensuretype,jdbcType=VARCHAR},
+      </if>
+      <if test="agreement1 != null" >
+        agreement1 = #{agreement1,jdbcType=INTEGER},
+      </if>
+      <if test="agreement2 != null" >
+        agreement2 = #{agreement2,jdbcType=INTEGER},
+      </if>
+      <if test="agreement3 != null" >
+        agreement3 = #{agreement3,jdbcType=INTEGER},
+      </if>
+      <if test="raisemoney != null" >
+        raisemoney = #{raisemoney,jdbcType=DECIMAL},
+      </if>
+      <if test="raisestate != null" >
+        raisestate = #{raisestate,jdbcType=INTEGER},
+      </if>
+      <if test="repaymentway != null" >
+        repaymentway = #{repaymentway,jdbcType=VARCHAR},
+      </if>
+      <if test="bindinnerno != null" >
+        bindinnerno = #{bindinnerno,jdbcType=VARCHAR},
+      </if>
+      <if test="bidclassintro != null" >
+        bidclassintro = #{bidclassintro,jdbcType=VARCHAR},
+      </if>
+      <if test="investscope != null" >
+        investscope = #{investscope,jdbcType=VARCHAR},
+      </if>
+      <if test="incomedesc != null" >
+        incomedesc = #{incomedesc,jdbcType=VARCHAR},
+      </if>
+      <if test="incomeway != null" >
+        incomeway = #{incomeway,jdbcType=INTEGER},
+      </if>
+      <if test="raisecond != null" >
+        raisecond = #{raisecond,jdbcType=VARCHAR},
+      </if>
+      <if test="redeemway != null" >
+        redeemway = #{redeemway,jdbcType=VARCHAR},
+      </if>
+      <if test="raiserate != null" >
+        raiserate = #{raiserate,jdbcType=DECIMAL},
+      </if>
+      <if test="redemrate != null" >
+        redemrate = #{redemrate,jdbcType=DECIMAL},
+      </if>
+      <if test="transrate != null" >
+        transrate = #{transrate,jdbcType=DECIMAL},
+      </if>
+      <if test="prepayrate != null" >
+        prepayrate = #{prepayrate,jdbcType=DECIMAL},
+      </if>
+      <if test="receiptdesc != null" >
+        receiptdesc = #{receiptdesc,jdbcType=VARCHAR},
+      </if>
+      <if test="bidnum != null" >
+        bidnum = #{bidnum,jdbcType=INTEGER},
+      </if>
+      <if test="pubdate != null" >
+        pubdate = #{pubdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="memberid != null" >
+        memberid = #{memberid,jdbcType=INTEGER},
+      </if>
+      <if test="staffNo != null" >
+        staff_no = #{staffNo,jdbcType=VARCHAR},
+      </if>
+      <if test="membername != null" >
+        membername = #{membername,jdbcType=VARCHAR},
+      </if>
+      <if test="riskmgrfee != null" >
+        riskmgrfee = #{riskmgrfee,jdbcType=DECIMAL},
+      </if>
+      <if test="transname != null" >
+        transname = #{transname,jdbcType=VARCHAR},
+      </if>
+      <if test="projectcode != null" >
+        projectCode = #{projectcode,jdbcType=VARCHAR},
+      </if>
+      <if test="projectfeature != null" >
+        projectfeature = #{projectfeature,jdbcType=VARCHAR},
+      </if>
+      <if test="yearservicefee != null" >
+        yearservicefee = #{yearservicefee,jdbcType=DECIMAL},
+      </if>
+      <if test="pubfee != null" >
+        pubfee = #{pubfee,jdbcType=DECIMAL},
+      </if>
+      <if test="infofee != null" >
+        infofee = #{infofee,jdbcType=DECIMAL},
+      </if>
+      <if test="overduefee != null" >
+        overduefee = #{overduefee,jdbcType=DECIMAL},
+      </if>
+      <if test="unpaidfee != null" >
+        unpaidfee = #{unpaidfee,jdbcType=DECIMAL},
+      </if>
+      <if test="investordercode != null" >
+        InvestOrderCode = #{investordercode,jdbcType=VARCHAR},
+      </if>
+      <if test="ifextrarate != null" >
+        ifextrarate = #{ifextrarate,jdbcType=INTEGER},
+      </if>
+      <if test="ifvirtual != null" >
+        ifvirtual = #{ifvirtual,jdbcType=INTEGER},
+      </if>
+      <if test="extrarate != null" >
+        extrarate = #{extrarate,jdbcType=DECIMAL},
+      </if>
+      <if test="approstatus != null" >
+        ApproStatus = #{approstatus,jdbcType=INTEGER},
+      </if>
+      <if test="bidstatus != null" >
+        bidstatus = #{bidstatus,jdbcType=INTEGER},
+      </if>
+      <if test="borrowstatus != null" >
+        borrowstatus = #{borrowstatus,jdbcType=INTEGER},
+      </if>
+      <if test="lockupperiod != null" >
+        lockupperiod = #{lockupperiod,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="assureinstdesc != null" >
+        assureinstdesc = #{assureinstdesc,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.zjgt.p2p.model.Bid" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    update bid
+    set BidCode = #{bidcode,jdbcType=VARCHAR},
+      bidno = #{bidno,jdbcType=VARCHAR},
+      bidclassno = #{bidclassno,jdbcType=VARCHAR},
+      bidtypeid = #{bidtypeid,jdbcType=INTEGER},
+      bidtype = #{bidtype,jdbcType=VARCHAR},
+      bidclassname = #{bidclassname,jdbcType=VARCHAR},
+      bidclasssubject = #{bidclasssubject,jdbcType=VARCHAR},
+      bidimg = #{bidimg,jdbcType=VARCHAR},
+      amount = #{amount,jdbcType=DECIMAL},
+      RemainPriAmount = #{remainpriamount,jdbcType=DECIMAL},
+      investperiodtypeid = #{investperiodtypeid,jdbcType=INTEGER},
+      investperiod = #{investperiod,jdbcType=INTEGER},
+      raiseperiod = #{raiseperiod,jdbcType=VARCHAR},
+      raisebegindate = #{raisebegindate,jdbcType=DATE},
+      raiseenddate = #{raiseenddate,jdbcType=DATE},
+      exptinterestdate = #{exptinterestdate,jdbcType=DATE},
+      exptexpiredate = #{exptexpiredate,jdbcType=DATE},
+      annualizedrate = #{annualizedrate,jdbcType=DECIMAL},
+      intestcalctypeid = #{intestcalctypeid,jdbcType=INTEGER},
+      intestcalctype = #{intestcalctype,jdbcType=VARCHAR},
+      exptlastacctdate = #{exptlastacctdate,jdbcType=DATE},
+      mininvestamount = #{mininvestamount,jdbcType=DECIMAL},
+      maxinvestamount = #{maxinvestamount,jdbcType=DECIMAL},
+      ifredeem = #{ifredeem,jdbcType=INTEGER},
+      redeemfeetype = #{redeemfeetype,jdbcType=INTEGER},
+      redeemfee = #{redeemfee,jdbcType=DECIMAL},
+      iftransfer = #{iftransfer,jdbcType=INTEGER},
+      transfertype = #{transfertype,jdbcType=INTEGER},
+      transfee = #{transfee,jdbcType=DECIMAL},
+      pledgetype = #{pledgetype,jdbcType=VARCHAR},
+      borrowerCode = #{borrowercode,jdbcType=VARCHAR},
+      borrowername = #{borrowername,jdbcType=VARCHAR},
+      borrowerdesc = #{borrowerdesc,jdbcType=VARCHAR},
+      borrowerinterest = #{borrowerinterest,jdbcType=DECIMAL},
+      instCode = #{instcode,jdbcType=VARCHAR},
+      assureinstname = #{assureinstname,jdbcType=VARCHAR},
+      ensuretype = #{ensuretype,jdbcType=VARCHAR},
+      agreement1 = #{agreement1,jdbcType=INTEGER},
+      agreement2 = #{agreement2,jdbcType=INTEGER},
+      agreement3 = #{agreement3,jdbcType=INTEGER},
+      raisemoney = #{raisemoney,jdbcType=DECIMAL},
+      raisestate = #{raisestate,jdbcType=INTEGER},
+      repaymentway = #{repaymentway,jdbcType=VARCHAR},
+      bindinnerno = #{bindinnerno,jdbcType=VARCHAR},
+      bidclassintro = #{bidclassintro,jdbcType=VARCHAR},
+      investscope = #{investscope,jdbcType=VARCHAR},
+      incomedesc = #{incomedesc,jdbcType=VARCHAR},
+      incomeway = #{incomeway,jdbcType=INTEGER},
+      raisecond = #{raisecond,jdbcType=VARCHAR},
+      redeemway = #{redeemway,jdbcType=VARCHAR},
+      raiserate = #{raiserate,jdbcType=DECIMAL},
+      redemrate = #{redemrate,jdbcType=DECIMAL},
+      transrate = #{transrate,jdbcType=DECIMAL},
+      prepayrate = #{prepayrate,jdbcType=DECIMAL},
+      receiptdesc = #{receiptdesc,jdbcType=VARCHAR},
+      bidnum = #{bidnum,jdbcType=INTEGER},
+      pubdate = #{pubdate,jdbcType=TIMESTAMP},
+      memberid = #{memberid,jdbcType=INTEGER},
+      staff_no = #{staffNo,jdbcType=VARCHAR},
+      membername = #{membername,jdbcType=VARCHAR},
+      riskmgrfee = #{riskmgrfee,jdbcType=DECIMAL},
+      transname = #{transname,jdbcType=VARCHAR},
+      projectCode = #{projectcode,jdbcType=VARCHAR},
+      projectfeature = #{projectfeature,jdbcType=VARCHAR},
+      yearservicefee = #{yearservicefee,jdbcType=DECIMAL},
+      pubfee = #{pubfee,jdbcType=DECIMAL},
+      infofee = #{infofee,jdbcType=DECIMAL},
+      overduefee = #{overduefee,jdbcType=DECIMAL},
+      unpaidfee = #{unpaidfee,jdbcType=DECIMAL},
+      InvestOrderCode = #{investordercode,jdbcType=VARCHAR},
+      ifextrarate = #{ifextrarate,jdbcType=INTEGER},
+      ifvirtual = #{ifvirtual,jdbcType=INTEGER},
+      extrarate = #{extrarate,jdbcType=DECIMAL},
+      ApproStatus = #{approstatus,jdbcType=INTEGER},
+      bidstatus = #{bidstatus,jdbcType=INTEGER},
+      borrowstatus = #{borrowstatus,jdbcType=INTEGER},
+      lockupperiod = #{lockupperiod,jdbcType=INTEGER},
+      remark = #{remark,jdbcType=VARCHAR},
+      assureinstdesc = #{assureinstdesc,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zjgt.p2p.model.Bid" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    update bid
+    set BidCode = #{bidcode,jdbcType=VARCHAR},
+      bidno = #{bidno,jdbcType=VARCHAR},
+      bidclassno = #{bidclassno,jdbcType=VARCHAR},
+      bidtypeid = #{bidtypeid,jdbcType=INTEGER},
+      bidtype = #{bidtype,jdbcType=VARCHAR},
+      bidclassname = #{bidclassname,jdbcType=VARCHAR},
+      bidclasssubject = #{bidclasssubject,jdbcType=VARCHAR},
+      bidimg = #{bidimg,jdbcType=VARCHAR},
+      amount = #{amount,jdbcType=DECIMAL},
+      RemainPriAmount = #{remainpriamount,jdbcType=DECIMAL},
+      investperiodtypeid = #{investperiodtypeid,jdbcType=INTEGER},
+      investperiod = #{investperiod,jdbcType=INTEGER},
+      raiseperiod = #{raiseperiod,jdbcType=VARCHAR},
+      raisebegindate = #{raisebegindate,jdbcType=DATE},
+      raiseenddate = #{raiseenddate,jdbcType=DATE},
+      exptinterestdate = #{exptinterestdate,jdbcType=DATE},
+      exptexpiredate = #{exptexpiredate,jdbcType=DATE},
+      annualizedrate = #{annualizedrate,jdbcType=DECIMAL},
+      intestcalctypeid = #{intestcalctypeid,jdbcType=INTEGER},
+      intestcalctype = #{intestcalctype,jdbcType=VARCHAR},
+      exptlastacctdate = #{exptlastacctdate,jdbcType=DATE},
+      mininvestamount = #{mininvestamount,jdbcType=DECIMAL},
+      maxinvestamount = #{maxinvestamount,jdbcType=DECIMAL},
+      ifredeem = #{ifredeem,jdbcType=INTEGER},
+      redeemfeetype = #{redeemfeetype,jdbcType=INTEGER},
+      redeemfee = #{redeemfee,jdbcType=DECIMAL},
+      iftransfer = #{iftransfer,jdbcType=INTEGER},
+      transfertype = #{transfertype,jdbcType=INTEGER},
+      transfee = #{transfee,jdbcType=DECIMAL},
+      pledgetype = #{pledgetype,jdbcType=VARCHAR},
+      borrowerCode = #{borrowercode,jdbcType=VARCHAR},
+      borrowername = #{borrowername,jdbcType=VARCHAR},
+      borrowerdesc = #{borrowerdesc,jdbcType=VARCHAR},
+      borrowerinterest = #{borrowerinterest,jdbcType=DECIMAL},
+      instCode = #{instcode,jdbcType=VARCHAR},
+      assureinstname = #{assureinstname,jdbcType=VARCHAR},
+      ensuretype = #{ensuretype,jdbcType=VARCHAR},
+      agreement1 = #{agreement1,jdbcType=INTEGER},
+      agreement2 = #{agreement2,jdbcType=INTEGER},
+      agreement3 = #{agreement3,jdbcType=INTEGER},
+      raisemoney = #{raisemoney,jdbcType=DECIMAL},
+      raisestate = #{raisestate,jdbcType=INTEGER},
+      repaymentway = #{repaymentway,jdbcType=VARCHAR},
+      bindinnerno = #{bindinnerno,jdbcType=VARCHAR},
+      bidclassintro = #{bidclassintro,jdbcType=VARCHAR},
+      investscope = #{investscope,jdbcType=VARCHAR},
+      incomedesc = #{incomedesc,jdbcType=VARCHAR},
+      incomeway = #{incomeway,jdbcType=INTEGER},
+      raisecond = #{raisecond,jdbcType=VARCHAR},
+      redeemway = #{redeemway,jdbcType=VARCHAR},
+      raiserate = #{raiserate,jdbcType=DECIMAL},
+      redemrate = #{redemrate,jdbcType=DECIMAL},
+      transrate = #{transrate,jdbcType=DECIMAL},
+      prepayrate = #{prepayrate,jdbcType=DECIMAL},
+      receiptdesc = #{receiptdesc,jdbcType=VARCHAR},
+      bidnum = #{bidnum,jdbcType=INTEGER},
+      pubdate = #{pubdate,jdbcType=TIMESTAMP},
+      memberid = #{memberid,jdbcType=INTEGER},
+      staff_no = #{staffNo,jdbcType=VARCHAR},
+      membername = #{membername,jdbcType=VARCHAR},
+      riskmgrfee = #{riskmgrfee,jdbcType=DECIMAL},
+      transname = #{transname,jdbcType=VARCHAR},
+      projectCode = #{projectcode,jdbcType=VARCHAR},
+      projectfeature = #{projectfeature,jdbcType=VARCHAR},
+      yearservicefee = #{yearservicefee,jdbcType=DECIMAL},
+      pubfee = #{pubfee,jdbcType=DECIMAL},
+      infofee = #{infofee,jdbcType=DECIMAL},
+      overduefee = #{overduefee,jdbcType=DECIMAL},
+      unpaidfee = #{unpaidfee,jdbcType=DECIMAL},
+      InvestOrderCode = #{investordercode,jdbcType=VARCHAR},
+      ifextrarate = #{ifextrarate,jdbcType=INTEGER},
+      ifvirtual = #{ifvirtual,jdbcType=INTEGER},
+      extrarate = #{extrarate,jdbcType=DECIMAL},
+      ApproStatus = #{approstatus,jdbcType=INTEGER},
+      bidstatus = #{bidstatus,jdbcType=INTEGER},
+      borrowstatus = #{borrowstatus,jdbcType=INTEGER},
+      lockupperiod = #{lockupperiod,jdbcType=INTEGER},
+      remark = #{remark,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <!-- 
+ 	func: 查询转让订单列表
+ 	auth: qianjun
+ 	date: 2015/02/03
+   -->
+  <select id="selectTransBidList" resultMap="BaseResultMap"  >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+   SELECT
+bid.bidno,
+bid.bidclassno,
+bid.bidtypeid,
+bid.bidtype,
+bid.bidclassname,
+bid.bidclasssubject,
+bid.bidimg,
+bid.amount,
+bid.investperiodtypeid,
+bid.investperiod,
+bid.raiseperiod,
+bid.raisebegindate,
+bid.raiseenddate,
+bid.exptinterestdate,
+bid.exptexpiredate,
+bid.annualizedrate,
+bid.intestcalctypeid,
+bid.intestcalctype,
+bid.exptlastacctdate,
+bid.mininvestamount,
+bid.maxinvestamount,
+bid.ifredeem,
+bid.redeemfeetype,
+bid.redeemfee,
+yieldsum.RemainPriAmount AS RemainPriAmount,
+bid.id,
+bid.iftransfer,
+bid.transfertype,
+bid.transfee,
+bid.instCode,
+bid.assureinstname,
+bid.ensuretype,
+bid.agreement1,
+bid.agreement2,
+bid.agreement3,
+bid.raisemoney,
+bid.raisestate,
+bid.bidstatus,
+bid.BidCode,
+bid.repaymentway,
+bid.bindinnerno,
+bid.bidclassintro,
+bid.investscope,
+bid.incomedesc,
+bid.incomeway,
+bid.raisecond,
+bid.redeemway,
+bid.raiserate,
+bid.redemrate,
+bid.transrate,
+bid.prepayrate,
+bid.receiptdesc,
+bid.bidnum,
+bid.pubdate,
+bid.memberid,
+bid.staff_no,
+bid.membername,
+bid.riskmgrfee,
+bid.transname,
+bid.ApproStatus,
+bid.projectCode,
+bid.yearservicefee,
+bid.remark,
+bid.pubfee,
+bid.infofee,
+bid.overduefee,
+bid.unpaidfee,
+investorder.InvestOrderCode AS InvestOrderCode
+FROM
+bid
+Inner Join investorder ON investorder.BidCode = bid.BidCode
+Inner Join yieldsum ON yieldsum.InvestOrderCode = investorder.InvestOrderCode
+WHERE
+investorder.transname =  '2' AND
+investorder.OrderStatus =  '1' AND
+investorder.InvestOrderCode = #{ordercode}
+
+  </select>
+  
+  <!-- 分页SQL语句 -->  
+<select id="selectProductsByPage" resultMap="BaseResultMap">  
+  select   
+  *  
+  from bid limit #{startPos},#{pageSize}   
+</select>  
+<!-- 取得记录的总数 -->  
+<select id="getProductsCount" resultType="long" parameterType="com.zjgt.p2p.model.BidExample">  
+  SELECT COUNT(*) FROM bid   
+      <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+</select>  
+
+<select id="selectByExampleLimit" resultMap="BaseResultMap" parameterType="com.zjgt.p2p.model.BidExample" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+      This element : Tue Dec 09 13:48:21 CST 2014.
+    -->
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from bid
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="startPos != null" >
+      limit ${startPos} ,${pageSize}
+    </if>
+  </select>
+  <select id="selectByidForUpdate" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from bid
+    where id = #{id,jdbcType=INTEGER} FOR UPDATE
+  </select>
+  <select id="selectBydateAndNofull" resultMap="BaseResultMap">
+  	select * from bid
+  	where raisemoney!=amount and bidtypeid=4 and bidstatus!=7 and bidstatus!=8
+  	order by pubdate DESC
+  	limit 1
+  </select>
+</mapper>

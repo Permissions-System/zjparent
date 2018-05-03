@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zjgt.p2p.base.dao.CountryDao" >
+   <cache readOnly="true" type="org.springfk.pancloud.daoframework.cache.PanLoggingCache">
+		<property name="cacheGroup" value="mclient0" />
+   </cache>
+   
+  <resultMap id="BaseResultMap" type="com.zjgt.p2p.base.domain.Country" >
+    <result column="COUNTRY_CODE" property="countryCode" jdbcType="VARCHAR" />
+    <result column="TWO_CODE" property="twoCode" jdbcType="VARCHAR" />
+    <result column="THREE_CODE" property="threeCode" jdbcType="VARCHAR" />
+    <result column="CN_SHORT_NAME" property="cnShortName" jdbcType="VARCHAR" />
+    <result column="EN_SHORT_NAME" property="enShortName" jdbcType="VARCHAR" />
+    <result column="CN_NAME" property="cnName" jdbcType="VARCHAR" />
+    <result column="EN_NAME" property="enName" jdbcType="VARCHAR" />
+    <result column="ITELFIX" property="itelFix" jdbcType="VARCHAR" />        
+  </resultMap>
+   
+  <select id="getCountryList" resultMap="BaseResultMap" useCache="true">
+    select COUNTRY_CODE, TWO_CODE, THREE_CODE, CN_SHORT_NAME, EN_SHORT_NAME, CN_NAME, EN_NAME, ITELFIX
+    from CP_COUNTRY
+    order by CN_NAME
+  </select>
+  
+  <select id="selectByContryCode" resultMap="BaseResultMap"  useCache="true">
+    select COUNTRY_CODE, TWO_CODE, THREE_CODE, CN_SHORT_NAME, EN_SHORT_NAME, CN_NAME, EN_NAME, ITELFIX
+    from CP_COUNTRY
+    where COUNTRY_CODE = #{countryCode,jdbcType=VARCHAR}
+  </select>
+</mapper>

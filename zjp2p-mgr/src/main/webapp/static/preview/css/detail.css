@@ -1,0 +1,313 @@
+@charset "utf-8";
+.subnav {
+	width: 1000px;
+	margin-left: auto;
+	margin-right: auto;
+	color: #8F9496;
+	font-family: "微软雅黑";
+	margin-top: 22px;
+	margin-bottom: 26px;
+}
+
+.subnav a{
+	text-decoration:none; 
+	color:#8F9496;
+}
+
+.subnav a:hover{
+	color:#1E9ED5;
+}
+
+.detail_content {
+	width: 1000px;
+	height: 480px;
+	margin-left: auto;
+	margin-right: auto;
+	margin-bottom: 10px;
+}
+.detail_content .detail_tleft {
+	width: 670px;
+	height: 480px;
+	float: left;
+	background-color: #FFFFFF;
+}
+
+.detail_content .detail_tright {
+	width: 320px;
+	height: 480px;
+	margin-left: 10px;
+	float: left;
+	background-color: #FFFFFF;
+}
+.detail_content .detail_tright .rest {
+	width: 270px;
+	margin-left: auto;
+	margin-right: auto;
+	font-family: "微软雅黑";
+	font-size: 16px;
+	color: #565A5C;
+	height: 55px;
+	line-height: 55px;
+}
+
+.detail_content .detail_tleft .detail03 {
+	width: 590px;
+	margin-top: 20px;
+	margin-left: 40px;
+	color: #565A5C;
+	font-family: "微软雅黑";
+	font-size: 14px;
+	height: 180px;
+	border-bottom: 1px solid #CCCCCC;
+}
+
+
+.detail_para {
+	width: 1000px;
+	margin-left: auto;
+	margin-right: auto;
+	background-color: #FFFFFF;
+	height: 1000px;
+}
+.detail_para .detail_content2 {
+	height: 900px;
+	width: 920px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.detail_content .detail_tleft .detail01 {
+	width: 590px;
+	margin-top: 20px;
+	margin-left: 40px;
+	height: 40px;
+	border-bottom: 1px solid #CCCCCC;
+	line-height: 35px;
+	color: #565A5C;
+	font-family: "微软雅黑";
+}
+.detail_content .detail_tleft .detail01 .detail_style01 {
+	font-size: 24px;
+	float: left;
+}
+.detail_content .detail_tleft .detail01 .detail_style02 {
+	float: right;
+	font-size: 15px;
+	line-height: 43px;
+}
+.detail_content .detail_tleft .detail02 {
+	width: 590px;
+	margin-left: 40px;
+	color: #565A5C;
+	font-family: "微软雅黑";
+	font-size: 14px;
+	margin-top: 13px;
+	line-height: 25px;
+}
+.detail_content .detail_tleft .detail04 {
+	width: 590px;
+	margin-left: 40px;
+	color: #565A5C;
+	font-family: "微软雅黑";
+	font-size: 14px;
+	margin-top: 20px;
+	line-height: 20px;
+}
+.detail_content .detail_tleft .detail02 .detail_style03 {
+	font-size: 16px;
+}
+.detail_content .detail_tleft .detail03 .detail_style04 {
+	font-size: 26px;
+	color: #009CE4;
+	line-height: 42px;
+}
+.detail_style05 {
+	font-size: 28px;
+	color: #E60012;
+	font-weight: bold;
+	line-height: 42px;
+}
+
+.detail_content .detail_tleft .detail03 .detail03_column {
+	width: 170px;
+	height: 160px;
+	float: left;
+	margin-right: 25px;
+	line-height: 27px;
+}
+
+.detail_content .detail_tleft .detail03 .detail03_column1 {
+	width: 170px;
+	height: 160px;
+	float: left;
+	margin-left: 20px;
+	line-height: 27px;
+}
+.detail_content .detail_tright #circle {
+	width: 320px;
+	height: 170px;
+	background-color: #565A5C;
+}
+
+#circle2 {
+	width: 147px;
+	height: 147px;
+	line-height: 147px;
+	margin-left: 90px;
+	margin-right: auto;
+	margin-top: 12px;
+	background: url(../images/circle3.png);
+	font-family: "arial";
+	text-align: center;
+	font-size: 42px;
+	color: #fff;
+	float: left;
+}
+.detail_content .detail_tright .add {
+	width: 270px;
+	height: 45px;
+	margin-left: auto;
+	margin-right: auto;
+}
+.detail_content .detail_tright .money {
+	width: 270px;
+	margin-left: auto;
+	margin-right: auto;
+	font-family: "微软雅黑";
+	color: #565A5C;
+	font-size: 16px;
+	line-height: 30px;
+	height: 60px;
+	margin-top: 10px;
+}
+.detail_content .detail_tright .purchase {
+	width: 270px;
+	height: 45px;
+	margin-left: auto;
+	margin-right: auto;
+	font-family: "微软雅黑";
+	color: #FFFFFF;
+	text-align: center;
+	font-size: 20px;
+	line-height: 45px;
+	font-weight: bold;
+	background-color: #009CE4;
+}
+.detail_content .detail_tright .license {
+	width: 270px;
+	margin-left: auto;
+	margin-right: auto;
+	height: 40px;
+	color: #565A5C;
+	font-family: "微软雅黑";
+	font-size: 14px;
+	text-align: left;
+	padding-top: 20px;
+}
+.detail_content .detail_tright .money span {
+	color: #E60012;
+}
+.detail_content .detail_tright .license input {
+	width: 17px;
+	height: 17px;
+	border-width: 0px;
+	border-style: none;
+	border-spacing: 0px 0px;
+	border-collapse: collapse;
+	border-radius: 3px;
+	float: left;
+}
+
+.detail_content .detail_tright .add input {
+	height: 45px;
+	border-style: none;
+	background-color: #F4F4F4;
+	float: left;
+	width: 160px;
+	font-family: "微软雅黑";
+	color: #565B5D;
+	font-size: 20px;
+	text-align: center;
+	font-weight: bold;
+}
+.detail_content .detail_tright .license a {
+	color: #009CE4;
+	text-decoration: none;
+}
+.detail_content .detail_tleft .detail01 .detail_style02 a {
+	text-decoration: none;
+	color: #565B5D;
+}
+.tab-container{ position: relative; height: 200px;} 
+.tab-container .tab-radio{ display: none;}
+.tab-container .tab{
+	display: block;
+	float: left;
+	position: relative;
+	border: 1px solid #cfd2d7;
+	color: #888;
+	margin-top: 20px;
+	margin-right: 1.0%;
+	text-decoration: none;
+	text-align: center;
+	cursor: pointer;
+	background-color: #eee;
+	width: 135px;
+	height: 40px;
+}
+
+
+
+.tab-container .tab-radio:checked ~ .tab, .tab-container .tab-radio:active ~ .tab
+{
+	background-color: #fff;
+	z-index: 100;
+	border-bottom: 1px solid #fff;
+}
+.tab-container .tab-radio:checked ~ .tab {background-color:#fff; color:#333;}
+.tab-container .tab-page {
+	visibility: hidden;
+	background-color: #fff;
+	color: #888;
+	display:block;
+	position: absolute;
+	top: 61px;
+	height: auto;
+	width: 100%;
+	float: left;
+	padding: 5px;
+	border: 1px solid #cfd2d7;
+}
+.tab-container .tab-radio:checked ~ .tab-page { visibility: visible; }
+
+.tab-container .tab-list {
+	color: #565B5D;
+}
+
+.tab-container .tab-list table {
+	width: 95%; 
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 14px;
+	font-family: "微软雅黑";
+	border: solid #ccc 1px;
+	border-left: none;   
+}   
+
+
+
+.tab-container .tab-list td, th {border-top: 1px solid #ccc; border-left: 1px solid #ccc; padding: 7px; text-align: left;}
+.tab-container .tab-list th {
+	background-color: #f0f0f0;
+	        box-shadow: 0 1px 0 rgba(255,255,255,.8) inset;
+	   -moz-box-shadow: 0 1px 0 rgba(255,255,255,.8) inset;  
+	-webkit-box-shadow: 0 1px 0 rgba(255,255,255,.8) inset;        
+	border-top: none;
+	text-shadow: 0 1px 0 rgba(255,255,255,.5);
+	font-size: 14px; 
+	line-height: 24px;
+	text-align: center;
+}
+.tab-container .tab-list td{font-size:14px; text-align:center}
+
+.tab-container .tab-list table tr.even td{background-color: #fafafa;}

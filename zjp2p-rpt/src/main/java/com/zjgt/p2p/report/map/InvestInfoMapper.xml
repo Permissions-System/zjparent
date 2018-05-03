@@ -1,0 +1,531 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zjgt.p2p.report.dao.InvestInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.zjgt.p2p.report.model.InvestInfo" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="lendId" property="lendid" jdbcType="INTEGER" />
+    <result column="fuyouAccount" property="fuyouaccount" jdbcType="VARCHAR" />
+    <result column="userName" property="username" jdbcType="VARCHAR" />
+    <result column="PromoCode" property="promocode" jdbcType="VARCHAR" />
+    <result column="realName" property="realname" jdbcType="VARCHAR" />
+    <result column="lendproject" property="lendproject" jdbcType="VARCHAR" />
+    <result column="lendMoney" property="lendmoney" jdbcType="DECIMAL" />
+    <result column="realMoney" property="realmoney" jdbcType="DECIMAL" />
+    <result column="deductMoney" property="deductmoney" jdbcType="DECIMAL" />
+    <result column="expectMoney" property="expectmoney" jdbcType="DECIMAL" />
+    <result column="repayMoney" property="repaymoney" jdbcType="DECIMAL" />
+    <result column="yearRate" property="yearrate" jdbcType="DOUBLE" />
+    <result column="timeLimit" property="timelimit" jdbcType="INTEGER" />
+    <result column="lendDate" property="lenddate" jdbcType="TIMESTAMP" />
+    <result column="repayDate" property="repaydate" jdbcType="TIMESTAMP" />
+    <result column="expireDate" property="expiredate" jdbcType="TIMESTAMP" />
+    <result column="regDate" property="regdate" jdbcType="TIMESTAMP" />
+    <result column="prevInvestDate" property="previnvestdate" jdbcType="TIMESTAMP" />
+    <result column="sumInvestCnt" property="suminvestcnt" jdbcType="INTEGER" />
+    <result column="area" property="area" jdbcType="VARCHAR" />
+    <result column="sex" property="sex" jdbcType="VARCHAR" />
+    <result column="age" property="age" jdbcType="INTEGER" />
+    <result column="createDate" property="createdate" jdbcType="TIMESTAMP" />
+    <result column="temp1" property="temp1" jdbcType="VARCHAR" />
+    <result column="temp2" property="temp2" jdbcType="VARCHAR" />
+    <result column="temp3" property="temp3" jdbcType="VARCHAR" />
+    <result column="temp4" property="temp4" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    id, lendId, fuyouAccount, userName, PromoCode, realName, lendproject, lendMoney, 
+    realMoney, deductMoney, expectMoney, repayMoney, yearRate, timeLimit, lendDate, repayDate, 
+    expireDate, regDate, prevInvestDate, sumInvestCnt, area, sex, age, createDate, temp1, 
+    temp2, temp3, temp4
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.zjgt.p2p.report.model.InvestInfoExample" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from investinfo
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    select 
+    <include refid="Base_Column_List" />
+    from investinfo
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    delete from investinfo
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zjgt.p2p.report.model.InvestInfo" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    insert into investinfo (id, lendId, fuyouAccount, 
+      userName, PromoCode, realName, 
+      lendproject, lendMoney, realMoney, 
+      deductMoney, expectMoney, repayMoney, 
+      yearRate, timeLimit, lendDate, 
+      repayDate, expireDate, regDate, 
+      prevInvestDate, sumInvestCnt, area, 
+      sex, age, createDate, 
+      temp1, temp2, temp3, 
+      temp4)
+    values (#{id,jdbcType=INTEGER}, #{lendid,jdbcType=INTEGER}, #{fuyouaccount,jdbcType=VARCHAR}, 
+      #{username,jdbcType=VARCHAR}, #{promocode,jdbcType=VARCHAR}, #{realname,jdbcType=VARCHAR}, 
+      #{lendproject,jdbcType=VARCHAR}, #{lendmoney,jdbcType=DECIMAL}, #{realmoney,jdbcType=DECIMAL}, 
+      #{deductmoney,jdbcType=DECIMAL}, #{expectmoney,jdbcType=DECIMAL}, #{repaymoney,jdbcType=DECIMAL}, 
+      #{yearrate,jdbcType=DOUBLE}, #{timelimit,jdbcType=INTEGER}, #{lenddate,jdbcType=TIMESTAMP}, 
+      #{repaydate,jdbcType=TIMESTAMP}, #{expiredate,jdbcType=TIMESTAMP}, #{regdate,jdbcType=TIMESTAMP}, 
+      #{previnvestdate,jdbcType=TIMESTAMP}, #{suminvestcnt,jdbcType=INTEGER}, #{area,jdbcType=VARCHAR}, 
+      #{sex,jdbcType=VARCHAR}, #{age,jdbcType=INTEGER}, #{createdate,jdbcType=TIMESTAMP}, 
+      #{temp1,jdbcType=VARCHAR}, #{temp2,jdbcType=VARCHAR}, #{temp3,jdbcType=VARCHAR}, 
+      #{temp4,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zjgt.p2p.report.model.InvestInfo" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    insert into investinfo
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="lendid != null" >
+        lendId,
+      </if>
+      <if test="fuyouaccount != null" >
+        fuyouAccount,
+      </if>
+      <if test="username != null" >
+        userName,
+      </if>
+      <if test="promocode != null" >
+        PromoCode,
+      </if>
+      <if test="realname != null" >
+        realName,
+      </if>
+      <if test="lendproject != null" >
+        lendproject,
+      </if>
+      <if test="lendmoney != null" >
+        lendMoney,
+      </if>
+      <if test="realmoney != null" >
+        realMoney,
+      </if>
+      <if test="deductmoney != null" >
+        deductMoney,
+      </if>
+      <if test="expectmoney != null" >
+        expectMoney,
+      </if>
+      <if test="repaymoney != null" >
+        repayMoney,
+      </if>
+      <if test="yearrate != null" >
+        yearRate,
+      </if>
+      <if test="timelimit != null" >
+        timeLimit,
+      </if>
+      <if test="lenddate != null" >
+        lendDate,
+      </if>
+      <if test="repaydate != null" >
+        repayDate,
+      </if>
+      <if test="expiredate != null" >
+        expireDate,
+      </if>
+      <if test="regdate != null" >
+        regDate,
+      </if>
+      <if test="previnvestdate != null" >
+        prevInvestDate,
+      </if>
+      <if test="suminvestcnt != null" >
+        sumInvestCnt,
+      </if>
+      <if test="area != null" >
+        area,
+      </if>
+      <if test="sex != null" >
+        sex,
+      </if>
+      <if test="age != null" >
+        age,
+      </if>
+      <if test="createdate != null" >
+        createDate,
+      </if>
+      <if test="temp1 != null" >
+        temp1,
+      </if>
+      <if test="temp2 != null" >
+        temp2,
+      </if>
+      <if test="temp3 != null" >
+        temp3,
+      </if>
+      <if test="temp4 != null" >
+        temp4,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="lendid != null" >
+        #{lendid,jdbcType=INTEGER},
+      </if>
+      <if test="fuyouaccount != null" >
+        #{fuyouaccount,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null" >
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="promocode != null" >
+        #{promocode,jdbcType=VARCHAR},
+      </if>
+      <if test="realname != null" >
+        #{realname,jdbcType=VARCHAR},
+      </if>
+      <if test="lendproject != null" >
+        #{lendproject,jdbcType=VARCHAR},
+      </if>
+      <if test="lendmoney != null" >
+        #{lendmoney,jdbcType=DECIMAL},
+      </if>
+      <if test="realmoney != null" >
+        #{realmoney,jdbcType=DECIMAL},
+      </if>
+      <if test="deductmoney != null" >
+        #{deductmoney,jdbcType=DECIMAL},
+      </if>
+      <if test="expectmoney != null" >
+        #{expectmoney,jdbcType=DECIMAL},
+      </if>
+      <if test="repaymoney != null" >
+        #{repaymoney,jdbcType=DECIMAL},
+      </if>
+      <if test="yearrate != null" >
+        #{yearrate,jdbcType=DOUBLE},
+      </if>
+      <if test="timelimit != null" >
+        #{timelimit,jdbcType=INTEGER},
+      </if>
+      <if test="lenddate != null" >
+        #{lenddate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="repaydate != null" >
+        #{repaydate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="expiredate != null" >
+        #{expiredate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="regdate != null" >
+        #{regdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="previnvestdate != null" >
+        #{previnvestdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="suminvestcnt != null" >
+        #{suminvestcnt,jdbcType=INTEGER},
+      </if>
+      <if test="area != null" >
+        #{area,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="age != null" >
+        #{age,jdbcType=INTEGER},
+      </if>
+      <if test="createdate != null" >
+        #{createdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="temp1 != null" >
+        #{temp1,jdbcType=VARCHAR},
+      </if>
+      <if test="temp2 != null" >
+        #{temp2,jdbcType=VARCHAR},
+      </if>
+      <if test="temp3 != null" >
+        #{temp3,jdbcType=VARCHAR},
+      </if>
+      <if test="temp4 != null" >
+        #{temp4,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zjgt.p2p.report.model.InvestInfo" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    update investinfo
+    <set >
+      <if test="lendid != null" >
+        lendId = #{lendid,jdbcType=INTEGER},
+      </if>
+      <if test="fuyouaccount != null" >
+        fuyouAccount = #{fuyouaccount,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null" >
+        userName = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="promocode != null" >
+        PromoCode = #{promocode,jdbcType=VARCHAR},
+      </if>
+      <if test="realname != null" >
+        realName = #{realname,jdbcType=VARCHAR},
+      </if>
+      <if test="lendproject != null" >
+        lendproject = #{lendproject,jdbcType=VARCHAR},
+      </if>
+      <if test="lendmoney != null" >
+        lendMoney = #{lendmoney,jdbcType=DECIMAL},
+      </if>
+      <if test="realmoney != null" >
+        realMoney = #{realmoney,jdbcType=DECIMAL},
+      </if>
+      <if test="deductmoney != null" >
+        deductMoney = #{deductmoney,jdbcType=DECIMAL},
+      </if>
+      <if test="expectmoney != null" >
+        expectMoney = #{expectmoney,jdbcType=DECIMAL},
+      </if>
+      <if test="repaymoney != null" >
+        repayMoney = #{repaymoney,jdbcType=DECIMAL},
+      </if>
+      <if test="yearrate != null" >
+        yearRate = #{yearrate,jdbcType=DOUBLE},
+      </if>
+      <if test="timelimit != null" >
+        timeLimit = #{timelimit,jdbcType=INTEGER},
+      </if>
+      <if test="lenddate != null" >
+        lendDate = #{lenddate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="repaydate != null" >
+        repayDate = #{repaydate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="expiredate != null" >
+        expireDate = #{expiredate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="regdate != null" >
+        regDate = #{regdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="previnvestdate != null" >
+        prevInvestDate = #{previnvestdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="suminvestcnt != null" >
+        sumInvestCnt = #{suminvestcnt,jdbcType=INTEGER},
+      </if>
+      <if test="area != null" >
+        area = #{area,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        sex = #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="age != null" >
+        age = #{age,jdbcType=INTEGER},
+      </if>
+      <if test="createdate != null" >
+        createDate = #{createdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="temp1 != null" >
+        temp1 = #{temp1,jdbcType=VARCHAR},
+      </if>
+      <if test="temp2 != null" >
+        temp2 = #{temp2,jdbcType=VARCHAR},
+      </if>
+      <if test="temp3 != null" >
+        temp3 = #{temp3,jdbcType=VARCHAR},
+      </if>
+      <if test="temp4 != null" >
+        temp4 = #{temp4,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zjgt.p2p.report.model.InvestInfo" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    update investinfo
+    set lendId = #{lendid,jdbcType=INTEGER},
+      fuyouAccount = #{fuyouaccount,jdbcType=VARCHAR},
+      userName = #{username,jdbcType=VARCHAR},
+      PromoCode = #{promocode,jdbcType=VARCHAR},
+      realName = #{realname,jdbcType=VARCHAR},
+      lendproject = #{lendproject,jdbcType=VARCHAR},
+      lendMoney = #{lendmoney,jdbcType=DECIMAL},
+      realMoney = #{realmoney,jdbcType=DECIMAL},
+      deductMoney = #{deductmoney,jdbcType=DECIMAL},
+      expectMoney = #{expectmoney,jdbcType=DECIMAL},
+      repayMoney = #{repaymoney,jdbcType=DECIMAL},
+      yearRate = #{yearrate,jdbcType=DOUBLE},
+      timeLimit = #{timelimit,jdbcType=INTEGER},
+      lendDate = #{lenddate,jdbcType=TIMESTAMP},
+      repayDate = #{repaydate,jdbcType=TIMESTAMP},
+      expireDate = #{expiredate,jdbcType=TIMESTAMP},
+      regDate = #{regdate,jdbcType=TIMESTAMP},
+      prevInvestDate = #{previnvestdate,jdbcType=TIMESTAMP},
+      sumInvestCnt = #{suminvestcnt,jdbcType=INTEGER},
+      area = #{area,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=VARCHAR},
+      age = #{age,jdbcType=INTEGER},
+      createDate = #{createdate,jdbcType=TIMESTAMP},
+      temp1 = #{temp1,jdbcType=VARCHAR},
+      temp2 = #{temp2,jdbcType=VARCHAR},
+      temp3 = #{temp3,jdbcType=VARCHAR},
+      temp4 = #{temp4,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+	<select id="getDatagridTotal" resultType="long">
+		select count(1) from investinfo where 1=1
+		<if test="investInfo.lendid != null and investInfo.lendid!='' ">
+			and lendId = #{investInfo.lendid}
+		</if> 
+		<if test="investInfo.lendproject != null and investInfo.lendproject!='' ">
+			and lendProject like concat('%',#{investInfo.lendproject},'%')
+		</if>
+		<if test="investInfo.promocode != null and investInfo.promocode != '' ">
+			and promocode like concat('%',#{investInfo.promocode},'%')
+		</if>
+		<if test="investInfo.username != null and investInfo.username != '' ">
+			and userName like concat('%',#{investInfo.username},'%')
+		</if>
+		<if test="investInfo.lendBeginTime != null and investInfo.lendBeginTime != '' ">
+			<![CDATA[  and lendDate >= #{investInfo.lendBeginTime}  ]]>
+		</if>
+		<if test="investInfo.lendEndTime != null and investInfo.lendEndTime != '' ">
+			<![CDATA[  and lendDate <= #{investInfo.lendEndTime}  ]]>
+		</if>
+		<if test="investInfo.repayBeginTime != null and investInfo.repayBeginTime != '' ">
+			<![CDATA[  and lendDate >= #{investInfo.repayBeginTime}  ]]>
+		</if>
+		<if test="investInfo.repayEndTime != null and investInfo.repayEndTime != '' ">
+			<![CDATA[  and lendDate <= #{investInfo.repayEndTime}  ]]>
+		</if>
+	</select>
+
+	<select id="datagridInvest" resultType="com.zjgt.p2p.report.model.InvestInfo">
+		<!-- select userName,regDate,lendMoney,lendDate from investinfo where 1=1 -->
+		select PromoCode,username,sex,age,area,lendId,lendproject,lendMoney,realMoney,deductMoney,yearRate,timeLimit,sumInvestCnt,lendDate,prevInvestDate,repayDate,expireDate,regdate 
+		from investinfo 
+		where 1=1
+		<if test="investInfo.lendid != null and investInfo.lendid!='' ">
+			and lendId = #{investInfo.lendid}
+		</if> 
+		<if test="investInfo.lendproject != null and investInfo.lendproject!='' ">
+			and lendProject like concat('%',#{investInfo.lendproject},'%')
+		</if>
+		<if test="investInfo.promocode != null and investInfo.promocode!='' "><!-- !"".equals() -->
+			and promocode like concat('%',#{investInfo.promocode},'%')
+		</if>
+		<if test="investInfo.username != null and investInfo.username != '' ">
+			and userName like concat('%',#{investInfo.username},'%')
+		</if>
+		<if test="investInfo.lendBeginTime != null and investInfo.lendBeginTime != '' ">
+			<![CDATA[  and lendDate >= #{investInfo.lendBeginTime}  ]]>
+		</if>
+		<if test="investInfo.lendEndTime != null and investInfo.lendEndTime != '' ">
+			<![CDATA[  and lendDate <= #{investInfo.lendEndTime}  ]]>
+		</if>
+		<if test="investInfo.repayBeginTime != null and investInfo.repayBeginTime != '' ">
+			<![CDATA[  and lendDate >= #{investInfo.repayBeginTime}  ]]>
+		</if>
+		<if test="investInfo.repayEndTime != null and investInfo.repayEndTime != '' ">
+			<![CDATA[  and lendDate <= #{investInfo.repayEndTime}  ]]>
+		</if>
+		<!-- <if test="page.sort != null and page.sort != ''">
+			order by #{page.sort} #{page.order}
+		</if> -->
+		order by lendDate desc
+		<if test="page.page > 0">
+			limit #{page.start},#{page.rows}
+		</if>
+	</select>
+	
+	<select id="selectByExampleLimit" resultMap="BaseResultMap" resultType="com.zjgt.p2p.report.model.InvestInfo">
+		
+		select  * from investinfo  order by createDate desc limit 0,1
+	
+	</select>
+
+	<delete id="deleteInvest" >
+
+   		 delete from investinfo 
+   		 
+  	</delete>
+  
+  <insert id="insertList" parameterType="java.util.Map" >
+   			${str}
+      </insert>
+</mapper>

@@ -1,0 +1,349 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zjgt.p2p.dao.YieldsumMapper" >
+  <resultMap id="BaseResultMap" type="com.zjgt.p2p.model.Yieldsum" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    <id column="Id" property="id" jdbcType="BIGINT" />
+    <result column="parentId" property="parentid" jdbcType="BIGINT" />
+    <result column="InvestOrderCode" property="investordercode" jdbcType="VARCHAR" />
+    <result column="TermNum" property="termnum" jdbcType="INTEGER" />
+    <result column="TermDate" property="termdate" jdbcType="DATE" />
+    <result column="RepayDate" property="repaydate" jdbcType="DATE" />
+    <result column="TermAmount" property="termamount" jdbcType="DECIMAL" />
+    <result column="PrincipalAmountSum" property="principalamountsum" jdbcType="DECIMAL" />
+    <result column="AccruedInterestSum" property="accruedinterestsum" jdbcType="DECIMAL" />
+    <result column="RemainInterestSum" property="remaininterestsum" jdbcType="DECIMAL" />
+    <result column="RemainPriAmount" property="remainpriamount" jdbcType="DECIMAL" />
+    <result column="RepaidInterestSum" property="repaidinterestsum" jdbcType="DECIMAL" />
+    <result column="RepaidAmountSum" property="repaidamountsum" jdbcType="DECIMAL" />
+    <result column="TermStatus" property="termstatus" jdbcType="CHAR" />
+    <result column="TransCode" property="transcode" jdbcType="CHAR" />
+    <result column="PayStatus" property="paystatus" jdbcType="INTEGER" />
+    <result column="CreditCode" property="creditcode" jdbcType="CHAR" />
+    <result column="Remark" property="remark" jdbcType="VARCHAR" />
+    <result column="memberid" property="memberid" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    Id, parentId, InvestOrderCode, TermNum, TermDate, RepayDate, TermAmount, PrincipalAmountSum, 
+    AccruedInterestSum, RemainInterestSum, RemainPriAmount, RepaidInterestSum, RepaidAmountSum, 
+    TermStatus, TransCode, PayStatus, CreditCode, Remark, memberid
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.zjgt.p2p.model.YieldsumExample" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from yieldsum
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    select 
+    <include refid="Base_Column_List" />
+    from yieldsum
+    where Id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    delete from yieldsum
+    where Id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.zjgt.p2p.model.Yieldsum" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    insert into yieldsum (Id, parentId, InvestOrderCode, 
+      TermNum, TermDate, RepayDate, 
+      TermAmount, PrincipalAmountSum, AccruedInterestSum, 
+      RemainInterestSum, RemainPriAmount, RepaidInterestSum, 
+      RepaidAmountSum, TermStatus, TransCode, 
+      PayStatus, CreditCode, Remark, 
+      memberid)
+    values (#{id,jdbcType=BIGINT}, #{parentid,jdbcType=BIGINT}, #{investordercode,jdbcType=VARCHAR}, 
+      #{termnum,jdbcType=INTEGER}, #{termdate,jdbcType=DATE}, #{repaydate,jdbcType=DATE}, 
+      #{termamount,jdbcType=DECIMAL}, #{principalamountsum,jdbcType=DECIMAL}, #{accruedinterestsum,jdbcType=DECIMAL}, 
+      #{remaininterestsum,jdbcType=DECIMAL}, #{remainpriamount,jdbcType=DECIMAL}, #{repaidinterestsum,jdbcType=DECIMAL}, 
+      #{repaidamountsum,jdbcType=DECIMAL}, #{termstatus,jdbcType=CHAR}, #{transcode,jdbcType=CHAR}, 
+      #{paystatus,jdbcType=INTEGER}, #{creditcode,jdbcType=CHAR}, #{remark,jdbcType=VARCHAR}, 
+      #{memberid,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zjgt.p2p.model.Yieldsum" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    insert into yieldsum
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        Id,
+      </if>
+      <if test="parentid != null" >
+        parentId,
+      </if>
+      <if test="investordercode != null" >
+        InvestOrderCode,
+      </if>
+      <if test="termnum != null" >
+        TermNum,
+      </if>
+      <if test="termdate != null" >
+        TermDate,
+      </if>
+      <if test="repaydate != null" >
+        RepayDate,
+      </if>
+      <if test="termamount != null" >
+        TermAmount,
+      </if>
+      <if test="principalamountsum != null" >
+        PrincipalAmountSum,
+      </if>
+      <if test="accruedinterestsum != null" >
+        AccruedInterestSum,
+      </if>
+      <if test="remaininterestsum != null" >
+        RemainInterestSum,
+      </if>
+      <if test="remainpriamount != null" >
+        RemainPriAmount,
+      </if>
+      <if test="repaidinterestsum != null" >
+        RepaidInterestSum,
+      </if>
+      <if test="repaidamountsum != null" >
+        RepaidAmountSum,
+      </if>
+      <if test="termstatus != null" >
+        TermStatus,
+      </if>
+      <if test="transcode != null" >
+        TransCode,
+      </if>
+      <if test="paystatus != null" >
+        PayStatus,
+      </if>
+      <if test="creditcode != null" >
+        CreditCode,
+      </if>
+      <if test="remark != null" >
+        Remark,
+      </if>
+      <if test="memberid != null" >
+        memberid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="parentid != null" >
+        #{parentid,jdbcType=BIGINT},
+      </if>
+      <if test="investordercode != null" >
+        #{investordercode,jdbcType=VARCHAR},
+      </if>
+      <if test="termnum != null" >
+        #{termnum,jdbcType=INTEGER},
+      </if>
+      <if test="termdate != null" >
+        #{termdate,jdbcType=DATE},
+      </if>
+      <if test="repaydate != null" >
+        #{repaydate,jdbcType=DATE},
+      </if>
+      <if test="termamount != null" >
+        #{termamount,jdbcType=DECIMAL},
+      </if>
+      <if test="principalamountsum != null" >
+        #{principalamountsum,jdbcType=DECIMAL},
+      </if>
+      <if test="accruedinterestsum != null" >
+        #{accruedinterestsum,jdbcType=DECIMAL},
+      </if>
+      <if test="remaininterestsum != null" >
+        #{remaininterestsum,jdbcType=DECIMAL},
+      </if>
+      <if test="remainpriamount != null" >
+        #{remainpriamount,jdbcType=DECIMAL},
+      </if>
+      <if test="repaidinterestsum != null" >
+        #{repaidinterestsum,jdbcType=DECIMAL},
+      </if>
+      <if test="repaidamountsum != null" >
+        #{repaidamountsum,jdbcType=DECIMAL},
+      </if>
+      <if test="termstatus != null" >
+        #{termstatus,jdbcType=CHAR},
+      </if>
+      <if test="transcode != null" >
+        #{transcode,jdbcType=CHAR},
+      </if>
+      <if test="paystatus != null" >
+        #{paystatus,jdbcType=INTEGER},
+      </if>
+      <if test="creditcode != null" >
+        #{creditcode,jdbcType=CHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="memberid != null" >
+        #{memberid,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zjgt.p2p.model.Yieldsum" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    update yieldsum
+    <set >
+      <if test="parentid != null" >
+        parentId = #{parentid,jdbcType=BIGINT},
+      </if>
+      <if test="investordercode != null" >
+        InvestOrderCode = #{investordercode,jdbcType=VARCHAR},
+      </if>
+      <if test="termnum != null" >
+        TermNum = #{termnum,jdbcType=INTEGER},
+      </if>
+      <if test="termdate != null" >
+        TermDate = #{termdate,jdbcType=DATE},
+      </if>
+      <if test="repaydate != null" >
+        RepayDate = #{repaydate,jdbcType=DATE},
+      </if>
+      <if test="termamount != null" >
+        TermAmount = #{termamount,jdbcType=DECIMAL},
+      </if>
+      <if test="principalamountsum != null" >
+        PrincipalAmountSum = #{principalamountsum,jdbcType=DECIMAL},
+      </if>
+      <if test="accruedinterestsum != null" >
+        AccruedInterestSum = #{accruedinterestsum,jdbcType=DECIMAL},
+      </if>
+      <if test="remaininterestsum != null" >
+        RemainInterestSum = #{remaininterestsum,jdbcType=DECIMAL},
+      </if>
+      <if test="remainpriamount != null" >
+        RemainPriAmount = #{remainpriamount,jdbcType=DECIMAL},
+      </if>
+      <if test="repaidinterestsum != null" >
+        RepaidInterestSum = #{repaidinterestsum,jdbcType=DECIMAL},
+      </if>
+      <if test="repaidamountsum != null" >
+        RepaidAmountSum = #{repaidamountsum,jdbcType=DECIMAL},
+      </if>
+      <if test="termstatus != null" >
+        TermStatus = #{termstatus,jdbcType=CHAR},
+      </if>
+      <if test="transcode != null" >
+        TransCode = #{transcode,jdbcType=CHAR},
+      </if>
+      <if test="paystatus != null" >
+        PayStatus = #{paystatus,jdbcType=INTEGER},
+      </if>
+      <if test="creditcode != null" >
+        CreditCode = #{creditcode,jdbcType=CHAR},
+      </if>
+      <if test="remark != null" >
+        Remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="memberid != null" >
+        memberid = #{memberid,jdbcType=INTEGER},
+      </if>
+    </set>
+    where Id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zjgt.p2p.model.Yieldsum" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    update yieldsum
+    set parentId = #{parentid,jdbcType=BIGINT},
+      InvestOrderCode = #{investordercode,jdbcType=VARCHAR},
+      TermNum = #{termnum,jdbcType=INTEGER},
+      TermDate = #{termdate,jdbcType=DATE},
+      RepayDate = #{repaydate,jdbcType=DATE},
+      TermAmount = #{termamount,jdbcType=DECIMAL},
+      PrincipalAmountSum = #{principalamountsum,jdbcType=DECIMAL},
+      AccruedInterestSum = #{accruedinterestsum,jdbcType=DECIMAL},
+      RemainInterestSum = #{remaininterestsum,jdbcType=DECIMAL},
+      RemainPriAmount = #{remainpriamount,jdbcType=DECIMAL},
+      RepaidInterestSum = #{repaidinterestsum,jdbcType=DECIMAL},
+      RepaidAmountSum = #{repaidamountsum,jdbcType=DECIMAL},
+      TermStatus = #{termstatus,jdbcType=CHAR},
+      TransCode = #{transcode,jdbcType=CHAR},
+      PayStatus = #{paystatus,jdbcType=INTEGER},
+      CreditCode = #{creditcode,jdbcType=CHAR},
+      Remark = #{remark,jdbcType=VARCHAR},
+      memberid = #{memberid,jdbcType=INTEGER}
+    where Id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="findCommissionByParent" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from yieldsum
+    where parentId = #{panentid,jdbcType=BIGINT} and TransCode=1036
+  </select>
+</mapper>

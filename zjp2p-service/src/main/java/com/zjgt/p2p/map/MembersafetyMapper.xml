@@ -1,0 +1,403 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zjgt.p2p.dao.MembersafetyMapper" >
+  <resultMap id="BaseResultMap" type="com.zjgt.p2p.model.Membersafety" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="memberid" property="memberid" jdbcType="BIGINT" />
+    <result column="realname" property="realname" jdbcType="VARCHAR" />
+    <result column="mobile" property="mobile" jdbcType="VARCHAR" />
+    <result column="mobileifverified" property="mobileifverified" jdbcType="INTEGER" />
+    <result column="mobileifverifydate" property="mobileifverifydate" jdbcType="TIMESTAMP" />
+    <result column="idcard" property="idcard" jdbcType="VARCHAR" />
+    <result column="idcardifverified" property="idcardifverified" jdbcType="INTEGER" />
+    <result column="idcardverifydate" property="idcardverifydate" jdbcType="TIMESTAMP" />
+    <result column="email" property="email" jdbcType="VARCHAR" />
+    <result column="emailifverified" property="emailifverified" jdbcType="INTEGER" />
+    <result column="emailverifyuuid" property="emailverifyuuid" jdbcType="VARCHAR" />
+    <result column="emailverifydate" property="emailverifydate" jdbcType="TIMESTAMP" />
+    <result column="bankcardifverified" property="bankcardifverified" jdbcType="INTEGER" />
+    <result column="bankname" property="bankname" jdbcType="VARCHAR" />
+    <result column="bankprince" property="bankprince" jdbcType="VARCHAR" />
+    <result column="bankcity" property="bankcity" jdbcType="VARCHAR" />
+    <result column="bankinfo" property="bankinfo" jdbcType="VARCHAR" />
+    <result column="bankcardno" property="bankcardno" jdbcType="VARCHAR" />
+    <result column="bankcode" property="bankcode" jdbcType="VARCHAR" />
+    <result column="bankverifydate" property="bankverifydate" jdbcType="TIMESTAMP" />
+    <result column="transpasswd" property="transpasswd" jdbcType="VARCHAR" />
+    <result column="transpasswdverified" property="transpasswdverified" jdbcType="INTEGER" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    id, memberid, realname, mobile, mobileifverified, mobileifverifydate, idcard, idcardifverified, 
+    idcardverifydate, email, emailifverified, emailverifyuuid, emailverifydate, bankcardifverified, 
+    bankname, bankprince, bankcity, bankinfo, bankcardno, bankcode, bankverifydate, transpasswd, 
+    transpasswdverified, remark
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.zjgt.p2p.model.MembersafetyExample" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from membersafety
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    select 
+    <include refid="Base_Column_List" />
+    from membersafety
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    delete from membersafety
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.zjgt.p2p.model.Membersafety" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    insert into membersafety (id, memberid, realname, 
+      mobile, mobileifverified, mobileifverifydate, 
+      idcard, idcardifverified, idcardverifydate, 
+      email, emailifverified, emailverifyuuid, 
+      emailverifydate, bankcardifverified, 
+      bankname, bankprince, bankcity, 
+      bankinfo, bankcardno, bankcode, 
+      bankverifydate, transpasswd, transpasswdverified, 
+      remark)
+    values (#{id,jdbcType=BIGINT}, #{memberid,jdbcType=BIGINT}, #{realname,jdbcType=VARCHAR}, 
+      #{mobile,jdbcType=VARCHAR}, #{mobileifverified,jdbcType=INTEGER}, #{mobileifverifydate,jdbcType=TIMESTAMP}, 
+      #{idcard,jdbcType=VARCHAR}, #{idcardifverified,jdbcType=INTEGER}, #{idcardverifydate,jdbcType=TIMESTAMP}, 
+      #{email,jdbcType=VARCHAR}, #{emailifverified,jdbcType=INTEGER}, #{emailverifyuuid,jdbcType=VARCHAR}, 
+      #{emailverifydate,jdbcType=TIMESTAMP}, #{bankcardifverified,jdbcType=INTEGER}, 
+      #{bankname,jdbcType=VARCHAR}, #{bankprince,jdbcType=VARCHAR}, #{bankcity,jdbcType=VARCHAR}, 
+      #{bankinfo,jdbcType=VARCHAR}, #{bankcardno,jdbcType=VARCHAR}, #{bankcode,jdbcType=VARCHAR}, 
+      #{bankverifydate,jdbcType=TIMESTAMP}, #{transpasswd,jdbcType=VARCHAR}, #{transpasswdverified,jdbcType=INTEGER}, 
+      #{remark,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zjgt.p2p.model.Membersafety" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    insert into membersafety
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="memberid != null" >
+        memberid,
+      </if>
+      <if test="realname != null" >
+        realname,
+      </if>
+      <if test="mobile != null" >
+        mobile,
+      </if>
+      <if test="mobileifverified != null" >
+        mobileifverified,
+      </if>
+      <if test="mobileifverifydate != null" >
+        mobileifverifydate,
+      </if>
+      <if test="idcard != null" >
+        idcard,
+      </if>
+      <if test="idcardifverified != null" >
+        idcardifverified,
+      </if>
+      <if test="idcardverifydate != null" >
+        idcardverifydate,
+      </if>
+      <if test="email != null" >
+        email,
+      </if>
+      <if test="emailifverified != null" >
+        emailifverified,
+      </if>
+      <if test="emailverifyuuid != null" >
+        emailverifyuuid,
+      </if>
+      <if test="emailverifydate != null" >
+        emailverifydate,
+      </if>
+      <if test="bankcardifverified != null" >
+        bankcardifverified,
+      </if>
+      <if test="bankname != null" >
+        bankname,
+      </if>
+      <if test="bankprince != null" >
+        bankprince,
+      </if>
+      <if test="bankcity != null" >
+        bankcity,
+      </if>
+      <if test="bankinfo != null" >
+        bankinfo,
+      </if>
+      <if test="bankcardno != null" >
+        bankcardno,
+      </if>
+      <if test="bankcode != null" >
+        bankcode,
+      </if>
+      <if test="bankverifydate != null" >
+        bankverifydate,
+      </if>
+      <if test="transpasswd != null" >
+        transpasswd,
+      </if>
+      <if test="transpasswdverified != null" >
+        transpasswdverified,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="memberid != null" >
+        #{memberid,jdbcType=BIGINT},
+      </if>
+      <if test="realname != null" >
+        #{realname,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null" >
+        #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="mobileifverified != null" >
+        #{mobileifverified,jdbcType=INTEGER},
+      </if>
+      <if test="mobileifverifydate != null" >
+        #{mobileifverifydate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="idcard != null" >
+        #{idcard,jdbcType=VARCHAR},
+      </if>
+      <if test="idcardifverified != null" >
+        #{idcardifverified,jdbcType=INTEGER},
+      </if>
+      <if test="idcardverifydate != null" >
+        #{idcardverifydate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="email != null" >
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="emailifverified != null" >
+        #{emailifverified,jdbcType=INTEGER},
+      </if>
+      <if test="emailverifyuuid != null" >
+        #{emailverifyuuid,jdbcType=VARCHAR},
+      </if>
+      <if test="emailverifydate != null" >
+        #{emailverifydate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="bankcardifverified != null" >
+        #{bankcardifverified,jdbcType=INTEGER},
+      </if>
+      <if test="bankname != null" >
+        #{bankname,jdbcType=VARCHAR},
+      </if>
+      <if test="bankprince != null" >
+        #{bankprince,jdbcType=VARCHAR},
+      </if>
+      <if test="bankcity != null" >
+        #{bankcity,jdbcType=VARCHAR},
+      </if>
+      <if test="bankinfo != null" >
+        #{bankinfo,jdbcType=VARCHAR},
+      </if>
+      <if test="bankcardno != null" >
+        #{bankcardno,jdbcType=VARCHAR},
+      </if>
+      <if test="bankcode != null" >
+        #{bankcode,jdbcType=VARCHAR},
+      </if>
+      <if test="bankverifydate != null" >
+        #{bankverifydate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="transpasswd != null" >
+        #{transpasswd,jdbcType=VARCHAR},
+      </if>
+      <if test="transpasswdverified != null" >
+        #{transpasswdverified,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zjgt.p2p.model.Membersafety" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    update membersafety
+    <set >
+      <if test="memberid != null" >
+        memberid = #{memberid,jdbcType=BIGINT},
+      </if>
+      <if test="realname != null" >
+        realname = #{realname,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null" >
+        mobile = #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="mobileifverified != null" >
+        mobileifverified = #{mobileifverified,jdbcType=INTEGER},
+      </if>
+      <if test="mobileifverifydate != null" >
+        mobileifverifydate = #{mobileifverifydate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="idcard != null" >
+        idcard = #{idcard,jdbcType=VARCHAR},
+      </if>
+      <if test="idcardifverified != null" >
+        idcardifverified = #{idcardifverified,jdbcType=INTEGER},
+      </if>
+      <if test="idcardverifydate != null" >
+        idcardverifydate = #{idcardverifydate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="email != null" >
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="emailifverified != null" >
+        emailifverified = #{emailifverified,jdbcType=INTEGER},
+      </if>
+      <if test="emailverifyuuid != null" >
+        emailverifyuuid = #{emailverifyuuid,jdbcType=VARCHAR},
+      </if>
+      <if test="emailverifydate != null" >
+        emailverifydate = #{emailverifydate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="bankcardifverified != null" >
+        bankcardifverified = #{bankcardifverified,jdbcType=INTEGER},
+      </if>
+      <if test="bankname != null" >
+        bankname = #{bankname,jdbcType=VARCHAR},
+      </if>
+      <if test="bankprince != null" >
+        bankprince = #{bankprince,jdbcType=VARCHAR},
+      </if>
+      <if test="bankcity != null" >
+        bankcity = #{bankcity,jdbcType=VARCHAR},
+      </if>
+      <if test="bankinfo != null" >
+        bankinfo = #{bankinfo,jdbcType=VARCHAR},
+      </if>
+      <if test="bankcardno != null" >
+        bankcardno = #{bankcardno,jdbcType=VARCHAR},
+      </if>
+      <if test="bankcode != null" >
+        bankcode = #{bankcode,jdbcType=VARCHAR},
+      </if>
+      <if test="bankverifydate != null" >
+        bankverifydate = #{bankverifydate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="transpasswd != null" >
+        transpasswd = #{transpasswd,jdbcType=VARCHAR},
+      </if>
+      <if test="transpasswdverified != null" >
+        transpasswdverified = #{transpasswdverified,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zjgt.p2p.model.Membersafety" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    update membersafety
+    set memberid = #{memberid,jdbcType=BIGINT},
+      realname = #{realname,jdbcType=VARCHAR},
+      mobile = #{mobile,jdbcType=VARCHAR},
+      mobileifverified = #{mobileifverified,jdbcType=INTEGER},
+      mobileifverifydate = #{mobileifverifydate,jdbcType=TIMESTAMP},
+      idcard = #{idcard,jdbcType=VARCHAR},
+      idcardifverified = #{idcardifverified,jdbcType=INTEGER},
+      idcardverifydate = #{idcardverifydate,jdbcType=TIMESTAMP},
+      email = #{email,jdbcType=VARCHAR},
+      emailifverified = #{emailifverified,jdbcType=INTEGER},
+      emailverifyuuid = #{emailverifyuuid,jdbcType=VARCHAR},
+      emailverifydate = #{emailverifydate,jdbcType=TIMESTAMP},
+      bankcardifverified = #{bankcardifverified,jdbcType=INTEGER},
+      bankname = #{bankname,jdbcType=VARCHAR},
+      bankprince = #{bankprince,jdbcType=VARCHAR},
+      bankcity = #{bankcity,jdbcType=VARCHAR},
+      bankinfo = #{bankinfo,jdbcType=VARCHAR},
+      bankcardno = #{bankcardno,jdbcType=VARCHAR},
+      bankcode = #{bankcode,jdbcType=VARCHAR},
+      bankverifydate = #{bankverifydate,jdbcType=TIMESTAMP},
+      transpasswd = #{transpasswd,jdbcType=VARCHAR},
+      transpasswdverified = #{transpasswdverified,jdbcType=INTEGER},
+      remark = #{remark,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

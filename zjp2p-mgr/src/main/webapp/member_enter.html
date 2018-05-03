@@ -1,0 +1,482 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport"
+        content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>百富网后台管理系统</title>
+<link href="assets/css/amazeui.css" rel="stylesheet" type="text/css">
+<link href="assets/css/app.css" rel="stylesheet" type="text/css">
+<script src="assets/js/jquery.min.js"></script>
+<script src="assets/js/handlebars.min.js"></script>
+<script>
+$(function() {
+  $('#doc-confirm-toggle-1').on('click', function() {
+	$('#my-confirm-1').modal({
+      relatedElement: this,
+      onConfirm: function() {
+        alert('流标审批完成')
+      },
+      onCancel: function() {
+        alert('审批取消')
+      }
+    });
+  });
+});
+
+$(function() {
+  $('#doc-confirm-toggle-2').on('click', function() {
+	$('#my-confirm-2').modal({
+      relatedElement: this,
+      onConfirm: function() {
+        alert('自充审批完成')
+      },
+      onCancel: function() {
+        alert('审批取消')
+      }
+    });
+  });
+});
+
+$(function() {
+  $('#doc-confirm-toggle-3').on('click', function() {
+	$('#my-confirm-3').modal({
+      relatedElement: this,
+      onConfirm: function() {
+        alert('发标完成')
+      },
+      onCancel: function() {
+        alert('取消')
+      }
+    });
+  });
+});
+
+$(function() {
+  $('#doc-confirm-toggle-4').on('click', function() {
+	$('#my-confirm-4').modal({
+      relatedElement: this,
+      onConfirm: function() {
+        alert('同意申请')
+      },
+      onCancel: function() {
+        alert('取消')
+      }
+    });
+  });
+});
+
+$(function() {
+  $('#doc-confirm-toggle-5').on('click', function() {
+	$('#my-confirm-5').modal({
+      relatedElement: this,
+      onConfirm: function() {
+        alert('拒绝申请')
+      },
+      onCancel: function() {
+        alert('取消')
+      }
+    });
+  });
+});
+
+</script>
+</head>
+<body>
+<div class="am-modal am-modal-confirm" id="my-confirm-1" tabindex="-1"><!-- 隐藏的弹出层 start-->
+  <div class="am-modal-dialog">
+    <div class="am-modal-hd">您确定要进行流标操作？</div>
+    <div class="am-modal-bd">标的金额：100万，已筹集：95万<br>
+      操作后，将不可撤销<br>
+      操作后，已投标资金将返还投标人</div>
+    <div class="am-modal-footer"> <span class="am-modal-btn" data-am-modal-confirm>确定</span> <span class="am-modal-btn" data-am-modal-cancel>取消</span> </div>
+  </div>
+</div>
+
+<div class="am-modal am-modal-confirm" id="my-confirm-2" tabindex="-1">
+  <div class="am-modal-dialog">
+    <div class="am-modal-hd">您确定要对该标的进行自充？</div>
+    <div class="am-modal-bd">标的金额：100万，已筹集：95万<br>
+      自充金额：5万元<br>
+      操作后，将不可撤销<br>
+      自充成功后，标的将完成募集</div>
+    <div class="am-modal-footer"> <span class="am-modal-btn" data-am-modal-confirm>确定</span> <span class="am-modal-btn" data-am-modal-cancel>取消</span> </div>
+  </div>
+</div>
+
+<div class="am-modal am-modal-confirm" id="my-confirm-3" tabindex="-1">
+  <div class="am-modal-dialog">
+    <div class="am-modal-hd">您确定对该标的直接发标？</div>
+    <div class="am-modal-bd">标的金额：100万，已筹集：95万<br>
+      操作后，将不可撤销<br>
+      直接发标成功后，该标的金额按照已募集金额计算<br>
+      直接发标完成后，该标的将完成筹集
+    </div>
+    <div class="am-modal-footer"> <span class="am-modal-btn" data-am-modal-confirm>确定</span> <span class="am-modal-btn" data-am-modal-cancel>取消</span> </div>
+  </div>
+</div>
+
+<div class="am-modal am-modal-confirm" id="my-confirm-4" tabindex="-1">
+  <div class="am-modal-dialog">
+    <div class="am-modal-hd">您确定同意该用户的提前赎回申请？</div>
+    <div class="am-modal-bd">赎回金额 10 万元<br>
+      操作后，将不可撤销<br>
+    </div>
+    <div class="am-modal-footer"> <span class="am-modal-btn" data-am-modal-confirm>确定</span> <span class="am-modal-btn" data-am-modal-cancel>取消</span> </div>
+  </div>
+</div>
+
+<div class="am-modal am-modal-confirm" id="my-confirm-5" tabindex="-1">
+  <div class="am-modal-dialog">
+    <div class="am-modal-hd">您确定拒绝该用户的转让申请？</div>
+    <div class="am-modal-bd">赎回金额 10 万元<br>
+      操作后，将不可撤销<br>
+    </div>
+    <div class="am-modal-footer"> <span class="am-modal-btn" data-am-modal-confirm>确定</span> <span class="am-modal-btn" data-am-modal-cancel>取消</span> </div>
+  </div>
+</div>
+<div class="am-modal am-modal-no-btn" tabindex="-1" id="doc-modal-1">
+  <div class="am-modal-dialog">
+    <div class="am-modal-hd" style="text-align:left; padding-left:50px;">银行卡信息
+      <a href="javascript: void(0)" class="am-close am-close-spin" data-am-modal-close>&times;</a>
+    </div>
+    <div class="am-modal-bd" style="text-align:left; padding-left:50px;">
+      开户银行：中国工商银行（上海徐汇支行）<br>
+银行帐号：6226 **** **** **01　　<input type="checkbox" checked> <span style="color:#0E90D2">默认银行</span><br>
+绑定时间：2014-11-11
+    </div>
+    <div class="am-modal-bd" style="text-align:left; padding-left:50px;">
+      开户银行：招商银行（上海徐汇支行）<br>
+银行帐号：6226 **** **** **01　　<br>
+绑定时间：2014-11-11
+    </div>
+    <div class="am-modal-bd" style="text-align:left; padding-left:50px;">
+      开户银行：中国银行（上海徐汇支行）<br>
+银行帐号：6226 **** **** **01　　<br>
+绑定时间：2014-11-11
+    </div>
+  </div>
+</div>
+<!-- 隐藏的弹出层 end -->
+
+
+
+<header class="am-topbar" style="margin-bottom:0px;"><img src="img/logo.png" style="margin-top:13px; margin-left:15px;"alt=""/>
+  <div class="top_user">
+    <button class="am-btn am-btn-blue" style="height:50px; margin-right:0px;"> <span class="am-icon-bell" style="margin-top:5px;"></span> <span style="font-size:14px; font-weight:bold;color:#F00;">1</span> </button>
+    <div class="am-dropdown" data-am-dropdown style="margin-left:-5px;">
+      <button class="am-btn am-btn-primary am-dropdown-toggle" data-am-dropdown-toggle style="height:50px; margin-left:0px;">Hello, administrator <span class="am-icon-caret-down"></span></button>
+      <ul class="am-dropdown-content">
+        <li><a href="#"><span class="am-icon-user">　个人设置</span></a></li>
+        <li><a href="#"><span class="am-icon-cog">　修改密码</span></a></li>
+        <li class="am-divider"></li>
+        <li><a href="#"><span class="am-icon-power-off">　退　出</span></a></li>
+      </ul>
+    </div>
+  </div>
+</header>
+
+<div class="leftslider"><!-- sidebar start -->
+  <button class="am-btn am-btn-primary am-dropdown-toggle" data-am-dropdown-toggle style="height:50px; min-width:160px; width:91%; margin-left:9px; margin-bottom:10px; margin-top:8px;"><span class="am-icon-home am-icon-sm">　系统首页</span></button>
+  <section data-am-widget="accordion" class="am-accordion am-accordion-gapped"
+data-am-accordion='{  }'>
+    <dl class="am-accordion-item" >
+      <dt class="am-accordion-title"><span class="am-icon-tags">　标的管理</span></dt>
+      <dd class="am-accordion-bd am-collapse"> 
+        <!-- 规避 Collapase 处理有 padding 的折叠内容计算计算有误问题， 加一个容器 -->
+        <div class="am-accordion-content" style="margin-left:33px; background-color:#FFF; line-height:30px;"><a href="targets_index.html">标的管理</a> <br/>
+          <a href="#">标的审批</a> </div>
+      </dd>
+    </dl>
+    <dl class="am-accordion-item">
+      <dt class="am-accordion-title"><span class="am-icon-users">　平台用户管理</span></dt>
+      <dd class="am-accordion-bd am-collapse "> 
+        <!-- 规避 Collapase 处理有 padding 的折叠内容计算计算有误问题， 加一个容器 -->
+        <div class="am-accordion-content" style="margin-left:33px; background-color:#FFF; line-height:30px;"><a href="#">平台用户管理</a></div>
+      </dd>
+    </dl>
+    <dl class="am-accordion-item">
+      <dt class="am-accordion-title"><span class="am-icon-pie-chart" style="margin-left:2px;">　平台交易管理</span></dt>
+      <dd class="am-accordion-bd am-collapse "> 
+        <!-- 规避 Collapase 处理有 padding 的折叠内容计算计算有误问题， 加一个容器 -->
+        <div class="am-accordion-content" style="margin-left:33px; background-color:#FFF; line-height:30px;"><a href="#">平台交易管理</a></div>
+      </dd>
+    </dl>
+    <dl class="am-accordion-item">
+      <dt class="am-accordion-title"><span class="am-icon-line-chart">　运营统计</span></dt>
+      <dd class="am-accordion-bd am-collapse "> 
+        <!-- 规避 Collapase 处理有 padding 的折叠内容计算计算有误问题， 加一个容器 -->
+        <div class="am-accordion-content" style="margin-left:33px; background-color:#FFF; line-height:30px;"><a href="#">运营统计</a></div>
+      </dd>
+    </dl>
+    <dl class="am-accordion-item">
+      <dt class="am-accordion-title"><span class="am-icon-tachometer">　资讯管理</span></dt>
+      <dd class="am-accordion-bd am-collapse "> 
+        <!-- 规避 Collapase 处理有 padding 的折叠内容计算计算有误问题， 加一个容器 -->
+        <div class="am-accordion-content" style="margin-left:33px; background-color:#FFF; line-height:30px;"><a href="#">新 闻</a> <br/>
+          <a href="#">公 告</a></div>
+      </dd>
+    </dl>
+    <dl class="am-accordion-item">
+      <dt class="am-accordion-title"><span class="am-icon-info-circle" style="margin-left:2px;">　消息管理</span></dt>
+      <dd class="am-accordion-bd am-collapse "> 
+        <!-- 规避 Collapase 处理有 padding 的折叠内容计算计算有误问题， 加一个容器 -->
+        <div class="am-accordion-content" style="margin-left:33px; background-color:#FFF; line-height:30px;"><a href="#">站内消息</a> <br/>
+          <a href="#">短信消息</a> <br/>
+          <a href="#">邮件消息</a></div>
+      </dd>
+    </dl>
+    <dl class="am-accordion-item">
+      <dt class="am-accordion-title"><span class="am-icon-jpy" style="margin-left:3px;">　 红包管理</span></dt>
+      <dd class="am-accordion-bd am-collapse "> 
+        <!-- 规避 Collapase 处理有 padding 的折叠内容计算计算有误问题， 加一个容器 -->
+        <div class="am-accordion-content" style="margin-left:33px; background-color:#FFF; line-height:30px;"><a href="#">红包管理</a></div>
+      </dd>
+    </dl>
+    <dl class="am-accordion-item">
+      <dt class="am-accordion-title"><span class=" am-icon-calculator">　积分管理</span></dt>
+      <dd class="am-accordion-bd am-collapse"> 
+        <!-- 规避 Collapase 处理有 padding 的折叠内容计算计算有误问题， 加一个容器 -->
+        <div class="am-accordion-content" style="margin-left:33px; background-color:#FFF; line-height:30px;"><a href="#">积分管理</a></div>
+      </dd>
+    </dl>
+    <dl class="am-accordion-item">
+      <dt class="am-accordion-title"><span class="am-icon-tasks">　权限管理</span></dt>
+      <dd class="am-accordion-bd am-collapse"> 
+        <!-- 规避 Collapase 处理有 padding 的折叠内容计算计算有误问题， 加一个容器 -->
+        <div class="am-accordion-content" style="margin-left:33px; background-color:#FFF; line-height:30px;"><a href="#">系统用户</a> <br/>
+          <a href="#">角色管理</a></div>
+      </dd>
+    </dl>
+    <dl class="am-accordion-item">
+      <dt class="am-accordion-title"><span class="am-icon-info" style="margin-left:6px;">　 平台信息管理</span></dt>
+      <dd class="am-accordion-bd am-collapse"> 
+        <!-- 规避 Collapase 处理有 padding 的折叠内容计算计算有误问题， 加一个容器 -->
+        <div class="am-accordion-content" style="margin-left:33px; background-color:#FFF; line-height:30px;"><a href="#">担保机构管理</a> <br/>
+          <a href="#">协议书管理</a> <br/>
+          <a href="#">公司信息</a> <br/>
+          <a href="#">安全与帮助</a> <br/>
+          <a href="#">平台页面管理</a></div>
+      </dd>
+    </dl>
+    <dl class="am-accordion-item">
+      <dt class="am-accordion-title"><span class="am-icon-cogs">　系统设置</span></dt>
+      <dd class="am-accordion-bd am-collapse"> 
+        <!-- 规避 Collapase 处理有 padding 的折叠内容计算计算有误问题， 加一个容器 -->
+        <div class="am-accordion-content" style="margin-left:33px; background-color:#FFF; line-height:30px;"><a href="#">系统设置</a></div>
+      </dd>
+    </dl>
+    <dl class="am-accordion-item">
+      <dt class="am-accordion-title"><span class="am-icon-user">　 个人中心</span></dt>
+      <dd class="am-accordion-bd am-collapse"> 
+        <!-- 规避 Collapase 处理有 padding 的折叠内容计算计算有误问题， 加一个容器 -->
+        <div class="am-accordion-content" style="margin-left:33px; background-color:#FFF; line-height:30px;"><a href="#">基本信息设置</a> <br/>
+          <a href="#">消 息</a> <br/>
+          <a href="#">修改密码</a></div>
+      </dd>
+    </dl>
+  </section>
+</div>
+<!-- sidebar end -->
+<div class="backcontent">
+  <div class="breadcrumb">
+    <ol class="am-breadcrumb am-breadcrumb-slash">
+      <li><a href="#">首 页</a></li>
+      <li class="am-active">标的管理</li>
+    </ol>
+  </div>
+  <div data-am-widget="tabs" class="am-tabs am-tabs-default" style="float:left; margin-top:-10px; width:100%">
+    <ul class="am-tabs-nav am-cf">
+      <li class="am-active"> <a href="[data-tab-panel-0]">基本信息</a> </li>
+      <li class=""> <a href="[data-tab-panel-1]">账户详情</a> </li>
+      <li class=""> <a href="[data-tab-panel-2]">资金流水</a> </li>
+      <li class=""> <a href="[data-tab-panel-3]">交易记录</a> </li>
+      <li class=""> <a href="[data-tab-panel-4]">推荐好友</a> </li>
+      <li class=""> <a href="[data-tab-panel-5]">积分明细</a> </li>
+    </ul>
+    <div class="am-tabs-bd">
+      <div data-tab-panel-0 class="am-tab-panel am-active">
+        <div class="tag_h" style="margin-top:20px;">用户 ID 123456</div>
+  
+  <div class="tag_record_1">用户帐号：Jack</div>
+  
+  <div class="tag_record_1">注册时间：2014-12-10　12:12:12</div>
+  
+  <div class="tag_record_1">姓　名：<input type="text">　</div>
+  
+  <div class="tag_record_1">性　别：男</div>
+  
+  <div class="tag_record_1">邮　箱：12******45@163.com　　<input type="checkbox" checked> 已验证　　验证时间：2014-12-12 12:12</div>
+  
+  <div class="tag_record_1">手　机：135******01　　<input type="checkbox" checked> 已验证　　验证时间：2014-12-12 12:12</div>
+  
+  <div class="tag_record_1">身份证：300*************01　　<input type="checkbox" checked> 已验证　　验证时间：2014-12-12 12:12</div>
+  
+  <div class="tag_record_1">银行卡：已绑定 3 张　<button type="button" class="am-btn am-btn-secondary am-btn-sm" data-am-modal="{target: '#doc-modal-1'}" style="height:25px; padding-top:5px; font-size:1.2rem">查 看</button></div>
+  
+  <div class="tag_record_1">交易密码已设置</div>
+  
+  <div class="tag_record_1">帐号状态：<span style="color:#090">正常</span>　<button type="button" class="am-btn am-btn-secondary am-btn-sm" data-am-modal="{target: '#doc-modal-1'}" style=" margin-top:-5px;">冻 结</button></div>
+  
+  
+      </div>
+      
+      <div data-tab-panel-1 class="am-tab-panel">
+        <div class="searchpanel" style="margin-top:15px; margin-left:0px; height:50px;">
+          
+        </div>
+      </div>
+      
+      <div data-tab-panel-2 class="am-tab-panel">
+        <div class="searchpanel" style="margin-top:15px; margin-left:0px; height:50px;">
+          
+        </div>
+      </div>
+      
+      <div data-tab-panel-3 class="am-tab-panel">
+        <div class="searchpanel" style="margin-top:15px; margin-left:0px; height:50px;">
+          
+        </div>
+      </div>
+      
+      <div data-tab-panel-4 class="am-tab-panel">
+        <div class="tag_h" style="margin-top:10px;">刘大力　推广ID 123456</div>
+        
+        <div class="tag_record_1" style="font-size:1.4rem">红包明细：共推荐了<span style="color:#F00"> 8 </span>名用户，其中交易<span style="color:#F00"> 1 </span>笔，共获红包<span style="color:#F00"> 5 </span>元</div>
+        
+        <div class="tablecontent" style="margin-left:0px;">
+          <table class="am-table am-table-bordered am-table-striped am-table-hover" style="text-align:center;">
+            <thead>
+              <tr style="text-align:center;">
+                <th style="text-align:center;">序 号</th>
+                <th style="text-align:center;">ID</th>
+                <th style="text-align:center;">帐 号</th>
+                <th style="text-align:center;">姓 名</th>
+                <th style="text-align:center;">注册时间</th>
+                <th style="text-align:center;">成交次数</th>
+                <th style="text-align:center;">累计红包</th>
+                <th style="text-align:center;">来 源</th>
+                <th style="text-align:center;">操 作</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>1</td>
+                <td>1235456112213</td>
+                <td>Wer Sind Sie</td>
+                <td>刘大力</td>
+                <td>2014-11-17 17:44:02</td>
+                <td>0</td>
+                <td>0</td>
+                <td>PC 端</td>
+                <td><button type="button" class="am-btn am-btn-secondary am-btn-sm">查看明细</button></td>
+              </tr>
+              <tr>
+                <td>2</td>
+                <td>1235456</td>
+                <td>Wer Sind Sie</td>
+                <td>刘大力</td>
+                <td>2014-11-17 17:44</td>
+                <td>0</td>
+                <td>0</td>
+                <td>移动端</td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>3</td>
+                <td>1235456</td>
+                <td>Wer Sind Sie</td>
+                <td>刘大力</td>
+                <td>2014-11-17 17:44</td>
+                <td>0</td>
+                <td>0</td>
+                <td>PC 端</td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>4</td>
+                <td>1235456</td>
+                <td>Wer Sind Sie</td>
+                <td>刘大力</td>
+                <td>2014-11-17 17:44</td>
+                <td>0</td>
+                <td>0</td>
+                <td>PC 端</td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>5</td>
+                <td>1235456</td>
+                <td>Wer Sind Sie</td>
+                <td>刘大力</td>
+                <td>2014-11-17 17:44</td>
+                <td>0</td>
+                <td>0</td>
+                <td>PC 端</td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>6</td>
+                <td>1235456</td>
+                <td>Wer Sind Sie</td>
+                <td>刘大力</td>
+                <td>2014-11-17 17:44</td>
+                <td>0</td>
+                <td>0</td>
+                <td>PC 端</td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>7</td>
+                <td>1235456</td>
+                <td>Wer Sind Sie</td>
+                <td>刘大力</td>
+                <td>2014-11-17 17:44</td>
+                <td>0</td>
+                <td>0</td>
+                <td>PC 端</td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>8</td>
+                <td>1235456</td>
+                <td>Wer Sind Sie</td>
+                <td>刘大力</td>
+                <td>2014-11-17 17:44</td>
+                <td>0</td>
+                <td>0</td>
+                <td>PC 端</td>
+                <td></td>
+              </tr>
+            </tbody>
+          </table>
+          <ul class="am-pagination am-pagination-right">
+            <li class="am-disabled"><a href="#">«</a></li>
+            <li class="am-active"><a href="#">1</a></li>
+            <li><a href="#">2</a></li>
+            <li><a href="#">3</a></li>
+            <li><a href="#">4</a></li>
+            <li><a href="#">5</a></li>
+            <li><a href="#">»</a></li>
+          </ul>
+        </div>
+      </div>
+      
+      <div data-tab-panel-5 class="am-tab-panel">
+        <div class="searchpanel" style="margin-top:15px; margin-left:0px; height:50px;">
+          
+        </div>
+      </div>
+      
+      
+    </div>
+  </div>
+</div>
+<footer>
+  <p class="am-padding-left">© 2014 zjp2p.com Backend Management System Ver 1.0</p>
+</footer>
+<script src="assets/js/amazeui.js"></script>
+</body>
+</html>

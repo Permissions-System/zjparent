@@ -1,0 +1,260 @@
+﻿@charset "utf-8";
+.nav2 {
+	width: 100%;
+	min-width:1200px;
+	height: 70px;
+	background-color: #fff;
+}
+
+.nav2 .logo {
+	width: 211px;
+	height: 46px;
+	margin-top: 20px;
+	float: left;
+}
+
+.nav2 .nav_wrap {
+	width: 1000px;
+	height: 70px;
+	margin-left: auto;
+	margin-right: auto;
+}
+.nav2 .nav_wrap2 {
+	width: 1000px;
+	height: 70px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.navi2 {
+	float: right;
+	margin-top: 35px;
+	width: 465px;
+}
+
+.nav2 .navi2 ul  {
+	margin-top: 0px;
+	padding-left: 0px;
+	
+}
+
+.nav2 .navi2 ul li {
+	list-style-type: none;
+	float: left;
+	font-size: 16px;
+	font-family: "微软雅黑";
+	color: #565A5C;
+	margin-right: 0px;
+	text-align: right;
+	margin-left: 50px;
+}
+
+.nav2 .navi2 ul li a {
+	font-size: 16px;
+	font-family: "微软雅黑";
+	color: #565A5C;
+	text-decoration: none;
+}
+
+.nav2 .navi2 ul li a:hover {
+	font-size: 16px;
+	font-family: "微软雅黑";
+	color: #1E9ED5;
+	text-decoration: none;
+}
+
+.hs1 {
+	width:1000px;
+	margin-left:auto;
+	margin-right:auto;
+	margin-top:35px;
+	margin-bottom:25px;
+	text-align:center;
+	font-family:"微软雅黑";
+	font-size:35px;
+	color:#565A5C;
+}
+
+.hst {
+	width:1000px;
+	margin-left:auto;
+	margin-right:auto;
+	text-align:center;
+	font-family:"微软雅黑";
+	color:#565A5C;
+	font-size:14px;
+	line-height:30px;
+	margin-bottom:30px;
+}
+
+.hs2 {
+	width:1000px;
+	margin-left:auto;
+	margin-right:auto;
+	text-align:center;
+	font-family:"微软雅黑";
+	color:#565A5C;
+	font-size:26px;
+}
+
+.hsm {
+	width:1000px;
+	margin-left:auto;
+	margin-right:auto;
+	text-align:center;
+	margin-top:25px;
+}
+
+.hpic {
+	height:590px;
+	font-size:35px;
+	font-family:"微软雅黑";
+	color:#565A5C;
+	text-align:center;
+	width:100%;
+	border-bottom-color:#D8D8D8;
+	border-bottom-width:1px;
+	border-bottom-style:solid;
+	background-color:#fff;
+	margin-top:-7px;
+}
+
+.job {
+	height:650px;
+	width:1000px;
+	margin-left:auto;
+	margin-right:auto;	
+}
+
+.jobx {
+	height:650px;
+	width:100%;
+	background-color:#F4F4F4;
+}
+
+.tab-container{ position: relative; height: 700px; width:600px; margin-left:auto; margin-right:auto } 
+.tab-container .tab-radio{ display: none;}
+.tab-container .tab{
+	display: block;
+	float: left;
+	position: relative;
+	color: #565A5C;
+	margin-top: 15px;
+	margin-left:20px;
+	margin-right:30px;
+	height:49.5px;
+	width:245px;
+	text-decoration: none;
+	text-indent:95px;
+	cursor: pointer;
+	font-family:"微软雅黑";
+	font-size:20px;
+	line-height:49.5px;
+	font-weight:normal;
+	background-image:url(../images/jobx2.png)
+}
+
+.tab-container .tab-radio:checked ~ .tab, .tab-container .tab-radio:active ~ .tab
+{
+	z-index: 100;
+	
+}
+.tab-container .tab-radio:checked ~ .tab {color:#565A5C;font-family:"微软雅黑"; background-image: url(../images/jobx.png)}
+
+.tab-container .tab-page
+{
+	visibility: hidden;
+	font-family:"微软雅黑";
+	color: #6C6F71;
+	display:block;
+	position: absolute;
+	top: 90px;
+	height: auto;
+	width: 600px;
+	float: left;
+	font-size:16px;
+	
+	font-weight:normal;
+	line-height:35px;
+}
+.tab-container .tab-radio:checked ~ .tab-page { visibility: visible; }
+
+.joinbox{
+	width:600px;
+	margin-top:25px;
+	margin-left:auto;
+	margin-right:auto;
+}
+
+#tab_nav{
+	margin:0;
+	padding:0;
+	height:30px;
+	line-height:30px;
+}
+
+#tab_nav li{
+	float:left;
+	margin-left:140px;
+	margin-right:-70px;
+	list-style:none;
+	height:30px;
+	line-height:30px;
+	text-indent:35px;
+	text-align:center;
+	background-image:url(../images/jobx.png);
+	background-repeat:no-repeat;
+}
+
+#tab_nav li a{
+	font-size:22px;
+	font-family: "微软雅黑";
+	color:#565A5C;
+	text-decoration:none;
+}
+
+#tab_nav li a:hover{
+	color:#009CE4;
+}
+
+#tab_content{
+	width:600px;
+	height:500px;
+	margin-top:50px;
+	font-size:16px;
+	font-family: "微软雅黑";
+	text-align:center;
+	overflow:hidden;
+	line-height:30px;
+}
+
+#t_1,#t_2,#t_3{
+	width:100%;
+	height:500px;
+}
+
+.email {
+	width:1000px;
+	margin-left:auto;
+	margin-right:auto;
+	padding-top:62px;
+	text-align:center;
+	font-family: "微软雅黑";
+	font-size:37px;
+	color:#565A5C;
+}
+
+.emailto {
+	width:263px;
+	height:25px;
+	margin-left:auto;
+	margin-right:auto;
+	margin-top:30px;
+	font-family: "微软雅黑";
+	font-size:18px;
+	line-height:25px;
+	color:#565A5C;
+	text-indent:40px;
+	background-image:url(../images/mail.png);
+	background-repeat:no-repeat;
+}

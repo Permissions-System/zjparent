@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<portable-config>
+	<config-file path="WEB-INF/classes/logback.xml">
+		<replace
+			xpath="/configuration/logger[@name='org.springframework.web']/@level">WARN</replace>
+		<replace
+			xpath="/configuration/logger[@name='org.springframework.beans']/@level">WARN</replace>
+		<replace
+			xpath="/configuration/logger[@name='org.springframework.core']/@level">WARN</replace>
+		<replace
+			xpath="/configuration/logger[@name='org.springframework.ui']/@level">WARN</replace>
+		<replace
+			xpath="/configuration/logger[@name='org.springframework.jndi']/@level">WARN</replace>
+		<replace
+			xpath="/configuration/logger[@name='org.springframework.context']/@level">WARN</replace>
+		<replace
+			xpath="/configuration/logger[@name='org.springframework.jdbc']/@level">WARN</replace>
+		<replace
+			xpath="/configuration/logger[@name='com.alisoft.xplatform.asf']/@level">WARN</replace>
+		<replace xpath="/configuration/logger[@name='org.apache.shiro']/@level">WARN</replace>
+		<replace xpath="/configuration/logger[@name='com.zjgt']/@level">DEBUG</replace>
+	</config-file>
+	<config-file path="WEB-INF/classes/memcached.xml">
+		<replace xpath="/memcached/socketpool[@name='pool0']/servers">192.168.1.213:11211</replace>
+		<replace xpath="/memcached/socketpool[@name='pool1']/servers">192.168.1.213:11211</replace>
+		<replace xpath="/memcached/socketpool[@name='pool2']/servers">192.168.1.213:11211</replace>
+	</config-file>
+	<config-file path="WEB-INF/config.xml">
+		<replace xpath="/config/baseURL">http://qudao.zjgt.com:8080/static/userfiles/</replace>
+	</config-file>
+	<config-file path="WEB-INF/classes/config.properties">
+		<replace key="jdbc_url">jdbc:mysql://192.168.1.213:3306/zjp2p01?useUnicode=true&amp;amp;characterEncoding=UTF-8&amp;amp;zeroDateTimeBehavior=convertToNull
+		</replace>
+		<replace key="jdbc_username">zjp2puser</replace>
+		<replace key="jdbc_password">zjp#A98</replace>
+		<replace key="jdbc_rpt_url">jdbc:mysql://192.168.1.213:3306/zjp2preport?useUnicode=true&amp;amp;characterEncoding=UTF-8&amp;amp;zeroDateTimeBehavior=convertToNull
+		</replace>
+		<replace key="jdbc_rpt_username">zjrptuser</replace>
+		<replace key="jdbc_rpt_password">zjrpt#A98</replace>
+		<replace key="jdbc_source_url">jdbc:sqlserver://192.168.1.191:1433;DatabaseName=zjgt</replace>
+		<replace key="jdbc_source_username">qianjun</replace>
+		<replace key="jdbc_source_password">123!@#</replace>
+		<replace key="zookeeper.address">zookeeper://192.168.1.213:2181</replace>
+		<replace key="zjp2p-managerURL">http://qudao.zjgt.com:8080</replace>
+		<replace key="uploadimgpath">/var/lib/tomcat6/webapps/ROOT/static/upload</replace>
+		<replace key="uploadimgurl">http://qudao.zjgt.com:8080/static/upload</replace>
+		<replace key="email">http://qudao.zjgt.com:8080/</replace>
+	</config-file>
+	<config-file path="WEB-INF/classes/quartz.properties">
+		<replace key="org.quartz.dataSource.zjp2pdb.URL">jdbc:mysql://192.168.1.213:3306/zjp2p01?useUnicode=true&amp;amp;characterEncoding=UTF-8&amp;amp;zeroDateTimeBehavior=convertToNull
+		</replace>
+		<replace key="org.quartz.dataSource.zjp2pdb.user">zjp2puser</replace>
+		<replace key="org.quartz.dataSource.zjp2pdb.password">zjp#A98</replace>
+	</config-file>
+</portable-config>

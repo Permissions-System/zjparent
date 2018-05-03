@@ -1,0 +1,294 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zjgt.p2p.dao.PaydealFlowMapper" >
+  <resultMap id="BaseResultMap" type="com.zjgt.p2p.model.PaydealFlow" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    <id column="DealFlowNum" property="dealflownum" jdbcType="CHAR" />
+    <result column="DealID" property="dealid" jdbcType="CHAR" />
+    <result column="DealType" property="dealtype" jdbcType="VARCHAR" />
+    <result column="DealUserID" property="dealuserid" jdbcType="BIGINT" />
+    <result column="DealRequestTime" property="dealrequesttime" jdbcType="VARCHAR" />
+    <result column="DealObject" property="dealobject" jdbcType="VARCHAR" />
+    <result column="DealAmount" property="dealamount" jdbcType="DECIMAL" />
+    <result column="DealResponseMsg" property="dealresponsemsg" jdbcType="VARCHAR" />
+    <result column="DealRequestMsg" property="dealrequestmsg" jdbcType="VARCHAR" />
+    <result column="DealStatus" property="dealstatus" jdbcType="INTEGER" />
+    <result column="DealResponseTime" property="dealresponsetime" jdbcType="VARCHAR" />
+    <result column="DealFailedDesc" property="dealfaileddesc" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    DealFlowNum, DealID, DealType, DealUserID, DealRequestTime, DealObject, DealAmount, 
+    DealResponseMsg, DealRequestMsg, DealStatus, DealResponseTime, DealFailedDesc
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.zjgt.p2p.model.PaydealFlowExample" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from paydealflow
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    select 
+    <include refid="Base_Column_List" />
+    from paydealflow
+    where DealFlowNum = #{dealflownum,jdbcType=CHAR}
+  </select>
+  
+  <select id="selectByPrimaryKeyForUpdate" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    select 
+    <include refid="Base_Column_List" />
+    from paydealflow
+    where DealFlowNum = #{dealflownum,jdbcType=CHAR} for update
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    delete from paydealflow
+    where DealFlowNum = #{dealflownum,jdbcType=CHAR}
+  </delete>
+  <insert id="insert" parameterType="com.zjgt.p2p.model.PaydealFlow" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    insert into paydealflow (DealFlowNum, DealID, DealType, 
+      DealUserID, DealRequestTime, DealObject, 
+      DealAmount, DealResponseMsg, DealRequestMsg, 
+      DealStatus, DealResponseTime, DealFailedDesc
+      )
+    values (#{dealflownum,jdbcType=CHAR}, #{dealid,jdbcType=CHAR}, #{dealtype,jdbcType=VARCHAR}, 
+      #{dealuserid,jdbcType=BIGINT}, #{dealrequesttime,jdbcType=VARCHAR}, #{dealobject,jdbcType=VARCHAR}, 
+      #{dealamount,jdbcType=DECIMAL}, #{dealresponsemsg,jdbcType=VARCHAR}, #{dealrequestmsg,jdbcType=VARCHAR}, 
+      #{dealstatus,jdbcType=INTEGER}, #{dealresponsetime,jdbcType=VARCHAR}, #{dealfaileddesc,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.zjgt.p2p.model.PaydealFlow" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    insert into paydealflow
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="dealflownum != null" >
+        DealFlowNum,
+      </if>
+      <if test="dealid != null" >
+        DealID,
+      </if>
+      <if test="dealtype != null" >
+        DealType,
+      </if>
+      <if test="dealuserid != null" >
+        DealUserID,
+      </if>
+      <if test="dealrequesttime != null" >
+        DealRequestTime,
+      </if>
+      <if test="dealobject != null" >
+        DealObject,
+      </if>
+      <if test="dealamount != null" >
+        DealAmount,
+      </if>
+      <if test="dealresponsemsg != null" >
+        DealResponseMsg,
+      </if>
+      <if test="dealrequestmsg != null" >
+        DealRequestMsg,
+      </if>
+      <if test="dealstatus != null" >
+        DealStatus,
+      </if>
+      <if test="dealresponsetime != null" >
+        DealResponseTime,
+      </if>
+      <if test="dealfaileddesc != null" >
+        DealFailedDesc,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="dealflownum != null" >
+        #{dealflownum,jdbcType=CHAR},
+      </if>
+      <if test="dealid != null" >
+        #{dealid,jdbcType=CHAR},
+      </if>
+      <if test="dealtype != null" >
+        #{dealtype,jdbcType=VARCHAR},
+      </if>
+      <if test="dealuserid != null" >
+        #{dealuserid,jdbcType=BIGINT},
+      </if>
+      <if test="dealrequesttime != null" >
+        #{dealrequesttime,jdbcType=VARCHAR},
+      </if>
+      <if test="dealobject != null" >
+        #{dealobject,jdbcType=VARCHAR},
+      </if>
+      <if test="dealamount != null" >
+        #{dealamount,jdbcType=DECIMAL},
+      </if>
+      <if test="dealresponsemsg != null" >
+        #{dealresponsemsg,jdbcType=VARCHAR},
+      </if>
+      <if test="dealrequestmsg != null" >
+        #{dealrequestmsg,jdbcType=VARCHAR},
+      </if>
+      <if test="dealstatus != null" >
+        #{dealstatus,jdbcType=INTEGER},
+      </if>
+      <if test="dealresponsetime != null" >
+        #{dealresponsetime,jdbcType=VARCHAR},
+      </if>
+      <if test="dealfaileddesc != null" >
+        #{dealfaileddesc,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zjgt.p2p.model.PaydealFlow" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    update paydealflow
+    <set >
+      <if test="dealid != null" >
+        DealID = #{dealid,jdbcType=CHAR},
+      </if>
+      <if test="dealtype != null" >
+        DealType = #{dealtype,jdbcType=VARCHAR},
+      </if>
+      <if test="dealuserid != null" >
+        DealUserID = #{dealuserid,jdbcType=BIGINT},
+      </if>
+      <if test="dealrequesttime != null" >
+        DealRequestTime = #{dealrequesttime,jdbcType=VARCHAR},
+      </if>
+      <if test="dealobject != null" >
+        DealObject = #{dealobject,jdbcType=VARCHAR},
+      </if>
+      <if test="dealamount != null" >
+        DealAmount = #{dealamount,jdbcType=DECIMAL},
+      </if>
+      <if test="dealresponsemsg != null" >
+        DealResponseMsg = #{dealresponsemsg,jdbcType=VARCHAR},
+      </if>
+      <if test="dealrequestmsg != null" >
+        DealRequestMsg = #{dealrequestmsg,jdbcType=VARCHAR},
+      </if>
+      <if test="dealstatus != null" >
+        DealStatus = #{dealstatus,jdbcType=INTEGER},
+      </if>
+      <if test="dealresponsetime != null" >
+        DealResponseTime = #{dealresponsetime,jdbcType=VARCHAR},
+      </if>
+      <if test="dealfaileddesc != null" >
+        DealFailedDesc = #{dealfaileddesc,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where DealFlowNum = #{dealflownum,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zjgt.p2p.model.PaydealFlow" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    update paydealflow
+    set DealID = #{dealid,jdbcType=CHAR},
+      DealType = #{dealtype,jdbcType=VARCHAR},
+      DealUserID = #{dealuserid,jdbcType=BIGINT},
+      DealRequestTime = #{dealrequesttime,jdbcType=VARCHAR},
+      DealObject = #{dealobject,jdbcType=VARCHAR},
+      DealAmount = #{dealamount,jdbcType=DECIMAL},
+      DealResponseMsg = #{dealresponsemsg,jdbcType=VARCHAR},
+      DealRequestMsg = #{dealrequestmsg,jdbcType=VARCHAR},
+      DealStatus = #{dealstatus,jdbcType=INTEGER},
+      DealResponseTime = #{dealresponsetime,jdbcType=VARCHAR},
+      DealFailedDesc = #{dealfaileddesc,jdbcType=VARCHAR}
+    where DealFlowNum = #{dealflownum,jdbcType=CHAR}
+  </update>
+  
+  <!-- 将处理超时的交易状态修改为失败 -->
+  <select id="getTimeoutProcessTrans" resultType="java.util.Map" parameterType="java.lang.String" >
+    SELECT p.dealFlowNum , p.dealRequestTime FROM paydealflow p 
+    WHERE p.dealstatus = 0 AND p.dealid != '1' AND HOUR(TIMEDIFF(#{currTime},STR_TO_DATE(p.dealRequestTime, '%Y%m%d%H%i%S'))) * 60 +  MINUTE(TIMEDIFF(#{currTime},STR_TO_DATE(p.dealRequestTime, '%Y%m%d%H%i%S'))) > 1440 AND dealtype = '1001'
+  </select>
+  
+  <!-- 获取处理中的支付请求  -->
+  <select id="getProcessPayRequest" resultType="java.util.Map" parameterType="java.lang.String" >
+    SELECT p.dealFlowNum , p.dealRequestTime , p.dealtype FROM paydealflow p 
+    WHERE p.dealstatus = 0 AND p.dealid = '1'
+  </select>
+   
+  <update id="closeTimeoutProcessTrans" >
+    update paydealflow
+    set DealStatus = 2
+    where DealFlowNum in 
+        <foreach collection="list" index="index" item="item" open="(" separator="," close=")"> 
+            #{item} 
+        </foreach> 
+  </update>
+</mapper>

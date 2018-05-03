@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd"
+	default-lazy-init="true">
+
+	<description>Shiro安全配置</description>
+
+	<!-- 
+		SecurityManager:会话管理器管理着应用中所有 Subject 的会话的创建、维护、删除、失效、验证等工作
+	 -->
+	<bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
+		<property name="realm" ref="shiroDbRealm" />
+		<property name="cacheManager" ref="shiroMemCachedManager" /> 
+	</bean>
+
+	<!-- 
+		項目自定义的Realm, 所有staffAccountService依赖的dao都需要用depends-on声明
+	 -->
+	<bean id="shiroDbRealm" class="com.zjgt.p2p.manage.base.web.ShiroDbRealm">
+		<property name="staffAccountService" ref="staffAccountService"/>
+	</bean>
+	
+	<!-- 
+		Shiro Filter ：
+		web.xml中的DelegatingFilterProxy 作用是自动到 spring 容器查找名字为 shiroFilter（filter-name）的 bean
+		并把所有 Filter 的操作委托给它
+	-->
+	<bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
+		<property name="securityManager" ref="securityManager" />
+		<!-- loginUrl：登录页面地址 -->
+		<property name="loginUrl" value="/login" />
+		<!-- successUrl：登录成功后的默认重定向地址 -->
+		<property name="successUrl" value="/home" />
+		<property name="filterChainDefinitions">
+			<value>
+				/ = anon
+				/login = authc
+				/home = authc
+				/home/index = authc
+				/home/post/*  = authc
+			 	/base/home/task = authc
+				/workbench = authc
+				/base/file/fileUpload = authc
+				/base/file/download/** = authc
+				/base/file/downloadExt/** = authc
+				/common/image/upload = authc
+				/common/image/load/** = authc
+				/logout = logout
+				/static/** = anon
+				/css/** = anon
+                /report/resources/images/** = anon
+                /report/resources/flashGraph/** = anon
+                /report/resources/treeimages/** = anon
+                /report/resources/j2re-1_4_1-windows-i586-i.exe = anon
+                /report/resources/runqianReport4Applet.jar = anon
+				/** = user
+			</value>
+		</property>
+		<property name="filters">
+            <map> 
+                <entry key="authc" value-ref="loginFormAuthenticationFilter" />
+                <entry key="user" value-ref="simpleUserFilter" />
+            </map>
+        </property>
+	</bean>
+    <!-- shiro登录过滤 -->
+	<bean id="loginFormAuthenticationFilter" class="com.zjgt.p2p.manage.base.web.LoginFormAuthenticationFilter" />
+	<!-- shiro用户资源访问过滤 -->
+	<bean id="simpleUserFilter" class="com.zjgt.p2p.manage.base.shiro.SimpleUserFilter" />
+	
+	<!-- 用户授权信息Cache, 采用MemCached -->
+	<bean id="shiroMemCachedManager" class="com.zjgt.p2p.manage.common.MemcachedManagerForShiro">
+		<property name="group" value="mclient1" />
+		<property name="cacheClient" ref="cacheClient" />
+	</bean>
+	
+	<!-- 保证实现了Shiro内部lifecycle函数的bean执行 -->
+	<bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor"/>
+</beans>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zjgt.p2p.base.dao.ActivityLogDao">
+	<resultMap id="BaseResultMap" type="com.zjgt.p2p.base.domain.ActivityLog">
+		<result column="REC_NO" property="recNo" jdbcType="VARCHAR" />
+		<result column="USER_NO" property="userNo" jdbcType="VARCHAR" />
+		<result column="OPER_TIME" property="operTime" jdbcType="CHAR" />
+		<result column="OPER_CODE" property="operCode" jdbcType="VARCHAR" />
+		<result column="OPER_NAME" property="operName" jdbcType="VARCHAR" />
+		<result column="OPER_DESC" property="operDesc" jdbcType="VARCHAR" />
+		<result column="SESSION_ID" property="sessionId" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<!-- 新增数据 -->
+	<insert id="insert" parameterType="com.zjgt.p2p.base.domain.ActivityLog">
+		insert into CP_ACTIVITY_LOG (REC_NO, USER_NO, OPER_TIME, OPER_CODE,
+		OPER_NAME, OPER_DESC,SESSION_ID)
+		values(#{recNo,jdbcType=VARCHAR},#{userNo,jdbcType=VARCHAR},#{operTime,jdbcType=CHAR},#{operCode,jdbcType=VARCHAR},
+		#{operName,jdbcType=VARCHAR},#{operDesc,jdbcType=VARCHAR},#{sessionId,jdbcType=VARCHAR}
+		)
+	</insert>
+
+</mapper>

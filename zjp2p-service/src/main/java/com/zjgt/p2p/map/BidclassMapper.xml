@@ -1,0 +1,460 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zjgt.p2p.dao.BidclassMapper" >
+  <resultMap id="BaseResultMap" type="com.zjgt.p2p.model.Bidclass" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+      This element : Tue Dec 09 13:48:21 CST 2014.
+    -->
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="bidclassno" property="bidclassno" jdbcType="VARCHAR" />
+    <result column="bidclassname" property="bidclassname" jdbcType="VARCHAR" />
+    <result column="bidclasssubject" property="bidclasssubject" jdbcType="VARCHAR" />
+    <result column="thumpic" property="thumpic" jdbcType="VARCHAR" />
+    <result column="bidclasspic" property="bidclasspic" jdbcType="VARCHAR" />
+    <result column="amount" property="amount" jdbcType="DECIMAL" />
+    <result column="investperiod" property="investperiod" jdbcType="VARCHAR" />
+    <result column="raiseperiod" property="raiseperiod" jdbcType="VARCHAR" />
+    <result column="exptinterestdate" property="exptinterestdate" jdbcType="DATE" />
+    <result column="exptexpiredate" property="exptexpiredate" jdbcType="DATE" />
+    <result column="intestcalctypeid" property="intestcalctypeid" jdbcType="INTEGER" />
+    <result column="intestcalctype" property="intestcalctype" jdbcType="VARCHAR" />
+    <result column="exptlastacctdate" property="exptlastacctdate" jdbcType="DATE" />
+    <result column="mininvestamount" property="mininvestamount" jdbcType="DECIMAL" />
+    <result column="maxinvestamount" property="maxinvestamount" jdbcType="DECIMAL" />
+    <result column="ifredeem" property="ifredeem" jdbcType="INTEGER" />
+    <result column="redeemfeetype" property="redeemfeetype" jdbcType="INTEGER" />
+    <result column="redeemfee" property="redeemfee" jdbcType="DECIMAL" />
+    <result column="iftransfer" property="iftransfer" jdbcType="INTEGER" />
+    <result column="transfertype" property="transfertype" jdbcType="INTEGER" />
+    <result column="transfee" property="transfee" jdbcType="DECIMAL" />
+    <result column="assureinstid" property="assureinstid" jdbcType="INTEGER" />
+    <result column="ensuretype" property="ensuretype" jdbcType="INTEGER" />
+    <result column="agreement1" property="agreement1" jdbcType="INTEGER" />
+    <result column="agreement2" property="agreement2" jdbcType="INTEGER" />
+    <result column="agreement3" property="agreement3" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+      This element : Tue Dec 09 13:48:21 CST 2014.
+    -->
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+      This element : Tue Dec 09 13:48:21 CST 2014.
+    -->
+    id, bidclassno, bidclassname, bidclasssubject, thumpic, bidclasspic, amount, investperiod, 
+    raiseperiod, exptinterestdate, exptexpiredate, intestcalctypeid, intestcalctype, 
+    exptlastacctdate, mininvestamount, maxinvestamount, ifredeem, redeemfeetype, redeemfee, 
+    iftransfer, transfertype, transfee, assureinstid, ensuretype, agreement1, agreement2, 
+    agreement3
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.zjgt.p2p.model.BidclassExample" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+      This element : Tue Dec 09 13:48:21 CST 2014.
+    -->
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from bidclass
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+      This element : Tue Dec 09 13:48:21 CST 2014.
+    -->
+    select 
+    <include refid="Base_Column_List" />
+    from bidclass
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+      This element : Tue Dec 09 13:48:21 CST 2014.
+    -->
+    delete from bidclass
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.zjgt.p2p.model.Bidclass" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+      This element : Tue Dec 09 13:48:21 CST 2014.
+    -->
+    insert into bidclass (id, bidclassno, bidclassname, 
+      bidclasssubject, thumpic, bidclasspic, 
+      amount, investperiod, raiseperiod, 
+      exptinterestdate, exptexpiredate, intestcalctypeid, 
+      intestcalctype, exptlastacctdate, mininvestamount, 
+      maxinvestamount, ifredeem, redeemfeetype, 
+      redeemfee, iftransfer, transfertype, 
+      transfee, assureinstid, ensuretype, 
+      agreement1, agreement2, agreement3
+      )
+    values (#{id,jdbcType=BIGINT}, #{bidclassno,jdbcType=VARCHAR}, #{bidclassname,jdbcType=VARCHAR}, 
+      #{bidclasssubject,jdbcType=VARCHAR}, #{thumpic,jdbcType=VARCHAR}, #{bidclasspic,jdbcType=VARCHAR}, 
+      #{amount,jdbcType=DECIMAL}, #{investperiod,jdbcType=VARCHAR}, #{raiseperiod,jdbcType=VARCHAR}, 
+      #{exptinterestdate,jdbcType=DATE}, #{exptexpiredate,jdbcType=DATE}, #{intestcalctypeid,jdbcType=INTEGER}, 
+      #{intestcalctype,jdbcType=VARCHAR}, #{exptlastacctdate,jdbcType=DATE}, #{mininvestamount,jdbcType=DECIMAL}, 
+      #{maxinvestamount,jdbcType=DECIMAL}, #{ifredeem,jdbcType=INTEGER}, #{redeemfeetype,jdbcType=INTEGER}, 
+      #{redeemfee,jdbcType=DECIMAL}, #{iftransfer,jdbcType=INTEGER}, #{transfertype,jdbcType=INTEGER}, 
+      #{transfee,jdbcType=DECIMAL}, #{assureinstid,jdbcType=INTEGER}, #{ensuretype,jdbcType=INTEGER}, 
+      #{agreement1,jdbcType=INTEGER}, #{agreement2,jdbcType=INTEGER}, #{agreement3,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.zjgt.p2p.model.Bidclass" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+      This element : Tue Dec 09 13:48:21 CST 2014.
+    -->
+    insert into bidclass
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="bidclassno != null" >
+        bidclassno,
+      </if>
+      <if test="bidclassname != null" >
+        bidclassname,
+      </if>
+      <if test="bidclasssubject != null" >
+        bidclasssubject,
+      </if>
+      <if test="thumpic != null" >
+        thumpic,
+      </if>
+      <if test="bidclasspic != null" >
+        bidclasspic,
+      </if>
+      <if test="amount != null" >
+        amount,
+      </if>
+      <if test="investperiod != null" >
+        investperiod,
+      </if>
+      <if test="raiseperiod != null" >
+        raiseperiod,
+      </if>
+      <if test="exptinterestdate != null" >
+        exptinterestdate,
+      </if>
+      <if test="exptexpiredate != null" >
+        exptexpiredate,
+      </if>
+      <if test="intestcalctypeid != null" >
+        intestcalctypeid,
+      </if>
+      <if test="intestcalctype != null" >
+        intestcalctype,
+      </if>
+      <if test="exptlastacctdate != null" >
+        exptlastacctdate,
+      </if>
+      <if test="mininvestamount != null" >
+        mininvestamount,
+      </if>
+      <if test="maxinvestamount != null" >
+        maxinvestamount,
+      </if>
+      <if test="ifredeem != null" >
+        ifredeem,
+      </if>
+      <if test="redeemfeetype != null" >
+        redeemfeetype,
+      </if>
+      <if test="redeemfee != null" >
+        redeemfee,
+      </if>
+      <if test="iftransfer != null" >
+        iftransfer,
+      </if>
+      <if test="transfertype != null" >
+        transfertype,
+      </if>
+      <if test="transfee != null" >
+        transfee,
+      </if>
+      <if test="assureinstid != null" >
+        assureinstid,
+      </if>
+      <if test="ensuretype != null" >
+        ensuretype,
+      </if>
+      <if test="agreement1 != null" >
+        agreement1,
+      </if>
+      <if test="agreement2 != null" >
+        agreement2,
+      </if>
+      <if test="agreement3 != null" >
+        agreement3,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="bidclassno != null" >
+        #{bidclassno,jdbcType=VARCHAR},
+      </if>
+      <if test="bidclassname != null" >
+        #{bidclassname,jdbcType=VARCHAR},
+      </if>
+      <if test="bidclasssubject != null" >
+        #{bidclasssubject,jdbcType=VARCHAR},
+      </if>
+      <if test="thumpic != null" >
+        #{thumpic,jdbcType=VARCHAR},
+      </if>
+      <if test="bidclasspic != null" >
+        #{bidclasspic,jdbcType=VARCHAR},
+      </if>
+      <if test="amount != null" >
+        #{amount,jdbcType=DECIMAL},
+      </if>
+      <if test="investperiod != null" >
+        #{investperiod,jdbcType=VARCHAR},
+      </if>
+      <if test="raiseperiod != null" >
+        #{raiseperiod,jdbcType=VARCHAR},
+      </if>
+      <if test="exptinterestdate != null" >
+        #{exptinterestdate,jdbcType=DATE},
+      </if>
+      <if test="exptexpiredate != null" >
+        #{exptexpiredate,jdbcType=DATE},
+      </if>
+      <if test="intestcalctypeid != null" >
+        #{intestcalctypeid,jdbcType=INTEGER},
+      </if>
+      <if test="intestcalctype != null" >
+        #{intestcalctype,jdbcType=VARCHAR},
+      </if>
+      <if test="exptlastacctdate != null" >
+        #{exptlastacctdate,jdbcType=DATE},
+      </if>
+      <if test="mininvestamount != null" >
+        #{mininvestamount,jdbcType=DECIMAL},
+      </if>
+      <if test="maxinvestamount != null" >
+        #{maxinvestamount,jdbcType=DECIMAL},
+      </if>
+      <if test="ifredeem != null" >
+        #{ifredeem,jdbcType=INTEGER},
+      </if>
+      <if test="redeemfeetype != null" >
+        #{redeemfeetype,jdbcType=INTEGER},
+      </if>
+      <if test="redeemfee != null" >
+        #{redeemfee,jdbcType=DECIMAL},
+      </if>
+      <if test="iftransfer != null" >
+        #{iftransfer,jdbcType=INTEGER},
+      </if>
+      <if test="transfertype != null" >
+        #{transfertype,jdbcType=INTEGER},
+      </if>
+      <if test="transfee != null" >
+        #{transfee,jdbcType=DECIMAL},
+      </if>
+      <if test="assureinstid != null" >
+        #{assureinstid,jdbcType=INTEGER},
+      </if>
+      <if test="ensuretype != null" >
+        #{ensuretype,jdbcType=INTEGER},
+      </if>
+      <if test="agreement1 != null" >
+        #{agreement1,jdbcType=INTEGER},
+      </if>
+      <if test="agreement2 != null" >
+        #{agreement2,jdbcType=INTEGER},
+      </if>
+      <if test="agreement3 != null" >
+        #{agreement3,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.zjgt.p2p.model.BidclassExample" resultType="java.lang.Integer" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+      This element : Tue Dec 09 13:48:21 CST 2014.
+    -->
+    select count(*) from bidclass
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zjgt.p2p.model.Bidclass" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+      This element : Tue Dec 09 13:48:21 CST 2014.
+    -->
+    update bidclass
+    <set >
+      <if test="bidclassno != null" >
+        bidclassno = #{bidclassno,jdbcType=VARCHAR},
+      </if>
+      <if test="bidclassname != null" >
+        bidclassname = #{bidclassname,jdbcType=VARCHAR},
+      </if>
+      <if test="bidclasssubject != null" >
+        bidclasssubject = #{bidclasssubject,jdbcType=VARCHAR},
+      </if>
+      <if test="thumpic != null" >
+        thumpic = #{thumpic,jdbcType=VARCHAR},
+      </if>
+      <if test="bidclasspic != null" >
+        bidclasspic = #{bidclasspic,jdbcType=VARCHAR},
+      </if>
+      <if test="amount != null" >
+        amount = #{amount,jdbcType=DECIMAL},
+      </if>
+      <if test="investperiod != null" >
+        investperiod = #{investperiod,jdbcType=VARCHAR},
+      </if>
+      <if test="raiseperiod != null" >
+        raiseperiod = #{raiseperiod,jdbcType=VARCHAR},
+      </if>
+      <if test="exptinterestdate != null" >
+        exptinterestdate = #{exptinterestdate,jdbcType=DATE},
+      </if>
+      <if test="exptexpiredate != null" >
+        exptexpiredate = #{exptexpiredate,jdbcType=DATE},
+      </if>
+      <if test="intestcalctypeid != null" >
+        intestcalctypeid = #{intestcalctypeid,jdbcType=INTEGER},
+      </if>
+      <if test="intestcalctype != null" >
+        intestcalctype = #{intestcalctype,jdbcType=VARCHAR},
+      </if>
+      <if test="exptlastacctdate != null" >
+        exptlastacctdate = #{exptlastacctdate,jdbcType=DATE},
+      </if>
+      <if test="mininvestamount != null" >
+        mininvestamount = #{mininvestamount,jdbcType=DECIMAL},
+      </if>
+      <if test="maxinvestamount != null" >
+        maxinvestamount = #{maxinvestamount,jdbcType=DECIMAL},
+      </if>
+      <if test="ifredeem != null" >
+        ifredeem = #{ifredeem,jdbcType=INTEGER},
+      </if>
+      <if test="redeemfeetype != null" >
+        redeemfeetype = #{redeemfeetype,jdbcType=INTEGER},
+      </if>
+      <if test="redeemfee != null" >
+        redeemfee = #{redeemfee,jdbcType=DECIMAL},
+      </if>
+      <if test="iftransfer != null" >
+        iftransfer = #{iftransfer,jdbcType=INTEGER},
+      </if>
+      <if test="transfertype != null" >
+        transfertype = #{transfertype,jdbcType=INTEGER},
+      </if>
+      <if test="transfee != null" >
+        transfee = #{transfee,jdbcType=DECIMAL},
+      </if>
+      <if test="assureinstid != null" >
+        assureinstid = #{assureinstid,jdbcType=INTEGER},
+      </if>
+      <if test="ensuretype != null" >
+        ensuretype = #{ensuretype,jdbcType=INTEGER},
+      </if>
+      <if test="agreement1 != null" >
+        agreement1 = #{agreement1,jdbcType=INTEGER},
+      </if>
+      <if test="agreement2 != null" >
+        agreement2 = #{agreement2,jdbcType=INTEGER},
+      </if>
+      <if test="agreement3 != null" >
+        agreement3 = #{agreement3,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zjgt.p2p.model.Bidclass" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+      This element : Tue Dec 09 13:48:21 CST 2014.
+    -->
+    update bidclass
+    set bidclassno = #{bidclassno,jdbcType=VARCHAR},
+      bidclassname = #{bidclassname,jdbcType=VARCHAR},
+      bidclasssubject = #{bidclasssubject,jdbcType=VARCHAR},
+      thumpic = #{thumpic,jdbcType=VARCHAR},
+      bidclasspic = #{bidclasspic,jdbcType=VARCHAR},
+      amount = #{amount,jdbcType=DECIMAL},
+      investperiod = #{investperiod,jdbcType=VARCHAR},
+      raiseperiod = #{raiseperiod,jdbcType=VARCHAR},
+      exptinterestdate = #{exptinterestdate,jdbcType=DATE},
+      exptexpiredate = #{exptexpiredate,jdbcType=DATE},
+      intestcalctypeid = #{intestcalctypeid,jdbcType=INTEGER},
+      intestcalctype = #{intestcalctype,jdbcType=VARCHAR},
+      exptlastacctdate = #{exptlastacctdate,jdbcType=DATE},
+      mininvestamount = #{mininvestamount,jdbcType=DECIMAL},
+      maxinvestamount = #{maxinvestamount,jdbcType=DECIMAL},
+      ifredeem = #{ifredeem,jdbcType=INTEGER},
+      redeemfeetype = #{redeemfeetype,jdbcType=INTEGER},
+      redeemfee = #{redeemfee,jdbcType=DECIMAL},
+      iftransfer = #{iftransfer,jdbcType=INTEGER},
+      transfertype = #{transfertype,jdbcType=INTEGER},
+      transfee = #{transfee,jdbcType=DECIMAL},
+      assureinstid = #{assureinstid,jdbcType=INTEGER},
+      ensuretype = #{ensuretype,jdbcType=INTEGER},
+      agreement1 = #{agreement1,jdbcType=INTEGER},
+      agreement2 = #{agreement2,jdbcType=INTEGER},
+      agreement3 = #{agreement3,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

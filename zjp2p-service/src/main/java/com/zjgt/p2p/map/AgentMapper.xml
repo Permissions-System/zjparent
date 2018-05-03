@@ -1,0 +1,290 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zjgt.p2p.dao.AgentMapper" >
+  <resultMap id="BaseResultMap" type="com.zjgt.p2p.model.Agent" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="memberid" property="memberid" jdbcType="BIGINT" />
+    <result column="level" property="level" jdbcType="INTEGER" />
+    <result column="iscompany" property="iscompany" jdbcType="INTEGER" />
+	<result column="isMerchant" property="isMerchant" jdbcType="INTEGER" />
+    <result column="commissionrate" property="commissionrate" jdbcType="DECIMAL" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    id, memberid, level, iscompany,isMerchant, commissionrate, remark
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.zjgt.p2p.model.AgentExample" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from agent
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.zjgt.p2p.model.AgentExample" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    delete from agent
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.zjgt.p2p.model.Agent" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    insert into agent (id, memberid, level, 
+      iscompany,isMerchant,  commissionrate, remark
+      )
+    values (#{id,jdbcType=BIGINT}, #{memberid,jdbcType=BIGINT}, #{level,jdbcType=INTEGER}, 
+      #{iscompany,jdbcType=INTEGER},#{isMerchant,jdbcType=INTEGER}, #{commissionrate,jdbcType=DECIMAL}, #{remark,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.zjgt.p2p.model.Agent" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    insert into agent
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="memberid != null" >
+        memberid,
+      </if>
+      <if test="level != null" >
+        level,
+      </if>
+      <if test="iscompany != null" >
+        iscompany,
+      </if>
+      <if test="isMerchant != null" >
+        isMerchant,
+      </if>
+      <if test="commissionrate != null" >
+        commissionrate,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="memberid != null" >
+        #{memberid,jdbcType=BIGINT},
+      </if>
+      <if test="level != null" >
+        #{level,jdbcType=INTEGER},
+      </if>
+      <if test="iscompany != null" >
+        #{iscompany,jdbcType=INTEGER},
+      </if>
+      <if test="isMerchant != null" >
+        #{isMerchant,jdbcType=INTEGER},
+      </if>
+      <if test="commissionrate != null" >
+        #{commissionrate,jdbcType=DECIMAL},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.zjgt.p2p.model.AgentExample" resultType="java.lang.Integer" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    select count(*) from agent
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    update agent
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.memberid != null" >
+        memberid = #{record.memberid,jdbcType=BIGINT},
+      </if>
+      <if test="record.level != null" >
+        level = #{record.level,jdbcType=INTEGER},
+      </if>
+      <if test="record.iscompany != null" >
+        iscompany = #{record.iscompany,jdbcType=INTEGER},
+      </if>
+      <if test="record.isMerchant != null" >
+        isMerchant = #{record.isMerchant,jdbcType=INTEGER},
+      </if>
+      <if test="record.commissionrate != null" >
+        commissionrate = #{record.commissionrate,jdbcType=DECIMAL},
+      </if>
+      <if test="record.remark != null" >
+        remark = #{record.remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    <!--
+          common class -  @ET
+      model 属性定义, do not modify.
+    -->
+    update agent
+    set id = #{record.id,jdbcType=BIGINT},
+      memberid = #{record.memberid,jdbcType=BIGINT},
+      level = #{record.level,jdbcType=INTEGER},
+      iscompany = #{record.iscompany,jdbcType=INTEGER},
+      commissionrate = #{record.commissionrate,jdbcType=DECIMAL},
+      remark = #{record.remark,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+    <update id="updateByPrimaryKeySelective" parameterType="com.zjgt.p2p.model.Agent" >
+    update agent
+    <set >
+      <if test="memberid != null" >
+        memberid = #{memberid,jdbcType=BIGINT},
+      </if>
+      <if test="level != null" >
+        level = #{level,jdbcType=INTEGER},
+      </if>
+      <if test="iscompany != null" >
+        iscompany = #{iscompany,jdbcType=INTEGER},
+      </if>
+      <if test="isMerchant != null" >
+        isMerchant = #{isMerchant,jdbcType=INTEGER},
+      </if>
+      <if test="commissionrate != null" >
+        commissionrate = #{commissionrate,jdbcType=DECIMAL},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zjgt.p2p.model.Agent" >
+    update agent
+    set memberid = #{memberid,jdbcType=BIGINT},
+      level = #{level,jdbcType=INTEGER},
+      iscompany = #{iscompany,jdbcType=INTEGER},
+      isMerchant = #{isMerchant,jdbcType=INTEGER},
+      commissionrate = #{commissionrate,jdbcType=DECIMAL},
+      remark = #{remark,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="selectByMemberid" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from agent
+    where memberid = #{memberid,jdbcType=BIGINT}
+  </select>
+  <select id="selectByInvitee" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    a.id, a.memberid, a.level, a.iscompany,a.isMerchant, a.commissionrate, a.remark
+    from agent a
+     INNER JOIN member m ON a.memberid=m.agentid
+     where m.id = #{memberid,jdbcType=BIGINT} 
+  </select>
+</mapper>
